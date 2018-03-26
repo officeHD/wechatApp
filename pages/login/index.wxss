@@ -1,0 +1,132 @@
+.login {
+}
+
+.logo_box {
+  height: 200rpx;
+  text-align: center;
+}
+
+.logo {
+  margin-top: 20rpx;
+  width: 200rpx;
+  height: 170rpx;
+}
+
+.login_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_list {
+  width: 513rpx;
+  height: 100rpx;
+  padding: 0 10rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+
+.message_input {
+  width: 513rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0 10rpx;
+  display: flex;
+}
+
+.message_input.hide {
+  display: none;
+}
+
+.send_message, .get_message {
+  height: 100rpx;
+  width: 215rpx;
+  text-align: right;
+  line-height: 100rpx;
+  font-size: 34rpx;
+  float: right;
+}
+
+.get_message button {
+  background-color: transparent;
+  
+  width: 215rpx;
+  margin: 0;
+  color: #00a0e9;
+  border: 1px solid transparent;
+  float: right;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 10rpx;
+  font-size: 30rpx;
+}
+
+.send_message {
+}
+
+.input_list.hide {
+  display: none;
+}
+
+.input_message {
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 298rpx;
+  border-bottom: 1rpx solid #ccc;
+  font-size: 34rpx;
+}
+
+.input_list input {
+  height: 100rpx;
+  /* line-height: 100rpx; */
+  font-size: 34rpx;
+}
+
+.login_type {
+  display: flex;
+  width: 513rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  justify-content: space-between;
+  font-size: 30rpx;
+}
+
+.login_type.hide {
+  display: none;
+}
+
+.login_mes {
+  color: #00a0e9;
+  float: left;
+}
+
+.login_forget {
+  color: #fa0000;
+  float: right;
+}
+
+.login_btn {
+  width: 513rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 80rpx;
+  background-color: #00a0e9;
+  text-align: center;
+  color: #fff;
+  margin: 10rpx 0;
+}
+
+.create_count {
+  text-align: center;
+  width: 513rpx;
+  height: 80rpx;
+  margin: 10rpx 0;
+  line-height: 80rpx;
+  font-size: 34rpx;
+  color: #00a0e9;
+}
+
+.suer_reset {
+  margin-top: 50rpx;
+}
