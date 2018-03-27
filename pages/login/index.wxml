@@ -13,11 +13,11 @@
       <input class='input_area' placeholder="请输入手机号" bindinput="changePhoneNum"></input>
     </view>
     <view class='input_list {{by_message||reset_pass?"hide":""}}'>
-      <input class='input_area' placeholder="请输入密码" bindinput="userNameInput"></input>
+      <input class='input_area' placeholder="请输入密码" bindinput="changePassWord"></input>
     </view>
 
     <view class='message_input {{by_message||reset_pass?"":"hide"}}'>
-      <input class='input_message' placeholder="请输入验证码" bindinput="userNameInput"></input>
+      <input class='input_message' placeholder="请输入验证码" bindinput="changeVerifyCode"></input>
       <view class='get_message' bindtap="sendmessg">
         <button disabled="{{codeDis}}">{{getmsg}}</button>
       </view>
@@ -32,7 +32,7 @@
       </view>
     </view>
     <view class='{{reset_pass?"hide":""}}'>
-      <view class='login_btn' bindtap='login'>登录</view>
+      <view class='login_btn' data-type="{{by_message}}" bindtap='login'>登录</view>
       <navigator url='../register/index' open-type="navigate" class='create_count'>创建账号</navigator>
     </view>
     <view class='suer_reset login_btn {{reset_pass?"":"hide"}}'>确认重置</view>

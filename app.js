@@ -1,5 +1,6 @@
 //app.js
-const util = require('./utils/util.js')
+const util = require('./utils/util.js');
+const api = require('./utils/ajax.js')
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -37,5 +38,7 @@ App({
   globalData: {
     userInfo: null
   },
-  checkData:util.checkData
+  checkData: util.checkData,
+  ajax:api.ajax,
+  sort_object:util.sort_object
 })

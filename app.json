@@ -1,7 +1,9 @@
 {
   "pages":[
-    
+    "pages/search/A9/index",
     "pages/login/index",
+    
+    "pages/user/index",
     "pages/register/index",
     "pages/index/index",
     "pages/demo/index",

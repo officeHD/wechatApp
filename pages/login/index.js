@@ -2,18 +2,21 @@ var app = getApp();
 Page({
   data: {
     by_message: false,
-     
     getmsg: "获取验证码",
     reset_pass: false,
     login_type: "短信快捷登录",
     reset_word: "忘记密码",
-    userPhone: '',
     flag: true,
-    codeDis: false
+    codeDis: false,
+    userPhone: '',
+    verifyCode:'',
+    passWord:''
+   
   },
   onLoad: function () {
 
   },
+  //切换登录方式
   onChangeLoginType: function (e) {
     console.log(e);
     let that = this;
@@ -60,11 +63,48 @@ Page({
 
     })
   },
+  // 填写值
   changePhoneNum: function (e) {
     let value = e.detail.value;
     let that = this;
     that.setData({
       userPhone: value
     })
+  }, 
+  // 填写值
+  changeVerifyCode: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      verifyCode: value
+    })
+  }, 
+  // 填写值
+  changePassWord: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      passWord: value
+    })
+  },
+
+  
+  //点击登录
+  login:function(e){
+    let that=this;
+    let type = e.currentTarget.dataset.type;
+    if (type){
+      if (app.checkData('手机号', that.data.userPhone) && app.checkData('验证码', that.data.verifyCode)){
+        wx.navigateTo({
+          url:"/pages/user/index"
+        })
+      } 
+    }else{
+      if (app.checkData('手机号', that.data.userPhone) && app.checkData('密码', that.data.passWord)) {
+        wx.navigateTo({
+          url: "/pages/user/index"
+        })
+      } 
+    }
   }
 })
