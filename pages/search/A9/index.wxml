@@ -1,8 +1,8 @@
-<view bindscroll="scroll">
+<view >
 
   <view class='search'>
     <view class='title'>A9数据查询</view>
-    <view class='pick_view'>
+    <view class='pick_view {{position}}'>
       <view class='picker_content'>
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
           <view class="picker_area">

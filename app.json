@@ -1,13 +1,13 @@
 {
   "pages":[
-    "pages/search/A9/index",
-    "pages/login/index",
-    
     "pages/user/index",
-    "pages/register/index",
     "pages/index/index",
+    "pages/login/index",
+    "pages/search/A9/index",
+   
+    "pages/register/index",
+   
     "pages/demo/index",
-    
     "pages/logs/logs"
   ],
   "window":{
@@ -15,5 +15,38 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "SurTime",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#fff",
+    "selectedColor": "#fff",
+    "borderStyle": "white",
+    "backgroundColor": "#2C7EDC",
+    "box-shadow": "0 0 6px 0",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/login/check.png",
+        "selectedIconPath": "images/login/check.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/login/check.png",
+        "selectedIconPath": "images/login/check.png",
+        "text": "团队"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/login/check.png",
+        "selectedIconPath": "images/login/check.png",
+        "text": "办公"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "images/login/check.png",
+        "selectedIconPath": "images/login/check.png",
+        "text": "我的"
+      }
+    ]
   }
 }

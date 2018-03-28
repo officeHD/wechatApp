@@ -67,19 +67,16 @@ Page({
     }
   },
   bindPickerChange: function (e) {
-     
     this.setData({
       index: e.detail.value
     })
   },
   bindDateChange: function (e) {
-   
     this.setData({
       month: e.detail.value
     })
   },
   bindYearChange: function (e) {
-     
     this.setData({
       year: e.detail.value
     })

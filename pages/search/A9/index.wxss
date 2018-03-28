@@ -1,24 +1,27 @@
-.content{
-  position: relative
+.content {
+  position: relative;
 }
+
 .table {
   border: 0px solid darkgray;
   font-size: 30rpx;
   display: table;
   width: 750rpx;
   z-index: 10;
-  overflow-y: auto
+  overflow-y: auto;
 }
 
 .template.table {
   position: absolute;
   top: 0;
   z-index: 5;
-   height:100rpx;
-  overflow: hidden
+  height: 100rpx;
+  overflow: hidden;
 }
-.fixed .template{
+
+.fixed .template {
   position: fixed;
+  top: 90rpx;
 }
 
 .thead {
@@ -27,15 +30,17 @@
   width: 750rpx;
   position: relative;
 }
-.thead .tr{
+
+.thead .tr {
   height: 70rpx;
-  background: #F8F9FB
+  background: #f8f9fb;
 }
 
 .tbody {
   display: table-row-group;
   z-index: 2;
 }
+
 .tbody.hide {
   opacity: 0;
   z-index: 0;
@@ -45,10 +50,8 @@
   width: 67.5rpx;
   height: 39rpx;
   margin: 0 8rpx;
-  vertical-align: middle
+  vertical-align: middle;
 }
-
-
 
 .tr {
   display: table-row;
@@ -60,8 +63,7 @@
 
 .th {
   display: table-cell;
-   
-  color: #6D6D6D;
+  color: #6d6d6d;
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
@@ -70,7 +72,6 @@
 .td {
   display: table-cell;
   height: 100rpx;
-   
   line-height: 100rpx;
   text-align: center;
 }
@@ -84,27 +85,43 @@
 .bg-g {
   background: #e6f3f9;
 }
-.search{
+
+.search {
   height: 300rpx;
-  background-color: #0088DD;
-  border: 1px solid #0088DD;
+  background-color: #08d;
+  border: 1px solid #08d;
 }
-.search .title{
+
+.search .title {
   width: 750rpx;
   text-align: center;
   margin: 45rpx 0;
   color: #fff;
   letter-spacing: 2rpx;
 }
-.pick_view{
+
+.pick_view {
   display: flex;
   width: 606rpx;
   height: 90rpx;
-  margin:10rpx auto;
+  margin: 10rpx auto;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 }
-.pick_view .picker_content{
+
+.pick_view.fixed {
+  position: fixed;
+  top: 0;
+  z-index: 30;
+  margin: 0;
+  width: 750rpx;
+  padding: 0 60rpx;
+  left: 0;
+  background-color: #08d;
+  box-sizing: border-box;
+}
+
+.pick_view .picker_content {
   width: 460rpx;
   display: flex;
   height: 55rpx;
@@ -113,22 +130,23 @@
   padding-left: 20rpx;
   text-align: center;
   font-size: 28rpx;
-  
 }
-.picker_area{
+
+.picker_area {
   width: 90rpx;
 }
-.picker_year{
+
+.picker_year {
   width: 90rpx;
 }
-.pick_view button{
+
+.pick_view button {
   width: 103rpx;
   height: 55rpx;
   line-height: 55rpx;
   font-size: 30rpx;
   padding: 0;
-  background-color: #F74342;
+  background-color: #f74342;
   border-radius: 0;
   color: #fff;
-  
 }
