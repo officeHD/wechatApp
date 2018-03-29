@@ -98,8 +98,8 @@
 
 .search {
   height: 500rpx;
-  background-color: #08d;
-  border: 1px solid #08d;
+  background-color: #fff;
+  border: 1px solid #fff;
 }
 
 .search .title {

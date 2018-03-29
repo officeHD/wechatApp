@@ -14,7 +14,7 @@
      </swiper-item>
      </swiper>
     <view class='pick_view'>
-       
+       充值记录 消费记录
     </view>
   </view>
   <view class="table">
