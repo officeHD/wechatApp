@@ -38,6 +38,18 @@
     <view class='suer_reset login_btn {{reset_pass?"":"hide"}}'>确认重置</view>
   </view>
   <view class='otherWay'>
-      OR
+      
+      <view class='line'>
+        <view class='left_line'></view>
+        <view class='line_center'>OR</view>
+        <view class='left_line'></view>
+      </view>
+      <view class='login_way'>
+            <view class='wechat'>
+              <image src='/images/login/wechat.png'></image>
+              <view class='login_text'>微信账号登录</view>
+            </view>
+      </view>
+
   </view>
 </view>

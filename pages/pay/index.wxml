@@ -1,0 +1,61 @@
+<view class='pay_info'>
+  <view class='banner bgcw'>
+    <image src='/images/pay/banner.jpg'></image>
+  </view>
+  <view class='order_info bgcw'>
+    <view class='title'>
+      套餐系列：基础版本
+    </view>
+    <view class='order_conrtent'>
+      <view>
+        <view>充值金额：300元 </view>
+        <view>订单创建时间：2018/3/19 14:30:30 </view>
+
+      </view>
+      <view>
+        <view>充值T点：350点 </view>
+        <view>充值方式：直接充值 </view>
+      </view>
+    </view>
+  </view>
+  <view class='discount bgcw'>
+    <view class=' title '>
+      选择优惠方式
+    </view>
+    <view class='discount_list '>
+      <view class='item_list'>
+        <view>优惠券</view>
+        <view>
+          <text class='checked'>-￥50 满减券</text> ></view>
+      </view>
+      <view class='item_list'>
+        <view>优惠券代码</view>
+        <view>></view>
+      </view>
+    </view>
+  </view>
+  <view class='pay_type bgcw'>
+    <view class='title '>
+      选择支付方式
+    </view>
+    <view class='pay_content '>
+      <view>支付宝</view>
+      <view>微信</view>
+    </view>
+  </view>
+  <view class='bottom bgcw'>
+    <view class='bottom_flex'>
+      <view class='price '>
+        <view class='price_val '>￥300</view>
+        <view class='discount_info '>
+          <text>已优惠￥50元</text>
+          <text>(1T仅需0.86元)</text>
+        </view>
+      </view>
+      <view class='topay '>
+        确认支付
+      </view>
+    </view>
+
+  </view>
+</view>

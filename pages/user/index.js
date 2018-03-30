@@ -3,13 +3,13 @@ var app = getApp();
 
 Page({
   data: {
-    array: ['美国', '中国', '巴西', '日本'],
+    recordType: 'recharge',
     index: 0,
-    year: '2018',
-    month: '09-01',
+
     position: 'relative',
     flag: true,
-    listData: []
+    listData: [],
+    consumeList:[]
   },
   onLoad: function () {
     let that = this;
@@ -71,15 +71,18 @@ Page({
       index: e.detail.value
     })
   },
-  bindDateChange: function (e) {
+  searchType: function (e) {
+    let that = this;
+    let target = e.currentTarget.dataset.target;
     this.setData({
-      month: e.detail.value
+      recordType: target
     })
-  },
-  bindYearChange: function (e) {
-    this.setData({
-      year: e.detail.value
-    })
-  },
+    let cb = (res) => {
+      that.setData({
+        consumeList: res.data.list
+      });
+    }
+    app.ajax('/consumeList', '', cb, 'POST')
+  }
 
 })

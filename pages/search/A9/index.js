@@ -1,15 +1,13 @@
-
 var app = getApp();
-
 Page({
   data: {
     array: ['美国', '中国', '巴西', '日本'],
     index: 0,
-    year:'2018',
+    year: '2018',
     month: '09-01',
     position: 'relative',
     flag: true,
-    listData: [ ]
+    listData: []
   },
   onLoad: function () {
     let that = this;

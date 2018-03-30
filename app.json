@@ -1,50 +1,49 @@
 {
-  "pages":[
-    "pages/user/index",
-    "pages/index/index",
+  "pages": [
+    "pages/pay/index",
     "pages/login/index",
+    "pages/user/index",
+    
+    
+    "pages/index/index",
     "pages/search/A9/index",
-   
-    "pages/register/index",
-   
-    "pages/demo/index",
-    "pages/logs/logs"
+    "pages/register/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "SurTime",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#fff",
-    "selectedColor": "#fff",
+    "selectedColor": "#333",
     "borderStyle": "white",
     "backgroundColor": "#2C7EDC",
     "box-shadow": "0 0 6px 0",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/login/index",
         "iconPath": "images/tab/home.png",
-        "selectedIconPath": "images/tab/home.png",
+        "selectedIconPath": "images/tab/home_on.png",
         "text": "主页"
       },
       {
         "pagePath": "pages/search/A9/index",
         "iconPath": "images/tab/message.png",
-        "selectedIconPath": "images/tab/message.png",
+        "selectedIconPath": "images/tab/message_on.png",
         "text": "消息"
       },
       {
         "pagePath": "pages/index/index",
         "iconPath": "images/tab/part.png",
-        "selectedIconPath": "images/tab/part.png",
+        "selectedIconPath": "images/tab/part_on.png",
         "text": "分类导航"
       },
       {
         "pagePath": "pages/user/index",
         "iconPath": "images/tab/user.png",
-        "selectedIconPath": "images/tab/user.png",
+        "selectedIconPath": "images/tab/user_on.png",
         "text": "我的"
       }
     ]

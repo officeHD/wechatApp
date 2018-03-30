@@ -50,7 +50,6 @@
 
 .get_message button {
   background-color: transparent;
-  
   width: 215rpx;
   margin: 0;
   color: #00a0e9;
@@ -121,7 +120,7 @@
   text-align: center;
   width: 513rpx;
   height: 80rpx;
-  margin: 10rpx 0;
+  margin: 20px 0;
   line-height: 80rpx;
   font-size: 34rpx;
   color: #00a0e9;
@@ -129,4 +128,62 @@
 
 .suer_reset {
   margin-top: 50rpx;
+}
+
+.otherWay {
+  width: 750rpx;
+  display: felx;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0 20px 0;
+}
+
+.line_center {
+  width: 60rpx;
+  text-align: center;
+  font-size: 18px;
+  margin: 0 10rpx;
+  color: #666;
+}
+
+.left_line {
+  width: 216rpx;
+  height: 0;
+  border-top: 1px solid #ccc;
+}
+
+.login_way {
+  display: flex;
+  justify-content: center;
+   
+}
+
+.wechat {
+  width: 513rpx;
+  height: 80rpx;
+  border-radius: 80rpx;
+  border: 1px solid #ccc;
+  
+   padding: 0 30rpx;
+   box-sizing: border-box;
+}
+
+.wechat image {
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+   margin-top: 10rpx;
+}
+.login_text{
+  width: 100%;
+   line-height: 80rpx;
+  text-align: center;
+  font-size: 16px;
+  color: #666;
 }
