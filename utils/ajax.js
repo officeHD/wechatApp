@@ -1,16 +1,48 @@
-let API_HOST = "https://www.easy-mock.com/mock/5a9a2c2efdc65f3e22abbdaf/example";
- 
-function ajax(url = '', data = '', fn, method = "get", header = {}) {
+// let API_HOST = "https://www.easy-mock.com/mock/5a9a2c2efdc65f3e22abbdaf/example";
+let API_HOST = "http://mp.surtime.com/SurtimeWebService.asmx";
+
+function ajax(url = '', data = {}, fn, ) {
   wx.request({
     url: API_HOST + url,
-    method: method ? method : 'get',
-    data: data,
-    header: header ? header : { "Content-Type": "application/json" },
+    method: 'POST',
+    data: Object.assign({ "Key": "SurTimeWebserviceS3ur0ti1me8" }, data),
+    header: { "Content-Type": "application/json" },
     success: function (res) {
       fn(res);
     }
   });
 }
+// 存储用户信息
+function initUserInfo(obj) {
+  wx.setStorage({
+    key: "PKID",
+    data: obj.PKID
+  })
+  wx.setStorage({
+    key: "Email",
+    data: obj.Email
+  })
+
+  wx.setStorage({
+    key: "IsAdmin",
+    data: obj.IsAdmin
+  })
+  wx.setStorage({
+    key: "Tel",
+    data: obj.Tel
+  })
+  wx.setStorage({
+    key: "UserName",
+    data: obj.UserName
+  })
+
+}
+//去空格
+function trim(str) {
+  return str.replace(/(^\s*)|(\s*$)/g, "");
+}
 module.exports = {
-  ajax:ajax
+  ajax: ajax,
+  initUserInfo: initUserInfo,
+  trim: trim
 }

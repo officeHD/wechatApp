@@ -37,12 +37,12 @@
       <block wx:for="{{listData}}" wx:key="{{code}}">
         <view class="tr">
           <view class="td">
-            {{item.integral}}
+            {{item.RechargeGK}}
           </view>
-          <view class="td">{{item.money}}元</view>
-          <view class="td">{{item.time}}</view>
+          <view class="td">{{item.RechargeMoney}}元</view>
+          <view class="td">{{item.RechargeTime}}</view>
           <view class="td operate">
-            <text class='{{item.type===0?"blue":"red"}}'>{{item.type===0?"直接充值":"间接充值"}}</text>
+            <text class='{{item.RechargeType==="直接充值"?"blue":"red"}}'>{{item.RechargeType}}</text>
           </view>
 
         </view>
@@ -63,11 +63,11 @@
       <block wx:for="{{consumeList}}" wx:key="{{code}}">
         <view class="tr">
           <view class="td">
-            {{item.type}}
+            {{item.page}}
           </view>
-          <view class="td">{{item.content}}</view>
-          <view class="td">{{item.integral}}</view>
-          <view class="td">  {{item.time}} </view>
+          <view class="td">{{item.Description}}</view>
+          <view class="td">{{item.UsableTD}}</view>
+          <view class="td">  {{item.HandleTime}} </view>
 
         </view>
 

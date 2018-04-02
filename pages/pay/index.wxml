@@ -9,7 +9,7 @@
     <view class='order_conrtent'>
       <view>
         <view>充值金额：300元 </view>
-        <view>订单创建时间：2018/3/19 14:30:30 </view>
+        <view>下单时间：2018/3/19 14:30:30 </view>
 
       </view>
       <view>
@@ -34,15 +34,7 @@
       </view>
     </view>
   </view>
-  <view class='pay_type bgcw'>
-    <view class='title '>
-      选择支付方式
-    </view>
-    <view class='pay_content '>
-      <view>支付宝</view>
-      <view>微信</view>
-    </view>
-  </view>
+  
   <view class='bottom bgcw'>
     <view class='bottom_flex'>
       <view class='price '>

@@ -1,10 +1,9 @@
 {
   "pages": [
-    "pages/pay/index",
     "pages/login/index",
+    "pages/pay/index",
+    "pages/webview/index",
     "pages/user/index",
-    
-    
     "pages/index/index",
     "pages/search/A9/index",
     "pages/register/index"
@@ -35,7 +34,7 @@
         "text": "消息"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/pay/index",
         "iconPath": "images/tab/part.png",
         "selectedIconPath": "images/tab/part_on.png",
         "text": "分类导航"

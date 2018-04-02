@@ -4,16 +4,17 @@
   </view>
   <view class='login_box'>
     <view class='input_list {{reset_pass?"":"hide"}}'>
-      <input class='input_area' placeholder="请输入新密码" bindinput="userNameInput"></input>
+      <input class='input_area'  placeholder="请输入新密码" bindinput="userNameInput"></input>
     </view>
-    <view class='input_list {{reset_pass?"":"hide"}}'>
-      <input class='input_area' placeholder="请再次输入" bindinput="userNameInput"></input>
-    </view>
-    <view class='input_list'>
+    
+    <view class='input_list {{by_message||reset_pass?"":"hide"}}'>
       <input class='input_area' placeholder="请输入手机号" bindinput="changePhoneNum"></input>
     </view>
+    <view class='input_list  {{by_message||reset_pass?"hide":""}}'>
+      <input class='input_area' placeholder="请输入账号" bindinput="changeUserName"></input>
+    </view>
     <view class='input_list {{by_message||reset_pass?"hide":""}}'>
-      <input class='input_area' placeholder="请输入密码" bindinput="changePassWord"></input>
+      <input class='input_area' password placeholder="请输入密码" bindinput="changePassWord"></input>
     </view>
 
     <view class='message_input {{by_message||reset_pass?"":"hide"}}'>

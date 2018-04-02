@@ -11,6 +11,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res);
       }
     })
     // 获取用户信息
@@ -37,7 +38,10 @@ App({
   globalData: {
     userInfo: null
   },
+  
+  ajax: api.ajax,
+  initUserInfo: api.initUserInfo,
+  trim: api.trim,
   checkData: util.checkData,
-  ajax:api.ajax,
-  sort_object:util.sort_object
+  sort_object: util.sort_object
 })

@@ -1,4 +1,4 @@
-<view >
+<view>
 
   <view class='search'>
     <view class='title'>A9数据查询</view>
@@ -6,7 +6,7 @@
       <view class='picker_content'>
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
           <view class="picker_area">
-             {{array[index]}}
+            {{array[index]}}
           </view>
         </picker>
         <picker fields="year" mode="date" bindchange="bindYearChange">
@@ -23,10 +23,7 @@
       <view class='button'>
         <button>搜索</button>
       </view>
-
-
     </view>
-
   </view>
   <view class='content {{position}}'>
     <view class="table template">

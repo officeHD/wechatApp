@@ -52,16 +52,17 @@
   display: table-cell;
   color: #000;
   height: 70rpx;
-  line-height: 70rpx;
-  text-align: center;
+  line-height:70rpx;
+  text-align: left;
   font-size: 14px;
+  padding-left: 5px;
 }
 
 .td {
   display: table-cell;
   height: 100rpx;
-  line-height: 100rpx;
-  text-align: center;
+  line-height: 1;
+  text-align: left;
   font-size: 12px;
 }
 
@@ -80,7 +81,11 @@
 
 .tbody .tr .td {
   height: 90rpx;
-  line-height: 90rpx;
+  line-height: 1;
+  padding: 5px 0 5px 5px;
+  min-width: 150rpx;
+  vertical-align: middle
+  
 }
 
 .tbody.hide {

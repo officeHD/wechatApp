@@ -28,11 +28,12 @@
 }
 .order_conrtent{
   display: flex;
-  font-size: 14px;
+  font-size: 12px;
   justify-content: space-around;
   line-height: 60rpx;
   padding-bottom: 30rpx;
   margin-bottom: 10px;
+  padding: 0 8px;
 }
 .discount_list{
   margin-bottom: 10px;
@@ -57,7 +58,7 @@
    justify-content: space-around;
  }
  .bottom{
-   display: absolute;
+   position: fixed;
    width:750rpx;
    bottom: 0;
    left: 0;

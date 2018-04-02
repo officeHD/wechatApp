@@ -1,24 +1,33 @@
-
 var app = getApp();
-
+const UserName = wx.getStorageSync('UserName')
 Page({
   data: {
     recordType: 'recharge',
     index: 0,
-
     position: 'relative',
     flag: true,
     listData: [],
-    consumeList:[]
+    consumeList: []
   },
   onLoad: function () {
     let that = this;
     let cb = (res) => {
-      that.setData({
-        listData: res.data.list
-      });
+      wx.hideLoading()
+      let result = JSON.parse(res.data.d);
+      if (result.State.toString() === "1") {
+        console.log(JSON.parse(result.ReturnInfo))
+        that.setData({
+          listData: JSON.parse(result.ReturnInfo)
+        });
+      }
+      // console.log(result)
+
     }
-    app.ajax('/recordList', '', cb, 'POST')
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    app.ajax('/GetRechargeListByUser', { UserName: UserName }, cb)
   },
   sortArr: function (e) {
     let target = e.currentTarget.dataset.target;
@@ -42,16 +51,7 @@ Page({
     wx.stopPullDownRefresh() //停止下拉刷新
 
   },
-
-  onReachBottom: function () {
-    let that = this;
-    let cb = (res) => {
-      that.setData({
-        listData: that.data.listData.concat(res.data.list)
-      });
-    }
-    app.ajax('/recordList', '', cb, 'POST')
-  },
+  
   onPageScroll: function (e) {
     let that = this;
     let scrollTop = e.scrollTop;
@@ -74,15 +74,28 @@ Page({
   searchType: function (e) {
     let that = this;
     let target = e.currentTarget.dataset.target;
+    console.log(target);
     this.setData({
       recordType: target
     })
-    let cb = (res) => {
-      that.setData({
-        consumeList: res.data.list
-      });
-    }
-    app.ajax('/consumeList', '', cb, 'POST')
+    if (target ==="consume"){
+      let cb = (res) => {
+        wx.hideLoading()
+        let result = JSON.parse(res.data.d);
+        if (result.State.toString() === "1") {
+          console.log(JSON.parse(result.ReturnInfo))
+          that.setData({
+            consumeList: JSON.parse(result.ReturnInfo)
+          });
+        }
+        // console.log(result)
+      }
+      wx.showLoading({
+        title: '加载中',
+      })
+      app.ajax('/GetOperationListByuser', { UserName: UserName }, cb)
+    } 
+   
   }
 
 })
