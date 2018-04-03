@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="info_list">
+    <block wx:for="{{userdate}}" wx:key="id">
+      <view class="weui_cell"  bindtap="openFile" data-target="{{item.url}}">
+       <view class="weui_cell_hd">
+          <image src="../../../images/user/book.png"></image>
+        </view>
+        <view class="weui_cell_bd"  >
+          <view class="weui_cell_bd_p"> {{item.text}} </view>
+        </view>
+        <view  class="with_arrow"></view>
+      </view>
+    </block>
+  </view>
+</view>

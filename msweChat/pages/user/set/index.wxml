@@ -1,0 +1,31 @@
+<!--pages/user/set/index.wxml-->
+<view>
+  <view class='login_img'>
+    <image src="../../../images/login.png"></image>
+  </view>
+  <view class="info_list">
+    <view bindtap="clearCache" class="weui_cell">
+      <view class="weui_cell_bd">
+        <view class="weui_cell_bd_p"> 清除缓存 </view>
+      </view>
+      
+      <view class="with_arrow"></view>
+    </view>
+    <view bindtap="toDetailsTap" data-detailurl="" class="weui_cell">
+      <view class="weui_cell_bd">
+        <view class="weui_cell_bd_p"> 修改密码 </view>
+      </view>
+      
+      <view class="with_arrow"></view>
+    </view>
+
+  <view bindtap="toDetailsTap" data-detailurl="" class="weui_cell">
+      <view class="weui_cell_bd">
+        <view class="weui_cell_bd_p"> 关于 </view>
+      </view>
+      
+      <view class="with_arrow"></view>
+    </view>
+
+  </view>
+</view>

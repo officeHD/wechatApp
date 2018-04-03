@@ -1,0 +1,11 @@
+<!--pages/suggest/index.wxml-->
+<view class="container">
+  <textarea class='suggest' placeholder="留下您宝贵的意见，让我们做的更好。为保护您的隐私，意见内容完全匿名，直接反馈给总经理查看，请放心填写"></textarea>
+  <view class='imgarea'>
+    <view class='addpic' wx:if="{{imgurl}}" bindtap="uploadPhoto"> <image src="{{imgurl}}"></image>添加图片</view>
+    <view class='showpic'wx:if="{{!imgurl}}" >  <image src="{{item.icon}}"></image> <image class='removeimg' src="{{item.icon}}"></image></view>
+  </view>
+  <view class='submitarea'>
+    <button>提交</button>
+  </view>
+</view>

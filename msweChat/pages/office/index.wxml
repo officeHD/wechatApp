@@ -1,0 +1,42 @@
+<view>
+  <view class='banner'>
+    <image src='../../images/office.png'></image>
+  </view>
+  <view class='title'>
+    <image src="../../images/office/title1.png"></image>
+    <text>业务管理</text>
+  </view>
+
+  <view class='content'>
+    <block wx:for="{{worklist}}" wx:key="id">
+      <view bindtap="toDetailsTap" data-detailurl="{{item.url}}" class="weui_cell">
+        <view class="weui_cell_hd">
+          <image src="{{item.icon}}"></image>
+        </view>
+        <view class="weui_cell_bd">
+          <view class="weui_cell_bd_p"> {{item.name}} </view>
+        </view>
+        <view class="with_arrow"></view>
+      </view>
+    </block>
+  </view>
+  <view class='title'>
+    <image src="../../images/office/title2.png"></image>
+    <text>便捷工作</text>
+  </view>
+  <view class='content'>
+    <block wx:for="{{joblist}}" wx:key="id">
+      <view bindtap="toDetailsTap" data-detailurl="" class="weui_cell nobottom">
+
+        <view class="weui_cell_hd">
+          <image src="{{item.icon}}"></image>
+        </view>
+        <view class="weui_cell_bd">
+          <view class="weui_cell_bd_p"> {{item.name}} </view>
+        </view>
+        <view class="with_arrow"></view>
+      </view>
+    </block>
+  </view>
+
+</view>

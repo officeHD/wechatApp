@@ -1,0 +1,62 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/index/index",
+    
+    "pages/crm/index",
+    "pages/office/index",
+    "pages/user/index",
+    "pages/user/userdata/index",
+    "pages/user/userfile/index",
+    "pages/user/suggest/index",
+    "pages/user/set/index",
+    "pages/insurance/life_insurance/index",
+    "pages/insurance/car_insurance/index",
+    "pages/insurance/card_insurance/index",
+    "pages/insurance/mscx/index",
+    "pages/insurance/xuqi/index",
+    "pages/office/increase/index",
+    "pages/office/manage_customers/index",
+    "pages/office/manage_order/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "民盛保代",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#6e6d6b",
+    "selectedColor": "#e64340",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "box-shadow": "0 0 6px 0",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/nav/home-off.png",
+        "selectedIconPath": "images/nav/home-on.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/crm/index",
+        "iconPath": "images/nav/crm-off.png",
+        "selectedIconPath": "images/nav/crm-on.png",
+        "text": "团队"
+      },
+      {
+        "pagePath": "pages/office/index",
+        "iconPath": "images/nav/order-off.png",
+        "selectedIconPath": "images/nav/order-on.png",
+        "text": "办公"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "images/nav/my-off.png",
+        "selectedIconPath": "images/nav/my-on.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

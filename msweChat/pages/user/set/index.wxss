@@ -1,0 +1,44 @@
+/* pages/user/set/index.wxss */
+page{
+  background-color: #f2f2f2;
+  height: 100%;
+}
+.login_img{
+  display: flex;
+  height: 300rpx;
+  align-items: center;
+  justify-content:center;
+}
+.login_img image{
+  width: 170rpx;
+  height: 170rpx;
+}
+.weui_cell {
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  padding: 10px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid #dadada;
+}
+.weui_cell_bd {
+  display: inline-block;
+}
+
+.weui_cell_bd_p {
+  font-size: 14px;
+  color: #333;
+}
+.with_arrow {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA8UExURQAAAJOTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk3d0CiEAAAAUdFJOUwAFDbevoZiOeGxhRKeHf1hRSz0ybptjKgAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAHNJREFUOE+tk0EOgCAQAwFRUARE//9XL/Vm7R6c0yRtAoFd91AuCCNMfzROGMPSKDBGiAPG8PGAMQyNvcMYft5gDENjWWEU3UgZQqkNwsgJQmgVQlAHqCuqXD2CyNVHyFwMg8zFuHkx0iF+L4VcmvG6ds7dcpoCmzwNk7cAAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+

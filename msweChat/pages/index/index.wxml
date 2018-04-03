@@ -1,0 +1,98 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- banner -->
+  <view class="swiper-container">
+    <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+      <block wx:for="{{banners}}" wx:key="id">
+        <swiper-item>
+          <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}" class="slide-image" width="750rpx" height="350rpx" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots">
+      <block wx:for="{{banners}}" wx:key="unique">
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+  <!-- 头条 -->
+  <view wx:if="{{noticeList}}" class="notice">
+    <view class="notice_iteml">民盛头条：</view>
+    <swiper wx:if="{{noticeList}}" class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="3000">
+      <navigator hover-class="none" wx:for-items="{{noticeList.dataList}}" wx:key="id" url="" open-type="navigate">
+        <swiper-item>
+          <view class="notice_itemr">{{item.title}}</view>
+        </swiper-item>
+      </navigator>
+    </swiper>
+  </view>
+  <!-- 产品部分 -->
+  <view class='product'>
+    <view class='product_t'>
+      <view class='p_l p_main'>
+        <view class='nav_img' bindtap="toDetailsTap" data-detailurl="../insurance/life_insurance/index">
+          <view class='title'>
+            <text class='main_title'>寿险 \n</text>
+            <text class='detail'>专业保险，相伴永远</text>
+          </view>
+          <image src="../../images/shouxian.png" class="pro_img" width="100rpx" height="50rpx" />
+        </view>
+      </view>
+      <view class='p_l'>
+        <view class='sub'>
+          <view class='nav_img' bindtap="toDetailsTap" data-detailurl="../insurance/car_insurance/index">
+            <view class='title'>
+              <text class='main_title'>车险 \n</text>
+              <text class='detail'>产品多优惠多</text>
+            </view>
+            <image src="../../images/chexian.png" class="min_img" width="100rpx" />
+          </view>
+        </view>
+        <view class='sub b_t'>
+          <view class='nav_img' bindtap="toDetailsTap" data-detailurl="">
+            <view class='title'>
+              <text class='main_title'>民盛出行 \n</text>
+              <text class='detail'>省钱更省心</text>
+            </view>
+            <image src="../../images/chuxing.png" class="min_img" width="100rpx" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='product_b'>
+      <view class='p_l b_r'>
+        <view class='nav_img' bindtap="toDetailsTap" data-detailurl="../insurance/card_insurance/index">
+          <view class='title'>
+            <text class='main_title'>卡单 \n</text>
+            <text class='detail'>方便快捷保费低</text>
+          </view>
+          <image src="../../images/chexian.png" class="min_img" width="100rpx" />
+        </view>
+      </view>
+      <view class='p_l'>
+        <view class='nav_img' bindtap="toDetailsTap" data-detailurl="">
+          <view class='title'>
+            <text class='main_title'>续期 \n</text>
+            <text class='detail'>一键查看所交保费</text>
+          </view>
+          <image src="../../images/chexian.png" class="min_img" width="100rpx" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 热门推荐 -->
+  <view class='hotsale'>
+    <view class='hot_title'>热门推荐</view>
+    <view class="goods-container">
+      <view class="goods-box" wx:for-items="{{hotsale}}" wx:key="{{index}}" bindtap="toDetailsTap" data-detailurl="{{item.detailurl}}">
+        <view class="img-box">
+          <image src="{{item.pic}}" class="image" mode="aspectFill" lazy-load="true" />
+        </view>
+        <view class="goods-title">
+          <text class='main_title'>{{item.title}} \n</text>
+          <text class='detail'>{{item.dataList}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

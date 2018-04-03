@@ -1,0 +1,38 @@
+.content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1rpx solid #ddd;
+  border-top: 1rpx solid #ddd;
+}
+
+.weui_cell {
+  width: 25vw;
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #ddd;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.weui_cell:nth-child(4n) {
+  border-right: none;
+}
+
+.weui_cell:nth-child(n) {
+  border-bottom: none;
+}
+
+.weui_cell_hd image {
+  width: 55rpx;
+  height: 55rpx;
+}
+
+.weui_cell_bd_p {
+  color: #333;
+  font-size: 26rpx;
+  margin-top: 10rpx;
+}

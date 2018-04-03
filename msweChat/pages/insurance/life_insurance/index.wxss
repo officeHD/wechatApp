@@ -1,0 +1,105 @@
+/* pages/insurance/life_insurance/index.wxss */
+
+.type-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 88rpx;
+  width: 100%;
+  background-color: #f2f2f2;
+  padding-top: 20rpx;
+}
+
+.type-navbar {
+  white-space: nowrap;
+  height: 88rpx;
+  width: 100%;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.type-box {
+  width: 25%;
+  box-sizing: content-box;
+  font-size: 32rpx;
+  line-height: 88rpx;
+  text-align: center;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.type-navbar-item {
+  border-bottom: 4rpx solid #fff;
+}
+
+.type-item-on {
+  border-bottom: 4rpx solid #e64340;
+}
+
+.insurelist {
+  height: 220rpx;
+  width: 100%;
+  display: flex;
+  padding: 10rpx 0;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ccc;
+}
+
+.list_content {
+  width: 100%;
+  margin-top: 120rpx;
+}
+
+.content {
+  width: 520rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10rpx;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title_text {
+  font-size: 36rpx;
+}
+
+.descript {
+  font-size: 32rpx;
+  color: #999;
+}
+
+.pic {
+  width: 220rpx;
+  height: 200rpx;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.pic image {
+  width: 100%;
+  height: 100%;
+}
+
+.price {
+  color: #ba1e17;
+  font-weight: 500;
+}
+
+.sale_num {
+  color: #999;
+  font-size: 30rpx;
+}
+
+.icon {
+  width: 50rpx;
+  height: 50rpx;
+}

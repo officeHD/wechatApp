@@ -1,0 +1,13 @@
+<view class='content'>
+    <block wx:for="{{worklist}}" wx:key="id">
+      <view bindtap="toDetailsTap" data-detailurl="{{item.url}}" class="weui_cell">
+        <view class="weui_cell_hd">
+          <image src="{{item.icon}}"></image>
+        </view>
+        <view class="weui_cell_bd">
+          <view class="weui_cell_bd_p"> {{item.name}} </view>
+        </view>
+        <view class="with_arrow"></view>
+      </view>
+    </block>
+  </view>

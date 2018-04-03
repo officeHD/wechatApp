@@ -1,0 +1,23 @@
+<view>
+  <view class='list_content'>
+    <view wx:for="{{increaselist}}" wx:key="name" class='insurelist'>
+      <view class='content'>
+        <view class='title'>
+          <text class='title_text'>{{item.name}}</text>
+
+          <text class='status'>{{item.status}}</text>
+        </view>
+        <view class='title'>
+          <text class='descript'>申请职位： <text class='noraml'>{{item.position}}</text></text>
+          <text class='descript'> 取消</text>
+        </view>
+        <view class='title'>
+          <text class='descript'>申请时间： <text class='noraml'>{{item.date_time}}</text></text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='add_person'>
+    +新增人员
+  </view>
+</view>

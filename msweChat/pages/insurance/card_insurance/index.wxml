@@ -1,0 +1,21 @@
+<view>
+  
+  <view class='list_content'>
+    <view wx:for="{{list}}" wx:key="name" class='insurelist'>
+      <view class='pic'>
+        <image src='../../../images/{{item.img}}'></image>
+      </view>
+      <view class='content'>
+        <view class='title'>
+          <text class='title_text'>{{item.title}}</text>
+          <image src='{{item.icon}}' class='icon'></image>
+        </view>
+        <text class='descript'> {{item.descript}}</text>
+        <view class='title'>
+          <text class='price'>{{item.price}}</text>
+          <text class='sale_num'>销量：{{item.stock_num}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

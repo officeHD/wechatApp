@@ -1,0 +1,28 @@
+<view class='login'>
+  <view class='login_img'>
+    <image src="{{img.logo}}"></image>
+  </view>
+  <view class='login_input'>
+    <view class='input_list'>
+      <image src="{{img.user}}"></image>
+      <text class='input_name'>用户名</text>
+      <input class='input_area' placeholder="请输入用户名"  bindinput="userNameInput"></input>
+    </view>
+    <view class='input_list'>
+      <image src="{{img.password}}"></image>
+      <text class='input_name'>密码</text>
+      <input class='input_area' password  placeholder="请输入密码"  bindinput="passWdInput"></input>
+    </view>
+  </view>
+  <view class='reader'>
+    我已阅读并同意
+    <text class='protocol '>用户协议</text>
+  </view>
+  <view class='login_button'>
+    <button bindtap="loginBtnClick">登录</button>
+  </view>
+  <view class='hot_line'>
+    客服热线
+    <text>400-880-2177</text>
+  </view>
+</view>

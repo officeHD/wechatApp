@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view class="container">
+  <navigator url="./userdata/index" open-type="navigate" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <view class='userinfo-text'>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <text class="userinfo-position">{{staffInfo.branchname}} \t\t {{staffInfo.position}}</text>
+    </view>
+  </navigator>
+  <view class='user_count'>
+    <view class='count_content'>
+      <view class='count count_line'>
+        <text class='count_num'>{{staffInfo.money}}</text>
+        <text>账户余额(元)</text>
+      </view>
+      <view class='count'>
+        <text class='count_num'>{{staffInfo.fee}}</text>
+        <text>本月保费(元)</text>
+      </view>
+    </view>
+  </view>
+  <view class="info_list">
+    <block wx:for="{{userListInfo}}" wx:key="{{index}}">
+      <view bindtap="toDetailsTap" data-detailurl="{{item.linkurl}}" class="weui_cell">
+        <view class="weui_cell_hd">
+          <image src="{{item.icon}}"></image>
+        </view>
+        <view class="weui_cell_bd">
+          <view class="weui_cell_bd_p"> {{item.text}} </view>
+        </view>
+        <view wx:if="{{item.isunread}}" class="badge">{{item.unreadNum}}</view>
+        <view class="with_arrow"></view>
+      </view>
+    </block>
+  </view>
+  <view class='hot_line'>
+    客服热线:
+    <text bindtap="calling">400-880-2177</text>
+  </view>
+</view>
