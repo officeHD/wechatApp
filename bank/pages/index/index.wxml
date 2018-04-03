@@ -1,0 +1,44 @@
+<!--index.wxml-->
+<view>
+  <view class="top">
+    <view class='tips'>
+      {{totalNum}}人已集齐哦，您已经集齐{{selfNum}}张花卡
+    </view>
+    <text bindtap='tonotice'>游戏规则</text>
+  </view>
+
+  <view class='bottom'>
+    <view class='cards'>
+      <view class='card'>
+        <text class='badge'>{{badge.no1}}</text>
+        <image src="/images/index/{{badge.no1>0?'no_1':'demo'}}.jpg"></image>
+      </view>
+      <view class='card'>
+        <text class='badge'>{{badge.no2}}</text>
+        <image src="/images/index/{{badge.no2>0?'no_2':'demo'}}.jpg"></image>
+      </view>
+      <view class='card'>
+        <text class='badge'>{{badge.no3}}</text>
+        <image src="/images/index/{{badge.no3>0?'no_3':'demo'}}.jpg"></image>
+      </view>
+      <view class='card'>
+        <text class='badge'>{{badge.no4}}</text>
+        <image src="/images/index/{{badge.no4>0?'no_4':'demo'}}.jpg"></image>
+      </view>
+      <view class='card'>
+        <text class='badge'>{{badge.no5}}</text>
+        <image src="/images/index/{{badge.no5>0?'no_5':'demo'}}.jpg"></image>
+      </view>
+    </view>
+    <view class='lottery' bindtap='lottery'>抽奖 (剩余{{drawTimes}}次)</view>
+  </view>
+  <view class='{{showHelp?"help":"hide"}}' bindtap='changeShow'>
+    <view class='helpInfo'>
+      <view class='info_title'> 哇哦，花卡与您擦肩而过了</view>
+      <view class='info_content'>
+        快快分享好友增加抽奖机会吧，使用中国银行手机银行完成任意一笔交易可获取指定花卡哦
+      </view>
+      <button class='share_btn' open-type="share" bindtap='changeShow'> 邀请好友助力</button>
+    </view>
+  </view>
+</view>

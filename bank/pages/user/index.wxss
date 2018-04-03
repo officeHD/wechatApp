@@ -1,0 +1,55 @@
+/* pages/user/index.wxss */
+
+.bottom {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  width: 650rpx;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.title {
+  text-align: center;
+  padding: 5px 0;
+}
+
+.userList {
+  max-height: 550rpx;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.item image {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.lottery {
+  width: 450rpx;
+  text-align: center;
+  color: #fff;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 5px;
+  background-color: #e7161b;
+  font-size: 14px;
+}

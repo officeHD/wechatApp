@@ -1,0 +1,59 @@
+{
+  "pages":[
+  
+    "pages/index/index",
+    "pages/login/index",
+   
+    "pages/user/index",
+      "pages/webview/index",
+   
+    
+   
+  
+  
+    "pages/notice/index",
+   
+    "pages/gift/index",
+   
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#2C241F",
+    "selectedColor": "#960C00",
+    "borderStyle": "white",
+    "backgroundColor": "#F5E9D1",
+    "box-shadow": "0 0 6px 0",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tab/index.png",
+        "selectedIconPath": "images/tab/index_on.png",
+        "text": "活动首页"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "images/tab/user.png",
+        "selectedIconPath": "images/tab/user_on.png",
+        "text": "好友助力"
+      },
+      {
+        "pagePath": "pages/gift/index",
+        "iconPath": "images/tab/gift.png",
+        "selectedIconPath": "images/tab/gift_on.png",
+        "text": "我的奖品"
+      },
+      {
+        "pagePath": "pages/notice/index",
+        "iconPath": "images/tab/notice.png",
+        "selectedIconPath": "images/tab/notice_on.png",
+        "text": "活动规则"
+      }
+    ]
+  }
+}

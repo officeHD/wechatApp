@@ -1,0 +1,89 @@
+/* pages/login/index.wxss */
+
+page {
+  background: none;
+  background-color: #f0eff3;
+}
+
+.user_icon {
+  width: 100%;
+  height: 400rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 14px;
+  color: #adbcc3;
+}
+
+.item_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user_icon image {
+  width: 130rpx;
+  height: 130rpx;
+  margin-bottom: 30rpx;
+}
+
+.item {
+  display: flex;
+  width: 700rpx;
+  height: 90rpx;
+  border: 1px solid #ccc;
+  margin-bottom: 30rpx;
+  border-radius: 5px;
+}
+
+.item input {
+  width: 500rpx;
+  height: 90rpx;
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+.item .input_mes {
+  width: 350rpx;
+}
+
+.get_mes {
+  width: 250rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 14px;
+}
+
+.image_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90rpx;
+  height: 90rpx;
+  border-right: 1px solid #ccc;
+}
+
+.item image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.enter {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  height: 100%;
+  line-height: 90rpx;
+  border-radius: 5px;
+  background-color: #e7161b;
+  font-size: 14px;
+  border: 1px solid #e7161b;
+}
+
+.tips {
+  font-size: 13px;
+  margin-top: 15px;
+}
