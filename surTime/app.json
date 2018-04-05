@@ -1,11 +1,14 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/search/A9/index",
     "pages/login/index",
     "pages/pay/index",
     "pages/webview/index",
     "pages/user/index",
-    "pages/index/index",
-    "pages/search/A9/index",
+    
+   
+    "pages/search/AutoCheck/index",
     "pages/register/index"
   ],
   "window": {
@@ -22,19 +25,19 @@
     "box-shadow": "0 0 6px 0",
     "list": [
       {
-        "pagePath": "pages/login/index",
+        "pagePath": "pages/index/index",
         "iconPath": "images/tab/home.png",
         "selectedIconPath": "images/tab/home_on.png",
         "text": "主页"
       },
       {
-        "pagePath": "pages/search/A9/index",
+        "pagePath": "pages/index/index",
         "iconPath": "images/tab/message.png",
         "selectedIconPath": "images/tab/message_on.png",
         "text": "消息"
       },
       {
-        "pagePath": "pages/pay/index",
+        "pagePath": "pages/index/index",
         "iconPath": "images/tab/part.png",
         "selectedIconPath": "images/tab/part_on.png",
         "text": "分类导航"

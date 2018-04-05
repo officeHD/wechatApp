@@ -14,6 +14,7 @@ function ajax(url = '', data = {}, fn, ) {
 }
 // 存储用户信息
 function initUserInfo(obj) {
+   
   wx.setStorage({
     key: "PKID",
     data: obj.PKID

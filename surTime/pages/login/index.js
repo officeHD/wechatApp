@@ -121,6 +121,7 @@ Page({
           let result = JSON.parse(res.data.d);
           console.log(result);
           if (result.State.toString() === "1") {
+            // 储存用户信息
             app.initUserInfo(JSON.parse(result.ReturnInfo));
             wx.switchTab({
               url: '/pages/user/index',

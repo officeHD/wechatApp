@@ -1,23 +1,25 @@
 var app = getApp();
 Page({
   data: {
-    array: ['美国', '中国', '巴西', '日本'],
+    array: ['美国', '中国', '巴西', '日本','印度尼西亚'],
     index: 0,
+    time:["3月30号-3月30号 (已购买)"],
+   
+    timeIndex:0,
     year: '2018',
-    month: '09-01',
+    
     position: 'relative',
     flag: true,
     listData: []
   },
   onLoad: function () {
-    let UserID = app.globalData.PKID
     let that = this;
     let cb = (res) => {
       that.setData({
         listData: res.data.list
       });
     }
-    app.ajax('/A9List', { UserID: UserID}, cb, 'POST')
+    app.ajax('/productList', '', cb, 'POST')
   },
   sortArr: function (e) {
     let target = e.currentTarget.dataset.target;
@@ -49,7 +51,7 @@ Page({
         listData: that.data.listData.concat(res.data.list)
       });
     }
-    app.ajax('A9List', '', cb, 'POST')
+    app.ajax('/productList', '', cb, 'POST')
   },
   onPageScroll: function (e) {
     let that = this;
@@ -70,6 +72,12 @@ Page({
       index: e.detail.value
     })
   },
+  bindPickerChangeTime: function (e) {
+    this.setData({
+      timeIndex: e.detail.value
+    })
+  },
+
   bindDateChange: function (e) {
     this.setData({
       month: e.detail.value
