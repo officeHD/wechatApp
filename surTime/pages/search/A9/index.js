@@ -13,8 +13,11 @@ Page({
     let UserID = app.globalData.PKID
     let that = this;
     let cb = (res) => {
+       
+      let data = JSON.parse(res.data.d)
+      console.log(JSON.parse(data.ReturnInfo))
       that.setData({
-        listData: res.data.list
+        listData: JSON.parse(data.ReturnInfo)
       });
     }
     app.ajax('/A9List', { UserID: UserID}, cb, 'POST')

@@ -41,8 +41,8 @@
             <view class="td logo">
               <image src='{{item.img}}'></image>
             </view>
-            <view class="td">{{item.id}}</view>
-            <view class="td">{{item.org}}</view>
+            <view class="td">{{item.ASIN}}</view>
+            <view class="td">{{item.Country}}</view>
             <view class="td operate">
               <image src='../../../images/table/detail.png'></image>
               <image src='../../../images/table/info.png'></image>
@@ -66,8 +66,8 @@
             <view class="td logo">
               <image src='{{item.img}}'></image>
             </view>
-            <view class="td">{{item.id}}</view>
-            <view class="td">{{item.org}}</view>
+            <view class="td">{{item.ASIN}}</view>
+            <view class="td">{{item.Country}}</view>
             <view class="td operate">
               <image src='../../../images/table/detail.png'></image>
               <image src='../../../images/table/info.png'></image>

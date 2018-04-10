@@ -13,12 +13,13 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+// let API_HOST = "https://huodong.taoronge.com/bank";
 let API_HOST = "https://www.easy-mock.com/mock/5a9a2c2efdc65f3e22abbdaf/example";
 
 const ajax = (url = '', data = '', fn) => {
   wx.request({
     url: API_HOST + url,
-    method: "POST",
+    method: "GET",
     data: data,
     header: { "Content-Type": "application/json" },
     success: function (res) {

@@ -5,32 +5,33 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      
-        let fn = msg => {
-          if (msg.data.result.toString() === "1") {
-            this.globalData.openId = msg.data.openId;
-          
-            if (this.openIdReadyCallback) {
-              this.openIdReadyCallback(msg.data)
-            }
-          }
+        this.globalData.userCode = res.code
+        if (this.userCodeReadyCallback) {
+          this.userCodeReadyCallback(res)
         }
-        ajax('/getOpenId', { code: res.code }, fn);
+        // 获取用户信息
+        
+
       }
     })
-    // 获取用户信息
     wx.getUserInfo({
       success: res => {
         // 可以将 res 发送给后台解码出 unionId
+        
         this.globalData.userInfo = res.userInfo
+        this.globalData.encryptedData = res.encryptedData
+        this.globalData.iv = res.iv
         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
         // 所以此处加入 callback 以防止这种情况
-      
+
         if (this.userInfoReadyCallback) {
           this.userInfoReadyCallback(res)
         }
+
       }
+
     })
+
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {

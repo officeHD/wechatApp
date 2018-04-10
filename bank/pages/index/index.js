@@ -10,13 +10,15 @@ Page({
     drawTimes: null,//抽奖次数
     showHelp: false,//显示好友助力
     isFirst: null,
+    imgsrc:'',//花卡大图
     badge: {},
     userInfo: {},
     hasUserInfo: false,
-    isloginback:false//从登陆页面返回
+    isloginback: false//从登陆页面返回
   },
 
   onLoad: function (options) {
+
     let that = this;
     // 如果有openId就是分享的
     if (options.openId) {
@@ -24,20 +26,20 @@ Page({
         aidOpenId: options.openId
       })
     }
-    
-
-    if (app.globalData.openId && app.globalData.userInfo) {
+    if (app.globalData.userCode && app.globalData.userInfo) {
       that.getUserData();
       that.setData({
         userInfo: app.globalData.userInfo,
-        openId: app.globalData.openId
+        userCode: app.globalData.userCode
       })
     } else {
-      app.openIdReadyCallback = res => {
+      app.userCodeReadyCallback = res => {
         that.setData({
-          openId: res.openId
+          userCode: res.code
         })
-        console.log(3)
+        app.userInfoReadyCallback = res => {
+          that.getUserData()
+        }
       }
       app.userInfoReadyCallback = res => {
         that.setData({
@@ -46,25 +48,29 @@ Page({
         })
 
       }
-      that.getUserData();
+
     }
 
   },
-  onShow:function(){
-   let that=this;
-  // 如果从注册页过来就直接开奖
-   if (that.data.isloginback){
-     that.starlottery();
-     that.setData({
-       isloginback:false
-     })
-   }
+  onShow: function () {
+    let that = this;
+    // 如果从注册页过来就直接开奖
+    if (that.data.isloginback) {
+      that.starlottery();
+      that.setData({
+        isloginback: false
+      })
+    }
   },
   getUserData: function () {
-    let openId = app.globalData.userInfo;
-    let userInfo = app.globalData.userInfo;
-    let aidOpenId = app.globalData.aidOpenId;
     let that = this;
+    let data = {
+      aidOpenId: that.data.aidOpenId,
+      code: app.globalData.userCode,
+      encryptedData: app.globalData.encryptedData,
+      iv: app.globalData.iv
+    }
+
     let fn = msg => {
       console.log(msg.data)
       if (msg.data.result.toString() === "1") {
@@ -78,8 +84,7 @@ Page({
         })
       }
     }
-    app.api("/getUserData", { openId: openId }, fn)
-
+    app.api("/getUserData", data, fn)
   },
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
@@ -107,24 +112,24 @@ Page({
       that.setData({
         showHelp: true
       })
-    }else{
+    } else {
       that.starlottery();
     }
   },
   starlottery: function () {
-     wx.showLoading({
-       title: '开始抽奖',
-     })
-     let fn=msg=>{
-       wx.hideLoading()
-       if(msg.data.result.toString()==="1"){
-         wx.showModal({
-           title: '抽奖结果',
-           content: '恭喜您抽中了',
-         })
-       }
-     }
-     app.api("/lottery", { openId: app.globalData.openId }, fn)
+    wx.showLoading({
+      title: '开始抽奖',
+    })
+    let fn = msg => {
+      wx.hideLoading()
+      if (msg.data.result.toString() === "1") {
+        wx.showModal({
+          title: '抽奖结果',
+          content: '恭喜您抽中了',
+        })
+      }
+    }
+    app.api("/lottery", { openId: app.globalData.openId }, fn)
   },
   changeShow: function () {
     let that = this;
@@ -133,6 +138,13 @@ Page({
         showHelp: false
       })
     }
+  },
+  //查看花卡
+  viewImg:function(e){
+    let imgsrc = e.currentTarget.dataset.src
+    this.setData({
+      imgsrc: imgsrc
+    })
   },
   //跳转Tab
   tonotice: function () {
