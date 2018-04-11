@@ -1,29 +1,39 @@
 /* pages/user/index.wxss */
-
+.userc{
+  display: flex;
+  justify-content: center;
+   flex-direction: column;
+align-items: center;
+}
 .bottom {
-  position: fixed;
-  bottom: 20px;
+  
   width: 100%;
   display: flex;
-  flex-direction: column;
+  height: 20vh;
+ 
   justify-content: center;
   align-items: center;
 }
 
 .content {
-  width: 650rpx;
+  margin-top: 20px;
+  width: 550rpx;
+  height: 70vh;
   background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 13px;
-  margin-bottom: 10px;
-  padding: 10px;
+ 
+  padding: 10px 20px;
+  border: 1px solid #F4723D;
 }
 
 .title {
   text-align: center;
   padding: 5px 0;
 }
-
+.time{
+  float: right;
+}
 .userList {
   max-height: 550rpx;
   overflow: hidden;
@@ -33,12 +43,21 @@
 .item {
   display: flex;
   align-items: center;
-  padding: 5px 20px;
+  padding: 5px 0;
+  justify-content: space-between;
+   align-items: center;
+   border-bottom: 1px dotted #C1BBA6;
+   height: 80rpx;
+ 
+}
+.iteml{
+   display: flex;
+  align-items: center;
 }
 
 .item image {
-  width: 60rpx;
-  height: 60rpx;
+  width: 70rpx;
+  height: 70rpx;
   border-radius: 50%;
   margin-right: 10px;
 }
@@ -47,9 +66,9 @@
   width: 450rpx;
   text-align: center;
   color: #fff;
-  height: 70rpx;
-  line-height: 70rpx;
-  border-radius: 5px;
-  background-color: #e7161b;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 8px;
+  background-color: #F57B4A;
   font-size: 14px;
 }

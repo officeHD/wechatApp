@@ -1,14 +1,17 @@
 {
   "pages":[
+      "pages/logs/logs",
     "pages/index/index",
-    "pages/login/index",
     "pages/user/index",
+    
+    "pages/login/index",
+    
     "pages/webview/index",
     "pages/notice/index",
    
-    "pages/gift/index",
+    "pages/gift/index"
    
-    "pages/logs/logs"
+  
   ],
   "window":{
    

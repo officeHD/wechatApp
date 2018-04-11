@@ -1,20 +1,25 @@
-<view>
-<view class='bottom'>
-     
-     <view class='content'>
-          <view class='title'>分享活动链接至微信群、微信好友增加抽取花卡的机会。每个微信用户仅可助力一次哦。</view>
-          <view class='detail'>
-            <view class='user_title'>以下好友已为您助力:</view>
-            <view class='userList'>
-                <view  wx:for-items="{{userList}}" wx:key="id">
-                    <view class='item'>
-                          <image src='{{avatarUrl}}'></image>
-                          <text>{{nickName}}</text>
-                    </view>
-                 </view>
-            </view>
-          </view>
-     </view>
-    <button open-type="share" class='lottery'>好友助力</button>
+<view class='userc'>
+
+  <view class='content'>
+      
+      <view class='detail'>
+        
+        <view class='userList'>
+            <view class='item'  wx:for-items="{{userList}}" wx:key="id">
+             
+                  <view class='iteml'>
+                    <image src='{{avatarUrl}}'></image>
+                      <text>{{nickName}}</text>
+                  </view>
+                      
+                      <text class='time'>{{nickName}}</text>
+
+                
+              </view>
+        </view>
+      </view>
+  </view>
+  <view class='bottom'>
+    <button open-type="share" class='lottery'>邀请好友助力</button>
   </view>
 </view>

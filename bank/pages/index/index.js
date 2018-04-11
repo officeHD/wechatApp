@@ -140,8 +140,14 @@ Page({
     }
   },
   //查看花卡
-  viewImg:function(e){
-    let imgsrc = e.currentTarget.dataset.src
+  clickNum:function(e){
+  
+    let imgsrc = e.currentTarget.dataset.src;
+    let badge = e.currentTarget.dataset.badge;
+    if (badge.toString()==="0"){
+      imgsrc="";
+    }
+   
     this.setData({
       imgsrc: imgsrc
     })

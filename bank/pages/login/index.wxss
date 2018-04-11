@@ -2,7 +2,7 @@
 
 page {
   background: none;
-  background-color: #f0eff3;
+  background-color: #FFFCF9;
 }
 
 .user_icon {
@@ -78,9 +78,10 @@ page {
   height: 100%;
   line-height: 90rpx;
   border-radius: 5px;
-  background-color: #e7161b;
+  background-color: #F57B4A;
   font-size: 14px;
-  border: 1px solid #e7161b;
+   border: 1px solid #F57B4A; 
+
 }
 
 .tips {

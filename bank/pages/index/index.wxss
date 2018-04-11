@@ -41,7 +41,7 @@
   padding: 20rpx;
   justify-content: space-around;
   box-sizing: border-box;
-  align-items: top;
+  
 }
 
 .card {
