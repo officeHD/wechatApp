@@ -1,0 +1,28 @@
+.search .title {
+  width: 750rpx;
+  text-align: center;
+  margin: 30rpx 0;
+  color: #333;
+  letter-spacing: 2rpx;
+}
+.picker_content{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  margin: 10px 0;
+  height: 80rpx;
+  font-size: 16px;
+}
+.picker_content .item{
+  width: 50%;
+  display: flex
+}
+.items{
+  display: flex;
+}
+.item text{
+  width: 50%;
+    text-align:justify; 
+    /* text-align-last:justify; */
+    font-size: 16px;
+}

@@ -4,7 +4,6 @@ Page({
     by_message: false,
     getmsg: "获取验证码",
     reset_pass: false,
-
     login_type: "短信快捷登录",
     reset_word: "忘记密码",
     flag: true,
@@ -15,10 +14,10 @@ Page({
     passWord: ''
   },
   onLoad: function () {
+
   },
   //切换登录方式
   onChangeLoginType: function (e) {
-
     let that = this;
     that.setData({
       by_message: (!that.data.by_message),
@@ -137,6 +136,18 @@ Page({
         app.ajax('/Login', data, fn)
       }
     }
+  },
+  login_wx:function(e){
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res);
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
+      }
+    })
+    
   }
 
 })

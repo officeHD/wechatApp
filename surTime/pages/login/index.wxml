@@ -46,7 +46,7 @@
         <view class='left_line'></view>
       </view>
       <view class='login_way'>
-            <view class='wechat'>
+            <view class='wechat' bindtap='login_wx'>
               <image src='/images/login/wechat.png'></image>
               <view class='login_text'>微信账号登录</view>
             </view>

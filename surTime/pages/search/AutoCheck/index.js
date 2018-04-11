@@ -4,22 +4,28 @@ Page({
     array: ['美国', '中国', '巴西', '日本','印度尼西亚'],
     index: 0,
     time:["3月30号-3月30号 (已购买)"],
-   
+    PNo:'0',
     timeIndex:0,
     year: '2018',
-    
+    Country:'美国',
     position: 'relative',
     flag: true,
     listData: []
   },
   onLoad: function () {
     let that = this;
+    let UserID = app.globalData.PKID;
+    let PNo = that.data.PNo;
     let cb = (res) => {
-      that.setData({
-        listData: res.data.list
-      });
+      let data = JSON.parse(res.data.d)
+      if (data.State.toString()==="1"){
+        console.log(JSON.parse(data.ReturnInfo))
+        that.setData({
+          listData: JSON.parse(data.ReturnInfo)
+        })
+      }
     }
-    app.ajax('/productList', '', cb, 'POST')
+    app.ajax('/AsinKeyAll', { UserID: UserID,PNo:PNo }, cb, 'POST')
   },
   sortArr: function (e) {
     let target = e.currentTarget.dataset.target;
@@ -84,9 +90,22 @@ Page({
     })
   },
   bindYearChange: function (e) {
+    let that=this;
+    let UserID = app.globalData.PKID;
+    let year = e.detail.value;
+    let Country = this.data.Country;
+    console.log(year);
     this.setData({
-      year: e.detail.value
+      year: year
     })
+    let cb = (res) => {
+      let data = JSON.parse(res.data.d)
+      
+      that.setData({
+        listData: JSON.parse(data.ReturnInfo)
+      });
+    }
+    app.ajax('/GetMouthByYear', { UserID: UserID, Year: year, Country: Country}, cb, 'POST')
   },
 
 })

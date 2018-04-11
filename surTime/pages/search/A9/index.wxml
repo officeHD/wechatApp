@@ -6,22 +6,14 @@
       <view class='picker_content'>
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
           <view class="picker_area">
-            {{array[index]}}
+            {{array[index]}}▼
           </view>
         </picker>
-        <picker fields="year" mode="date" bindchange="bindYearChange">
-          <view class="picker_year">
-            {{year}}
-          </view>
-        </picker>
-        <picker fields="day" mode="date" bindchange="bindDateChange">
-          <view class="picker_time">
-            {{month}}
-          </view>
-        </picker>
+         
+         <input placeholder='请务必输入ASIN' bindinput="changeASIN"></input>
       </view>
       <view class='button'>
-        <button>搜索</button>
+        <button bindtap='search'>搜索</button>
       </view>
     </view>
   </view>

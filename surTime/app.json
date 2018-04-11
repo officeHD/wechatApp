@@ -1,16 +1,20 @@
 {
   "pages": [
-    "pages/search/A9/index",
-    "pages/index/index",
+    
+    
+   
    
     "pages/login/index",
+    "pages/search/KR/index",
+    "pages/register/index",
+    "pages/index/index",
+    "pages/search/A9/index",
     "pages/pay/index",
     "pages/webview/index",
     "pages/user/index",
     
    
-    "pages/search/AutoCheck/index",
-    "pages/register/index"
+    "pages/search/AutoCheck/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

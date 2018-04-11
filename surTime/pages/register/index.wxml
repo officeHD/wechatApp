@@ -1,5 +1,7 @@
 <view class='login'>
-  
+  <view class='logo_box'>
+    <image src="../../images/login/logo.png" class="logo" />
+  </view>
   <view class='login_box'>
     <view class='input_list'>
       <image src="../../images/login/email.png" class="input_logo" />
@@ -11,7 +13,7 @@
     </view>
     <view class='input_list'>
      <image src="../../images/login/phone.png" class="input_logo" />
-      <input class='input_area' placeholder="手机号" bindinput="userNameInput"></input>
+      <input class='input_area' placeholder="手机号" bindinput="changephone"></input>
     </view>
    
 
@@ -21,7 +23,7 @@
         <input class='' placeholder="手机验证码" bindinput="userNameInput"></input>
       </view>
       
-      <view class='{{sendmsg}}' bindtap='sendmessg'> {{getmsg}}</view>
+      <view class='{{c2?"get_message":"send_message"}}' bindtap='sendmessg'>{{c2||'获取验证码'}}</view>
     </view>
     <view class='message_input '>
       <view class='input_message'>
@@ -33,7 +35,7 @@
 
      
      
-    <view class='suer_reset login_btn '>确认注册</view>
+    <view class='suer_reset login_btn' bindtap='register'>确认注册</view>
 
   </view>
 </view>

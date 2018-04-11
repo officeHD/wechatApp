@@ -4,6 +4,7 @@
 .logo_box {
   height: 200rpx;
   text-align: center;
+  margin-bottom: 30rpx;
 }
 
 .logo {
@@ -69,7 +70,9 @@
   border: 1px solid #ccc;
 }
 
-.send_message {
+.get_message {
+  /* background-color: gray;
+  color: #fff; */
 }
 
 .input_list.hide {

@@ -1,0 +1,63 @@
+<view class='search'>
+    <view class='title'>KR工具</view>
+    <view class='pick_view {{position}}'>
+      <view class='picker_content'>
+        <view class='item'>
+          <text>站点：</text>
+          
+          <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+            <view class="picker_area">
+              {{areas[areasIndex]}}▼
+            </view>
+          </picker>
+        </view>
+        <view class='item'>
+          <text>计划名：</text>
+          
+          <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+            <view class="picker_area">
+              {{areas[areasIndex]}}▼
+            </view>
+          </picker>
+        </view>
+      </view>
+       <view class='picker_content'>
+        <view class='item'>
+          <text>监控频率：</text>
+          
+          <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+            <view class="picker_area">
+              {{areas[areasIndex]}}▼
+            </view>
+          </picker>
+        </view>
+        <view class='item'>
+          <text>监控时长：</text>
+          
+          <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+            <view class="picker_area">
+              {{areas[areasIndex]}}▼
+            </view>
+          </picker>
+        </view>
+      </view>
+       <view class='picker_content'>
+        <view class='items'>
+          <text>ASIN关键词：</text>
+          
+          <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+            <view class="picker_area">
+              {{areas[areasIndex]}}▼
+            </view>
+          </picker>
+        </view>
+        <view>
+        一行一个
+        </view>
+         
+      </view>
+      <view class='button'>
+        <button bindtap='search'>搜索</button>
+      </view>
+    </view>
+  </view>

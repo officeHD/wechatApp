@@ -99,14 +99,33 @@
   color: #fff;
   letter-spacing: 2rpx;
 }
-
 .pick_view {
   display: flex;
-  width: 606rpx;
+   width: 500rpx;
+  max-width: 700rpx;
   height: 90rpx;
   margin: 10rpx auto;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+}
+.pick_view .picker_content {
+  /* width: 490rpx; */
+  display: flex;
+  height: 55rpx;
+  background-color: #fff;
+  align-items: center;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.picker_content picker {
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.picker_content input{
+  width: 200rpx;
+  text-align: left; 
+  padding-left: 20rpx;
 }
 
 .pick_view.fixed {
@@ -121,24 +140,18 @@
   box-sizing: border-box;
 }
 
-.pick_view .picker_content {
-  width: 460rpx;
-  display: flex;
-  height: 55rpx;
-  background-color: #fff;
-  align-items: center;
-  padding-left: 20rpx;
-  text-align: center;
-  font-size: 28rpx;
-}
-
+ 
 .picker_area {
-  width: 90rpx;
+  border-right: 1px solid #000;
+  padding: 0 5px;
+  height: 40rpx;
+  max-width: 140rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
 }
 
-.picker_year {
-  width: 90rpx;
-}
+ 
 
 .pick_view button {
   width: 103rpx;
