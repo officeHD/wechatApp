@@ -1,8 +1,10 @@
 <!--index.wxml-->
 <view class="container">
-  <navigator url="../login/index" >注册页面</navigator>
-  <navigator url="../search/A9/index" >A9查询页面</navigator>
-  <navigator url="../search/AutoCheck/index" >自动选品页面</navigator>
-  <navigator url="../pay/index" >支付页面</navigator>
-    
+  <navigator url="../register/index">注册页面</navigator>
+  <navigator url="../search/A9/index">A9查询页面</navigator>
+  <navigator url="../search/GK/index">GK查询页面</navigator>
+  <navigator url="../search/AutoCheck/index">自动选品页面</navigator>
+  <navigator url="../search/KR/index">KR页面</navigator>
+  <navigator url="../pay/index">支付页面</navigator>
+
 </view>

@@ -10,8 +10,8 @@
   justify-content: space-between;
   padding: 0 20rpx;
   margin: 10px 0;
-  height: 80rpx;
-  font-size: 16px;
+ 
+  font-size: 14px;
 }
 .picker_content .item{
   width: 50%;
@@ -20,9 +20,57 @@
 .items{
   display: flex;
 }
+picker{
+  width: 195rpx;
+  height: 50rpx;
+}
+.picker_area{
+  width: 195rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: left;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 13px;
+}
+.flag{
+  float: right;
+  color:#818181;
+}
 .item text{
-  width: 50%;
-    text-align:justify; 
-    /* text-align-last:justify; */
-    font-size: 16px;
+  width: 150rpx;
+   
+    font-size: 30rpx;
+}
+textarea{
+  width: 248rpx;
+  height: 180rpx;
+  border: 1px solid #CCC;
+}
+.tips{
+  width: 260rpx;
+  font-size: 12px;
+  padding: 10rpx;
+}
+.button{
+  width: 400rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 20px auto;
+  text-align: center;
+  background-color: #1487D9;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 33rpx;
+}
+.attention{
+  border-top: 1px dotted #ccc;
+  padding: 20px 10px;
+  font-size: 28rpx;
+}
+.attention .titles{
+  text-align: left;
+  font-size: 32rpx;
+  color:#1487D9; 
 }

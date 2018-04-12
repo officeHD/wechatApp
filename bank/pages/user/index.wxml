@@ -11,10 +11,7 @@
                     <image src='{{avatarUrl}}'></image>
                       <text>{{nickName}}</text>
                   </view>
-                      
                       <text class='time'>{{nickName}}</text>
-
-                
               </view>
         </view>
       </view>

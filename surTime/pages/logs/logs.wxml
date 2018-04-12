@@ -1,4 +1,0 @@
-<!--logs.wxml-->
-<view class="container log-list">
-    <image   src="/images/cards.png"></image> 
-</view>

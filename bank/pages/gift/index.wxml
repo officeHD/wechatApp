@@ -1,4 +1,5 @@
-
- <view class='container'>
-    <button bindtap='lottery'>获取红包</button>
- </view>
+<view class='container'>
+   
+ <button bindtap='lottery'>开  奖</button>
+</view>
+ 

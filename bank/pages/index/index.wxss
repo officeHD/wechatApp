@@ -52,8 +52,8 @@
 
 .badge {
   position: absolute;
-  right: -10rpx;
-  top: -10rpx;
+  right: 0rpx;
+  top: -15rpx;
   display: inline-block;
   width: 40rpx;
   height: 40rpx;

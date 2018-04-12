@@ -10,10 +10,18 @@ Page({
     drawTimes: null,//抽奖次数
     showHelp: false,//显示好友助力
     isFirst: null,
-    imgsrc:'',//花卡大图
+    imgsrc: '',//花卡大图
     badge: {},
     userInfo: {},
     hasUserInfo: false,
+    cards: [
+      { name: "1", num: "2", src:"/images/index/huaka_01.png"},
+      { name: "2", num: "2", src: "/images/index/huaka_02.png" },
+      { name: "3", num: "0", src: "/images/index/huaka_03.png" },
+      { name: "4", num: "2", src: "/images/index/huaka_04.png"},
+      { name: "5", num: "2", src: "/images/index/huaka_05.png" },
+      { name: "6", num: "0", src: "/images/index/huaka_06.png" }
+    ],
     isloginback: false//从登陆页面返回
   },
 
@@ -140,14 +148,14 @@ Page({
     }
   },
   //查看花卡
-  clickNum:function(e){
-  
+  clickNum: function (e) {
+
     let imgsrc = e.currentTarget.dataset.src;
     let badge = e.currentTarget.dataset.badge;
-    if (badge.toString()==="0"){
-      imgsrc="";
+    if (badge.toString() === "0") {
+      imgsrc = "";
     }
-   
+
     this.setData({
       imgsrc: imgsrc
     })

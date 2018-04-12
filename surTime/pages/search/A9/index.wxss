@@ -105,7 +105,7 @@
   max-width: 700rpx;
   height: 90rpx;
   margin: 10rpx auto;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 .pick_view .picker_content {
@@ -116,6 +116,7 @@
   align-items: center;
   text-align: center;
   font-size: 24rpx;
+  margin-right: 10px;
 }
 
 .picker_content picker {

@@ -27,11 +27,15 @@ Page({
   },
 
   lottery:function(){
+
     let url = this.data.geturl;
-    let fn=msg=>{
-      console.log(msg)
-    }
-    app.api(url, {}, fn)
+    wx.navigateTo({
+      url: '/pages/webview/index?url=' + encodeURIComponent(this.data.geturl)
+    })
+    // let fn=msg=>{
+    //   console.log(msg)
+    // }
+    // app.api("/openhongbao", {}, fn)
   },
 
  

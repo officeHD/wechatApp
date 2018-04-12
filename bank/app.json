@@ -1,20 +1,14 @@
 {
   "pages":[
-      "pages/logs/logs",
     "pages/index/index",
     "pages/user/index",
-    
     "pages/login/index",
-    
+    "pages/logs/logs",
     "pages/webview/index",
     "pages/notice/index",
-   
     "pages/gift/index"
-   
-  
   ],
   "window":{
-   
     "navigationBarBackgroundColor": "#FFE3CD",
     "navigationBarTitleText": "中国银行安徽分行",
     "navigationBarTextStyle":"black",
@@ -24,7 +18,7 @@
     "color": "#D88735",
     "selectedColor": "#D88735",
     "borderStyle": "white",
-    "backgroundColor": "#F5E9D1",
+    "backgroundColor": "#FFE9D8",
     "box-shadow": "0 0 6px 0",
     "list": [
       {

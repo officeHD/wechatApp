@@ -1,8 +1,25 @@
-.log-list {
-  display: flex;
-  flex-direction: column;
-  padding: 40rpx;
+/* pages/gift/index.wxss */
+page{
+  background-color: #FFFDFA;
 }
-.log-item {
-  margin: 10rpx;
+.gift{
+  padding: 100rpx 0;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  height: 100%；
+}
+.gift image{
+  width: 600rpx;
+  height: 738rpx;
+  margin-bottom: 20px;
+}
+button{
+  background-color: #F57B4A;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  width: 400rpx;
+  font-size: 14px;
 }

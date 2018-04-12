@@ -1,4 +1,5 @@
-<!--logs.wxml-->
-<view class="container log-list">
-    <image   src="/images/cards.png"></image> 
+<view class='gift'>
+  <image src='/images/card1.png'></image>
+ <button bindtap='lottery'>分享好友</button>
 </view>
+ 

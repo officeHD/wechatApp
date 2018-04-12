@@ -1,19 +1,18 @@
-// pages/webview/index.js
+// pages/search/KM/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    url: 'https://bank.taoronge.com/bank'
+  
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
-    options.url ? this.setData({ url: decodeURIComponent(options.url)  }) : wx.navigateBack();
+  
   },
 
   /**

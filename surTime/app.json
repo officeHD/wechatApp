@@ -1,14 +1,21 @@
 {
   "pages": [
-    
-    
-   
-   
-    "pages/login/index",
-    "pages/search/KR/index",
-    "pages/register/index",
+
+"pages/login/index",
     "pages/index/index",
+    
+    
+    "pages/search/KR/index",
+    "pages/search/GK/index",
+    "pages/search/SK/index",
+    "pages/search/ST/index",
+    "pages/search/KM/index",
+    
     "pages/search/A9/index",
+   
+   
+    "pages/register/index",
+    
     "pages/pay/index",
     "pages/webview/index",
     "pages/user/index",
