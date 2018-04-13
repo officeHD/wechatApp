@@ -1,5 +1,11 @@
 <view class='container'>
-   
- <button bindtap='lottery'>开  奖</button>
+ <button bindtap='lottery'>开 奖</button>
+  <view class="section">
+    <view class="section__title">省市区选择器</view>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" >
+      <view class="picker">
+        当前选择：{{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker>
+  </view>
 </view>
- 

@@ -6,23 +6,23 @@ Page({
   data: {
     aidOpenId: null,//辅助openId
     totalNum: null,//集齐总数
-    selfNum: null,//自己张数
-    drawTimes: null,//抽奖次数
+    selfNum: 0,//自己张数
+    drawTimes: 0,//抽奖次数
     showHelp: false,//显示好友助力
-    isFirst: null,
+    isFirst: 0,
     imgsrc: '',//花卡大图
     badge: {},
     userInfo: {},
     hasUserInfo: false,
+    isloginback: false,//从登陆页面返回
     cards: [
-      { name: "1", num: "2", src:"/images/index/huaka_01.png"},
+      { name: "1", num: "2", src: "/images/index/huaka_01.png" },
       { name: "2", num: "2", src: "/images/index/huaka_02.png" },
       { name: "3", num: "0", src: "/images/index/huaka_03.png" },
-      { name: "4", num: "2", src: "/images/index/huaka_04.png"},
+      { name: "4", num: "2", src: "/images/index/huaka_04.png" },
       { name: "5", num: "2", src: "/images/index/huaka_05.png" },
       { name: "6", num: "0", src: "/images/index/huaka_06.png" }
-    ],
-    isloginback: false//从登陆页面返回
+    ]
   },
 
   onLoad: function (options) {
@@ -54,11 +54,8 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-
       }
-
     }
-
   },
   onShow: function () {
     let that = this;
@@ -133,7 +130,7 @@ Page({
       if (msg.data.result.toString() === "1") {
         wx.showModal({
           title: '抽奖结果',
-          content: '恭喜您抽中了',
+          content: '恭喜您抽中了'
         })
       }
     }
@@ -149,13 +146,11 @@ Page({
   },
   //查看花卡
   clickNum: function (e) {
-
     let imgsrc = e.currentTarget.dataset.src;
     let badge = e.currentTarget.dataset.badge;
     if (badge.toString() === "0") {
       imgsrc = "";
     }
-
     this.setData({
       imgsrc: imgsrc
     })

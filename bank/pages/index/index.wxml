@@ -4,7 +4,6 @@
     <view class='tips'>
       {{totalNum}}人已集齐哦，您已经集齐{{selfNum}}张花卡
     </view>
-    
   </view>
   <view class='bannerImg'>
      <image class='{{imgsrc?"hide":"bgimg"}}' src="/images/index/bg.png"></image> 
@@ -19,7 +18,10 @@
           </view>
        </block>
     </view>
-    <view class='lottery' bindtap='lottery'>抽奖 (剩余{{drawTimes}}次)</view>
+    <image class='lottery' bindtap='lottery' src='/images/index/button.png'>
+    <text class='lottery_text' >抽奖 (剩余{{drawTimes}}次)</text>
+    </image>
+    
   </view>
   <view class='{{showHelp?"help":"hide"}}' bindtap='changeShow'>
     <view class='helpInfo'>

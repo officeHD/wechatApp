@@ -83,14 +83,16 @@
 }
 
 .lottery {
-  width: 450rpx;
+  width: 460rpx;
   text-align: center;
   color: #fff;
-  height: 70rpx;
-  line-height: 70rpx;
-  border-radius: 5px;
-  background-color: #e7161b;
-  font-size: 14px;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.lottery_text{
+  position: relative;
+  top: -100rpx;
+  color: #fff;
 }
 .help{
    position: fixed;
