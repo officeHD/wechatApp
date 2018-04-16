@@ -1,0 +1,11 @@
+/* pages/album/detail/index.wxss */
+.album{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 7.9rpx;
+}
+.album image{
+  width: 177rpx;
+  height:  177rpx;
+  margin: 5rpx;
+}

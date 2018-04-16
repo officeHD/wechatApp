@@ -4,11 +4,12 @@
 .logo_box {
   height: 200rpx;
   text-align: center;
+  margin-top: 70rpx;
   margin-bottom: 30rpx;
 }
 
 .logo {
-  margin-top: 20rpx;
+  
   width: 200rpx;
   height: 170rpx;
 }
@@ -19,6 +20,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+    font-size: 28rpx;
 }
 
 .input_list {
@@ -34,7 +36,7 @@
 
 .input_list input {
   height: 100%; 
-  font-size: 34rpx;
+ 
   display: inline-block;
   width: 512rpx;
 }
@@ -65,9 +67,9 @@
   width: 215rpx;
   text-align: center;
   line-height: 80rpx;
-  color: #333;
-  font-size: 34rpx;
-  border: 1px solid #ccc;
+  color: #00A0E9;
+  
+  /* border: 1px solid #ccc; */
 }
 
 .get_message {
@@ -85,7 +87,7 @@
   width: 350rpx;
   text-indent: 10rpx;
   border: 1rpx solid #ccc;
-  font-size: 34rpx;
+ 
   /* display: block */
 }
 
@@ -101,7 +103,7 @@
   height: 80rpx;
   line-height: 80rpx;
   justify-content: space-between;
-  font-size: 30rpx;
+ 
 }
 
 .login_type.hide {
@@ -133,7 +135,7 @@
   height: 80rpx;
   margin: 10rpx 0;
   line-height: 80rpx;
-  font-size: 34rpx;
+ 
   color: #00a0e9;
 }
 

@@ -1,4 +1,7 @@
 /**index.wxss**/
+.container{
+  padding: 0;
+}
 navigator{
   margin: 10px 0;
 }

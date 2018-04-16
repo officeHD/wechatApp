@@ -1,50 +1,49 @@
 var app = getApp();
 Page({
   data: {
-    array: ['美国', '中国', '巴西', '日本','印度尼西亚'],
+    array: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
     index: 0,
     year: '2018',
     month: '09-01',
-    Page:1,
+    Country: 'us',
     position: 'relative',
     flag: true,
-    ASIN:'',
+    ASIN: '',
     listData: []
   },
   onLoad: function () {
     let that = this;
     let UserID = app.globalData.PKID;
-   
-  
     let cb = (res) => {
-       
+
       let data = JSON.parse(res.data.d)
       console.log(JSON.parse(data.ReturnInfo))
       that.setData({
         listData: JSON.parse(data.ReturnInfo)
       });
     }
-    app.ajax('/A9List', { UserID: UserID}, cb, 'POST')
+    app.ajax('/A9List', { UserID: UserID }, cb, 'POST')
   },
-  changeASIN:function (e) {
+  changeASIN: function (e) {
     let value = e.detail.value;
     let that = this;
-   
+
     that.setData({
       ASIN: value
     })
   },
-  search:function () {
-    let UserID = app.globalData.PKID
+  search: function () {
     let that = this;
-    let Page = that.data.Page;
+    let UserID = app.globalData.PKID
+
+    let Country = that.data.Country;
     let ASIN = that.data.ASIN;
-    if (!ASIN){
+    if (!ASIN) {
       wx.showToast({
         title: '请输入ASIN',
-        icon:"none"
+        icon: "none"
       })
-      return ;
+      return;
     }
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
@@ -52,7 +51,7 @@ Page({
         listData: JSON.parse(data.ReturnInfo)
       });
     }
-    app.ajax('/A9ListByPage', { UserID: UserID, PageCount: 10, Page: Page, Asin: ASIN}, cb, 'POST')
+    app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
   },
   sortArr: function (e) {
     let target = e.currentTarget.dataset.target;

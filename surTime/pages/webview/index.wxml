@@ -1,1 +1,1 @@
-<web-view src="https://www.amazon.cn/b/ref=mh_1943190071_ex_n_1?rh=n:2016156051&ie=UTF8&qid=1522462888&node=2016156051"></web-view>
+<web-view src="{{url}}"></web-view>

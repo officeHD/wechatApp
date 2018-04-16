@@ -1,0 +1,41 @@
+/* pages/album/index.wxss */
+
+.album {
+  padding-left: 20rpx;
+}
+
+.albun_item {
+  display: flex;
+  height: 125rpx;
+  align-items: center;
+  border-bottom: 1px solid #666;
+  position: relative;
+}
+
+.albun_item image {
+  width: 105rpx;
+  height: 105rpx;
+  margin-right: 20px;
+}
+
+.title {
+  font-size: 34rpx;
+}
+
+.num {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.delete {
+  width: 200rpx;
+  float: right;
+  background-color: #a8dcff;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  line-height: 125rpx;
+  text-align: center;
+  font-size: 32rpx;
+}

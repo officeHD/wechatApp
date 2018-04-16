@@ -1,26 +1,17 @@
 {
   "pages": [
-
-"pages/login/index",
     "pages/index/index",
-    
-    
-    "pages/search/KR/index",
-    "pages/search/GK/index",
-    "pages/search/SK/index",
-    "pages/search/ST/index",
-    "pages/search/KM/index",
-    
-    "pages/search/A9/index",
-   
-   
     "pages/register/index",
-    
+   
+    "pages/search/A9/index",
+    "pages/album/detail/index",
+    "pages/album/index",
+    "pages/login/index",
+    "pages/search/GKSKSTKM/index",
+    "pages/search/KR/index",
     "pages/pay/index",
     "pages/webview/index",
     "pages/user/index",
-    
-   
     "pages/search/AutoCheck/index"
   ],
   "window": {
@@ -36,18 +27,6 @@
     "backgroundColor": "#2C7EDC",
     "box-shadow": "0 0 6px 0",
     "list": [
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "images/tab/home.png",
-        "selectedIconPath": "images/tab/home_on.png",
-        "text": "主页"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "images/tab/message.png",
-        "selectedIconPath": "images/tab/message_on.png",
-        "text": "消息"
-      },
       {
         "pagePath": "pages/index/index",
         "iconPath": "images/tab/part.png",

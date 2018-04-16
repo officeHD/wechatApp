@@ -45,7 +45,9 @@ picker{
 }
 textarea{
   width: 248rpx;
-  height: 180rpx;
+  min-height: 50rpx;
+  line-height: 50rpx;
+  height: auto;
   border: 1px solid #CCC;
 }
 .tips{
@@ -67,10 +69,12 @@ textarea{
 .attention{
   border-top: 1px dotted #ccc;
   padding: 20px 10px;
-  font-size: 28rpx;
+  font-size: 26rpx;
 }
 .attention .titles{
   text-align: left;
-  font-size: 32rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  margin: 15rpx 0;
   color:#1487D9; 
 }

@@ -1,67 +1,110 @@
-// pages/search/KR/index.js
+var app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    areas: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
-    areasIndex:0,
+    array: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
+    index: 0,
+    year: '2018',
+    month: '09-01',
+    Country: 'us',
+    position: 'relative',
+    flag: true,
+    ASIN: '',
+    listData: []
   },
+  onLoad: function () {
+    let that = this;
+    let UserID = app.globalData.PKID;
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
+
+    let cb = (res) => {
+
+      let data = JSON.parse(res.data.d)
+      console.log(JSON.parse(data.ReturnInfo))
+      that.setData({
+        listData: JSON.parse(data.ReturnInfo)
+      });
+    }
+    app.ajax('/A9List', { UserID: UserID }, cb, 'POST')
   },
+  changeASIN: function (e) {
+    let value = e.detail.value;
+    let that = this;
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+    that.setData({
+      ASIN: value
+    })
   },
+  search: function () {
+    let that = this;
+    let UserID = app.globalData.PKID
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+    let Country = that.data.Country;
+    let ASIN = that.data.ASIN;
+    if (!ASIN) {
+      wx.showToast({
+        title: '请输入ASIN',
+        icon: "none"
+      })
+      return;
+    }
+    let cb = (res) => {
+      let data = JSON.parse(res.data.d)
+      that.setData({
+        listData: JSON.parse(data.ReturnInfo)
+      });
+    }
+    app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
   },
+  sortArr: function (e) {
+    let target = e.currentTarget.dataset.target;
+    let that = this;
+    let arr = that.data.listData;
+    let flag = !that.data.flag;
+    that.setData({
+      flag: flag,
+      listData: app.sort_object(arr, target, flag)
+    });
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
   },
-
   /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+  * 页面相关事件处理函数--监听用户下拉动作
+  */
   onPullDownRefresh: function () {
-  
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    this.onLoad();
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
+
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
-  
+    let that = this;
+    let cb = (res) => {
+      that.setData({
+        listData: that.data.listData.concat(res.data.list)
+      });
+    }
+    app.ajax('A9List', '', cb, 'POST')
   },
+  onPageScroll: function (e) {
+    let that = this;
+    let scrollTop = e.scrollTop;
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    if (scrollTop >= 60) {
+      that.setData({
+        position: 'fixed'
+      });
+    } else {
+      that.setData({
+        position: 'relative'
+      });
+    }
+  },
+  bindPickerChange: function (e) {
+    this.setData({
+      index: e.detail.value
+    })
   }
+
 })

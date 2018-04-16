@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <view>
   <view class='search'>
     <swiper indicator-dots previous-margin="70rpx" next-margin="70rpx" current='1' circular='true'>

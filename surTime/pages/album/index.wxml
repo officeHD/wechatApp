@@ -1,0 +1,14 @@
+<view class='album'>
+  <block wx:for="{{album}}" wx:key="{{code}}">
+    <view class='albun_item'>
+      <image src='/images/album/demo.png'></image>
+      <view>
+        <view class='title'>宝贝图片</view>
+        <text class='num'>56张</text>
+      </view>
+      <view class='delete' >
+      删除相册
+      </view>
+    </view>
+  </block>
+</view>

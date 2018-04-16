@@ -3,13 +3,9 @@ var app = getApp();
 Page({
   data: {
     by_message: false,
-    
-    getmsg: "获取验证码",
     reset_pass: false,
-    login_type: "短信快捷登录",
     phone: '',
-    mesCode: '',
-    reset_word: "忘记密码"
+    mesCode: ''
   },
   onLoad: function (options) {
     // 生命周期函数--监听页面加载
@@ -25,7 +21,14 @@ Page({
   sendmessg: function (e) {
     let phone = this.data.phone;
     if (app.checkData('手机号', phone)) {
-      if (this.c2 && this.c2.interval) return !1
+      if (this.c2 && this.c2.interval) {
+        wx.showToast({
+          title: '请稍后获取',
+          icon: 'none',
+          duration: 2000
+        })
+        return false;
+      }
       this.c2 = new $wuxCountDown({
         date: +(new Date) + 60000,
         onEnd() {
@@ -42,9 +45,10 @@ Page({
       })
       // 请求获取验证码
       let cb = msg => {
-        if (msg.data.result.toString() !== "1") {
+        let res = JSON.parse(msg.data.d)
+        if (res.State.toString() !== "1") {
           wx.showToast({
-            title: msg.data.message,
+            title: res.ReturnInfo,
             icon: 'none',
             duration: 2000
           })

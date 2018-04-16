@@ -1,5 +1,5 @@
 <view>
-
+  <image class='search_bg' src='/images/search_bg.png'></image>
   <view class='search'>
     <view class='title'>A9数据查询</view>
     <view class='pick_view {{position}}'>
@@ -9,47 +9,23 @@
             {{array[index]}}▼
           </view>
         </picker>
-         
-         <input placeholder='请务必输入ASIN' bindinput="changeASIN"></input>
+
+        <input placeholder='请务必输入ASIN' bindinput="changeASIN"></input>
       </view>
       <view class='button'>
         <button bindtap='search'>搜索</button>
       </view>
     </view>
   </view>
-  <view class='content {{position}}'>
-    <view class="table template">
-      <view class='thead'>
-        <view class="tr ">
-          <view class="th"> 图片</view>
-          <view class="th" data-target="id" bindtap='sortArr'> ASIN {{flag?'↓':'↑'}} </view>
-          <view class="th " data-target="org" bindtap='sortArr'>站点 {{flag?'↓':'↑'}} </view>
-          <view class="th ">操作</view>
-        </view>
-      </view>
-      <view class='tbody hide'>
-        <block wx:for="{{listData}}" wx:key="{{code}}">
-          <view class="tr">
-            <view class="td logo">
-              <image src='{{item.img}}'></image>
-            </view>
-            <view class="td">{{item.ASIN}}</view>
-            <view class="td">{{item.Country}}</view>
-            <view class="td operate">
-              <image src='../../../images/table/detail.png'></image>
-              <image src='../../../images/table/info.png'></image>
-            </view>
-          </view>
-        </block>
-      </view>
-    </view>
+  <view class='content'>
+
     <view class="table">
       <view class='thead'>
         <view class="tr ">
-          <view class="th"> 图片</view>
-          <view class="th" data-target="id" bindtap='sortArr'> ASIN {{flag?'↓':'↑'}} </view>
-          <view class="th " data-target="org" bindtap='sortArr'>站点 {{flag?'↓':'↑'}} </view>
-          <view class="th ">操作</view>
+          <view class="th">图片</view>
+          <view class="th">ASIN </view>
+          <view class="th">站点 </view>
+          <view class="th">操作</view>
         </view>
       </view>
       <view class='tbody'>
@@ -62,7 +38,6 @@
             <view class="td">{{item.Country}}</view>
             <view class="td operate">
               <image src='../../../images/table/detail.png'></image>
-              <image src='../../../images/table/info.png'></image>
             </view>
           </view>
         </block>

@@ -1,8 +1,8 @@
 var app = getApp();
+import { $wuxCountDown } from '../components/wux'
 Page({
   data: {
-    by_message: false,
-    getmsg: "获取验证码",
+    by_message: false, 
     reset_pass: false,
     login_type: "短信快捷登录",
     reset_word: "忘记密码",
@@ -26,28 +26,35 @@ Page({
   },
   // 获取验证码
   sendmessg: function (e) {
-    let that = this;
-    if (app.checkData('手机号', that.data.userPhone)) {
-      that.setData({
-        codeDis: true
+    let phone = this.data.userPhone;
+    if (app.checkData('手机号', phone)) {
+      if (this.c2 && this.c2.interval) return !1
+      this.c2 = new $wuxCountDown({
+        date: +(new Date) + 60000,
+        onEnd() {
+          this.setData({
+            c2: '重新获取验证码',
+          })
+        },
+        render(date) {
+          const sec = this.leadingZeros(date.sec, 2) + ' 秒后重发 '
+          date.sec !== 0 && this.setData({
+            c2: sec,
+          })
+        },
       })
-      let second = 60;
-      let time = setInterval(() => {
-
-        second--
-        that.setData({
-          getmsg: `${second}秒`
-        })
-        if (second == 0) {
-          clearInterval(time)
-          that.setData({
-            getmsg: "获取验证码",
-            flag: true,
-            codeDis: false
+      // 请求获取验证码
+      let cb = res => {
+        let result = JSON.parse(res.data.d);
+        if (result.State.toString() !== "1") {
+          wx.showToast({
+            title: result.ReturnInfo,
+            icon: 'none',
+            duration: 2000
           })
         }
-      }, 1000)
-
+      }
+      app.ajax('/GetMobileCode', { Phone: phone }, cb)
     }
   },
   //重置密码
@@ -104,9 +111,29 @@ Page({
 
     if (type) {
       if (app.checkData('手机号', userPhone) && app.checkData('验证码', verifyCode)) {
-        wx.navigateTo({
-          url: "/pages/user/index"
-        })
+        let data = {
+          "Phone": userPhone,
+          "Code": verifyCode
+        };
+        let fn = (res) => {
+          
+          let result = JSON.parse(res.data.d);
+          
+          if (result.State.toString() === "1") {
+            // 储存用户信息
+            app.initUserInfo(JSON.parse(result.ReturnInfo));
+            wx.switchTab({
+              url: '/pages/user/index',
+            })
+          } else {
+            wx.showToast({
+              title: result.ReturnInfo,
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }
+        app.ajax('/MobileLogin', data, fn)
       }
     } else {
       if (app.checkData('账号', userName) && app.checkData('密码', passWord)) {
@@ -114,7 +141,6 @@ Page({
           "UserName": userName,
           "PassWord": passWord,
           "LoginType": 1
-         
         };
         let fn = (res) => {
           let result = JSON.parse(res.data.d);

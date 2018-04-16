@@ -8,7 +8,7 @@
     </view>
     
     <view class='input_list {{by_message||reset_pass?"":"hide"}}'>
-      <input class='input_area' placeholder="请输入手机号" bindinput="changePhoneNum"></input>
+      <input class='input_area' placeholder="请输入手机号" bindinput="changePhoneNum" maxlength="11" ></input>
     </view>
     <view class='input_list  {{by_message||reset_pass?"hide":""}}'>
       <input class='input_area' placeholder="请输入账号" bindinput="changeUserName"></input>
@@ -18,9 +18,9 @@
     </view>
 
     <view class='message_input {{by_message||reset_pass?"":"hide"}}'>
-      <input class='input_message' placeholder="请输入验证码" bindinput="changeVerifyCode"></input>
+      <input class='input_message' placeholder="请输入验证码" bindinput="changeVerifyCode" maxlength="6" ></input>
       <view class='get_message' bindtap="sendmessg">
-        <button disabled="{{codeDis}}">{{getmsg}}</button>
+        <button disabled="{{codeDis}}">{{c2||'获取验证码'}}</button>
       </view>
     </view>
 
