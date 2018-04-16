@@ -1,5 +1,5 @@
 <view>
-
+<image class='search_bg' src='/images/search_bg.png'></image>
   <view class='search'>
     <view class='title'>自动选品工具</view>
     <view class='pick_view {{position}}'>
@@ -25,13 +25,13 @@
       </view>
     </view>
   </view>
-  <view class='content {{position}}'>
+  <view class='content '>
     <view class="table template">
       <view class='thead'>
         <view class="tr ">
           <view class="th"> 图片</view>
-          <view class="th" data-target="id" bindtap='sortArr'> ASIN {{flag?'↓':'↑'}} </view>
-          <view class="th " data-target="org" bindtap='sortArr'>站点 {{flag?'↓':'↑'}} </view>
+          <view class="th"  > ASIN   </view>
+          <view class="th "  >站点   </view>
           <view class="th ">操作</view>
         </view>
       </view>

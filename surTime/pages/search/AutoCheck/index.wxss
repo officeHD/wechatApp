@@ -1,5 +1,6 @@
 .content {
   position: relative;
+  top: 388rpx;
 }
 
 .table {
@@ -86,16 +87,30 @@
   background: #e6f3f9;
 }
 
+.search_bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 750rpx;
+  height: 388rpx;
+}
+
 .search {
-  height: 300rpx;
-  background-color: #08d;
-  border: 1px solid #08d;
+  height: 388rpx;
+  background: transparent;
+  border: 1px solid transparent;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
 
 .search .title {
   width: 750rpx;
   text-align: center;
-  margin: 45rpx 0;
+  margin-bottom: 50rpx;
   color: #fff;
   letter-spacing: 2rpx;
 }
@@ -105,7 +120,7 @@
   width: 650rpx;
   max-width: 700rpx;
   height: 90rpx;
-  margin: 10rpx auto;
+  margin: 0 auto;
   justify-content: space-around;
   align-items: center;
 }
@@ -139,7 +154,7 @@
 
 .picker_area {
   /* width: 110rpx; */
-  border-right: 1px solid #000;
+  border-right: 1px solid #ccc;
   padding: 0 5px;
   height: 40rpx;
   max-width: 140rpx;
@@ -150,7 +165,7 @@
 
 .picker_year {
   /* width: 100rpx; */
-  border-right: 1px solid #000;
+  border-right: 1px solid #ccc;
   text-align: right;
   padding: 0 5px;
   height: 40rpx;

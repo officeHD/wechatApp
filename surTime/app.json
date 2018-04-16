@@ -1,12 +1,11 @@
 {
   "pages": [
+    "pages/login/index",
     "pages/index/index",
     "pages/register/index",
-   
     "pages/search/A9/index",
     "pages/album/detail/index",
     "pages/album/index",
-    "pages/login/index",
     "pages/search/GKSKSTKM/index",
     "pages/search/KR/index",
     "pages/pay/index",
