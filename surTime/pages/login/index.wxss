@@ -45,21 +45,9 @@
   width: 215rpx;
   text-align: right;
   line-height: 100rpx;
-  font-size: 34rpx;
+  font-size: 32rpx;
   float: right;
-}
-
-.get_message button {
-  background-color: transparent;
-  width: 215rpx;
-  margin: 0;
   color: #00a0e9;
-  border: 1px solid transparent;
-  float: right;
-  height: 80rpx;
-  line-height: 80rpx;
-  margin-top: 10rpx;
-  font-size: 30rpx;
 }
 
 .send_message {
@@ -74,12 +62,12 @@
   line-height: 100rpx;
   width: 298rpx;
   border-bottom: 1rpx solid #ccc;
-  font-size: 34rpx;
+  font-size: 32rpx;
 }
 
 .input_list input {
   height: 100rpx;
-  font-size: 16px;
+  font-size: 32rpx;
 }
 
 .login_type {
@@ -88,7 +76,7 @@
   height: 80rpx;
   line-height: 80rpx;
   justify-content: space-between;
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 
 .login_type.hide {
@@ -122,12 +110,12 @@
   height: 80rpx;
   margin: 20px 0;
   line-height: 80rpx;
-  font-size: 34rpx;
+  font-size: 32rpx;
   color: #00a0e9;
 }
 
 .suer_reset {
-  margin-top: 50rpx;
+  margin: 50rpx 0;
 }
 
 .otherWay {
@@ -147,7 +135,7 @@
 .line_center {
   width: 60rpx;
   text-align: center;
-  font-size: 18px;
+  font-size: 32rpx;
   margin: 0 10rpx;
   color: #666;
 }
@@ -161,7 +149,6 @@
 .login_way {
   display: flex;
   justify-content: center;
-   
 }
 
 .wechat {
@@ -169,21 +156,21 @@
   height: 80rpx;
   border-radius: 80rpx;
   border: 1px solid #ccc;
-  
-   padding: 0 30rpx;
-   box-sizing: border-box;
+  padding: 0 30rpx;
+  box-sizing: border-box;
 }
 
 .wechat image {
   width: 60rpx;
   height: 60rpx;
   float: left;
-   margin-top: 10rpx;
+  margin-top: 10rpx;
 }
-.login_text{
+
+.login_text {
   width: 100%;
-   line-height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 16px;
+  font-size: 32rpx;
   color: #666;
 }

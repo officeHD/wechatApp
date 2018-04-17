@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="container">
+  <navigator url="../login/index">登录页面</navigator>
   <navigator url="../register/index">注册页面</navigator>
   <navigator url="../search/A9/index">A9查询页面</navigator>
   <navigator url="../search/GKSKSTKM/index?type=GK">GK查询页面</navigator>

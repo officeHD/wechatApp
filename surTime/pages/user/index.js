@@ -1,48 +1,41 @@
 var app = getApp();
-const UserName = wx.getStorageSync('UserName')
+const UserName = app.globalData.UserName;
 Page({
   data: {
     recordType: 'recharge',
     index: 0,
     position: 'relative',
     flag: true,
+    imgurl: [
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        type: 1
+      },
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        type: 2
+      },
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        type: 3
+      },
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        type: 4
+      },
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        type: 5
+      }
+
+    ],
     listData: [],
     consumeList: []
   },
   onLoad: function () {
-    let that = this;
-    let cb = (res) => {
-      wx.hideLoading()
-      let result = JSON.parse(res.data.d);
-      if (result.State.toString() === "1") {
-        console.log(JSON.parse(result.ReturnInfo))
-        that.setData({
-          listData: JSON.parse(result.ReturnInfo)
-        });
-      }
-      // console.log(result)
-
-    }
-    wx.showLoading({
-      title: '加载中',
-    })
-
-    app.ajax('/GetRechargeListByUser', { UserName: UserName }, cb)
+    this.GetRechargeList()
   },
-  sortArr: function (e) {
-    let target = e.currentTarget.dataset.target;
-    let that = this;
-    let arr = that.data.listData;
-    let flag = !that.data.flag;
-    that.setData({
-      flag: flag,
-      listData: app.sort_object(arr, target, flag)
-    });
 
-  },
-  /**
-  * 页面相关事件处理函数--监听用户下拉动作
-  */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
     //模拟加载
@@ -51,51 +44,60 @@ Page({
     wx.stopPullDownRefresh() //停止下拉刷新
 
   },
-  
-  onPageScroll: function (e) {
-    let that = this;
-    let scrollTop = e.scrollTop;
 
-    if (scrollTop >= 60) {
-      that.setData({
-        position: 'fixed'
-      });
-    } else {
-      that.setData({
-        position: 'relative'
-      });
-    }
-  },
-  bindPickerChange: function (e) {
-    this.setData({
-      index: e.detail.value
-    })
-  },
   searchType: function (e) {
     let that = this;
     let target = e.currentTarget.dataset.target;
-    console.log(target);
+
     this.setData({
       recordType: target
     })
-    if (target ==="consume"){
-      let cb = (res) => {
-        wx.hideLoading()
-        let result = JSON.parse(res.data.d);
-        if (result.State.toString() === "1") {
-          console.log(JSON.parse(result.ReturnInfo))
-          that.setData({
-            consumeList: JSON.parse(result.ReturnInfo)
-          });
-        }
-        // console.log(result)
+    if (target === "consume") {
+      that.GetOperationLis()
+    } else {
+      that.GetRechargeList()
+    }
+
+  },
+  GetRechargeList: function () {
+    let that = this;
+    let cb = (res) => {
+      wx.hideLoading()
+      let result = JSON.parse(res.data.d);
+      if (result.State.toString() === "1") {
+        that.setData({
+          listData: JSON.parse(result.ReturnInfo)
+        });
       }
-      wx.showLoading({
-        title: '加载中',
-      })
-      app.ajax('/GetOperationListByuser', { UserName: UserName }, cb)
-    } 
+    }
+    wx.showLoading({
+      title: '加载中',
+    })
+    app.ajax('/GetRechargeListByUser', { UserName: UserName }, cb)
+  },
+  GetOperationLis: function () {
+    let that = this;
+    let cb = (res) => {
+      wx.hideLoading()
+      let result = JSON.parse(res.data.d);
+      if (result.State.toString() === "1") {
+
+        that.setData({
+          consumeList: JSON.parse(result.ReturnInfo)
+        });
+      }
+      // console.log(result)
+    }
+    wx.showLoading({
+      title: '加载中',
+    })
+    app.ajax('/GetOperationListByuser', { UserName: UserName }, cb)
+  },
+  payOrder:function(e){
    
+    wx.navigateTo({
+      url: `/pages/pay/index?type=${e.currentTarget.dataset.type}`,
+    })
   }
 
 })

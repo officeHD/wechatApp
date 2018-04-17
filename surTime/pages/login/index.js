@@ -68,7 +68,7 @@ Page({
 
     })
   },
-  // 填写值
+  // 填写手机号值
   changePhoneNum: function (e) {
     let value = e.detail.value;
     let that = this;
@@ -76,7 +76,7 @@ Page({
       userPhone: value
     })
   },
-  // 填写值
+  // 填写验证码值
   changeVerifyCode: function (e) {
     let value = e.detail.value;
     let that = this;
@@ -84,7 +84,7 @@ Page({
       verifyCode: value
     })
   },
-  // 填写值
+  // 填写密码值
   changePassWord: function (e) {
     let value = e.detail.value;
     let that = this;
@@ -92,6 +92,7 @@ Page({
       passWord: value
     })
   },
+   // 填写用户名值
   changeUserName: function (e) {
     let value = e.detail.value;
     let that = this;
@@ -116,7 +117,7 @@ Page({
           "Code": verifyCode
         };
         let fn = (res) => {
-          
+          wx.hideLoading()
           let result = JSON.parse(res.data.d);
           
           if (result.State.toString() === "1") {
@@ -133,6 +134,9 @@ Page({
             })
           }
         }
+        wx.showLoading({
+          title: '登录中',
+        })
         app.ajax('/MobileLogin', data, fn)
       }
     } else {

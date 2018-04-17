@@ -130,7 +130,11 @@
   background-color: #fff;
   border: 1px solid #fff;
 }
-
+.search swiper{
+  height: 400rpx;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
 .search .title {
   width: 750rpx;
   text-align: center;

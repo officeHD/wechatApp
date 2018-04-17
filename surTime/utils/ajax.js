@@ -1,4 +1,5 @@
 // let API_HOST = "https://www.easy-mock.com/mock/5a9a2c2efdc65f3e22abbdaf/example";
+var app = getApp();
 let API_HOST = "http://mp.surtime.com/SurtimeWebService.asmx";
 
 function ajax(url = '', data = {}, fn, ) {
@@ -14,7 +15,11 @@ function ajax(url = '', data = {}, fn, ) {
 }
 // 存储用户信息
 function initUserInfo(obj) {
-   
+  app.globalData.PKID = obj.PKID;
+  app.globalData.Email = obj.Email;
+  app.globalData.IsAdmin = obj.IsAdmin;
+  app.globalData.Tel = obj.Tel;
+  app.globalData.UserName = obj.UserName;
   wx.setStorage({
     key: "PKID",
     data: obj.PKID

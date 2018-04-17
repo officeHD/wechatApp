@@ -7,8 +7,12 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    var PKID = wx.getStorageSync('PKID') || []
+    var PKID = wx.getStorageSync('PKID') || '';
+    var Tel = wx.getStorageSync('Tel') || '';
+    var UserName = wx.getStorageSync('UserName')||'';
     this.globalData.PKID = PKID;
+    this.globalData.UserName = UserName;
+    this.globalData.Tel = Tel;
     // 登录
     wx.login({
       success: res => {
