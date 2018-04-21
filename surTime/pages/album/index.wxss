@@ -1,41 +1,91 @@
-/* pages/album/index.wxss */
-
-.album {
-  padding-left: 20rpx;
+view {
+  box-sizing: border-box;
 }
 
-.albun_item {
-  display: flex;
-  height: 125rpx;
-  align-items: center;
-  border-bottom: 1px solid #666;
+.item-box {
+  width: 700rpx;
+  margin: 0auto;
+  padding: 40rpx 0;
+}
+
+.items {
+  width: 100%;
+}
+
+.item {
   position: relative;
+  border-top: 2rpx solid#eee;
+  height: 160rpx;  
+  overflow: hidden;
+  display: flex;
+  vertical-align: middle;
 }
 
-.albun_item image {
-  width: 105rpx;
-  height: 105rpx;
-  margin-right: 20px;
+.item:last-child {
+  border-bottom: 2rpx solid#eee;
 }
 
-.title {
-  font-size: 34rpx;
-}
-
-.num {
-  font-size: 30rpx;
-  color: #999;
-}
-
-.delete {
-  width: 200rpx;
-  float: right;
-  background-color: #a8dcff;
+.inner {
   position: absolute;
-  right: 0;
   top: 0;
-  height: 100%;
-  line-height: 125rpx;
+}
+
+.inner.txt {
+  background-color: #fff;
+  width: 100%;
+  z-index: 5;
+  padding: 0 10rpx;
+  transition: left 0.2s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+}
+
+.inner .content {
+  height: 160rpx;
+   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}
+.content text{
+  height: auto;
+  line-height: 40rpx;
+}
+.content .num{
+font-size: 26rpx;
+}
+
+.inner.del {
+  background-color: #e64340;
+  width: 180rpx;
   text-align: center;
-  font-size: 32rpx;
+  z-index: 4;
+  right: 0;
+  color: #fff;
+  height: 100%;
+  line-height: 160rpx;
+}
+
+.item-icon {
+  width: 120rpx;
+  vertical-align: middle;
+  margin-right: 16rpx;
+}
+.add_album{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  text-align: center;
+  background-color: #00A0E9;
+  height: 100rpx;
+  line-height: 100rpx;
+  transform: translate(-50%,0);
+  color: #fff;
 }

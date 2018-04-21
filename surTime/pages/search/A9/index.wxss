@@ -58,6 +58,7 @@
   display: table-header-group;
   width: 750rpx;
   position: relative;
+
 }
 
 .thead .tr {
@@ -89,10 +90,14 @@
   box-sizing: border-box;
   background: #fff;
 }
-
+.demo_head{
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
 .th {
   display: table-cell;
-  color: #6d6d6d;
+  color: #565656;
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;

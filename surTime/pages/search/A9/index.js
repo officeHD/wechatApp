@@ -3,12 +3,10 @@ Page({
   data: {
     array: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
     index: 0,
-    year: '2018',
-    month: '09-01',
     Country: 'us',
-    position: 'relative',
     flag: true,
     ASIN: '',
+    OldData: '',
     listData: []
   },
   onLoad: function () {
@@ -24,20 +22,13 @@ Page({
     }
     app.ajax('/A9List', { UserID: UserID }, cb, 'POST')
   },
-  changeASIN: function (e) {
-    let value = e.detail.value;
-    let that = this;
-
-    that.setData({
-      ASIN: value
-    })
-  },
+  //A9查询
   search: function () {
     let that = this;
     let UserID = app.globalData.PKID
-
     let Country = that.data.Country;
     let ASIN = that.data.ASIN;
+
     if (!ASIN) {
       wx.showToast({
         title: '请输入ASIN',
@@ -47,25 +38,46 @@ Page({
     }
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
-      that.setData({
-        listData: JSON.parse(data.ReturnInfo)
-      });
+      if (data.State.toString() === '1') {
+        console.log(data);
+      } else if (data.State.toString() === '4') {
+        that.setData({
+          OldData: data.ReturnInfo
+        })
+      } else if (data.State.toString() === '2') {
+
+        wx.showToast({
+          title: data.ReturnInfo,
+          icon: 'none'
+        })
+        return false;
+      } else {
+        wx.showModal({
+          title: '查询提示',
+          content: '存在旧数据，是否重新查询',
+        })
+      }
+      that.addAsin(UserID, Country, ASIN, that.data.OldData)
+
     }
     app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
-  },
-  sortArr: function (e) {
-    let target = e.currentTarget.dataset.target;
-    let that = this;
-    let arr = that.data.listData;
-    let flag = !that.data.flag;
-    that.setData({
-      flag: flag,
-      listData: app.sort_object(arr, target, flag)
-    });
 
   },
+  // 增加A9查询信息
+  addAsin: function (UserID, Country, ASIN, OldData) {
+    let that = this;
+    let cb = (res) => {
+      let data = JSON.parse(res.data.d)
+      wx.showToast({
+        title: data.ReturnInfo,
+        icon: 'none'
+      })
+      that.onLoad()
+    }
+    app.ajax('/AddAsin', { UserID: UserID, Country: Country, Asin: ASIN, OldData: OldData }, cb, 'POST')
+  },
   /**
-  * 页面相关事件处理函数--监听用户下拉动作
+  * 下拉刷新
   */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
@@ -75,7 +87,7 @@ Page({
     wx.stopPullDownRefresh() //停止下拉刷新
 
   },
-
+  //加载更多
   onReachBottom: function () {
     let that = this;
     let cb = (res) => {
@@ -83,36 +95,20 @@ Page({
         listData: that.data.listData.concat(res.data.list)
       });
     }
-    app.ajax('A9List', '', cb, 'POST')
+    app.ajax('/A9List', '', cb, 'POST')
   },
-  onPageScroll: function (e) {
+  changeASIN: function (e) {
+    let value = e.detail.value;
     let that = this;
-    let scrollTop = e.scrollTop;
-
-    if (scrollTop >= 60) {
-      that.setData({
-        position: 'fixed'
-      });
-    } else {
-      that.setData({
-        position: 'relative'
-      });
-    }
+    that.setData({
+      ASIN: value
+    })
   },
   bindPickerChange: function (e) {
     this.setData({
       index: e.detail.value
     })
-  },
-  bindDateChange: function (e) {
-    this.setData({
-      month: e.detail.value
-    })
-  },
-  bindYearChange: function (e) {
-    this.setData({
-      year: e.detail.value
-    })
   }
+
 
 })

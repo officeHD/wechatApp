@@ -18,10 +18,13 @@
     </view>
   </view>
   <view class='content'>
-
+    <block wx:if="{{listData.length==0}}" >
+    <view class='demo_head'>案例</view>
+    </block>
     <view class="table">
+    
       <view class='thead'>
-        <view class="tr ">
+        <view class="tr">
           <view class="th">图片</view>
           <view class="th">ASIN </view>
           <view class="th">站点 </view>
@@ -29,6 +32,18 @@
         </view>
       </view>
       <view class='tbody'>
+       <block wx:if="{{listData.length==0}}" >
+          <view class="tr">
+            <view class="td logo">
+              <image src='/images/album/demo.png'></image>
+            </view>
+            <view class="td"> ASINDEMO</view>
+            <view class="td">us</view>
+            <view class="td operate">
+               <image src='../../../images/table/detail.png'></image>
+            </view>
+          </view>
+      </block>
         <block wx:for="{{listData}}" wx:key="{{code}}">
           <view class="tr">
             <view class="td logo">
@@ -37,7 +52,11 @@
             <view class="td">{{item.ASIN}}</view>
             <view class="td">{{item.Country}}</view>
             <view class="td operate">
-              <image src='../../../images/table/detail.png'></image>
+              <text wx-if="{{item.State==='1'||item.State==='2'}}">正在查询中 </text>
+              <text wx-if="{{item.State==='3' }}">数据优化中 </text>
+              <text wx-if="{{item.State==='5' }}">数据已失效 </text>
+              
+              <image wx-if="{{item.State==='4'}}" src='../../../images/table/detail.png'></image>
             </view>
           </view>
         </block>

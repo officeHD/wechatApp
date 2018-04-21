@@ -5,11 +5,11 @@
   <view class='login_box'>
     <view class='input_list'>
       <image src="../../images/login/email.png" class="input_logo" />
-      <input class='input_area' placeholder="邮箱" bindinput="userEmailInput"></input>
+      <input class='input_area' placeholder="邮箱" bindinput="changeemail"></input>
     </view>
      <view class='input_list '>
       <image src="../../images/login/password.png"  class="input_logo" />
-      <input class='input_area' placeholder="密码" password bindinput="userPAsswordInput"></input>
+      <input class='input_area' placeholder="密码" password bindinput="changepassword"></input>
     </view>
     <view class='input_list'>
      <image src="../../images/login/phone.png" class="input_logo" />
@@ -18,7 +18,7 @@
     <view class='message_input '>
       <view class='input_message'>
         <image src="../../images/login/check.png" class="input_logo" />
-        <input class='' placeholder="手机验证码" bindinput="messgInput" maxlength="6" ></input>
+        <input class='' placeholder="手机验证码" bindinput="changemsCode" maxlength="6" ></input>
       </view>
       
       <view class='{{c2?"get_message":"send_message"}}' bindtap='sendmessg'>{{c2||'获取验证码'}}</view>
@@ -26,7 +26,7 @@
     <view class='message_input '>
       <view class='input_message'>
         <image src="../../images/login/hart.png" class="input_logo" />
-        <input class='' placeholder="推荐码(可不填)" bindinput="userNameInput"></input>
+        <input class='' placeholder="推荐码(可不填)" bindinput="changeRecCode"></input>
       </view>
       <view> </view>
     </view>

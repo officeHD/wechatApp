@@ -1,5 +1,5 @@
 var app = getApp();
-const UserName = app.globalData.UserName;
+
 Page({
   data: {
     recordType: 'recharge',
@@ -33,6 +33,20 @@ Page({
     consumeList: []
   },
   onLoad: function () {
+    let that = this;
+    let UserName = app.globalData.UserName;
+    if (!UserName) {
+
+
+      wx.showModal({
+        title: '提示',
+        content: '登录失效，请重新登录',
+      })
+      wx.navigateTo({
+        url: '/pages/login/index',
+      })
+      return false;
+    }
     this.GetRechargeList()
   },
 
@@ -65,6 +79,7 @@ Page({
       wx.hideLoading()
       let result = JSON.parse(res.data.d);
       if (result.State.toString() === "1") {
+      
         that.setData({
           listData: JSON.parse(result.ReturnInfo)
         });
@@ -73,7 +88,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    app.ajax('/GetRechargeListByUser', { UserName: UserName }, cb)
+    app.ajax('/GetRechargeListByUser', { UserName: app.globalData.UserName }, cb)
   },
   GetOperationLis: function () {
     let that = this;
@@ -91,10 +106,10 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    app.ajax('/GetOperationListByuser', { UserName: UserName }, cb)
+    app.ajax('/GetOperationListByuser', { UserName: app.globalData.UserName }, cb)
   },
-  payOrder:function(e){
-   
+  payOrder: function (e) {
+
     wx.navigateTo({
       url: `/pages/pay/index?type=${e.currentTarget.dataset.type}`,
     })

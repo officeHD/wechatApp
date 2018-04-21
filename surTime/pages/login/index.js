@@ -147,6 +147,7 @@ Page({
           "LoginType": 1
         };
         let fn = (res) => {
+          wx.hideLoading()
           let result = JSON.parse(res.data.d);
           console.log(result);
           if (result.State.toString() === "1") {
@@ -163,6 +164,9 @@ Page({
             })
           }
         }
+        wx.showLoading({
+          title: '登录中',
+        })
         app.ajax('/Login', data, fn)
       }
     }

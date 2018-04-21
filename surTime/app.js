@@ -4,22 +4,15 @@ const api = require('./utils/ajax.js')
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+
     var PKID = wx.getStorageSync('PKID') || '';
     var Tel = wx.getStorageSync('Tel') || '';
-    var UserName = wx.getStorageSync('UserName')||'';
+    var UserName = wx.getStorageSync('UserName') || '';
     this.globalData.PKID = PKID;
     this.globalData.UserName = UserName;
     this.globalData.Tel = Tel;
     // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res);
-      }
-    })
+     
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -41,12 +34,41 @@ App({
       }
     })
   },
+  initUserInfo: function (obj) {
+    this.globalData.PKID = obj.PKID;
+    this.globalData.Email = obj.Email;
+    this.globalData.IsAdmin = obj.IsAdmin;
+    this.globalData.Tel = obj.Tel;
+    this.globalData.UserName = obj.UserName;
+    wx.setStorage({
+      key: "PKID",
+      data: obj.PKID
+    })
+    wx.setStorage({
+      key: "Email",
+      data: obj.Email
+    })
+
+    wx.setStorage({
+      key: "IsAdmin",
+      data: obj.IsAdmin
+    })
+    wx.setStorage({
+      key: "Tel",
+      data: obj.Tel
+    })
+    wx.setStorage({
+      key: "UserName",
+      data: obj.UserName
+    })
+
+  },
   globalData: {
     userInfo: null
   },
-  
+
   ajax: api.ajax,
-  initUserInfo: api.initUserInfo,
+  
   trim: api.trim,
   checkData: util.checkData,
   sort_object: util.sort_object

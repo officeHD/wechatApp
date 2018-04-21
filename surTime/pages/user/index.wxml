@@ -40,6 +40,9 @@
     </view>
     <view class='tbody'>
       <block wx-if="{{recordType==='recharge'}}" wx:for="{{listData}}" wx:key="{{RechargeTime}}">
+        <view class="noData" wx-if="{{listData.length===0}}">
+         
+        </view>
         <view class="tr">
           <view class="td">{{item.RechargeGK}}</view>
           <view class="td">{{item.RechargeMoney}}</view>

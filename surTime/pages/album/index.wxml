@@ -1,14 +1,21 @@
-<view class='album'>
-  <block wx:for="{{album}}" wx:key="{{code}}">
-    <view class='albun_item'>
-      <image src='/images/album/demo.png'></image>
-      <view>
-        <view class='title'>宝贝图片</view>
-        <text class='num'>56张</text>
+<view class="item-box">
+  <view class="items">
+    <view wx:for="{{list}}" wx:key="{{index}}" class="item">
+      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style='{{item.txtStyle}}' class="inner txt">
+
+        <image class="item-icon" mode="widthFix" src="{{item.icon}}">
+        </image>
+
+        <view class='content'>
+          <text>{{item.name}}</text>
+          <text class='num'>{{item.num}}张</text>
+        </view>
       </view>
-      <view class='delete' >
-      删除相册
-      </view>
+
+      <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
+
     </view>
-  </block>
+
+  </view>
+  <view class='add_album'>添加相册</view>
 </view>

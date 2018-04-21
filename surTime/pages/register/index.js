@@ -2,24 +2,59 @@ import { $wuxCountDown } from '../components/wux'
 var app = getApp();
 Page({
   data: {
-    by_message: false,
-    reset_pass: false,
-    phone: '',
-    mesCode: ''
+    Email: '',// 邮箱
+    PassWord: '',//密码
+    Mobile:'',//手机号
+    RecCode:'',//推荐码
+    IPAddress:'',//IP地址
+    MobileCode:''//手机验证码
   },
   onLoad: function (options) {
-    // 生命周期函数--监听页面加载
-    by_message: (options.by_message == "true" ? true : false)
+
   },
-  changephone: function (e) {
-    let value = e.detail.value;
-    let that = this;
-    that.setData({
-      phone: value
-    })
+  //确认注册
+  register: function () {
+    let that=this;
+    let Email = that.data.Email;
+    let PassWord = that.data.PassWord;
+    let Mobile = that.data.Mobile;
+    let RecCode = that.data.RecCode;
+    let IPAddress = that.data.IPAddress;
+    let MobileCode = that.data.MobileCode;
+    let cb = msg => {
+      let result = JSON.parse(mag.data.d)
+      if (result.State.toString() === '1') {
+        wx.showModal({
+          title: '注册提示',
+          content: "注册成功",
+        })
+        wx.navigateTo({
+          url: '/pages/login/index',
+        })
+      }
+      if(result.State.toString()!=='1'){
+        wx.showModal({
+          title: '注册提示',
+          content: result.ReturnInfo,
+        })
+      }
+    }
+    let data = {
+      Email: Email,
+      PassWord: PassWord,
+      Mobile: Mobile,
+      RecCode: RecCode,
+      IPAddress: IPAddress,
+      MobileCode: MobileCode,
+    }
+    if (app.checkData('手机号', Mobile) && app.checkData('邮箱', Email)){
+      app.ajax('/Register', data, cb)
+    }
+    
   },
+  //获取短信验证码
   sendmessg: function (e) {
-    let phone = this.data.phone;
+    let phone = this.data.Mobile;
     if (app.checkData('手机号', phone)) {
       if (this.c2 && this.c2.interval) {
         wx.showToast({
@@ -46,6 +81,13 @@ Page({
       // 请求获取验证码
       let cb = msg => {
         let res = JSON.parse(msg.data.d)
+        if (res.State.toString() === "1"){
+          wx.showToast({
+            title: "短信发送成功",
+            icon: 'none',
+            duration: 2000
+          })
+        }
         if (res.State.toString() !== "1") {
           wx.showToast({
             title: res.ReturnInfo,
@@ -56,8 +98,44 @@ Page({
       }
       app.ajax('/GetMobileCode', { Phone: phone }, cb)
     }
+  }, //输入手机号
+  changephone: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      Mobile: value
+    })
   },
-  register: function () {
-    app.ajax('/Register', { phone: phone }, cb)
+  //邮箱
+  changeemail: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      Email: value
+    })
+  },
+  //密码
+  changepassword: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      PassWord: value
+    })
+  },
+  //手机验证码
+  changemsCode: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      MobileCode: value
+    })
+  },
+  //推荐码
+  changeRecCode: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      RecCode: value
+    })
   }
 })

@@ -7,6 +7,7 @@ Page({
     month: '09-01',
     Country: 'us',
     position: 'relative',
+    page:'1',
     flag: true,
     type: '',
     ASIN: '',
@@ -27,7 +28,13 @@ Page({
         listData: JSON.parse(data.ReturnInfo)
       });
     }
-    app.ajax('/GetGKSKSTKMHistoryTable', { UserID: UserID, PageType:  that.data.type }, cb, 'POST')
+    let data = {
+      UserID: UserID, 
+      PageType: that.data.type,
+      Page:'1',
+      PageCount:'10'
+    }
+    app.ajax('/GetGKSKSTKMHistoryTableInPage', data, cb)
   },
   changeASIN: function (e) {
     let value = e.detail.value;
@@ -56,19 +63,9 @@ Page({
         listData: JSON.parse(data.ReturnInfo)
       });
     }
-    app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
+    app.ajax('/GetGKSKSTKMHistoryTableInPageByAsin', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
   },
-  sortArr: function (e) {
-    let target = e.currentTarget.dataset.target;
-    let that = this;
-    let arr = that.data.listData;
-    let flag = !that.data.flag;
-    that.setData({
-      flag: flag,
-      listData: app.sort_object(arr, target, flag)
-    });
 
-  },
   /**
   * 页面相关事件处理函数--监听用户下拉动作
   */
@@ -80,15 +77,26 @@ Page({
     wx.stopPullDownRefresh() //停止下拉刷新
 
   },
-
+//底部加载更多
   onReachBottom: function () {
     let that = this;
+    that.setData({
+      page: that.data.page-0+1
+    })
     let cb = (res) => {
+      let data = JSON.parse(res.data.d)
+      let newList = JSON.parse(data.ReturnInfo);
       that.setData({
-        listData: that.data.listData.concat(res.data.list)
+        listData: that.data.listData.concat(newList)
       });
     }
-    app.ajax('A9List', '', cb, 'POST')
+    let data = {
+      UserID: app.globalData.PKID,
+      PageType: that.data.type,
+      Page: that.data.page,
+      PageCount: '10'
+    }
+    app.ajax('/GetGKSKSTKMHistoryTableInPage', data, cb)
   },
   onPageScroll: function (e) {
     let that = this;
