@@ -1,11 +1,27 @@
 /* pages/album/detail/index.wxss */
-.album{
+
+.album {
   display: flex;
   flex-wrap: wrap;
   padding: 0 7.9rpx;
+  padding-bottom: 120rpx;
 }
-.album image{
+
+.album image {
   width: 177rpx;
-  height:  177rpx;
+  height: 177rpx;
   margin: 5rpx;
+}
+
+.add_album {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  text-align: center;
+  background-color: #00a0e9;
+  height: 100rpx;
+  line-height: 100rpx;
+  transform: translate(-50%, 0);
+  color: #fff;
 }

@@ -2,7 +2,7 @@ var app = getApp();
 import { $wuxCountDown } from '../components/wux'
 Page({
   data: {
-    by_message: false, 
+    by_message: false,
     reset_pass: false,
     login_type: "短信快捷登录",
     reset_word: "忘记密码",
@@ -11,7 +11,8 @@ Page({
     userName: '',
     userPhone: '',
     verifyCode: '',
-    passWord: ''
+    passWord: '',
+    newPassWord: ''
   },
   onLoad: function () {
 
@@ -59,14 +60,30 @@ Page({
   },
   //重置密码
   resetPassWord: function (event) {
-    console.log(event)
-    var that = this;
+    let that = this;
     that.setData({
       reset_pass: !that.data.reset_pass,
       reset_word: that.data.reset_pass ? "忘记密码" : "取消重置",
       login_type: that.data.reset_pass ? "短信快捷登录" : ""
 
     })
+  },
+  //确认重制
+  update: function () {
+    let that = this;
+    let data={
+      newPassword:that.data.newPassword,
+      userPhone: that.data.userPhone,
+      verifyCode: that.data.verifyCode
+    }
+    let fn=msg=>{
+      console.log(1);
+    }
+    if (app.checkData('手机号', that.data.userPhone) && app.checkData('验证码', that.data.verifyCode)) {
+
+      app.ajax('/UpdatePassWord', data, fn)
+    }
+
   },
   // 填写手机号值
   changePhoneNum: function (e) {
@@ -92,7 +109,15 @@ Page({
       passWord: value
     })
   },
-   // 填写用户名值
+  //输入新密码
+  changeNewPassWord: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      newPassWord: value
+    })
+  },
+  // 填写用户名值
   changeUserName: function (e) {
     let value = e.detail.value;
     let that = this;
@@ -119,7 +144,7 @@ Page({
         let fn = (res) => {
           wx.hideLoading()
           let result = JSON.parse(res.data.d);
-          
+
           if (result.State.toString() === "1") {
             // 储存用户信息
             app.initUserInfo(JSON.parse(result.ReturnInfo));
@@ -171,7 +196,7 @@ Page({
       }
     }
   },
-  login_wx:function(e){
+  login_wx: function (e) {
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -181,7 +206,7 @@ Page({
         })
       }
     })
-    
+
   }
 
 })

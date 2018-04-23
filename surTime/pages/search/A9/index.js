@@ -95,7 +95,7 @@ Page({
         listData: that.data.listData.concat(res.data.list)
       });
     }
-    app.ajax('/A9List', '', cb, 'POST')
+    // app.ajax('/A9List', '', cb, 'POST')
   },
   changeASIN: function (e) {
     let value = e.detail.value;

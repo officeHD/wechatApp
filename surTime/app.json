@@ -1,13 +1,14 @@
 {
   "pages": [
-      "pages/index/index",
-   "pages/album/index",
+   
+    "pages/index/index",
+    "pages/search/KR/result/index",
+    
+    "pages/album/index",
     "pages/login/index",
-  
     "pages/register/index",
     "pages/search/A9/index",
     "pages/album/detail/index",
-    
     "pages/search/GKSKSTKM/index",
     "pages/search/KR/index",
     "pages/pay/index",

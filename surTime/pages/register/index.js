@@ -6,7 +6,7 @@ Page({
     PassWord: '',//密码
     Mobile:'',//手机号
     RecCode:'',//推荐码
-    IPAddress:'',//IP地址
+    IPAddress:'1',//IP地址
     MobileCode:''//手机验证码
   },
   onLoad: function (options) {
@@ -22,7 +22,7 @@ Page({
     let IPAddress = that.data.IPAddress;
     let MobileCode = that.data.MobileCode;
     let cb = msg => {
-      let result = JSON.parse(mag.data.d)
+      let result = JSON.parse(msg.data.d)
       if (result.State.toString() === '1') {
         wx.showModal({
           title: '注册提示',

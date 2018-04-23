@@ -32,6 +32,14 @@ Page({
   addItem: function (e) {
 
   },
+  //查看相册
+  albumDetail:function(e){
+   
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/album/detail/index?id=${id}`,
+    })
+  },
   touchS: function (e) {
     if (e.touches.length == 1) {
       this.setData({
