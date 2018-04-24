@@ -1,20 +1,32 @@
 var app = getApp();
 Page({
   data: {
+    add_show: '',//显示添加模态框
     delBtnWidth: 180//删除按钮宽度单位（rpx）
   },
   onLoad: function () {
-    let that=this;
-    let fn=msg=>{
+    let that = this;
+    let fn = msg => {
       console.log(JSON.parse(msg.data.d))
     }
-    let data={
-      UserID: app.globalData.PKID 
-      
+    let data = {
+      UserID: app.globalData.PKID
+
     }
-    app.ajax('/LoadDropDownList',data,fn)
+    app.ajax('/LoadDropDownList', data, fn)
     that.initEleWidth();
     that.tempData();
+  },
+  sure_add: function () {
+    let that = this;
+    that.changeShow();
+  },
+
+  changeShow: function () {
+    let that = this;
+    this.setData({
+      add_show: !that.data.add_show
+    });
   },
   //点击删除按钮事件
   delItem: function (e) {
@@ -33,8 +45,8 @@ Page({
 
   },
   //查看相册
-  albumDetail:function(e){
-   
+  albumDetail: function (e) {
+
     let id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: `/pages/album/detail/index?id=${id}`,

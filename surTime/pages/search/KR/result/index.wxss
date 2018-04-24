@@ -9,7 +9,15 @@
   width: 750rpx;
   z-index: 10;
   overflow-y: auto;
-  box-sizing: border-box
+  box-sizing: border-box;
+}
+
+.noData {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  font-size: 36rpx;
+  box-sizing: border-box;
 }
 
 .table.hide {
@@ -54,7 +62,7 @@
   display: table-cell;
   color: #000;
   height: 70rpx;
-  line-height:70rpx;
+  line-height: 70rpx;
   text-align: center;
   font-size: 14px;
   padding-left: 5px;
@@ -66,7 +74,7 @@
   line-height: 1;
   text-align: center;
   font-size: 12px;
-   box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .thead .tr {
@@ -87,8 +95,7 @@
   line-height: 1;
   padding: 5px 0 5px 5px;
   min-width: 150rpx;
-  vertical-align: middle
-  
+  vertical-align: middle;
 }
 
 .tbody.hide {
@@ -130,11 +137,13 @@
   background-color: #fff;
   border: 1px solid #fff;
 }
-.search swiper{
+
+.search swiper {
   height: 400rpx;
   padding: 20rpx 0;
   box-sizing: border-box;
 }
+
 .search .title {
   width: 750rpx;
   text-align: center;
@@ -153,7 +162,8 @@
   border: 1px solid #00a0e9;
   border-radius: 5px;
 }
-.status{
+
+.status {
   width: 161rpx;
   border-right: 1px solid #00a0e9;
   text-align: center;
@@ -161,10 +171,12 @@
   font-size: 32rpx;
   line-height: 55rpx;
 }
-.status:last-child{
-   border-right: none;
+
+.status:last-child {
+  border-right: none;
 }
-.active{
+
+.active {
   background-color: #00a0e9;
   color: #fff;
 }

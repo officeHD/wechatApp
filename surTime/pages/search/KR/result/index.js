@@ -4,6 +4,7 @@ Page({
   data: {
     index: 0,
     position: 'relative',
+    active: 'runing',
     flag: true,
     listData: [],
     runing: [],
@@ -13,6 +14,7 @@ Page({
   onLoad: function () {
     let that = this;
     let UserName = app.globalData.UserName;
+     
     if (!UserName) {
       wx.showModal({
         title: '提示',
@@ -22,46 +24,30 @@ Page({
         url: '/pages/login/index',
       })
       return false;
+    } else {
+      that.setData({
+        listData: app.globalData.runingData,
+        runing: app.globalData.runingData,
+        stop: app.globalData.stopData,
+        finish: app.globalData.finishData,
+      })
     }
-  
   },
-
-  onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    //模拟加载
-    this.onLoad();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
-  },
-
   searchType: function (e) {
     let that = this;
     let target = e.currentTarget.dataset.target;
-    this.setData({
-      recordType: target
-    })
-    if (target === "consume") {
-      that.GetOperationLis()
+    let data;
+    if (target === "runing") {
+      data = that.data.runing
+    } else if (target === "stop") {
+      data = that.data.stop;
+      
     } else {
-      that.GetRechargeList()
+      data = that.data.finish
     }
-  },
-  GetRechargeList: function () {
-    let that = this;
-    let cb = (res) => {
-      wx.hideLoading()
-      let result = JSON.parse(res.data.d);
-      if (result.State.toString() === "1") {
-        that.setData({
-          listData: JSON.parse(result.ReturnInfo)
-        });
-      }
-    }
-    wx.showLoading({
-      title: '加载中',
+    this.setData({
+      active: target,
+      listData: data
     })
-    app.ajax('/GetRechargeListByUser', { UserName: app.globalData.UserName }, cb)
   }
-  
-
 })

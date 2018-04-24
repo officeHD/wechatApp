@@ -2,9 +2,8 @@
   "pages": [
    
     "pages/index/index",
-    "pages/search/KR/result/index",
-    
     "pages/album/index",
+    "pages/search/KR/result/index",
     "pages/login/index",
     "pages/register/index",
     "pages/search/A9/index",

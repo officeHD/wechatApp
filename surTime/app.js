@@ -64,7 +64,10 @@ App({
 
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    runingData: [],
+    stopData: [],
+    finishData: []
   },
 
   ajax: api.ajax,
