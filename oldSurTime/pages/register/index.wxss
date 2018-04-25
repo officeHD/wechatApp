@@ -1,0 +1,144 @@
+.login {
+}
+
+.logo_box {
+  height: 200rpx;
+  text-align: center;
+  margin-top: 70rpx;
+  margin-bottom: 30rpx;
+}
+
+.logo {
+  
+  width: 200rpx;
+  height: 170rpx;
+}
+
+.login_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    font-size: 28rpx;
+}
+
+.input_list {
+  width: 612rpx;
+  height: 80rpx;
+  padding: 0 10rpx;
+  border: 1px solid #ccc;
+  margin-bottom: 30rpx;
+  display: flex;
+  box-sizing: border-box;
+  line-height: 80rpx;
+}
+
+.input_list input {
+  height: 100%; 
+ 
+  display: inline-block;
+  width: 512rpx;
+}
+
+.input_logo {
+  width: 60rpx;
+  height: 60rpx;
+  display: inline-block;
+  margin-bottom: 10rpx;
+  margin-right: 10rpx;
+  margin-top: 10rpx;
+}
+
+.message_input {
+  width: 612rpx;
+  height: 80rpx;
+  display: flex;
+  margin-bottom: 30rpx;
+  justify-content: space-between;
+}
+
+.message_input.hide {
+  display: none;
+}
+
+.send_message, .get_message {
+  height: 80rpx;
+  width: 215rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color: #00A0E9;
+  
+  /* border: 1px solid #ccc; */
+}
+
+.get_message {
+  /* background-color: gray;
+  color: #fff; */
+}
+
+.input_list.hide {
+  display: none;
+}
+
+.input_message {
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 350rpx;
+  text-indent: 10rpx;
+  border: 1rpx solid #ccc;
+ 
+  /* display: block */
+}
+
+.input_message input {
+  height: 80rpx;
+  width: 270rpx;
+  display: inline-block;
+}
+
+.login_type {
+  display: flex;
+  width: 513rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  justify-content: space-between;
+ 
+}
+
+.login_type.hide {
+  display: none;
+}
+
+.login_mes {
+  color: #00a0e9;
+}
+
+.login_forget {
+  color: #fa0000;
+}
+
+.login_btn {
+  width: 513rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 80rpx;
+  background-color: #00a0e9;
+  text-align: center;
+  color: #fff;
+  margin: 10rpx 0;
+}
+
+.create_count {
+  text-align: center;
+  width: 513rpx;
+  height: 80rpx;
+  margin: 10rpx 0;
+  line-height: 80rpx;
+ 
+  color: #00a0e9;
+}
+
+.suer_reset {
+  margin-top: 50rpx;
+}

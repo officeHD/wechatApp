@@ -1,0 +1,41 @@
+<view>
+  <view class='search'>
+
+    <view class='pick_view'>
+      <view class='status {{active==="runing"?"active":""}}' data-target="runing" bindtap='searchType'>
+        进行中
+      </view>
+      <view class='status {{active==="stop"?"active":""}}' data-target="stop" bindtap='searchType'>
+        已停止
+      </view>
+      <view class='status {{active==="finish"?"active":""}}' data-target="finish" bindtap='searchType'>
+        已完成
+      </view>
+    </view>
+  </view>
+
+  <view class="table">
+    <view class='thead'>
+      <view class="tr">
+        <view class="th" data-target="integral" bindtap='sortArr'> 图片 </view>
+        <view class="th" data-target="money" bindtap='sortArr'> ASIN </view>
+        <view class="th " data-target="time" bindtap='sortArr'>站点 </view>
+        <view class="th ">操作</view>
+      </view>
+    </view>
+    <view class='tbody' wx-if="{{listData.length>0}}">
+      <block wx:for="{{listData}}" wx:key="{{index}}">
+        <view class="tr">
+          <view class="td">{{item.RechargeGK}}</view>
+          <view class="td">{{item.RechargeMoney}}</view>
+          <view class="td">{{item.RechargeTime}}</view>
+          <view class="td"> {{item.RechargeType}} </view>
+        </view>
+      </block>
+
+    </view>
+  </view>
+  <view class="noData" wx-if="{{listData.length<=0}}">
+    暂无数据
+  </view>
+</view>

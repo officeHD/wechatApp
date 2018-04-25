@@ -1,0 +1,176 @@
+.login {
+}
+
+.logo_box {
+  height: 200rpx;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.logo {
+  margin-top: 20rpx;
+  width: 200rpx;
+  height: 170rpx;
+}
+
+.login_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_list {
+  width: 513rpx;
+  height: 100rpx;
+  padding: 0 10rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+
+.message_input {
+  width: 513rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0 10rpx;
+  display: flex;
+}
+
+.message_input.hide {
+  display: none;
+}
+
+.send_message, .get_message {
+  height: 100rpx;
+  width: 215rpx;
+  text-align: right;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  float: right;
+  color: #00a0e9;
+}
+
+.send_message {
+}
+
+.input_list.hide {
+  display: none;
+}
+
+.input_message {
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 298rpx;
+  border-bottom: 1rpx solid #ccc;
+  font-size: 32rpx;
+}
+
+.input_list input {
+  height: 100rpx;
+  font-size: 32rpx;
+}
+
+.login_type {
+  display: flex;
+  width: 513rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  justify-content: space-between;
+  font-size: 32rpx;
+}
+
+.login_type.hide {
+  display: none;
+}
+
+.login_mes {
+  color: #00a0e9;
+  float: left;
+}
+
+.login_forget {
+  color: #fa0000;
+  float: right;
+}
+
+.login_btn {
+  width: 513rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 80rpx;
+  background-color: #00a0e9;
+  text-align: center;
+  color: #fff;
+  margin: 10rpx 0;
+}
+
+.create_count {
+  text-align: center;
+  width: 513rpx;
+  height: 80rpx;
+  margin: 20px 0;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #00a0e9;
+}
+
+.suer_reset {
+  margin: 50rpx 0;
+}
+
+.otherWay {
+  width: 750rpx;
+  display: felx;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0 20px 0;
+}
+
+.line_center {
+  width: 60rpx;
+  text-align: center;
+  font-size: 32rpx;
+  margin: 0 10rpx;
+  color: #666;
+}
+
+.left_line {
+  width: 216rpx;
+  height: 0;
+  border-top: 1px solid #ccc;
+}
+
+.login_way {
+  display: flex;
+  justify-content: center;
+}
+
+.wechat {
+  width: 513rpx;
+  height: 80rpx;
+  border-radius: 80rpx;
+  border: 1px solid #ccc;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+.wechat image {
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+  margin-top: 10rpx;
+}
+
+.login_text {
+  width: 100%;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #666;
+}

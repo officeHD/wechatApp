@@ -1,0 +1,65 @@
+<view>
+  <view class='search'>
+    <swiper indicator-dots previous-margin="70rpx" next-margin="70rpx" current='1' circular='true'>
+      <block wx:for="{{imgurl}}" wx:key="{{code}}">
+        <swiper-item>
+          <image src='{{item.src}}' data-type='{{item.type}}' bindtap='payOrder'></image>
+        </swiper-item>
+      </block>
+
+    </swiper>
+    <view class='pick_view'>
+      <view class='recharge' data-target="recharge" bindtap='searchType'>
+        <image class='{{recordType==="recharge"?"hide":null}}' src="/images/user/off.png"></image>
+        <image class='{{recordType==="recharge"?null:"hide"}}' src="/images/user/on.png"></image>
+        充值记录
+      </view>
+      <view class='consume' data-target="consume" bindtap='searchType'>
+        <image class='{{recordType==="consume"?"hide":null}}' src="/images/user/off.png"></image>
+        <image class='{{recordType==="consume"?null:"hide"}}' src="/images/user/on.png"></image>
+        消费记录
+      </view>
+    </view>
+  </view>
+
+  <view class="table">
+    <view class='thead'>
+      <view class="tr" wx-if="{{recordType==='recharge'}}">
+        <view class="th" data-target="integral" bindtap='sortArr'> 充值积分 </view>
+        <view class="th" data-target="money" bindtap='sortArr'> 充值金额 </view>
+        <view class="th " data-target="time" bindtap='sortArr'>充值时间 </view>
+        <view class="th ">充值类型</view>
+      </view>
+      <view class="tr" wx-if="{{recordType==='consume'}}">
+        <view class="th" data-target="integral" bindtap='sortArr'> 使用功能 </view>
+        <view class="th" data-target="money" bindtap='sortArr'> 操作内容 </view>
+        <view class="th " data-target="time" bindtap='sortArr'>应扣点数 </view>
+        <view class="th ">操作时间</view>
+      </view>
+
+    </view>
+    <view class='tbody'>
+      <block wx-if="{{recordType==='recharge'}}" wx:for="{{listData}}" wx:key="{{RechargeTime}}">
+        <view class="noData" wx-if="{{listData.length===0}}">
+         
+        </view>
+        <view class="tr">
+          <view class="td">{{item.RechargeGK}}</view>
+          <view class="td">{{item.RechargeMoney}}</view>
+          <view class="td">{{item.RechargeTime}}</view>
+          <view class="td"> {{item.RechargeType}} </view>
+        </view>
+      </block>
+      <block wx-if="{{recordType==='consume'}}" wx:for="{{consumeList}}" wx:key="{{code}}">
+        <view class="tr">
+          <view class="td">
+            {{item.page}}
+          </view>
+          <view class="td">{{item.Description}}</view>
+          <view class="td">{{item.UsableTD}}</view>
+          <view class="td"> {{item.HandleTime}} </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
