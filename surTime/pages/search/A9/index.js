@@ -108,9 +108,8 @@ Page({
     this.setData({
       index: e.detail.value
     })
-  } ,
+  },
   checkDetail: function (e) {
-     
     let pkid = e.currentTarget.dataset.pkid;
     wx.navigateTo({
       url: 'detail/index?pkid=' + pkid,

@@ -1,49 +1,105 @@
 /* pages/search/A9/detail/index.wxss */
-page{
+
+page {
   background-color: #f2f2f2;
 }
-.tableInfo{
+
+.tableInfo {
   width: 710rpx;
   margin: 20rpx;
   border-radius: 5px;
   background-color: #fff;
 }
-.title{
+
+.title {
   text-align: center;
-  font-size: 30rpx;color: #1893DE;
+  font-size: 30rpx;
+  color: #1893de;
   padding: 10px 0;
 }
 
-.infotop{
+.infotop {
   display: flex;
   width: 100%;
   justify-content: space-around;
 }
-.image{
+
+.image {
   width: 250rpx;
   height: 250rpx;
 }
-.Product_title{
+
+.Product_title {
   width: 400rpx;
-  
 }
-.infotop image{
- width: 250rpx;
+
+.infotop image {
+  width: 250rpx;
   height: 250rpx;
 }
-.infoList{
+
+.infoList {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
 }
-.infoList .item{
-  width: 350rpx;
+
+.infoList .item {
+  width: 700rpx;
   padding: 10rpx;
-  font-size: 24rpx;
+  font-size: 30rpx;
   box-sizing: border-box;
-  word-wrap : break-word
+  word-wrap: break-word;
 }
-.item text{
-  
+
+.item view {
+  display: flex;
+  word-wrap: break-all;
+}
+
+.item .item_title {
+  display: block;
   text-align: right;
-  width: 120rpx;
+  width: 200rpx;
+  margin-right: 10rpx;
+}
+
+.item .content {
+  text-align: left;
+  word-wrap: break-all;
+}
+.pick_view {
+  display: flex;
+  width: 600rpx;
+  height: 55rpx;
+  margin: 10px auto;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #00a0e9;
+  border-radius: 55px;
+  background-color: #E9E9E9;
+  overflow: hidden;
+}
+
+.status {
+  width: 200rpx;
+  border-right: 1px solid #00a0e9;
+  text-align: center;
+  height: 100%;
+  font-size: 28rpx;
+  line-height: 55rpx;
+}
+
+.status:last-child {
+  border-right: none;
+}
+
+.active {
+  background-color: #00a0e9;
+  color: #fff;
+}
+.detail{
+  padding: 10rpx;
+  box-sizing: border-box;
+  font-size: 32rpx;
 }

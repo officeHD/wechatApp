@@ -14,28 +14,94 @@
     </view>
     <view class='infoList'>
       <view class='item'>
-        <view><text>Country:</text> {{tableInfo.Country}}</view>
-        <view><text>Brand:</text>{{tableInfo.Brand}}</view>
-        <view><text>UPC:</text>{{tableInfo.UPC}}</view>
-        <view><text>Model:</text>{{tableInfo.Model}}</view>
-        <view><text>MPN:</text>{{tableInfo.MPN}}</view>
-        <view><text>Review:</text>{{tableInfo.Review}}</view>
-      </view>
-      <view class='item'>
-        <view>ASIN:{{tableInfo.ASIN}}</view>
-        <view>Manufacture:{{tableInfo.Manufacture}}</view>
-        <view>EAN:{{tableInfo.EAN}}</view>
-        <view>PartNumber:{{tableInfo.PartNumber}}</view>
-        <view>Department:{{tableInfo.Department}}</view>
-        <view>ReviewLevel:{{tableInfo.ReviewLevel}}</view>
+        <view class='item_list'>
+          <view class='item_title'>Country:</view>
+          <view class='content'>{{tableInfo.Country}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>ASIN:</view>
+          <view class='content'>{{tableInfo.ASIN}}</view>
+        </view>
+
+        <view class='item_list'>
+          <view class='item_title'>UPC:</view>
+          <view class='content'>{{tableInfo.UPC}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>EAN:</view>
+          <view class='content'>{{tableInfo.EAN}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>Brand:</view>
+          <view class='content'>{{tableInfo.Brand}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>Model:</view>
+          <view class='content'>{{tableInfo.Model}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>MPN:</view>
+          <view class='content'>{{tableInfo.MPN}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>Review:</view>
+          <view class='content'>{{tableInfo.Review}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>Manufacture:</view>
+          <view class='content'>{{tableInfo.Manufacture}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>PartNumber:</view>
+          <view class='content'>{{tableInfo.PartNumber}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>Department:</view>
+          <view class='content'>{{tableInfo.Department}}</view>
+        </view>
+        <view class='item_list'>
+          <view class='item_title'>ReviewLevel:</view>
+          <view class='content'>{{tableInfo.ReviewLevel}}</view>
+        </view>
       </view>
     </view>
-  </view>
-  <view>ASINLink:{{tableInfo.ASINLink}}</view>
-  <view>Description:{{tableInfo.Description}}</view>
-  <view>SearchTerms:{{tableInfo.SearchTerms}}</view>
-  <view>Features:{{tableInfo.Features}}</view>
+    <view class='search'>
 
+      <view class='pick_view'>
+        <view class='status {{active==="SearchTerms"?"active":""}}' data-target="SearchTerms" bindtap='searchType'>
+          SearchTerms
+        </view>
+        <view class='status {{active==="Features"?"active":""}}' data-target="Features" bindtap='searchType'>
+          Features
+        </view>
+        <view class='status {{active==="Description"?"active":""}}' data-target="Description" bindtap='searchType'>
+          Description
+        </view>
+      </view>
+    </view>
+    <view class='detail'>
+      <view wx-if="{{active==='Description'}}"> {{tableInfo.Description}}</view>
+      <view wx-if="{{active==='SearchTerms'}}"> {{SearchTerms}}</view>
+      <view wx-if="{{active==='Features'}}"> {{tableInfo.Features}}</view>
+    </view>
+
+  </view>
+  <view class='tableInfo'>
+    <view class='title'> 变体所有信息</view>
+  </view>
+  <view class='tableInfo'>
+    <view class='title'> 卖家流量渠道占比</view>
+    <view>
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+    </view>
+  </view>
+  <view class='tableInfo'>
+    <view class='title'> 精准关键词</view>
+  </view>
+
+
+
+  <view>ASINLink:{{tableInfo.ASINLink}}</view>
   <view>PKID:{{tableInfo.PKID}}</view>
   <view>Parentage:{{tableInfo.Parentage}}</view>
   <view>FK_PIASIN:{{tableInfo.FK_PIASIN}}</view>
