@@ -91,7 +91,7 @@
   </view>
   <view class='tableInfo'>
     <view class='title'> 卖家流量渠道占比</view>
-    <view>
+    <view class='echart'>
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
     </view>
   </view>

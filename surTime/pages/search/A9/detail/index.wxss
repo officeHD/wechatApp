@@ -103,3 +103,12 @@ page {
   box-sizing: border-box;
   font-size: 32rpx;
 }
+.echart{
+  width: 600rpx;
+  height: 600rpx;
+}
+ec-canvas {
+  width: 100%;
+  height: 100%;
+}
+
