@@ -72,20 +72,7 @@ Page({
     }
     // app.ajax('/productList', '', cb, 'POST')
   },
-  onPageScroll: function (e) {
-    let that = this;
-    let scrollTop = e.scrollTop;
 
-    if (scrollTop >= 60) {
-      that.setData({
-        position: 'fixed'
-      });
-    } else {
-      that.setData({
-        position: 'relative'
-      });
-    }
-  },
   bindPickerChange: function (e) {
     this.setData({
       index: e.detail.value

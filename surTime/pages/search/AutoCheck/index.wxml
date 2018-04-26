@@ -2,7 +2,7 @@
 <image class='search_bg' src='/images/search_bg.png'></image>
   <view class='search'>
     <view class='title'>自动选品工具</view>
-    <view class='pick_view {{position}}'>
+    <view class='pick_view'>
       <view class='picker_content'>
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
           <view class="picker_area">

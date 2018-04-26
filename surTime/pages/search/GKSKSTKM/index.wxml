@@ -17,6 +17,11 @@
         <button bindtap='search'>搜索</button>
       </view>
     </view>
+   <checkbox-group class="checkC" bindchange="checkboxChange">
+    <label class="checkbox" >
+      <checkbox value="yes"/>是否查询所有子商品 
+    </label>
+  </checkbox-group>
   </view>
   <view class='content'>
 

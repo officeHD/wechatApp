@@ -11,6 +11,41 @@
   height: 388rpx;
 }
 
+.checkC {
+  width: 500rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+
+checkbox {
+  vertical-align: middle;
+}
+
+.checkbox {
+  font-size: 13px;
+  color: #fff;
+}
+
+checkbox .wx-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  border: none;
+  background: #fff;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #1487d9;
+  background: #fff;
+}
+
 .search {
   height: 388rpx;
   background: transparent;
@@ -114,7 +149,6 @@
 .pick_view {
   display: flex;
   width: 500rpx;
-   
   height: 90rpx;
   margin: 0 auto;
   justify-content: center;

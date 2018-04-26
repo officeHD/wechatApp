@@ -1,0 +1,42 @@
+<view>
+  <view class='tableInfo'>
+    <view class='title'> 商品基础信息分析</view>
+
+    <view class='infotop'>
+      <view class='image'>
+        <image src='{{tableInfo.ImageUrl}}'></image>
+      </view>
+
+      <view class='Product_title'>
+        <view>Product Title:</view>
+        {{tableInfo.Title}}
+      </view>
+    </view>
+    <view class='infoList'>
+      <view class='item'>
+        <view><text>Country:</text> {{tableInfo.Country}}</view>
+        <view><text>Brand:</text>{{tableInfo.Brand}}</view>
+        <view><text>UPC:</text>{{tableInfo.UPC}}</view>
+        <view><text>Model:</text>{{tableInfo.Model}}</view>
+        <view><text>MPN:</text>{{tableInfo.MPN}}</view>
+        <view><text>Review:</text>{{tableInfo.Review}}</view>
+      </view>
+      <view class='item'>
+        <view>ASIN:{{tableInfo.ASIN}}</view>
+        <view>Manufacture:{{tableInfo.Manufacture}}</view>
+        <view>EAN:{{tableInfo.EAN}}</view>
+        <view>PartNumber:{{tableInfo.PartNumber}}</view>
+        <view>Department:{{tableInfo.Department}}</view>
+        <view>ReviewLevel:{{tableInfo.ReviewLevel}}</view>
+      </view>
+    </view>
+  </view>
+  <view>ASINLink:{{tableInfo.ASINLink}}</view>
+  <view>Description:{{tableInfo.Description}}</view>
+  <view>SearchTerms:{{tableInfo.SearchTerms}}</view>
+  <view>Features:{{tableInfo.Features}}</view>
+
+  <view>PKID:{{tableInfo.PKID}}</view>
+  <view>Parentage:{{tableInfo.Parentage}}</view>
+  <view>FK_PIASIN:{{tableInfo.FK_PIASIN}}</view>
+</view>

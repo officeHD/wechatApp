@@ -1,0 +1,49 @@
+/* pages/search/A9/detail/index.wxss */
+page{
+  background-color: #f2f2f2;
+}
+.tableInfo{
+  width: 710rpx;
+  margin: 20rpx;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.title{
+  text-align: center;
+  font-size: 30rpx;color: #1893DE;
+  padding: 10px 0;
+}
+
+.infotop{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.image{
+  width: 250rpx;
+  height: 250rpx;
+}
+.Product_title{
+  width: 400rpx;
+  
+}
+.infotop image{
+ width: 250rpx;
+  height: 250rpx;
+}
+.infoList{
+  display: flex;
+  justify-content: space-around;
+}
+.infoList .item{
+  width: 350rpx;
+  padding: 10rpx;
+  font-size: 24rpx;
+  box-sizing: border-box;
+  word-wrap : break-word
+}
+.item text{
+  
+  text-align: right;
+  width: 120rpx;
+}

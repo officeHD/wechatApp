@@ -7,15 +7,13 @@ Page({
     month: '09-01',
     Country: 'us',
     position: 'relative',
-    page:'1',
+    page: '1',
     flag: true,
     type: '',
     ASIN: '',
     listData: []
   },
   onLoad: function (options) {
-
-
     let that = this;
     that.setData({
       type: options.type
@@ -29,19 +27,24 @@ Page({
       });
     }
     let data = {
-      UserID: UserID, 
+      UserID: UserID,
       PageType: that.data.type,
-      Page:'1',
-      PageCount:'10'
+      Page: '1',
+      PageCount: '10'
     }
     app.ajax('/GetGKSKSTKMHistoryTableInPage', data, cb)
   },
   changeASIN: function (e) {
     let value = e.detail.value;
     let that = this;
-
     that.setData({
       ASIN: value
+    })
+  },
+  checkboxChange: function (e) {
+    let value = e.detail.value;
+    this.setData({
+      check: value
     })
   },
   search: function () {
@@ -77,11 +80,11 @@ Page({
     wx.stopPullDownRefresh() //停止下拉刷新
 
   },
-//底部加载更多
+  //底部加载更多
   onReachBottom: function () {
     let that = this;
     that.setData({
-      page: that.data.page-0+1
+      page: that.data.page - 0 + 1
     })
     let cb = (res) => {
       let data = JSON.parse(res.data.d)

@@ -72,7 +72,7 @@ Page({
   update: function () {
     let that = this;
     let data={
-      newPassword:that.data.newPassword,
+      NewPassWord:that.data.newPassword,
       userPhone: that.data.userPhone,
       verifyCode: that.data.verifyCode
     }
