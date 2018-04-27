@@ -2,6 +2,7 @@ var app = getApp();
 Page({
   data: {
     array: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
+    page: 1,
     index: 0,
     Country: 'us',
     flag: true,
@@ -10,17 +11,28 @@ Page({
     listData: []
   },
   onLoad: function () {
+    this.getA9List();
+  },
+  getA9List: function () {
     let that = this;
     let UserID = app.globalData.PKID;
     let cb = (res) => {
-
       let data = JSON.parse(res.data.d)
       console.log(JSON.parse(data.ReturnInfo))
       that.setData({
-        listData: JSON.parse(data.ReturnInfo)
+        listData: that.data.listData.concat(JSON.parse(data.ReturnInfo)),
+        page: that.data.page + 1
       });
     }
-    app.ajax('/A9List', { UserID: UserID }, cb, 'POST')
+    let sendData = {
+      UserID: UserID,
+      Page: that.data.page,
+      PageCount: 10,
+      Asin: '',
+      StrTime: '',
+      EndTime: ''
+    }
+    app.ajax('/A9ListByPage', sendData, cb, 'POST')
   },
   //A9查询
   search: function () {
@@ -89,13 +101,7 @@ Page({
   },
   //加载更多
   onReachBottom: function () {
-    let that = this;
-    let cb = (res) => {
-      that.setData({
-        listData: that.data.listData.concat(res.data.list)
-      });
-    }
-    // app.ajax('/A9List', '', cb, 'POST')
+    this.getA9List();
   },
   changeASIN: function (e) {
     let value = e.detail.value;
@@ -111,9 +117,28 @@ Page({
   },
   checkDetail: function (e) {
     let pkid = e.currentTarget.dataset.pkid;
-    wx.navigateTo({
-      url: 'detail/index?pkid=' + pkid,
-    })
+    let state = e.currentTarget.dataset.state;
+    if (state === "4") {
+      wx.navigateTo({
+        url: 'detail/index?pkid=' + pkid,
+      })
+    } else if (state === "5") {
+      wx.showModal({
+        title: '提示',
+        content: '数据已失效',
+      })
+    } else if (state === "3") {
+      wx.showModal({
+        title: '提示',
+        content: '数据优化中，最终完成可能需要2个工作日左右，请耐心等待!',
+      })
+    } else   {
+      wx.showModal({
+        title: '提示',
+        content: '正在查询中 ，最终完成可能需要2个工作日左右，请耐心等待!',
+      })
+    }
+
   }
 
 

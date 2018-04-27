@@ -138,27 +138,27 @@ Page({
     app.ajax('/GetPIChildbyID', { UserID: UserID, ChildPkId: pkid }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo[0])
+      // console.log(ReturnInfo[0])
       that.setData({
-        tableInfo: ReturnInfo[0],
-        SearchTerms: ReturnInfo[0].SearchTerms.replace(/<br\s*\/?>/g, "\t\n")
+        tableInfo: ReturnInfo[0]
+        
       })
       
     })
     //获取商品近三个月曝光量、点击量、销量明细
     app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
       let data = JSON.parse(res.data.d);
-      // let ReturnInfo = JSON.parse(data.ReturnInfo);
-      // console.log(ReturnInfo)
-      // that.setData({
-      //   tableInfo: ReturnInfo[0]
-      // })
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      console.log(ReturnInfo)
+      that.setData({
+        // tableInfo: ReturnInfo[0]
+      })
     })
     //关键词入口渠道占比图形数据
     app.ajax('/GetASINStatisticsByID', { UserID: UserID, PkId: pkid }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      // console.log(ReturnInfo)
       // that.setData({
       //   tableInfo: ReturnInfo[0]
       // })
@@ -167,7 +167,7 @@ Page({
     app.ajax('/GetKeywordAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum:'20' }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      // console.log(ReturnInfo)
       // that.setData({
       //   tableInfo: ReturnInfo[0]
       // })
@@ -176,7 +176,7 @@ Page({
     app.ajax('/GetKeywordRedAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      // console.log(ReturnInfo)
       // that.setData({
       //   tableInfo: ReturnInfo[0]
       // })
@@ -185,7 +185,7 @@ Page({
     app.ajax('/GetPageRelatedASIN', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      // console.log(ReturnInfo)
       // that.setData({
       //   tableInfo: ReturnInfo[0]
       // })
