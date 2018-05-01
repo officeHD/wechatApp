@@ -1,15 +1,13 @@
 <view>
   <view class='tableInfo'>
     <view class='title'> 商品基础信息分析</view>
-
     <view class='infotop'>
       <view class='image'>
         <image src='{{tableInfo.ImageUrl}}'></image>
       </view>
-
       <view class='Product_title'>
         <view>Product Title:</view>
-        {{tableInfo.Title}}
+        {{tableInfo.ProductTitle}}
       </view>
     </view>
     <view class='infoList'>
@@ -66,7 +64,6 @@
       </view>
     </view>
     <view class='search'>
-
       <view class='pick_view'>
         <view class='status {{active==="SearchTerms"?"active":""}}' data-target="SearchTerms" bindtap='searchType'>
           SearchTerms
@@ -81,16 +78,44 @@
     </view>
     <view class='detail'>
       <view wx-if="{{active==='Description'}}"> {{tableInfo.Description}}</view>
-      <view wx-if="{{active==='SearchTerms'}}"> {{SearchTerms}}</view>
+      <view wx-if="{{active==='SearchTerms'}}"> {{tableInfo.SearchTerms}}</view>
       <view wx-if="{{active==='Features'}}"> {{tableInfo.Features}}</view>
     </view>
-
   </view>
   <view class='tableInfo'>
     <view class='title'> 变体所有信息</view>
+    <view class="table">
+      <view class='thead'>
+        <view class="tr">
+          <view class="th">Number</view>
+          <view class="th">ASIN </view>
+          <view class="th">Parentage </view>
+          <view class="th"></view>
+        </view>
+      </view>
+      <view class='tbody'>
+        <block wx:for="{{PIChild}}" wx:key="{{index}}">
+          <view class="tr">
+            <view class="td">{{index}} </view>
+            <view class="td">{{item.ASIN}}</view>
+            <view class="td">{{item.Parentage}}</view>
+            <view class="td">
+
+              <image src='/images/table/detail.png' data-url='{{item.ASINLink}}' bindtap='viewdetail'></image>
+
+
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
   </view>
   <view class='tableInfo'>
-    <view class='title'> 卖家流量渠道占比</view>
+    <view class='title'> 
+      <image class='controll fl' src='/images/table/detail.png'></image>
+        卖家流量渠道占比
+      <image class='controll fr' src='/images/table/detail.png'></image>
+    </view>
     <view class='echart'>
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
     </view>

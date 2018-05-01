@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/search/A9/detail/index",
     "pages/index/index",
     "pages/search/A9/index",
-    "pages/search/A9/detail/index",
+    
    
     "pages/album/index",
     "pages/search/KR/result/index",

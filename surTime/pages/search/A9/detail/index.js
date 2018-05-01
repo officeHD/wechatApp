@@ -31,28 +31,54 @@ Page({
     let that = this;
     // 获取组件
     this.ecComponent = this.selectComponent('#mychart-dom-bar');
+
+    // 获取A9明细信息
+    wx.showLoading({
+      title: '加载中',
+    });
+    app.ajax('/A9ListDetail', { UserID: UserID, PkId: pkid, AnalysisRows: 10, RedAnalysisRows: 10, RelatedRows: 10 }, function (res) {
+      wx.hideLoading();
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      let Tables = JSON.parse(ReturnInfo.ds);
+      console.log(Tables)
+      that.setData({
+        ASINUrl: ReturnInfo.ASINUrl,//Asin链接:
+        KetUrl: ReturnInfo.KetUrl,//关键词链接
+        ZiAsinCount: ReturnInfo.ZiAsinCount,//子表数量
+        tableInfo: Tables.reads[0],//产品主表
+        OlderPI: Tables.reads1,//历史表
+        KeywordAnalysis: Tables.reads2,//精准关键词分析 
+        SourcesStatistics: Tables.reads3,//卖家流量渠道占比
+        PIChild: Tables.reads4,//产品子表
+        ASINStatisticsByID: Tables.reads5,//关键词入口渠道占比
+        KeywordRedAnalysis: Tables.reads6,//流量关键词分析
+        RelatedASIN: Tables.reads7,//关联ASIN分析,
+       
+      })
+    })
     // 根据用户编号和A9主表编号，获取A9产品信息子表top10（变体所有ASIN信息（默认显示））
     app.ajax('/GetPIChild', { UserID: UserID, PkId: pkid }, function (res) {
-      let data = JSON.parse(res.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo[0])
-      that.setData({
-        PIChild10: ReturnInfo[0]
-
-      })
 
     })
-    //根据子表ChildPkId, 查看A9产品子表信息
-    app.ajax('/GetPIChildAll', { UserID: UserID, PkId: pkid }, function (res) {
-      let data = JSON.parse(res.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      // console.log(ReturnInfo[0])
-      that.setData({
-        tableInfo: ReturnInfo[0]
 
-      })
+    // 根据用户编号和A9主表编号，获取A9产品所有信息子表（变体所有ASIN信息（展开全部））
+    // app.ajax('/GetPIChildAll', { UserID: UserID, PkId: pkid }, function (res) {
+    //   let data = JSON.parse(res.data.d);
+    //   let ReturnInfo = JSON.parse(data.ReturnInfo);
+    //   console.log(ReturnInfo[0])
+    //   that.setData({
+    //      tableInfo: ReturnInfo[0]
+
+    //   })
+
+    // })
+    // 根据用户编号，A9主表编号和页数，获取A9产品信息子表（变体所有ASIN信息（显示更多））
+    app.ajax('/GetPIChildbyPage', { UserID: UserID, PkId: pkid, PageNum: 20 }, function (res) {
+
 
     })
+
 
     //获取商品近三个月曝光量、点击量、销量明细
     app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
@@ -66,39 +92,19 @@ Page({
     })
     //关键词入口渠道占比图形数据
     app.ajax('/GetASINStatisticsByID', { UserID: UserID, PkId: pkid }, function (res) {
-      let data = JSON.parse(res.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      // console.log(ReturnInfo)
-      // that.setData({
-      //   tableInfo: ReturnInfo[0]
-      // })
+
     })
     //获取A9精准关键词分析信息(滚动条)
     app.ajax('/GetKeywordAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
-      let data = JSON.parse(res.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      // console.log(ReturnInfo)
-      // that.setData({
-      //   tableInfo: ReturnInfo[0]
-      // })
+
     })
     //获取A9流量关键词分析信息(滚动条)
     app.ajax('/GetKeywordRedAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
-      let data = JSON.parse(res.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      // console.log(ReturnInfo)
-      // that.setData({
-      //   tableInfo: ReturnInfo[0]
-      // })
+
     })
     //获取A9关联ASIN分析(滚动条)
     app.ajax('/GetPageRelatedASIN', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
-      let data = JSON.parse(res.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      // console.log(ReturnInfo)
-      // that.setData({
-      //   tableInfo: ReturnInfo[0]
-      // })
+
     })
 
   },
@@ -112,7 +118,7 @@ Page({
 
   },
 
-  
+
 
   /**
    * 生命周期函数--监听页面卸载
@@ -223,6 +229,11 @@ Page({
     this.setData({
       isDisposed: true
     });
+  },
+  viewdetail: function (e) {
+    wx.navigateTo({
+      url: '/pages/webview/index?url=' + e.currentTarget.dataset.url,
+    })
   }
 
 })

@@ -43,7 +43,7 @@
                <image src='../../../images/table/detail.png'></image>
             </view>
           </view>
-      </block>
+        </block>
         <block wx:for="{{listData}}" wx:key="{{code}}">
           <view class="tr">
             <view class="td logo">

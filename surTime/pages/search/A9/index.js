@@ -18,7 +18,7 @@ Page({
     let UserID = app.globalData.PKID;
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
-      console.log(JSON.parse(data.ReturnInfo))
+      // console.log(JSON.parse(data.ReturnInfo))
       that.setData({
         listData: that.data.listData.concat(JSON.parse(data.ReturnInfo)),
         page: that.data.page + 1
@@ -51,7 +51,7 @@ Page({
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
       if (data.State.toString() === '1') {
-        console.log(data);
+        // console.log(data);
       } else if (data.State.toString() === '4') {
         that.setData({
           OldData: data.ReturnInfo
