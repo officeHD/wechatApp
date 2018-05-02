@@ -18,6 +18,7 @@ Page({
     isDisposed: false,
     tableInfo: {},
     active: "SearchTerms",
+    chartIndex:1,
     chart1: []
   },
 
@@ -233,6 +234,22 @@ Page({
   viewdetail: function (e) {
     wx.navigateTo({
       url: '/pages/webview/index?url=' + e.currentTarget.dataset.url,
+    })
+  },
+  prevChart:function(e){
+    console.log(e)
+    let that=this;
+    if (that.data.chartIndex>1){
+      that.setData({
+        chartIndex: that.data.chartIndex - 1
+      })
+    }
+    
+  },
+  nextChart: function (e) {
+    let that = this;
+    that.setData({
+      chartIndex: that.data.chartIndex+ 1
     })
   }
 

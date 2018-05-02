@@ -112,9 +112,9 @@
   </view>
   <view class='tableInfo'>
     <view class='title'> 
-      <image class='controll fl' src='/images/table/detail.png'></image>
+      <image wx-if='{{chartIndex>1}}' bindtap='prevChart' class='controll pl' src='/images/arrow_left.png'></image>
         卖家流量渠道占比
-      <image class='controll fr' src='/images/table/detail.png'></image>
+      <image wx-if='{{chartIndex<3}}' bindtap='nextChart' class='controll pr' src='/images/arrow_right.png'></image>
     </view>
     <view class='echart'>
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>

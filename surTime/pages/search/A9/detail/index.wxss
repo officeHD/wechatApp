@@ -16,14 +16,22 @@ page {
   font-size: 30rpx;
   color: #1893de;
   padding: 10px 30px;
+  position: relative;
 }
 .title .controll{
-  width: 67.5rpx;
-  height: 39rpx;
+  width: 50rpx;
+  height: 50rpx;
   margin: 0 8rpx;
   vertical-align: middle;
 }
-
+.controll.pl{
+  position: absolute;
+  left:20rpx;
+}
+.controll.pr{
+  position: absolute;
+  right:20rpx;
+}
 .infotop {
   display: flex;
   width: 100%;
