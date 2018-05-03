@@ -1,5 +1,5 @@
 //app.js
-import { ajax, checkData, saveUserInfo } from "utils/util.js"
+import { ajax, checkData } from "utils/util.js"
 App({
   onLaunch: function () {
     let that=this;
@@ -9,27 +9,34 @@ App({
         that.globalData.openId=res.data;
       }
     })
-    
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+        }
+      }
+    })
   },
-  getUserInfo: function (cb) {
-    var that = this
-    if (!this.globalData.userInfo) {
-      // 调用登录接口  
+
+  getUserData:function(cb){
+   
+    let that = this;
+    if (!that.globalData.userInfo){
       wx.login({
-        success: function (res) {
-          var code = res.code// 登录凭证 
-          that.globalData.code = res.code; 
-          // 获取用户信息  
+        success: res => {
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          that.globalData.userCode = res.code
+          // 获取用户信息
           wx.getUserInfo({
-            // 当你获取用户信息的时候会弹出一个弹框是否允许授权  
-            // 这里点击允许触发的方法  
-            success: function (res2) {
-              that.globalData.userInfo = res2.userInfo;
-              that.globalData.encryptedData = res2.encryptedData;
-              that.globalData.iv = res2.iv;
-              cb();
+            success: res => {
+              // 可以将 res 发送给后台解码出 unionId
+              that.globalData.userInfo = res.userInfo
+              that.globalData.encryptedData = res.encryptedData
+              that.globalData.iv = res.iv
+              if(cb){
+                cb();
+              }
             },
-            // 这里是点击拒绝触发的方法  
             fail: function (res2) {
               // 在这里做一下兼容，有些同行业的用户会点击拒绝玩一玩看你们的小程序是否存在bug，  
               // 所以在这里还是加上下面这两行代码吧，打开微信小程序的设置，允许小程序重新授权的页面  
@@ -40,23 +47,21 @@ App({
                   // 不相信的慢慢的去自己跳坑吧  
                   if (res.authSetting["scope.userInfo"]) {
                     // 进入这里说明用户重新授权了，重新执行获取用户信息的方法  
-                    that.getUserInfo()
+                    that.getUserData(cb)
                   }
                 }
               })
-            }
+            }  
           })
         }
       })
-    } 
-  },  
-
+    }
+   
+  },
   globalData: {
-    code:'',
-    userInfo: '',
-    encryptedData:'',
-    iv:'',
+    userInfo: null,
     openId: '',
+    url:'/images/index'
   },
   api: ajax,
   checkData: checkData

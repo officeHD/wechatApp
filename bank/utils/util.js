@@ -1,4 +1,3 @@
-const app = getApp()
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -15,7 +14,7 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 let API_HOST = "https://huodong.taoronge.com/bank";
-// let API_HOST = "http://192.168.1.14:8080/bank";
+// let API_HOST = "http://192.168.1.15:8080/bank";
 // let API_HOST = "https://www.easy-mock.com/mock/5a9a2c2efdc65f3e22abbdaf/example";
 
 const ajax = (url = '', data = '', fn) => {
@@ -23,11 +22,29 @@ const ajax = (url = '', data = '', fn) => {
     url: API_HOST + url,
     method: "GET",
     data: data,
-    header: { "Content-Type": "application/json" },
+    header: { "Content-Type": "application/json;charset=utf-8" },
     success: function (res) {
+      console.log(res)
       fn(res);
+      
+
+    },
+    fail: function (error) {
+      console.log(error)
+      wx.hideLoading()
+      wx.showModal({
+        title: '请求失败',
+        content: '活动火爆，请稍后打开重试',
+      })
+      // wx.showToast({
+      //   title: '下拉刷新重试',
+      //   icon: 'loading',
+      //   duration: 2000
+      // })
+
     }
   });
+  
 }
 //校验数据有效性
 const checkData = (str, text) => {
@@ -73,9 +90,9 @@ const checkData = (str, text) => {
         break
     }
     if (!reg.test(text)) {
-      let mes =" 格式不正确！";
-      if (str ==="详细住址"){
-        mes="具体到门牌号"
+      let mes = " 格式不正确！";
+      if (str === "详细住址") {
+        mes = "具体到门牌号"
       }
       wx.showToast({
         title: `${str} ${mes} `,
@@ -87,12 +104,9 @@ const checkData = (str, text) => {
     return true;
   }
 }
-const saveUserInfo=(msg)=>{
-  app.globalData.msg=msg
-}
+
 module.exports = {
   formatTime: formatTime,
   ajax: ajax,
-  saveUserInfo: saveUserInfo,
   checkData: checkData
 }

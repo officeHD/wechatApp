@@ -121,6 +121,7 @@ page {
 .echart{
   width: 600rpx;
   height: 600rpx;
+  margin: 0 auto;
 }
 ec-canvas {
   width: 100%;

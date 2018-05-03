@@ -1,13 +1,35 @@
 <!--index.wxml-->
 <view>
- <!-- 助力成功 -->
+  <!-- 助力成功 -->
   <view wx-if="{{relationFlag-0===1}}" class='cover' bindtap='toIndex'>
     <image class='relationFlag' src='/images/cover.png'></image>
   </view>
   <!-- 助力成功 -->
-   <!-- 攻略 -->
+  <!-- 攻略 -->
   <view wx-if="{{gonglue}}" class='cover' bindtap='changegonglue'>
-    <image class='gonglue' src='/images/gonglue.png'></image>
+    <view class='gonglue'>
+      <image src='/images/bg_bk02.png'></image>
+      <view class='close'>×</view>
+      <view class='content_text'>
+        <view class='title'>
+          活动攻略
+        </view>
+        <view class='p'>
+          1.首次登录我行“集卡赠礼”活动小程序并关注“中国银行安徽分行”微信公众号（微信号AnHui_BOC），即获得一次抽取花卡机会。
+        </view>
+        <view class='p'>
+          2.分享活动链接至微信好友、微信群，即可获取更多抽取花卡机会（同一个客户每个好友仅能助力一次）。抽取卡片次数不设上限，分享越多，机会越多，更有机会抽中万能卡，万能卡可替代任意一张花卡。
+        </view>
+        <view class='p'>
+          3.完成中国银行手机银行指定交易一笔：转账（含关联账户转账）、信用卡（自动还款除外）、结汇购汇交易，可领取粉康乃馨花卡一张（该花卡将按交易时间先后顺序，在完成动帐交易第2个工作日到账，逢周末、节假日顺延）。
+        </view>
+        <view class='p'>
+          4.集齐5种花卡（粉康乃馨、粉绣球、粉郁金香、粉风信子、报春花）点击合成，100%中奖。每人仅限合成一次。前50名可兑换价值799元20寸品牌拉杆箱，5月13日前未提交收货信息将视同自动放弃。第51名至活动结束前所有集齐花卡客户瓜分福袋，福袋将于5月13日母亲节当天开奖，金额1-100元。福袋将通过微信现金红包发送（服务通知，点击领取后将存入微信零钱，可在“微信-我-钱包-零钱”中查看）
+        </view>
+        <view class='p'>5.所有参加集卡活动的客户均可于5月10日18点后进入“集卡赠礼”小程序点击生成母亲节电子贺卡。</view>
+      </view>
+    </view>
+
   </view>
   <!-- 攻略  -->
   <!-- 未关注 -->
@@ -15,17 +37,18 @@
     <view class='suscribe_content'>
       <image class='suscribe_img' src='/images/index/bind.png'></image>
     </view>
-    
+
   </view>
   <!-- 未关注 -->
- 
 
   <view class="top">
     <view class='tips'>
-    
-      {{completejoinNum}}人已集齐哦，您已经集齐<text wx-if='{{ownerNum-0>=0}}'>{{ownerNum}}张花卡</text>
+
+      <text wx-if='{{cardseq<=0}}'>{{completejoinNum}}人已集齐，您已集{{ownerNum}}张花卡</text>
+      
+      <text wx-if='{{cardseq>0}}'>恭喜，您是第{{cardseq}}位集齐人</text>
     </view>
-    <text bindtap='changegonglue'>游戏攻略</text>
+    <text bindtap='changegonglue'>活动攻略</text>
   </view>
   <view class='bannerImg'>
     <image class='cardimg' src="{{imgsrc}}"></image>
@@ -33,25 +56,28 @@
   <view class='bottom'>
     <view class='cards'>
       <block wx:for="{{cards}}" wx:key="{{name}}">
-        <view wx:if="{{item.name!=='6'||item.name==='6'&&item.num-0>0}}" class='card' data-badge='{{item.num-0}}' data-src='{{item.src}}' bindtap='clickNum'>
+        <view wx:if="{{item.name!=='6'||item.name==='6'&&item.num-0>0}}" class='card' data-badge='{{item.num-0}}' data-name='{{item.name-0}}' data-src='{{item.src}}' bindtap='clickNum'>
           <text class='{{item.num-0>0?"badge":"hide"}}'>{{item.num}}</text>
           <image src="/images/index/{{'icon_0'+(item.num-0>0?item.name:'0') }}.png"></image>
         </view>
       </block>
     </view>
-    <image wx-if="{{!combine&&!cardseq}}" class='lottery' bindtap='lottery' src='/images/index/button.png'>
-      <text class='lottery_text'>抽奖 (剩余{{choiceNum}}次)</text>
-    </image>
-    <image wx-if="{{combine&&!cardseq}}" class='lottery' bindtap='combine' src='/images/index/button.png'>
+    <form wx-if="{{!combine&&!(cardseq-0)}}" bindsubmit="lottery" report-submit='true' class='lottery_form'>
+      <image class='lottery' src='/images/index/button.png'>
+        <text class='lottery_text'>抽奖 (剩余{{choiceNum}}次)</text>
+      </image>
+      <button form-type="submit"></button>
+    </form>
+    <image wx-if="{{combine&&!(cardseq-0)}}" class='lottery' bindtap='combine' src='/images/index/button.png'>
       <text class='lottery_text'>立即合成</text>
     </image>
-    <image wx-if="{{cardseq}}" class='lottery' src='/images/index/button.png'>
+    <!-- <image wx-if="{{cardseq}}" class='lottery' src='/images/index/button.png'>
       <text class='lottery_text'>出奖中</text>
-    </image>
+    </image> -->
   </view>
   <view class='{{showHelp?"help":"hide"}}' bindtap='changeShow'>
     <view class='helpInfo'>
-      <view class='info_title'> 哇哦，花卡与您擦肩而过了</view>
+
       <view class='info_content'>
         快快分享好友增加抽奖机会吧，使用中国银行手机银行完成任意一笔交易可获取指定花卡哦
       </view>

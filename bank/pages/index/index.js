@@ -5,7 +5,7 @@ Page({
   data: {
     aidOpenId: '',//助力openId
     completejoinNum: '',//集齐总数
-    bindingFlag: '',//是否绑定手机号
+    bindingFlag: 0,//是否绑定手机号
     suscribe: 0,//是否关注公众号
     relationFlag: 0,//是否助力成功
     ownerNum: 0,//自己张数
@@ -13,24 +13,25 @@ Page({
     showsuscribe: 0,//显示关注模态框
     cardseq: 0,//是否已经合成
     combine: 0,
+    starSecond: 1,
     showHelp: false,//显示好友助力
     isFirst: 0,
-    imgsrc: '/images/index/bg.png',//花卡大图
+    imgsrc: `${app.globalData.url}/bg.png`,//花卡大图
     userInfo: {},
     hasUserInfo: false,
     gonglue: 0,
     isloginback: false,//从登陆页面返回
 
     cards: [
-      { name: "1", num: "0", src: "/images/index/huaka_01.png" },
-      { name: "2", num: "0", src: "/images/index/huaka_02.png" },
-      { name: "3", num: "0", src: "/images/index/huaka_03.png" },
-      { name: "4", num: "0", src: "/images/index/huaka_04.png" },
-      { name: "5", num: "0", src: "/images/index/huaka_05.png" },
-      { name: "6", num: "0", src: "/images/index/huaka_06.png" }
+      { name: "1", num: "0", src: `${app.globalData.url}/huaka_01.png` },
+      { name: "2", num: "0", src: `${app.globalData.url}/huaka_02.png` },
+      { name: "3", num: "0", src: `${app.globalData.url}/huaka_03.png` },
+      { name: "4", num: "0", src: `${app.globalData.url}/huaka_04.png` },
+      { name: "5", num: "0", src: `${app.globalData.url}/huaka_05.png` },
+      { name: "6", num: "0", src: `${app.globalData.url}/huaka_06.png` }
     ]
   },
-//页面加载
+  //页面加载
   onLoad: function (options) {
     let that = this;
     // 如果有openId就是分享的
@@ -38,18 +39,61 @@ Page({
       that.setData({
         aidOpenId: options.openId
       })
+      console.log(options.openId);
     }
-    wx.showLoading({
-      title: '加载中',
-    })
-    app.getUserInfo(function(){
-      that.getUserData();
-    })
-    wx.hideLoading()
+    
+   
   },
   //页面显示
   onShow: function () {
+    let starSecond = Date.parse(new Date("2018-05-10 18:00:00".replace(/-/g, "/"))) / 1000 - Date.parse(new Date()) / 1000;
     let that = this;
+    wx.login({
+      success: res => {
+        if (res.code) {
+           
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          app.globalData.userCode = res.code;
+          // 获取用户信息
+          wx.getUserInfo({
+            success: res => {
+              // 可以将 res 发送给后台解码出 unionId
+              app.globalData.userInfo = res.userInfo;
+              app.globalData.encryptedData = res.encryptedData;
+              app.globalData.iv = res.iv;
+             
+              that.getUserData();
+            },
+            fail: function (res2) {
+              // 在这里做一下兼容，有些同行业的用户会点击拒绝玩一玩看你们的小程序是否存在bug，  
+              // 所以在这里还是加上下面这两行代码吧，打开微信小程序的设置，允许小程序重新授权的页面  
+              wx.openSetting({
+                success: (res) => {
+                  // 下面的代码格式按照我的写，不要看工具打印的什么，在这里提醒大家一句，有时候不能相信开发者工具，因为  
+                  // android和ios还有工具底层的js库是不同的，有些时候坑的你是一点脾气也没有，所以大家注意一下，  
+                  // 不相信的慢慢的去自己跳坑吧  
+                  if (res.authSetting["scope.userInfo"]) {
+                    // 进入这里说明用户重新授权了，重新执行获取用户信息的方法  
+                    that.getUserData()
+                  }
+                }
+              })
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+
+      },
+      fail: res => {
+        console.log(res);
+      }
+
+    })
+
+    that.setData({
+      starSecond: starSecond
+    })
     // 如果从注册页过来就直接开奖
     if (that.data.isloginback) {
       that.starlottery();
@@ -58,16 +102,19 @@ Page({
       })
     }
   },
+
   //获取用户信息
   getUserData: function () {
+    wx.showLoading({
+      title: '加载中'
+    })
+  
     let that = this;
-    let code = app.globalData.code;
-    if (app.globalData.openId){
-      code='';
-    } 
-    if (!app.globalData.userInfo){
-      app.getUserInfo();
+    let code = '';
+    if (!app.globalData.openId) {
+      code = app.globalData.userCode
     }
+
     let data = {
       smallopenid: app.globalData.openId,
       aidOpenId: that.data.aidOpenId,
@@ -93,12 +140,12 @@ Page({
           cardseq: returnMes.cardseq,//是否合成
           ownerNum: returnMes.ownerNum,  //自己张数
           cards: [
-            { name: "1", num: returnMes.card1, src: "/images/index/huaka_01.png" },
-            { name: "2", num: returnMes.card2, src: "/images/index/huaka_02.png" },
-            { name: "3", num: returnMes.card3, src: "/images/index/huaka_03.png" },
-            { name: "4", num: returnMes.card4, src: "/images/index/huaka_04.png" },
-            { name: "5", num: returnMes.card5, src: "/images/index/huaka_05.png" },
-            { name: "6", num: returnMes.wanneng, src: "/images/index/huaka_06.png" }
+            { name: "1", num: returnMes.card1, src: `${app.globalData.url}/huaka_01.png` },
+            { name: "2", num: returnMes.card2, src: `${app.globalData.url}/huaka_02.png` },
+            { name: "3", num: returnMes.card3, src: `${app.globalData.url}/huaka_03.png` },
+            { name: "4", num: returnMes.card4, src: `${app.globalData.url}/huaka_04.png` },
+            { name: "5", num: returnMes.card5, src: `${app.globalData.url}/huaka_05.png` },
+            { name: "6", num: returnMes.wanneng, src: `${app.globalData.url}/huaka_06.png` }
           ]
         })
         let cardArr = [returnMes.card1, returnMes.card2, returnMes.card3, returnMes.card4, returnMes.card5, returnMes.wanneng].filter(num => num - 0 > 0);
@@ -109,15 +156,19 @@ Page({
         }
       }
     }
+ 
     app.api("/getUserData", data, fn)
   },
+
+
   // 分享
   onShareAppMessage: function (res) {
     return {
-      title: '浓情五月集花献礼，开福袋赢好礼',
-      imageUrl: '/images/index/bg.png',
+      title: '浓情五月集花献礼，赢豪礼开福袋 ',
+      imageUrl: '/images/wechat_share.png',
       path: `/pages/index/index?openId=${app.globalData.openId}`,
       success: function (res) {
+        console.log(res)
         // 转发成功
       },
       fail: function (res) {
@@ -125,9 +176,14 @@ Page({
       }
     }
   },
-  lottery: function () {
+  lottery: function (e) {
+    if (!this.checkEnd() || !this.checkStar()) {
+
+      return false;
+    }
+    app.globalData.formid = e.detail.formId;
     let that = this;
-    // that.getUserData();
+    // that.starlottery();
     //如果没有关注提示关注
     if (that.data.suscribe.toString() === '0') {
       that.setData({
@@ -172,16 +228,16 @@ Page({
             cardName = '粉绣球'
             break;
           case "card2":
-            cardName = '郁金香'
+            cardName = '粉郁金香'
             break;
           case "card3":
-            cardName = '风信子'
+            cardName = '红风信子'
             break;
           case "card4":
             cardName = '报春花'
             break;
           case "card5":
-            cardName = '康乃馨'
+            cardName = '粉康乃馨'
             break;
           case "card6":
             cardName = '万能花卡'
@@ -193,12 +249,21 @@ Page({
           title: '抽奖结果',
           content: `恭喜您抽中了${cardName}`
         })
-        that.getUserData()
+       
+      }else{
+        wx.showModal({
+          title: '抽奖结果',
+          content: `很遗憾，您与花卡擦肩而过。。。`
+        })
       }
+      that.getUserData()
     }
-    app.api("/lottery", { smallopenid: app.globalData.openId }, fn)
+    app.api("/lottery", { smallopenid: app.globalData.openId, formid: app.globalData.formid }, fn)
   },
   combine: function () {
+    if (!this.checkEnd()) {
+      return false;
+    }
     let that = this;
     wx.showLoading({
       title: '开始合成',
@@ -208,7 +273,7 @@ Page({
       if (msg.data.result.toString() === "1") {
         wx.showModal({
           title: '合成结果',
-          content: `恭喜您合成成功`
+          content: `恭喜您完成集卡任务，请前往我的奖品页面查看兑奖详情。`
         })
         that.getUserData()
       }
@@ -227,8 +292,17 @@ Page({
   clickNum: function (e) {
     let imgsrc = e.currentTarget.dataset.src;
     let badge = e.currentTarget.dataset.badge;
+    let name = e.currentTarget.dataset.name;
+    console.log(name)
+
     if (badge.toString() === "0") {
       imgsrc = "/images/index/bg.png";
+      if (name.toString() === "5") {
+        wx.showToast({
+          title: '通过手机银行指定交易获得',
+          icon: 'none'
+        })
+      }
     }
     this.setData({
       imgsrc: imgsrc
@@ -253,11 +327,39 @@ Page({
     // that.getUserData();
   },
   onPullDownRefresh: function () {
-    wx.showLoading({
-      title: '加载中',
-    })
-    this.getUserData();
+    let that = this;
+    if (this.checkStar()) {
+      wx.showLoading({
+        title: '加载中',
+      })
+      that.getUserData()
+    }
+   
     wx.stopPullDownRefresh()
+  },
+  checkStar: function () {
+    let starSecond = Date.parse(new Date("2018-04-20 10:00:00".replace(/-/g, "/"))) / 1000 - Date.parse(new Date()) / 1000;
+    //if (starSecond > 0) {
+    //  wx.showModal({
+    //   title: '活动提示',
+    //   content: '活动于4月20号上午10点开始，您准备好了吗？',
+    //  })
+    // return false;
+    //  } else {
+    return true;
+    //}
+  },
+  checkEnd: function () {
+    let starSecond = Date.parse(new Date("2018-05-10 18:00:00".replace(/-/g, "/"))) / 1000 - Date.parse(new Date()) / 1000;
+    if (starSecond < 0) {
+      wx.showModal({
+        title: '活动提示',
+        content: '活动已结束，敬请期待下次活动通知',
+      })
+      return false;
+    } else {
+      return true;
+    }
   },
   changeSuscribe: function () {
     this.setData({

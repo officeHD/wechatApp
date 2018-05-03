@@ -1,8 +1,5 @@
 // pages/search/A9/detail/index.js
 import * as echarts from '../../../../ec-canvas/echarts';
-
-
-
 var app = getApp();
 Page({
 
@@ -10,28 +7,33 @@ Page({
    * 页面的初始数据
    */
   data: {
+    PkId: '',
+    pieData: [],//卖家流量渠道占比
+
+    lineData: [],//折线图数据
     ec: {
-      // 将 lazyLoad 设为 true 后，需要手动初始化图表
       lazyLoad: true
     },
     isLoaded: false,
     isDisposed: false,
     tableInfo: {},
     active: "SearchTerms",
-    chartIndex:1,
-    chart1: []
+    chartIndex: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    let pkid = options.pkid;
-    let UserID = app.globalData.PKID;
     let that = this;
+    let pkid = options.pkid;
+    that.setData({
+      PkId: pkid
+    });
+    let UserID = app.globalData.PKID;
+
     // 获取组件
-    this.ecComponent = this.selectComponent('#mychart-dom-bar');
+    that.ecComponent = that.selectComponent('#mychart-dom-bar');
 
     // 获取A9明细信息
     wx.showLoading({
@@ -42,7 +44,11 @@ Page({
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       let Tables = JSON.parse(ReturnInfo.ds);
-      console.log(Tables)
+      console.log(Tables);
+      if (Tables.reads3.length > 0) {
+        //获取饼图数据
+        that.GetSourcesStatisticsbyName(UserID, pkid, Tables.reads3[0].StoreName)
+      }
       that.setData({
         ASINUrl: ReturnInfo.ASINUrl,//Asin链接:
         KetUrl: ReturnInfo.KetUrl,//关键词链接
@@ -55,29 +61,7 @@ Page({
         ASINStatisticsByID: Tables.reads5,//关键词入口渠道占比
         KeywordRedAnalysis: Tables.reads6,//流量关键词分析
         RelatedASIN: Tables.reads7,//关联ASIN分析,
-       
       })
-    })
-    // 根据用户编号和A9主表编号，获取A9产品信息子表top10（变体所有ASIN信息（默认显示））
-    app.ajax('/GetPIChild', { UserID: UserID, PkId: pkid }, function (res) {
-
-    })
-
-    // 根据用户编号和A9主表编号，获取A9产品所有信息子表（变体所有ASIN信息（展开全部））
-    // app.ajax('/GetPIChildAll', { UserID: UserID, PkId: pkid }, function (res) {
-    //   let data = JSON.parse(res.data.d);
-    //   let ReturnInfo = JSON.parse(data.ReturnInfo);
-    //   console.log(ReturnInfo[0])
-    //   that.setData({
-    //      tableInfo: ReturnInfo[0]
-
-    //   })
-
-    // })
-    // 根据用户编号，A9主表编号和页数，获取A9产品信息子表（变体所有ASIN信息（显示更多））
-    app.ajax('/GetPIChildbyPage', { UserID: UserID, PkId: pkid, PageNum: 20 }, function (res) {
-
-
     })
 
 
@@ -85,11 +69,11 @@ Page({
     app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-
       that.setData({
-        chart1: ReturnInfo
+        lineData: ReturnInfo
       })
-      that.init(ReturnInfo);
+      //折线图
+      that.setLineChart(ReturnInfo);
     })
     //关键词入口渠道占比图形数据
     app.ajax('/GetASINStatisticsByID', { UserID: UserID, PkId: pkid }, function (res) {
@@ -110,117 +94,136 @@ Page({
 
   },
 
-
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
   searchType: function (e) {
     let target = e.currentTarget.dataset.target;
     this.setData({
       active: target
     })
   },
+  // 根据店铺名称查询卖家流量渠道占比图形数据
+  GetSourcesStatisticsbyName: function (UserID, PkId, StoreName) {
+    let that = this;
+    app.ajax('/GetSourcesStatisticsbyName', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      console.log(ReturnInfo);
+      that.setData({
+        pieData: ReturnInfo
+      })
+
+    })
+  },
+  //设置折线图
+  setLineChart: function (options) {
+    let option = {
+      color: ['rgb(124, 181, 236)', 'rgb(67, 67, 72)', 'rgb(144, 237, 125)', 'rgb(247, 163, 92)', 'rgb(128, 133, 233)', 'rgb(241, 92, 128)'],
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['曝光量', '点击量', '加入购物车量', '订单量', '平均价格', '总销售金额']
+      },
+      grid: {
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: options.XDay
+      },
+      yAxis: [
+        { x: 'center', type: 'value' }
+      ],
+      series: [
+        { name: '曝光量', type: 'line', smooth: true, data: options.yy1 },
+        { name: '点击量', type: 'line', smooth: true, data: options.yy2 },
+        { name: '加入购物车量', type: 'line', smooth: true, data: options.yy3 },
+        { name: '订单量', type: 'line', smooth: true, data: options.yy4 },
+        { name: '平均价格', type: 'line', smooth: true, data: options.yy5 },
+        { name: '总销售金额', type: 'line', smooth: true, data: options.yy6 }
+      ]
+    };
+    this.init(option)
+  },
+  setPieChart: function (options) {
+    let data = [];
+    if (options.x && options.x.length) {
+      for (var i = 0; i < options.x.length; i++) {
+        data[data.length] = {
+          value: options.y[i], name: options.x[i]
+        }
+      }
+    } else {
+      data = [{ value: 1, name: "暂无数据" }]
+    }
+
+
+    let option = {
+      backgroundColor: "#ffffff",
+      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      series: [{
+        label: { normal: { ontSize: 14 } },
+        type: 'pie',
+        center: ['50%', '50%'],
+        radius: [0, '60%'],
+        data: data,
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 2, 2, 0.3)'
+          }
+        }
+      }]
+    };
+    this.init(option)
+  },
+  setPie2Chart: function (options) {
+    let data = [];
+    if (options&&options.length) {
+      for (var i = 0; i < options.length; i++) {
+        data[data.length] = {
+          value: options[i].KeywordsSourceRate, name: options[i].ASIN
+        }
+      }
+    } else {
+      data = [{ value: 1, name: "暂无数据" }]
+    }
+
+    let option = {
+      backgroundColor: "#ffffff",
+      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      series: [{
+        label: { normal: { ontSize: 14 } },
+        type: 'pie',
+        center: ['50%', '50%'],
+        radius: [0, '60%'],
+        data: data,
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 2, 2, 0.3)'
+          }
+        }
+      }]
+    };
+    this.init(option)
+  },
   // 点击按钮后初始化图表
-  init: function (options) {
+  init: function (option) {
     this.ecComponent.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
       const chart = echarts.init(canvas, null, {
         width: width,
         height: height
       });
-      let option = {
-        color: ['rgb(124, 181, 236)', 'rgb(67, 67, 72)', 'rgb(144, 237, 125)', 'rgb(247, 163, 92)', 'rgb(128, 133, 233)', 'rgb(241, 92, 128)'],
-        tooltip: {
-          trigger: 'axis'
-        },
-        legend: {
-
-          data: ['曝光量', '点击量', '加入购物车量', '订单量', '平均价格', '总销售金额']
-        },
-        grid: {
-          containLabel: true
-        },
-        xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: options.XDay
-        },
-        yAxis: [
-          {
-            x: 'center',
-            type: 'value'
-          }
-        ],
-        series: [
-          {
-            name: '曝光量',
-            type: 'line',
-            smooth: true,
-            data: options.yy1
-          },
-          {
-            name: '点击量',
-            type: 'line',
-            smooth: true,
-            data: options.yy2
-          },
-          {
-            name: '加入购物车量',
-            type: 'line',
-            smooth: true,
-            data: options.yy3
-          }, {
-            name: '订单量',
-            type: 'line',
-            smooth: true,
-            data: options.yy4
-          }, {
-            name: '平均价格',
-            type: 'line',
-            smooth: true,
-            data: options.yy5
-          }, {
-            name: '总销售金额',
-            type: 'line',
-            smooth: true,
-            data: options.yy6
-          }
-        ]
-      };
       chart.setOption(option)
-
       // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
       this.chart = chart;
-
-      this.setData({
-        isLoaded: true,
-        isDisposed: false
-      });
-
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
-    });
+    })
+
   },
 
   dispose: function () {
@@ -236,20 +239,30 @@ Page({
       url: '/pages/webview/index?url=' + e.currentTarget.dataset.url,
     })
   },
-  prevChart:function(e){
+  prevChart: function (e) {
     console.log(e)
-    let that=this;
-    if (that.data.chartIndex>1){
+    let that = this;
+    if (that.data.chartIndex === 3) {
+      that.setPieChart(that.data.pieData)
+    } else {
+      that.setLineChart(that.data.lineData)
+    }
+    if (that.data.chartIndex > 1) {
       that.setData({
         chartIndex: that.data.chartIndex - 1
       })
     }
-    
+
   },
   nextChart: function (e) {
     let that = this;
+    if (that.data.chartIndex === 1) {
+      that.setPieChart(that.data.pieData)
+    } else {
+      that.setPie2Chart(that.data.ASINStatisticsByID)
+    }
     that.setData({
-      chartIndex: that.data.chartIndex+ 1
+      chartIndex: that.data.chartIndex + 1
     })
   }
 

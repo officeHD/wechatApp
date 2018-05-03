@@ -1,8 +1,9 @@
 <view class='userc'>
 
   <view class='content'>
-   
+    <image class='flag' src='/images/hyzl_01.png'></image>
       <view class='detail'>
+     
         <view class='userList'>
           <view wx:if="{{userList.length>0}}" >
               <view class='item'  wx:for-items="{{userList}}" wx:key="id">

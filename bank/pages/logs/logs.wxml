@@ -1,7 +1,7 @@
 <view class='gift'>
   <image src='{{src}}'></image>
   <view class='operation'>
-    <button bindtap='lottery'>分享好友</button>
+    <button class='share' open-type="share" bindtap='share'>分享好友</button>
     <button data-src='{{src}}' class='save' bindtap='save'>保存至相册</button>
   </view>
  

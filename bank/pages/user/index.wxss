@@ -1,29 +1,39 @@
 /* pages/user/index.wxss */
 .userc{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
    flex-direction: column;
 align-items: center;
+height: 100vh;
 }
 .bottom {
   width: 100%;
   display: flex;
-  height: 20vh;
+  
  
   justify-content: center;
   align-items: center;
 }
+.flag{
+  position: absolute;
+  width: 610rpx;
+  height: 132rpx;
+  left: -5rpx;
+  top: -1px;
+}
 
 .content {
-  margin-top: 20px;
-  width: 550rpx;
-  height: 70vh;
+  
+  width: 600rpx;
+  
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 8px;
   font-size: 13px;
- 
-  padding: 10px 20px;
+ box-sizing: border-box;
+  padding: 11vh 20px 0;
+
   border: 1px solid #F4723D;
+  position: relative;
 }
 
 .title {
@@ -34,9 +44,11 @@ align-items: center;
   float: right;
 }
 .userList {
-  max-height: 550rpx;
+  height: 59vh;
+  padding-bottom: 20px;
   overflow: hidden;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 .statu{
   display: flex;

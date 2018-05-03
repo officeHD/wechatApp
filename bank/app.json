@@ -1,22 +1,20 @@
 {
-  "pages":[
-
-    "pages/index/index",
+  "pages": [
     
-    "pages/notice/index",
+    "pages/index/index",
+    "pages/gift/index",
     "pages/logs/logs",
-      "pages/gift/index",
     "pages/user/index",
     "pages/login/index",
-    
-    "pages/webview/index"
+    "pages/test/index",
    
+    "pages/notice/index",
+    "pages/webview/index"
   ],
-  "window":{
+  "window": {
     "navigationBarBackgroundColor": "#FFE3CD",
     "navigationBarTitleText": "中国银行安徽分行",
-    "navigationBarTextStyle":"black",
-   
+    "navigationBarTextStyle": "black",
     "backgroundTextStyle": "light"
   },
   "tabBar": {
@@ -51,5 +49,8 @@
         "text": "活动规则"
       }
     ]
+  },
+  "networkTimeout":{
+    "request": 10000
   }
 }

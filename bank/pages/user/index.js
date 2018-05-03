@@ -2,7 +2,7 @@
 const app = getApp()
 Page({
   data: {
-    
+
     userList: [
     ]
   },
@@ -23,11 +23,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    
+
     return {
-      title: '浓情五月集花献礼，开福袋赢好礼',
+      title: '浓情五月集花献礼，赢豪礼开福袋 ',
+      imageUrl: '/images/wechat_share.png',
       path: `/pages/index/index?openId=${app.globalData.openId}`,
-      imageUrl: '/images/index/bg.png',
+
       success: function (res) {
         // 转发成功
 
@@ -37,4 +38,6 @@ Page({
       }
     }
   }
+
+
 })

@@ -34,8 +34,8 @@
 }
 .suscribe_content{
   width: 750rpx;
-  height: 311rpx;
-  padding:0 10%;
+  height: 354rpx;
+  padding:0 15%;
   box-sizing: border-box;
 }
 .cover .suscribe_img{
@@ -56,28 +56,68 @@
   top: 50%;
   left: 50%;
   width: 600rpx;
-  height: 699rpx;
+  height:723.5rpx;
   transform: translate(-50%,-50%);
+  background-color: #fff;
+  border-radius: 5px;
 }
- 
+.gonglue image{
+  width: 560rpx;
+   height: 675rpx;
+   margin: 20rpx;
+}
+.gonglue .content_text{
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding:0 20rpx;
+  position: absolute;
+   width: 540rpx;
+   height: 625rpx;
+  left: 30rpx;
+  top: 50rpx;
+  font-size: 24rpx
+}
+.content_text .title{
+font-size: 30rpx;
+text-align: center;
+color: #F68A60;
+margin: 10rpx 0;
+}
+.content_text .p{
+  color: #F57B4A;
+}
+.close{
+  position: absolute;
+  right: -20rpx;
+  top: -20rpx;
+  border-radius: 50%;
+  width: 50rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 49rpx;
+  color: #F57B4A;
+  font-size: 40rpx;
+  background-color: #fff;
+}
 
 .bottom {
   position: fixed;
-  bottom:20px;
+  bottom:0;
   width: 100%;
-  height: 400rpx;
+  height:300rpx;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-around;
   align-items: center;
 }
 
 .cards {
   display: flex;
   width: 100%;
-  height: 200rpx;
-  padding: 20rpx;
+  height: 140rpx;
+  padding: 10rpx;
   justify-content: space-around;
+  align-items: center;
   box-sizing: border-box;
   
 }
@@ -107,13 +147,10 @@
   width: 100%;
   text-align: center;
 }
-.bannerImg .bgimg{
-  width: 600rpx;
-  height: 600rpx;
-}
+ 
 .bannerImg .cardimg{
-  width: 600rpx;
-  height:660rpx;
+  width: 530rpx;
+  height:650rpx;
 }
 .card image {
   width: 100%;
@@ -127,10 +164,22 @@
   height: 100rpx;
   line-height: 100rpx;
 }
+.lottery_form{
+  height: 100rpx;
+}
+.lottery_form button{
+  position: relative;
+  top: -100rpx;
+  height: 100rpx;
+  opacity: 0;
+}
 .lottery_text{
   position: relative;
   top: -100rpx;
   color: #fff;
+  background-color: transparent;
+  border: none;
+  font-size: 36rpx;
 }
 .help{
    position: fixed;
@@ -138,7 +187,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-color: transparent;
+  
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.8);
 }

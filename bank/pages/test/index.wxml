@@ -1,0 +1,7 @@
+<form name='pushMsgFm' report-submit bindsubmit='orderSign'>  
+    enter product:<input type="text" name="product" value='' placeholder="enter your name" />  
+    detail: <input type="text" name='detail' placeholder="enter desc" />  
+    select sex:<switch type="switch" name='sex' />  
+    <button form-type="submit">submit</button>  
+    <image src='http://etc.mschn.cn/mstps/static/js/mobile/tianan/mszd/bec14aeb7f210eb712be068e7357319e.jpg'></image>
+</form>  

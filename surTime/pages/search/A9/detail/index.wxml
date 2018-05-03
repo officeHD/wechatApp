@@ -111,17 +111,97 @@
     </view>
   </view>
   <view class='tableInfo'>
-    <view class='title'> 
+    <view class='title'>
       <image wx-if='{{chartIndex>1}}' bindtap='prevChart' class='controll pl' src='/images/arrow_left.png'></image>
-        卖家流量渠道占比
+
+      <text wx-if="{{chartIndex===1}}">近三个月曝光量、点击量、销量明细</text>
+      <text wx-if="{{chartIndex===2}}">卖家流量渠道占比</text>
+      <text wx-if="{{chartIndex===3}}">关键词入口渠道占比</text>
       <image wx-if='{{chartIndex<3}}' bindtap='nextChart' class='controll pr' src='/images/arrow_right.png'></image>
     </view>
     <view class='echart'>
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+
+    </view>
+    <view class="table" wx-if="{{chartIndex===2&&SourcesStatistics.length>0}}">
+      <view class='thead'>
+        <view class="tr">
+          <view class="th">店铺名称</view>
+          <view class="th">销售额度占比 </view>
+
+        </view>
+      </view>
+      <view class='tbody'>
+        <block wx:for="{{SourcesStatistics}}" wx:key="{{index}}">
+          <view class="tr">
+            <view class="td">{{item.StoreName}} </view>
+            <view class="td">{{item.StoreNameRate}}</view>
+          </view>
+        </block>
+      </view>
     </view>
   </view>
   <view class='tableInfo'>
-    <view class='title'> 精准关键词</view>
+    <view class='title'>
+      <image wx-if='{{tableIndex>1}}' bindtap='prevChart' class='controll pl' src='/images/arrow_left.png'></image>
+
+      <text wx-if="{{tableIndex===1}}">精准关键词</text>
+      <text wx-if="{{tableIndex===2}}">流量关键词</text>
+      <text wx-if="{{tableIndex===3}}">关联ASIN分析</text>
+      <image wx-if='{{tableIndex<3}}' bindtap='nextChart' class='controll pr' src='/images/arrow_right.png'></image>
+
+    </view>
+    <view class="table" wx-if="{{tableIndex===1}}">
+      <view class='thead'>
+        <view class="tr">
+          <view class="th">店铺名称</view>
+          <view class="th">销售额度占比 </view>
+
+        </view>
+      </view>
+      <view class='tbody'>
+        <block wx:for="{{SourcesStatistics}}" wx:key="{{index}}">
+          <view class="tr">
+            <view class="td">{{item.StoreName}} </view>
+            <view class="td">{{item.StoreNameRate}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="table" wx-if="{{tableIndex===2}}">
+      <view class='thead'>
+        <view class="tr">
+          <view class="th">店铺名称</view>
+          <view class="th">销售额度占比 </view>
+
+        </view>
+      </view>
+      <view class='tbody'>
+        <block wx:for="{{SourcesStatistics}}" wx:key="{{index}}">
+          <view class="tr">
+            <view class="td">{{item.StoreName}} </view>
+            <view class="td">{{item.StoreNameRate}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="table" wx-if="{{tableIndex===3}}">
+      <view class='thead'>
+        <view class="tr">
+          <view class="th">店铺名称</view>
+          <view class="th">销售额度占比 </view>
+
+        </view>
+      </view>
+      <view class='tbody'>
+        <block wx:for="{{SourcesStatistics}}" wx:key="{{index}}">
+          <view class="tr">
+            <view class="td">{{item.StoreName}} </view>
+            <view class="td">{{item.StoreNameRate}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
   </view>
 
 

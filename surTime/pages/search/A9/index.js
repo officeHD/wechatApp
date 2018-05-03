@@ -8,6 +8,7 @@ Page({
     flag: true,
     ASIN: '',
     OldData: '',
+    length: 1,
     listData: []
   },
   onLoad: function () {
@@ -18,10 +19,10 @@ Page({
     let UserID = app.globalData.PKID;
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
-      // console.log(JSON.parse(data.ReturnInfo))
       that.setData({
         listData: that.data.listData.concat(JSON.parse(data.ReturnInfo)),
-        page: that.data.page + 1
+        page: that.data.page + 1,
+        length: JSON.parse(data.ReturnInfo).length
       });
     }
     let sendData = {
@@ -51,7 +52,7 @@ Page({
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
       if (data.State.toString() === '1') {
-        // console.log(data);
+
       } else if (data.State.toString() === '4') {
         that.setData({
           OldData: data.ReturnInfo
@@ -101,6 +102,14 @@ Page({
   },
   //加载更多
   onReachBottom: function () {
+    let that = this;
+    if (that.data.length === 0) {
+      wx.showToast({
+        title: '没有更多了',
+        icon: 'none'
+      })
+      return false;
+    }
     this.getA9List();
   },
   changeASIN: function (e) {
@@ -132,7 +141,7 @@ Page({
         title: '提示',
         content: '数据优化中，最终完成可能需要2个工作日左右，请耐心等待!',
       })
-    } else   {
+    } else {
       wx.showModal({
         title: '提示',
         content: '正在查询中 ，最终完成可能需要2个工作日左右，请耐心等待!',

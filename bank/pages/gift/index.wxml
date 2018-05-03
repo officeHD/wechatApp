@@ -1,19 +1,92 @@
-
 <view>
-<view class='container'>
-  <button bindtap='changeShow'>收货信息</button>
-  
-</view>
-<view class="cover" wx-if='{{showAddress}}'>
-    <view class='content'>
+  <!-- 攻略 -->
+  <view wx-if="{{gonglue}}" class='cover' bindtap='changegonglue'>
+    <view class='gonglue'>
+      <image src='/images/bg_bk02.png'></image>
+      <view class='close'>×</view>
+      <view class='content_text'>
+        <view class='title'>
+          活动攻略
+        </view>
+        <view class='p'>
+          1.首次登录我行“集卡赠礼”活动小程序并关注“中国银行安徽分行”微信公众号（微信号AnHui_BOC），即获得一次抽取花卡机会。
+        </view>
+        <view class='p'>
+          2.分享活动链接至微信好友、微信群，即可获取更多抽取花卡机会（同一个客户每个好友仅能助力一次）。抽取卡片次数不设上限，分享越多，机会越多，更有机会抽中万能卡，万能卡可替代任意一张花卡。。
+        </view>
+        <view class='p'>
+          3.完成中国银行手机银行指定交易一笔：转账（含关联账户转账）、信用卡（自动还款除外）、结汇购汇交易，可领取粉康乃馨花卡一张（该花卡将按交易时间先后顺序，在完成动帐交易第2个工作日到账，逢周末、节假日顺延）。
+        </view>
+        <view class='p'>
+          4.集齐5种花卡（粉康乃馨、粉绣球、粉郁金香、粉风信子、报春花）点击合成，100%中奖。每人仅限合成一次。前50名可兑换价值799元20寸品牌拉杆箱，5月13日前未提交收货信息将视同自动放弃。第51名至活动结束前所有集齐花卡客户瓜分福袋，福袋将于5月13日母亲节当天开奖，金额1-100元。福袋将通过微信现金红包发送（服务通知，点击领取后将存入微信零钱，可在“微信-我-钱包-零钱”中查看）
+        </view>
+        <view class='p'>5.所有参加集卡活动的客户均可于5月10日18点后进入“集卡赠礼”小程序点击生成母亲节电子贺卡。</view>
+      </view>
+    </view>
+
+  </view>
+  <!-- 攻略  -->
+  <view class='tops'>
+    <view class="top">
+      <view class='tips'>
+      </view>
+      <text bindtap='changegonglue'>活动攻略</text>
+    </view>
+    <view class='bannerImg'>
+      <image class='cardimg' src="/images/index/bg.png"></image>
+    </view>
+  </view>
+
+  <view class='result'>
+    <view class="countDownTimeView" wx-if="{{!(range-0)||endSecond<0}}">
+      <view class='countDownTimeView_title'>
+        <text wx-if="{{endSecond<0}}"> 活动已结束</text>
+        <text wx-if="{{!(range-0)}}">暂未集齐</text>
+
+      </view>
+      <text class='countDownTimeView_content' wx-if="{{!(range-0)}}">抽取花卡机会及母亲节电子贺卡，集齐5种花卡点击合成即可领取实物奖品（20寸品牌拉杆箱，限前50名）或福袋（1-100元）。本活动仅限安徽地区客户参加。本次活动100%中奖
+      </text>
+      <button class='cards' bindtap='creatCard'>点击生成母亲节专属贺卡</button>
+
+    </view>
+
+    <view wx-if="{{endSecond>0&&range>0}}">
+      <image class='r_bg' src='/images/bg_bk.png'></image>
+      <image class='r_title' src='/images/title_huojiang.png'></image>
+      <view class='center'>
+        <view wx-if="{{range-50<=0}}">
+          <view class='title_txt'>5月13日前未提交收货信息将视同自动放弃</view>
+          <view class='mes_c'>
+            <image src='/images/laganxiang.png'></image>
+            <view class='mes'>
+              <view class='gift_name'>维士十字拉杆箱（银色）</view>
+              <text>售价 799元</text>
+              <button bindtap='acceptInput'>立即兑换</button>
+            </view>
+
+          </view>
+        </view>
+        <view wx-if="{{range-50>0}}" class="fudai">
+          <view class='fudai_content'>福袋将于5月13日母亲节当天开奖,第51名至5月10日活动结束前集齐花卡的所有客户瓜分5000元福袋，100%中奖（福袋金额随机，单份福袋金额不超过200元，24小时未领取视为自动放弃）</view>
+          <image src='/images/fudai.png' bindtap='lottery'>
+            <view class='getfudai'>领取福袋</view>
+          </image>
+        </view>
+        <button class='cards' bindtap='creatCard'>点击生成母亲节专属贺卡</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="cover" wx-if='{{showAddress||showbag}}'>
+    <view class='content' wx-if='{{showAddress}}'>
       <view class='title'>收货信息</view>
       <view class='list_item'>
         <text class='name'>收货人</text>
-        <input placeholder='请输入姓名' bindinput="nameInput"></input>
+        <input placeholder='请输入姓名' bindinput="nameInput" value='{{name}}'></input>
       </view>
       <view class='list_item'>
         <text class='name'>手机号</text>
-        <input placeholder='请输入手机号' maxlength="11" bindinput="phoneInput"></input>
+        <input placeholder='请输入手机号' maxlength="11" bindinput="phoneInput" value='{{phone}}'></input>
       </view>
       <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
         <view class='list_item'>
@@ -24,13 +97,16 @@
       </picker>
       <view class='list_item'>
         <text class='name'>详细地址</text>
-        <input placeholder='请输入详细地址' bindinput="addressInput"></input>
+        <input placeholder='请输入详细地址' bindinput="addressInput" value='{{address}}'></input>
       </view>
       <view class='operation'>
         <text class='border' bindtap='storeAddress'>确认</text>
         <text class='cancel' bindtap='changeShow'>取消</text>
       </view>
     </view>
-
+    <view class='showbag' wx-if='{{showbag}}'>
+      <image src='/images/hb_01.png'></image>
+      <view class='moneytext'>￥<text class='moneynum'>{{bagMoney}}.00</text> </view>
+    </view>
   </view>
 </view>
