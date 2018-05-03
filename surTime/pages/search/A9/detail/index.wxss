@@ -136,12 +136,12 @@ ec-canvas {
   overflow-y: auto;
   box-sizing: border-box;
 
-}.thead {
+}
+.thead {
   background: snow;
   display: table-header-group;
   width: 100%;
   position: relative;
-
 }
 .thead .tr {
   height: 70rpx;
@@ -181,3 +181,19 @@ ec-canvas {
   margin: 0 8rpx;
   vertical-align: middle;
 }
+.col{
+  width: 2200rpx;
+  
+}
+.col .td{
+   width: 200rpx;
+  line-height: 50rpx;
+}
+ .col .th{
+  width: 200rpx;
+   
+}
+.col .tbody .tr:nth-child(2n){
+background-color: #f2f2f2
+}
+ 

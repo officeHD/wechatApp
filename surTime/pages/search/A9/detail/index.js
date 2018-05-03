@@ -17,8 +17,10 @@ Page({
     isLoaded: false,
     isDisposed: false,
     tableInfo: {},
+    KeywordAnalysis:[],//精准关键词分析 
     active: "SearchTerms",
-    chartIndex: 1
+    chartIndex: 1,
+    tableIndex:1
   },
 
   /**
@@ -264,6 +266,27 @@ Page({
     that.setData({
       chartIndex: that.data.chartIndex + 1
     })
+  },
+  prevTable: function (e) {
+    
+    let that = this;
+    
+    if (that.data.tableIndex > 1) {
+      that.setData({
+        tableIndex: that.data.tableIndex - 1
+      })
+    }
+
+  },
+  nextTable: function (e) {
+    let that = this;
+    
+    that.setData({
+      tableIndex: that.data.tableIndex + 1
+    })
   }
+
+  
+  
 
 })
