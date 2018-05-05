@@ -1,8 +1,7 @@
 <view>
-
   <image class='search_bg' src='/images/search_bg.png'></image>
   <view class='search'>
-    <view class='title'>{{type}}数据查询</view>
+    <view class='title'>A9数据查询</view>
     <view class='pick_view {{position}}'>
       <view class='picker_content'>
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
@@ -17,16 +16,13 @@
         <button bindtap='search'>搜索</button>
       </view>
     </view>
-    
-      <view wx-if="{{type!=='KM'}}" class="checkbox" bindtap='checkboxChange'>
-      <image src='{{check?"/images/check.png":"/images/nocheck.png"}}'></image>
-         是否查询所有子商品
-      </view>
-    
   </view>
   <view class='content'>
-
+    <block wx:if="{{listData.length==0}}" >
+    <view class='demo_head'>案例</view>
+    </block>
     <view class="table">
+    
       <view class='thead'>
         <view class="tr">
           <view class="th">图片</view>
@@ -36,16 +32,31 @@
         </view>
       </view>
       <view class='tbody'>
+       <block wx:if="{{listData.length==0}}" >
+          <view class="tr">
+            <view class="td logo">
+              <image src='/images/album/demo.png'></image>
+            </view>
+            <view class="td"> ASINDEMO</view>
+            <view class="td">us</view>
+            <view class="td operate">
+               <image src='../../../images/table/detail.png'></image>
+            </view>
+          </view>
+        </block>
         <block wx:for="{{listData}}" wx:key="{{code}}">
           <view class="tr">
             <view class="td logo">
-              <image src='{{item.ImgUrl}}'></image>
+              <image src='{{item.ImageUrl}}'></image>
             </view>
             <view class="td">{{item.ASIN}}</view>
-            <view class="td">{{item.CountryName}}</view>
-            <view class="td operate">
-              <image src='../../../images/table/detail.png' data-url='{{item.ASINLink}}' bindtap='viewdetail'></image>
-
+            <view class="td">{{item.Country}}</view>
+            <view class="td operate" data-State='{{item.State}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'>
+              <text wx-if="{{item.State==='1'||item.State==='2'}}">正在查询中 </text>
+              <text wx-if="{{item.State==='3' }}">数据优化中 </text>
+              <text wx-if="{{item.State==='5' }}">数据已失效 </text>
+              
+              <image wx-if="{{item.State==='4'}}" src='../../../images/table/detail.png'></image>
             </view>
           </view>
         </block>

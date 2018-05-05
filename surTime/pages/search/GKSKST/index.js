@@ -1,11 +1,10 @@
 var app = getApp();
 Page({
   data: {
-    array: ['美国', '英国', '德国', '法国', '加拿大', '墨西哥', '日本', '西班牙','意大利'],
-    arrayval: ['US', 'UK', 'DE','FR','CA','MX', 'JP','ES', 'IT'],
+    array: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
     page: 1,
     index: 0,
-    Country: 'US',
+    Country: 'us',
     flag: true,
     ASIN: '',
     OldData: '',
@@ -18,14 +17,6 @@ Page({
   getA9List: function () {
     let that = this;
     let UserID = app.globalData.PKID;
-    let sendData = {
-      UserID: UserID,
-      Page: that.data.page,
-      PageCount: 10,
-      Asin: '',
-      StrTime: '',
-      EndTime: ''
-    }
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
       that.setData({
@@ -34,8 +25,15 @@ Page({
         length: JSON.parse(data.ReturnInfo).length
       });
     }
-
-    app.ajax('/A9ListByPage', sendData, cb, 'POST')
+    let sendData = {
+      UserID: UserID,
+      Page: that.data.page,
+      PageCount: 10,
+      Asin: '',
+      StrTime: '',
+      EndTime: ''
+    }
+    app.ajax('/PlannerKeyAllByPage', sendData, cb, 'POST')
   },
   //A9查询
   search: function () {
@@ -75,7 +73,7 @@ Page({
       that.addAsin(UserID, Country, ASIN, that.data.OldData)
 
     }
-    app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
+    app.ajax('/PlannerAsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
 
   },
   // 增加A9查询信息
@@ -89,7 +87,7 @@ Page({
       })
       that.onLoad()
     }
-    app.ajax('/AddAsin', { UserID: UserID, Country: Country, Asin: ASIN, OldData: OldData }, cb, 'POST')
+    app.ajax('/PlannerAddAsin', { UserID: UserID, Country: Country, Asin: ASIN, OldData: OldData }, cb, 'POST')
   },
   /**
   * 下拉刷新
@@ -122,12 +120,8 @@ Page({
     })
   },
   bindPickerChange: function (e) {
-    let that=this;
-    let index = e.detail.value;
-  
-    that.setData({
-      index: index,
-      country: that.data.arrayval[index]
+    this.setData({
+      index: e.detail.value
     })
   },
   checkDetail: function (e) {
@@ -142,17 +136,12 @@ Page({
         title: '提示',
         content: '数据已失效',
       })
-    } else if (state === "3") {
+    } else  {
       wx.showModal({
         title: '提示',
-        content: '数据优化中，最终完成可能需要2个工作日左右，请耐心等待!',
+        content: '正在查询中，最终完成可能需要5-30分钟（与子ASIN数量有关），请耐心等待!!',
       })
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '正在查询中 ，最终完成可能需要2个工作日左右，请耐心等待!',
-      })
-    }
+    }  
 
   }
 

@@ -7,6 +7,7 @@ Page({
     month: '09-01',
     Country: 'us',
     position: 'relative',
+    check:false,
     page: '1',
     flag: true,
     type: '',
@@ -42,10 +43,13 @@ Page({
     })
   },
   checkboxChange: function (e) {
-    let value = e.detail.value;
-    this.setData({
-      check: value
-    })
+    
+     
+      this.setData({
+        check: !this.data.true
+      })
+   
+   
   },
   search: function () {
     let that = this;
@@ -66,7 +70,16 @@ Page({
         listData: JSON.parse(data.ReturnInfo)
       });
     }
-    app.ajax('/GetGKSKSTKMHistoryTableInPageByAsin', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
+    let datas={
+      UserID: UserID, 
+      Country: Country, 
+      IsExpand:that.data.check,
+      AsinList:'1-5',
+      PageCount:'20',
+      UserIpAddress:'',
+      Asin: ASIN 
+    }
+    app.ajax('/GKSKSTKMSubmit', datas, cb, 'POST')
   },
 
   /**
@@ -130,7 +143,30 @@ Page({
       year: e.detail.value
     })
   },
+  checkDetail: function (e) {
+    let pkid = e.currentTarget.dataset.pkid;
+    let state = e.currentTarget.dataset.state;
+    if (state === "4") {
+     
+    } else if (state === "5") {
+      wx.showModal({
+        title: '提示',
+        content: '数据已失效',
+      })
+    } else if (state === "3") {
+      wx.showModal({
+        title: '提示',
+        content: '数据优化中，最终完成可能需要2个工作日左右，请耐心等待!',
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '正在查询中 ，最终完成可能需要2个工作日左右，请耐心等待!',
+      })
+    }
 
+  }
+,
 
   viewdetail: function (e) {
     wx.navigateTo({

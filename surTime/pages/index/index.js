@@ -8,7 +8,8 @@ Page({
       {
         className: 'navlist active', name: 'ASIN黑客数据揭秘', navgator: [
           { url: "/pages/search/A9/index", name: "A9工具(真实数据解密)" },
-          { url: "/pages/search/AutoCheck/index", name: "自动选品(最具潜力TOP)" }
+          { url: "/pages/search/AutoCheck/index", name: "自动选品(最具潜力TOP)" },
+          { url: "/pages/search/GKSKST/index", name: "GK SK ST 综合数据查询" },
         ]
       },
       {

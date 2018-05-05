@@ -130,7 +130,7 @@
       <view class='tbody'>
         <block wx:for="{{SourcesStatistics}}" wx:key="{{index}}">
           <view class="tr">
-            <view class="td" data-name='{{item.StoreName}}' bindtap='getPieData'>{{item.StoreName}} </view>
+            <view class="td">{{item.StoreName}} </view>
             <view class="td">{{item.StoreNameRate}}</view>
           </view>
         </block>
@@ -186,7 +186,7 @@
       </view>
     </scroll-view>
 
-    <view class="table centertable" wx-if="{{tableIndex===2}}">
+    <view class="table" wx-if="{{tableIndex===2}}">
       <view class='thead'>
         <view class="tr">
           <view class="th">序号</view>

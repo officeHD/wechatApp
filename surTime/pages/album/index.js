@@ -1,26 +1,66 @@
 var app = getApp();
 Page({
   data: {
+    list: [],
     add_show: '',//显示添加模态框
     delBtnWidth: 180//删除按钮宽度单位（rpx）
   },
   onLoad: function () {
     let that = this;
-    let fn = msg => {
-      console.log(JSON.parse(msg.data.d))
-    }
-    let data = {
-      UserID: app.globalData.PKID
-
-    }
-    app.ajax('/LoadDropDownList', data, fn)
+    that.setList();
     that.initEleWidth();
-    that.tempData();
+  },
+  changename: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      newName: value
+    })
   },
   sure_add: function () {
     let that = this;
-    that.changeShow();
+
+    if (that.data.newName) {
+      let data = {
+        UserID: app.globalData.PKID,
+        Pictname: that.data.newName
+      }
+
+      app.ajax('/ISPhoto', data, function (res) {
+        let mes = JSON.parse(res.data.d)
+        if (mes.ReturnInfo === "true") {
+          wx.showToast({
+            title: '该相册已存在,请更换名称',
+            icon: 'none'
+          })
+        } else {
+          let datas = {
+            UserID: app.globalData.PKID,
+            Pictname: that.data.newName
+          }
+          wx.showLoading({
+            title: '加载中',
+          })
+          app.ajax('/addpic', datas, function (res) {
+            wx.hideLoading()
+            let remes = JSON.parse(res.data.d);
+            if (remes.State.toString() === "1") {
+              wx.showModal({
+                title: '提示',
+                content: remes.ReturnInfo,
+                complete: function () {
+                  that.setList();
+                  that.changeShow();
+                }
+              })
+            }
+
+          })
+        }
+      })
+    }
   },
+
 
   changeShow: function () {
     let that = this;
@@ -30,7 +70,26 @@ Page({
   },
   //点击删除按钮事件
   delItem: function (e) {
-    //获取列表中要删除项的下标
+    let that=this;
+    let id = e.currentTarget.dataset.id;
+    let Pictname = e.currentTarget.dataset.name;
+    let datas = {
+      UserID: app.globalData.PKID,
+      Pictname: Pictname,
+      PictId: id
+    }
+    app.ajax('/DelPic', datas, function(res){
+        
+        if (JSON.parse(res.data.d).State.toString()==="1"){
+            wx.showModal({
+              title: '提示',
+              content: '删除成功',
+              complete:function(){
+                that.setList();
+              }
+            })
+        }
+    })
     var index = e.currentTarget.dataset.index;
     var list = this.data.list;
     //移除列表中下标为index的项
@@ -40,10 +99,7 @@ Page({
       list: list
     });
   },
-  //点击删除按钮事件
-  addItem: function (e) {
-
-  },
+  
   //查看相册
   albumDetail: function (e) {
 
@@ -127,21 +183,20 @@ Page({
       delBtnWidth: delBtnWidth
     });
   },
-  //测试临时数据
-  tempData: function () {
-    var list = [
-      {
-        icon: "/images/album/demo.png",
-        name: "相册名称",
-        num: '62'
-      }, {
-        icon: "/images/album/demo.png",
-        name: "相册名称",
-        num: '62'
-      }
-    ];
-    this.setData({
-      list: list
-    });
+  setList: function () {
+    let that = this;
+    let data = {
+      UserID: app.globalData.PKID,
+      Picid: 0
+    }
+    let fn = msg => {
+      let res = JSON.parse(msg.data.d);
+      console.log(JSON.parse(res.ReturnInfo))
+      that.setData({
+        list: JSON.parse(res.ReturnInfo).Table1
+      })
+    }
+    app.ajax('/ImageList', data, fn)
   }
+
 })

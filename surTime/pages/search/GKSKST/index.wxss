@@ -11,25 +11,6 @@
   height: 388rpx;
 }
 
- 
- 
-
-.checkbox {
-  width: 500rpx;
-  display: block;
-  font-size: 13px;
-  color: #fff;
-   height: 40rpx;
-   line-height: 40rpx;
-}
-
-.checkbox image {
-  width: 30rpx;
-  height: 30rpx;
-  vertical-align: text-top;
-}
-
- 
 .search {
   height: 388rpx;
   background: transparent;
@@ -77,6 +58,7 @@
   display: table-header-group;
   width: 750rpx;
   position: relative;
+
 }
 
 .thead .tr {
@@ -108,7 +90,11 @@
   box-sizing: border-box;
   background: #fff;
 }
-
+.demo_head{
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
 .th {
   display: table-cell;
   color: #565656;
@@ -133,9 +119,10 @@
 .pick_view {
   display: flex;
   width: 500rpx;
+   
   height: 90rpx;
   margin: 0 auto;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 

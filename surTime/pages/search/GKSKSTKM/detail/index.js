@@ -2,9 +2,14 @@
 import * as echarts from '../../../../ec-canvas/echarts';
 var app = getApp();
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
     PkId: '',
     pieData: [],//卖家流量渠道占比
+
     lineData: [],//折线图数据
     ec: {
       lazyLoad: true
@@ -28,8 +33,10 @@ Page({
       PkId: pkid
     });
     let UserID = app.globalData.PKID;
+
     // 获取组件
     that.ecComponent = that.selectComponent('#mychart-dom-bar');
+
     // 获取A9明细信息
     wx.showLoading({
       title: '加载中',
@@ -70,8 +77,22 @@ Page({
       //折线图
       that.setLineChart(ReturnInfo);
     })
-   
-  
+    //关键词入口渠道占比图形数据
+    app.ajax('/GetASINStatisticsByID', { UserID: UserID, PkId: pkid }, function (res) {
+
+    })
+    //获取A9精准关键词分析信息(滚动条)
+    app.ajax('/GetKeywordAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
+
+    })
+    //获取A9流量关键词分析信息(滚动条)
+    app.ajax('/GetKeywordRedAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
+
+    })
+    //获取A9关联ASIN分析(滚动条)
+    app.ajax('/GetPageRelatedASIN', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
+
+    })
 
   },
 
@@ -80,12 +101,6 @@ Page({
     this.setData({
       active: target
     })
-  },
-  getPieData:function(e){
-    let UserID = app.globalData.PKID;
-    let PkId = this.data.PkId;
-    let name=e.currentTarget.dataset.name;
-    GetSourcesStatisticsbyName(UserID, PkId, name);
   },
   // 根据店铺名称查询卖家流量渠道占比图形数据
   GetSourcesStatisticsbyName: function (UserID, PkId, StoreName) {

@@ -1,6 +1,5 @@
 <view>
   <view class='search'>
-
     <view class='pick_view'>
       <view class='status {{active==="runing"?"active":""}}' data-target="runing" bindtap='searchType'>
         进行中

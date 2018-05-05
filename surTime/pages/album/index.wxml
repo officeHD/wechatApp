@@ -2,14 +2,14 @@
   <view class="items">
     <view wx:for="{{list}}" wx:key="{{index}}" class="item">
       <view data-id='{{item.id}}' bindtap='albumDetail' bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style='{{item.txtStyle}}' class="inner txt">
-        <image class="item-icon" mode="widthFix" src="{{item.icon}}">
+        <image class="item-icon" mode="widthFix" src="/images/album/demo.png">
         </image>
         <view class='content'>
-          <text>{{item.name}}</text>
-          <text class='num'>{{item.num}}张</text>
+          <text>{{item.text}}</text>
+          <text class='num'>33张</text>
         </view>
       </view>
-      <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
+      <view  data-id='{{item.id}}' data-name="{{item.text}}" bindtap="delItem" class="inner del">删除</view>
     </view>
   </view>
   <view class='add_album' bindtap='changeShow'>添加相册</view>
@@ -21,7 +21,7 @@
       </view>
       <view class='input_area'>
         <text>请输入相册名称</text>
-        <input placeholder=''></input>
+        <input placeholder='' bindinput="changename"></input>
       </view>
       <view class='sure' bindtap='sure_add'>确定</view>
     </view>

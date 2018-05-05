@@ -2,9 +2,14 @@
 import * as echarts from '../../../../ec-canvas/echarts';
 var app = getApp();
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
     PkId: '',
     pieData: [],//卖家流量渠道占比
+
     lineData: [],//折线图数据
     ec: {
       lazyLoad: true
@@ -28,13 +33,15 @@ Page({
       PkId: pkid
     });
     let UserID = app.globalData.PKID;
+
     // 获取组件
     that.ecComponent = that.selectComponent('#mychart-dom-bar');
+
     // 获取A9明细信息
     wx.showLoading({
       title: '加载中',
     });
-    app.ajax('/A9ListDetail', { UserID: UserID, PkId: pkid, AnalysisRows: 10, RedAnalysisRows: 10, RelatedRows: 10 }, function (res) {
+    app.ajax('/PlannerKeyAllDetail', { UserID: UserID, PkId: pkid,KeyKeywordsRows: 10, RedAnalysisRows:10}, function (res) {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
@@ -46,15 +53,18 @@ Page({
       }
       that.setData({
         ASINUrl: ReturnInfo.ASINUrl,//Asin链接:
-        KetUrl: ReturnInfo.KetUrl,//关键词链接
-        ZiAsinCount: ReturnInfo.ZiAsinCount,//子表数量
+        KetUrl: ReturnInfo.KeywordUrl,//关键词链接
+        ZiAsinCount: ReturnInfo.ChildAsinCount,//子表数量
         tableInfo: Tables.reads[0],//产品主表
-        OlderPI: Tables.reads1,//历史表
-        KeywordAnalysis: Tables.reads2,//精准关键词分析 
-        SourcesStatistics: Tables.reads3,//卖家流量渠道占比
-        PIChild: Tables.reads4,//产品子表
-        ASINStatisticsByID: Tables.reads5,//关键词入口渠道占比
-        KeywordRedAnalysis: Tables.reads6,//流量关键词分析
+        
+        KeywordRedAnalysisTop: Tables.reads1,//流量关键词词频分析Top20
+        
+        PIChild: Tables.reads2,//产品子表
+        
+        ASINStatisticsByID: Tables.reads3,//关键词入口渠道占比
+      
+        ProKeywordRedAnalysis: Tables.reads4,//商品流量关键词分析
+        KeywordRedAnalysis: Tables.reads6,//流量关键词词频分析
         RelatedASIN: Tables.reads7,//关联ASIN分析,
       })
     })
@@ -70,8 +80,22 @@ Page({
       //折线图
       that.setLineChart(ReturnInfo);
     })
-   
-  
+    //关键词入口渠道占比图形数据
+    app.ajax('/GetASINStatisticsByID', { UserID: UserID, PkId: pkid }, function (res) {
+
+    })
+    //获取A9精准关键词分析信息(滚动条)
+    app.ajax('/GetKeywordAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
+
+    })
+    //获取A9流量关键词分析信息(滚动条)
+    app.ajax('/GetKeywordRedAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
+
+    })
+    //获取A9关联ASIN分析(滚动条)
+    app.ajax('/GetPageRelatedASIN', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
+
+    })
 
   },
 
@@ -80,12 +104,6 @@ Page({
     this.setData({
       active: target
     })
-  },
-  getPieData:function(e){
-    let UserID = app.globalData.PKID;
-    let PkId = this.data.PkId;
-    let name=e.currentTarget.dataset.name;
-    GetSourcesStatisticsbyName(UserID, PkId, name);
   },
   // 根据店铺名称查询卖家流量渠道占比图形数据
   GetSourcesStatisticsbyName: function (UserID, PkId, StoreName) {

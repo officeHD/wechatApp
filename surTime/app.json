@@ -12,6 +12,9 @@
     
     "pages/album/detail/index",
     "pages/search/GKSKSTKM/index",
+    "pages/search/GKSKSTKM/detail/index",
+    "pages/search/GKSKST/index",
+    "pages/search/GKSKST/detail/index",
     "pages/search/KR/index",
     "pages/pay/index",
     "pages/webview/index",

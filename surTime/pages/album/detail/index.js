@@ -1,4 +1,5 @@
 // pages/album/detail/index.js
+var app = getApp();
 Page({
 
   /**
@@ -6,14 +7,7 @@ Page({
    */
   data: {
     album: [
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
+      
     ]
   },
 
@@ -21,11 +15,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    this.setData({
+      id: options.id
+    })
+    this.setAlbum();
   },
-
-
-
+  setAlbum: function () {
+    let that = this;
+    let data = {
+      Picid: that.data.id,
+      UserID: app.globalData.PKID,
+      Page: '1',
+      PageCount: '20'
+    }
+    app.ajax('/Getpictable', data, function (res) {
+      
+      let albumList = JSON.parse(JSON.parse(res.data.d).ReturnInfo);
+      console.log(albumList)
+      that.setData({
+        album: albumList
+      })
+    })
+  },
   add_pic: function (e) {
     wx.chooseImage({
       count: 9, // 默认9

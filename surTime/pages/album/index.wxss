@@ -3,9 +3,10 @@ view {
 }
 
 .item-box {
-  width: 700rpx;
+  width: 750rpx;
   margin: 0auto;
-  padding: 40rpx 0;
+  padding-top: 40rpx;
+  padding-bottom: 130rpx;
 }
 
 .items {
@@ -90,6 +91,7 @@ view {
   line-height: 100rpx;
   transform: translate(-50%, 0);
   color: #fff;
+  z-index: 999;
 }
 .bg{
   background-color: rgba(0, 0, 0, 0.85);

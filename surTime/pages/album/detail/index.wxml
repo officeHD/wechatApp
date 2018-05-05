@@ -1,7 +1,7 @@
 <view>
   <view class='album'>
-    <block wx:for="{{album}}" wx:key="{{code}}">
-      <image bindlongtap='showDel' src='/images/album/demo.png'></image>
+    <block wx:for="{{album}}" wx:key="{{index}}">
+      <image bindlongtap='showDel' src='{{item.FileURL}}'></image>
     </block>
   </view>
   <view class='add_album' bindtap='add_pic'>添加图片</view>

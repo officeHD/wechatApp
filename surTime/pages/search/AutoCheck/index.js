@@ -1,16 +1,19 @@
 var app = getApp();
 Page({
   data: {
-    array: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
-    yearArr: ['2018'],
+
+    countryArr: [{ name: "美国", value: "US" }],
+    country: 'US',
     index: 0,
-    time: ["3月30号-3月30号 (已购买)"],
-    PNo: '0',
-    timeIndex: 0,
+    yearArr: [{ name: "2018年", value: '2018' }],
     year: '2018',
-    Country: '美国',
+    yearIndex: 0,
+    timeArr: [{ PNo: '0', MonthDay: '3月30号-3月30号 (已购买)' }],
+    PNo: 0,
+    timeIndex: 0,
     position: 'relative',
     flag: true,
+    PageNum: 1,
     listData: []
   },
   onLoad: function () {
@@ -20,34 +23,40 @@ Page({
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
       if (data.State.toString() === "1") {
-
         let ReturnInfo = JSON.parse(data.ReturnInfo);
         let DataDropDownList = JSON.parse(ReturnInfo.DataDropDownList);
         let DataDt = JSON.parse(ReturnInfo.DataDt);
-        let array = [];
-        let time = [];
+        let arr = [];
         let yearArr = [];
+        let time = [];
+
         for (var i in DataDropDownList.selectcountry) {
-          array.push(i); //属性
-          //arr.push(object[i]); //值
-        }
-        for (var i in DataDropDownList.selectmouth) {
-          time.push(i); //属性
+          arr.push({ name: i, value: DataDropDownList.selectcountry[i] }); //属性
           //arr.push(object[i]); //值
         }
         for (var i in DataDropDownList.selectyear) {
-          yearArr.push(DataDropDownList.selectyear[i]); //属性
+          yearArr.push({ name: i, value: DataDropDownList.selectyear[i] })
+
+        }
+
+        for (var i in DataDropDownList.selectmouth) {
+          time.push({ MonthDay: i, PNo: DataDropDownList.selectmouth[i] }); //属性
           //arr.push(object[i]); //值
         }
-        console.log(DataDropDownList)
+
         that.setData({
           listData: DataDt,
-          array: array,
+          countryArr: arr,
+          country: arr[0].value,
           yearArr: yearArr,
-          time: time
+          year: yearArr[0].value,
+          timeArr: time,
+          PNo: time[0].PNo
         })
+
       }
     }
+    that.AsinKeyAllByPage();
     app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10 }, cb, 'POST')
   },
 
@@ -65,22 +74,48 @@ Page({
 
   onReachBottom: function () {
     let that = this;
-    let cb = (res) => {
-      that.setData({
-        listData: that.data.listData.concat(res.data.list)
-      });
-    }
-    // app.ajax('/productList', '', cb, 'POST')
+    that.AsinKeyAllByPage();
   },
+  // 自动选品分页查询(下拉自动加载)
+  AsinKeyAllByPage: function () {
+    let that = this;
+    let data = {
+      UserID: app.globalData.PKID,
+      PNO: that.data.PNo,
+      PageNum: that.data.PageNum,
+      RowsNum: 10,
+    }
+    let cb = res => {
+      console.log(res);
 
+    }
+    app.ajax('/AsinKeyAllByPage', data, cb)
+  },
+  //切换地区
   bindPickerChange: function (e) {
+    let index = e.detail.value;
+    let country = this.data.countryArr[index].value
     this.setData({
-      index: e.detail.value
+      index: index,
+      country: country
     })
   },
-  bindPickerChangeTime: function (e) {
+  //切换年份 
+  bindYearChange: function (e) {
+    let index = e.detail.value;
+    let year = this.data.yearArr[index].value
     this.setData({
-      timeIndex: e.detail.value
+      year: year,
+      yearIndex: index
+    })
+    this.getMonth();
+  },
+  bindPickerChangeTime: function (e) {
+    let index = e.detail.value;
+    let PNo = this.data.timeArr[index].PNo;
+    this.setData({
+      timeIndex: index,
+      PNo: PNo
     })
   },
 
@@ -89,23 +124,27 @@ Page({
       month: e.detail.value
     })
   },
-  bindYearChange: function (e) {
+  // 根据年获取月份（改变年份选择）
+  getMonth: function () {
     let that = this;
-    let UserID = app.globalData.PKID;
-    let year = e.detail.value;
-    let Country = this.data.Country;
-    console.log(year);
-    this.setData({
-      year: year
-    })
-    let cb = (res) => {
-      let data = JSON.parse(res.data.d)
-
-      that.setData({
-        listData: JSON.parse(data.ReturnInfo)
-      });
+    let data = {
+      UserID: app.globalData.PKID,
+      Year: that.data.year,
+      Country: that.data.country
     }
-    app.ajax('/GetMouthByYear', { UserID: UserID, Year: year, Country: Country }, cb, 'POST')
-  },
+    let cb = res => {
+      let data = JSON.parse(res.data.d)
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+
+
+      console.log(ReturnInfo)
+      that.setData({
+        timeArr: ReturnInfo,
+        PNo: ReturnInfo[0].PNo
+      })
+    }
+    app.ajax('/GetMouthByYear', data, cb)
+  }
+
 
 })

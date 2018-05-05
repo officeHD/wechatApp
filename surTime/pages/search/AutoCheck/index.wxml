@@ -4,19 +4,19 @@
     <view class='title'>自动选品工具</view>
     <view class='pick_view'>
       <view class='picker_content'>
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <picker  value="{{index}}" range-key="name" range="{{countryArr}}" bindchange="bindPickerChange">
           <view class="picker_area">
-            {{array[index]}}▼
+            {{countryArr[index].name}}▼
           </view>
         </picker>
-        <picker range="{{yearArr}}" bindchange="bindYearChange">
+        <picker value="{{yearIndex}}" range-key="name" range="{{yearArr}}" bindchange="bindYearChange">
           <view class="picker_year">
-            {{year}}▼
+            {{yearArr[yearIndex].name}}▼
           </view>
         </picker>
-        <picker bindchange="bindPickerChangeTime" value="{{timeIndex}}" range="{{time}}">
+        <picker  value="{{timeIndex}}" range-key="MonthDay"  range="{{timeArr}}" bindchange="bindPickerChangeTime">
           <view class="picker_time">
-            {{time[timeIndex]}}▼
+             {{timeArr[timeIndex].MonthDay}}▼
           </view>
         </picker>
       </view>

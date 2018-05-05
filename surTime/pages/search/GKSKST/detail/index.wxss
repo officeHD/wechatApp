@@ -193,14 +193,6 @@ ec-canvas {
   line-height: 50rpx;
   vertical-align:middle;
 }
-.centertable .th{
-  max-width: 300rpx;
-}
-.centertable .td{
-  max-width: 300rpx;
-  line-height: 50rpx;
-  vertical-align:middle;
-}
  .col3 .th{
   max-width:300rpx;
 }
@@ -214,8 +206,10 @@ ec-canvas {
   max-width:300rpx;
    
 }
-.tbody .tr:nth-child(2n){
+.col .tbody .tr:nth-child(2n){
 background-color: #f2f2f2
 }
-
+.col3 .tbody .tr:nth-child(2n){
+background-color: #f2f2f2
+}
  
