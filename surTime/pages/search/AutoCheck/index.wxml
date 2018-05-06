@@ -1,10 +1,10 @@
 <view>
-<image class='search_bg' src='/images/search_bg.png'></image>
+  <image class='search_bg' src='/images/search_bg.png'></image>
   <view class='search'>
     <view class='title'>自动选品工具</view>
     <view class='pick_view'>
       <view class='picker_content'>
-        <picker  value="{{index}}" range-key="name" range="{{countryArr}}" bindchange="bindPickerChange">
+        <picker value="{{index}}" range-key="name" range="{{countryArr}}" bindchange="bindPickerChange">
           <view class="picker_area">
             {{countryArr[index].name}}▼
           </view>
@@ -14,26 +14,27 @@
             {{yearArr[yearIndex].name}}▼
           </view>
         </picker>
-        <picker  value="{{timeIndex}}" range-key="MonthDay"  range="{{timeArr}}" bindchange="bindPickerChangeTime">
+        <picker value="{{timeIndex}}" range-key="MonthDay" range="{{timeArr}}" bindchange="bindPickerChangeTime">
           <view class="picker_time">
-             {{timeArr[timeIndex].MonthDay}}▼
+            {{timeArr[timeIndex].MonthDay}}▼
           </view>
         </picker>
       </view>
       <view class='button'>
-        <button>搜索</button>
+        <button bindtap='searchBtn'>搜索</button>
       </view>
     </view>
+    <view class='tips'>{{tips}}</view>
   </view>
   <view class='content '>
-    
-    
+
+
     <view class="table">
       <view class='thead'>
         <view class="tr ">
           <view class="th"> 图片</view>
-          <view class="th"  > ASIN   </view>
-          <view class="th " >站点   </view>
+          <view class="th"> ASIN </view>
+          <view class="th ">站点 </view>
           <view class="th ">操作</view>
         </view>
       </view>

@@ -14,6 +14,7 @@ Page({
     position: 'relative',
     flag: true,
     PageNum: 1,
+    tips: '',
     listData: []
   },
   onLoad: function () {
@@ -22,18 +23,20 @@ Page({
     let PNo = that.data.PNo;
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
+
       if (data.State.toString() === "1") {
         let ReturnInfo = JSON.parse(data.ReturnInfo);
         let DataDropDownList = JSON.parse(ReturnInfo.DataDropDownList);
         let DataDt = JSON.parse(ReturnInfo.DataDt);
+
         let arr = [];
         let yearArr = [];
         let time = [];
-
         for (var i in DataDropDownList.selectcountry) {
           arr.push({ name: i, value: DataDropDownList.selectcountry[i] }); //属性
           //arr.push(object[i]); //值
         }
+
         for (var i in DataDropDownList.selectyear) {
           yearArr.push({ name: i, value: DataDropDownList.selectyear[i] })
 
@@ -53,11 +56,11 @@ Page({
           timeArr: time,
           PNo: time[0].PNo
         })
-
+        that.GetPNoIsView();
       }
     }
-    that.AsinKeyAllByPage();
-    app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10 }, cb, 'POST')
+    // that.AsinKeyAllByPage();
+    app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10 }, cb)
   },
 
   /**
@@ -74,7 +77,7 @@ Page({
 
   onReachBottom: function () {
     let that = this;
-    that.AsinKeyAllByPage();
+    // that.AsinKeyAllByPage();
   },
   // 自动选品分页查询(下拉自动加载)
   AsinKeyAllByPage: function () {
@@ -99,6 +102,7 @@ Page({
       index: index,
       country: country
     })
+    this.getYear();
   },
   //切换年份 
   bindYearChange: function (e) {
@@ -116,13 +120,95 @@ Page({
     this.setData({
       timeIndex: index,
       PNo: PNo
-    })
+    });
+    this.GetPNoIsView();
   },
 
-  bindDateChange: function (e) {
-    this.setData({
-      month: e.detail.value
+  //点击搜索
+  searchBtn: function () {
+    let that = this;
+    that.UserIsValidRole(function (res) {
+      let result = JSON.parse(res.data.d);
+      console.log(result)
+      if (result.State.toString() === "1") {
+        that.setData({
+          listData: JSON.parse(result.ReturnInfo)
+        })
+      } else {
+        wx.showModal({
+          title: '查询提示',
+          content: result.ReturnInfo,
+          success: function () {
+            if (result.State.toString() === "4") {
+              that.UserAddRole()
+            }
+
+          }
+        })
+      }
     })
+  },
+  // 根据批次查询返回提示信息（当前用户如果已经查询过并且查询完成，直接显示Table）
+  UserIsValidRole: function (cb) {
+    let that = this;
+    let data = {
+      RowsNum: 10,
+      UserID: app.globalData.PKID,
+      PNO: that.data.PNo
+    }
+    app.ajax('/UserIsValidRole', data, cb)
+  },
+
+  UserAddRole: function () {
+    let that = this;
+    let data = {
+      RowsNum: 10,
+      UserID: app.globalData.PKID,
+      PNO: that.data.PNo
+    }
+    let cb = res => {
+      let result = JSON.parse(res.data.d);
+      that.setData({
+        listData: JSON.parse(result.ReturnInfo)
+      })
+    }
+    app.ajax('/UserAddRole', data, cb)
+  },
+  // 获取消费所扣T点提示信息
+  GetPNoIsView: function () {
+    let that = this;
+    let data = {
+      UserID: app.globalData.PKID,
+      PNO: that.data.PNo
+    }
+    let cb = res => {
+      let ReturnInfo = JSON.parse(JSON.parse(res.data.d).ReturnInfo)
+      that.setData({
+        tips: ReturnInfo.Ttext
+      })
+    }
+    app.ajax('/GetPNoIsView', data, cb)
+  },
+  getYear: function () {
+    let that = this;
+    let data = {
+      UserID: app.globalData.PKID,
+      Country: that.data.country
+    }
+    let cb = res => {
+      let data = JSON.parse(res.data.d)
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+
+      let yearArr = [];
+      for (var i = 0; i < ReturnInfo.length; i++) {
+        yearArr.push({ name: ReturnInfo[i].Year, value: ReturnInfo[i].Year })
+      }
+      that.setData({
+        yearArr: yearArr,
+        year: yearArr[0].value
+      })
+    }
+    app.ajax('/GetYearByCountry', data, cb)
   },
   // 根据年获取月份（改变年份选择）
   getMonth: function () {
@@ -136,15 +222,25 @@ Page({
       let data = JSON.parse(res.data.d)
       let ReturnInfo = JSON.parse(data.ReturnInfo);
 
-
-      console.log(ReturnInfo)
+      for (let i = 0; i < ReturnInfo.length; i++) {
+        let datas = {
+          UserID: app.globalData.PKID,
+          PNO: ReturnInfo[i].PNo
+        }
+        app.ajax('/GetUserIsView', datas, function (res) {
+          ReturnInfo[i].MonthDay = ReturnInfo[i].MonthDay + JSON.parse(res.data.d).ReturnInfo.replace(/"/g, "");
+          that.setData({
+            timeArr: ReturnInfo,
+            PNo: ReturnInfo[0].PNo
+          })
+        })
+      }
       that.setData({
         timeArr: ReturnInfo,
         PNo: ReturnInfo[0].PNo
       })
+      console.log(that.data.timeArr)
     }
     app.ajax('/GetMouthByYear', data, cb)
   }
-
-
 })

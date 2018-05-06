@@ -124,6 +124,12 @@
   justify-content: space-between;
   align-items: center;
 }
+.tips{
+   width: 580rpx;
+   text-align: left;
+   font-size: 30rpx;
+   color: #FB3838;
+}
 
 .pick_view.fixed {
   position: fixed;
@@ -164,7 +170,7 @@
 }
 
 .picker_year {
-   width: 120rpx; 
+   width: 125rpx; 
   border-right: 1px solid #ccc;
   text-align: center;
   padding: 0 5px;
@@ -176,7 +182,7 @@
 }
 
 .picker_time {
-   width: 240rpx; 
+   width: 235rpx; 
   padding: 0 5px;
   height: 40rpx;
   text-align: left;
