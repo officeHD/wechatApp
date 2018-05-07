@@ -6,6 +6,7 @@ Page({
     page: 1,
     index: 0,
     Country: 'US',
+    
     flag: true,
     ASIN: '',
     OldData: '',
@@ -22,7 +23,7 @@ Page({
       UserID: UserID,
       Page: that.data.page,
       PageCount: 10,
-      Asin: '',
+      Asin: that.data.ASIN,
       StrTime: '',
       EndTime: ''
     }

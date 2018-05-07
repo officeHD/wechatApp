@@ -48,8 +48,8 @@
 }
 
 .operate image {
-  width: 67.5rpx;
-  height: 39rpx;
+  width: 57rpx;
+  height: 33rpx;
   margin: 0 8rpx;
   vertical-align: middle;
 }
@@ -191,7 +191,11 @@
   white-space: nowrap;
   box-sizing: border-box;
 }
-
+.demo_head{
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
 .pick_view button {
   width: 103rpx;
   height: 55rpx;

@@ -59,7 +59,7 @@ Page({
         that.GetPNoIsView();
       }
     }
-    // that.AsinKeyAllByPage();
+   
     app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10 }, cb)
   },
 
@@ -77,7 +77,7 @@ Page({
 
   onReachBottom: function () {
     let that = this;
-    // that.AsinKeyAllByPage();
+    that.AsinKeyAllByPage();
   },
   // 自动选品分页查询(下拉自动加载)
   AsinKeyAllByPage: function () {
@@ -242,5 +242,31 @@ Page({
       console.log(that.data.timeArr)
     }
     app.ajax('/GetMouthByYear', data, cb)
+  },
+  checkDetail: function (e) {
+    let pkid = e.currentTarget.dataset.pkid;
+    let state = e.currentTarget.dataset.state;
+    if (state === "4") {
+      wx.navigateTo({
+        url: 'detail/index?pkid=' + pkid,
+      })
+    } else if (state === "5") {
+      wx.showModal({
+        title: '提示',
+        content: '数据已失效',
+      })
+    } else if (state === "3") {
+      wx.showModal({
+        title: '提示',
+        content: '数据优化中，最终完成可能需要2个工作日左右，请耐心等待!',
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '正在查询中 ，最终完成可能需要2个工作日左右，请耐心等待!',
+      })
+    }
+
   }
+
 })

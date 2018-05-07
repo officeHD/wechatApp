@@ -77,8 +77,8 @@
 }
 
 .operate image {
-  width: 67.5rpx;
-  height: 39rpx;
+  width: 57rpx;
+  height: 33rpx;
   margin: 0 8rpx;
   vertical-align: middle;
 }

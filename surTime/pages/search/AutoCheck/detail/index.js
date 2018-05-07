@@ -9,8 +9,8 @@ Page({
     ec: {
       lazyLoad: true
     },
-    showChild:false,
-    childPIData:'',
+    showChild: false,
+    childPIData: '',
     isLoaded: false,
     isDisposed: false,
     tableInfo: {},
@@ -72,8 +72,8 @@ Page({
       //折线图
       that.setLineChart(ReturnInfo);
     })
-   
-  
+
+
 
   },
 
@@ -83,10 +83,10 @@ Page({
       active: target
     })
   },
-  getPieData:function(e){
+  getPieData: function (e) {
     let UserID = app.globalData.PKID;
     let PkId = this.data.PkId;
-    let name=e.currentTarget.dataset.name;
+    let name = e.currentTarget.dataset.name;
     GetSourcesStatisticsbyName(UserID, PkId, name);
   },
   // 根据店铺名称查询卖家流量渠道占比图形数据
@@ -224,31 +224,31 @@ Page({
     });
   },
   viewdetail: function (e) {
-    let that=this;
+    let that = this;
     let ChildPkId = e.currentTarget.dataset.pkid;
-    this.GetPIChildbyID(ChildPkId, function(res){
+    this.GetPIChildbyID(ChildPkId, function (res) {
       let resData = JSON.parse(res.data.d);
       let childPIData = JSON.parse(resData.ReturnInfo)[0];
       console.log(childPIData)
-       that.setData({
-         childPIData: childPIData ,
-         showChild:true
-       })
+      that.setData({
+        childPIData: childPIData,
+        showChild: true
+      })
     })
   },
-  GetPIChildbyID: function (ChildPkId,fn) {
-    let data={
+  GetPIChildbyID: function (ChildPkId, fn) {
+    let data = {
       ChildPkId: ChildPkId,
       UserID: app.globalData.PKID
     }
 
-    app.ajax('/GetPIChildbyID',data,fn )
+    app.ajax('/GetPIChildbyID', data, fn)
   },
 
 
 
   prevChart: function (e) {
-    
+
     let that = this;
     if (that.data.chartIndex === 3) {
       that.setPieChart(that.data.pieData)
@@ -291,9 +291,9 @@ Page({
       tableIndex: that.data.tableIndex + 1
     })
   },
-  closeChild:function(){
+  closeChild: function () {
     this.setData({
-      showChild:false
+      showChild: false
     })
   }
 

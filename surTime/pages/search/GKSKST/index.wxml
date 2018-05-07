@@ -1,7 +1,7 @@
 <view>
   <image class='search_bg' src='/images/search_bg.png'></image>
   <view class='search'>
-    <view class='title'>A9数据查询</view>
+    <view class='title'>综合数据查询</view>
     <view class='pick_view {{position}}'>
       <view class='picker_content'>
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
@@ -55,7 +55,6 @@
               <text wx-if="{{item.State==='1'||item.State==='2'}}">正在查询中 </text>
               <text wx-if="{{item.State==='3' }}">数据优化中 </text>
               <text wx-if="{{item.State==='5' }}">数据已失效 </text>
-              
               <image wx-if="{{item.State==='4'}}" src='../../../images/table/detail.png'></image>
             </view>
           </view>
