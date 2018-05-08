@@ -41,7 +41,6 @@ Page({
       data = that.data.runing
     } else if (target === "stop") {
       data = that.data.stop;
-      
     } else {
       data = that.data.finish
     }

@@ -8,7 +8,8 @@ App({
     var PKID = wx.getStorageSync('PKID') || '';
     var Tel = wx.getStorageSync('Tel') || '';
     var UserName = wx.getStorageSync('UserName') || '';
-    this.globalData.PKID = PKID;
+    var userData = wx.getStorageSync('userData') || '';
+    this.globalData.userData = userData;
     this.globalData.UserName = UserName;
     this.globalData.Tel = Tel;
     // 登录
@@ -34,7 +35,15 @@ App({
       }
     })
   },
+  initUserData: function (userData){
+    wx.setStorage({
+      key: "userData",
+      data: userData
+    })
+    this.globalData.userData =userData;
+  },
   initUserInfo: function (obj) {
+
     this.globalData.PKID = obj.PKID;
     this.globalData.Email = obj.Email;
     this.globalData.IsAdmin = obj.IsAdmin;
@@ -65,6 +74,7 @@ App({
   },
   globalData: {
     userInfo: null,
+    userData:'',
     runingData: [],
     stopData: [],
     finishData: []

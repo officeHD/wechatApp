@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/user/index",
     "pages/login/index",
     "pages/index/index",
     
     "pages/crm/index",
     "pages/office/index",
-    "pages/user/index",
+   
     "pages/user/userdata/index",
     "pages/user/userfile/index",
     "pages/user/suggest/index",

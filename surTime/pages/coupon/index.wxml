@@ -1,0 +1,79 @@
+<view>
+
+  <view class='search'>
+    <view class='pick_view'>
+      <view class='status {{active==="left"?"active":""}}' data-target="left" bindtap='searchType'>
+        满减券
+      </view>
+      <view class='status {{active==="center"?"active":""}}' data-target="center" bindtap='searchType'>
+        折扣券
+      </view>
+      <view class='status {{active==="right"?"active":""}}' data-target="right" bindtap='searchType'>
+        抵扣券
+      </view>
+    </view>
+  </view>
+  <view wx-if="{{active==='left'}}" wx:for="{{couponList}}" wx:key="{{index}}" class="item">
+    <view class="stamp stamp01">
+      <view class="par">
+        <view>
+          <text class="sign">￥</text>
+          <text class='span'>50</text> </view>
+        <view class='p'>订单满100.00元</view>
+      </view>
+      <view class="copy">
+        <text>立</text>
+        <text>即</text>
+        <text>使</text>用
+        <text></text> </view>
+
+    </view>
+    <view wx-if="{{couponList.length===0}}" class='nodata'>
+       <image src='/images/user/nocoupe.png'></image>
+    </view>
+  </view>
+  <block wx-if="{{active==='center'}}">
+    <view wx:for="{{centerList}}" wx:key="{{index}}" class="item">
+      <view class="stamp stamp01">
+        <view class="par">
+          <view>
+            <text class="sign">￥</text>
+            <text class='span'>50</text> </view>
+          <view class='p'>订单满100.00元</view>
+        </view>
+        <view class="copy">
+          <text>立</text>
+          <text>即</text>
+          <text>使</text>用
+          <text></text> </view>
+
+      </view>
+    </view>
+
+    <view wx-if="{{centerList.length===0}}" class='nodata'>
+      <image src='/images/user/nocoupe.png'></image>
+    </view>
+  </block>
+  <block wx-if="{{active==='right'}}">
+    <view wx:for="{{rightList}}" wx:key="{{index}}" class="item">
+      <view class="stamp stamp01">
+        <view class="par">
+          <view>
+            <text class="sign">￥</text>
+            <text class='span'>50</text> </view>
+          <view class='p'>订单满100.00元</view>
+        </view>
+        <view class="copy">
+          <text>立</text>
+          <text>即</text>
+          <text>使</text>用
+          <text></text> </view>
+
+      </view>
+    </view>
+
+    <view wx-if="{{rightList.length===0}}" class='nodata'>
+      <image src='/images/user/nocoupe.png'></image>
+    </view>
+  </block>
+</view>

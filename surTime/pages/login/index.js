@@ -58,33 +58,7 @@ Page({
       app.ajax('/GetMobileCode', { Phone: phone }, cb)
     }
   },
-  //重置密码
-  resetPassWord: function (event) {
-    let that = this;
-    that.setData({
-      reset_pass: !that.data.reset_pass,
-      reset_word: that.data.reset_pass ? "忘记密码" : "取消重置",
-      login_type: that.data.reset_pass ? "短信快捷登录" : ""
-
-    })
-  },
-  //确认重制
-  update: function () {
-    let that = this;
-    let data={
-      NewPassWord:that.data.newPassword,
-      userPhone: that.data.userPhone,
-      verifyCode: that.data.verifyCode
-    }
-    let fn=msg=>{
-      console.log(1);
-    }
-    if (app.checkData('手机号', that.data.userPhone) && app.checkData('验证码', that.data.verifyCode)) {
-
-      app.ajax('/UpdatePassWord', data, fn)
-    }
-
-  },
+  
   // 填写手机号值
   changePhoneNum: function (e) {
     let value = e.detail.value;
@@ -109,14 +83,7 @@ Page({
       passWord: value
     })
   },
-  //输入新密码
-  changeNewPassWord: function (e) {
-    let value = e.detail.value;
-    let that = this;
-    that.setData({
-      newPassWord: value
-    })
-  },
+ 
   // 填写用户名值
   changeUserName: function (e) {
     let value = e.detail.value;
@@ -148,8 +115,9 @@ Page({
           if (result.State.toString() === "1") {
             // 储存用户信息
             app.initUserInfo(JSON.parse(result.ReturnInfo));
+            app.initUserData(result.ReturnInfo);
             wx.switchTab({
-              url: '/pages/user/index',
+              url: '/pages/usercenter/index',
             })
           } else {
             wx.showToast({
@@ -174,12 +142,14 @@ Page({
         let fn = (res) => {
           wx.hideLoading()
           let result = JSON.parse(res.data.d);
-          console.log(result);
+          
           if (result.State.toString() === "1") {
             // 储存用户信息
             app.initUserInfo(JSON.parse(result.ReturnInfo));
+            app.initUserData(result.ReturnInfo);
+           
             wx.switchTab({
-              url: '/pages/user/index',
+              url: '/pages/usercenter/index',
             })
           } else {
             wx.showToast({

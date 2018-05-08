@@ -6,14 +6,14 @@ Page({
     login: false,
     navbar: [
       {
-        className: 'navlist active', name: 'ASIN黑客数据揭秘', navgator: [
+        className: 'navlist active', name: '数据揭秘', navgator: [
           { url: "/pages/search/A9/index", name: "A9工具(真实数据解密)" },
           { url: "/pages/search/AutoCheck/index", name: "自动选品(最具潜力TOP)" },
           { url: "/pages/search/GKSKST/index", name: "GK SK ST 综合数据查询" },
         ]
       },
       {
-        className: 'navlist', name: '亚马逊关键词规划师', navgator: [
+        className: 'navlist', name: ' 关键词规划', navgator: [
           { url: "/pages/search/GKSKSTKM/index?type=GK", name: "GK 工具(竞品流量入口)" },
           { url: "/pages/search/GKSKSTKM/index?type=SK", name: "SK 工具(关联流量入口)" },
           { url: "/pages/search/GKSKSTKM/index?type=ST", name: "ST 工具(Search Terms)" },
@@ -21,26 +21,26 @@ Page({
         ]
       },
       {
-        className: 'navlist', name: '亚马逊李思婷实验室', navgator: [
+        className: 'navlist', name: '李思婷实验室', navgator: [
           { url: " ", name: "IM 工具(监控竞品销量)" },
           { url: " ", name: "DE 工具(描述编辑器)" },
           { url: "/pages/search/KR/index", name: "KR 工具(关键词排名)" }
         ]
       },
       {
-        className: 'navlist', name: '亚马逊卖家配套服务', navgator: [
+        className: 'navlist', name: '卖家配套服务', navgator: [
           { url: "/pages/album/index", name: "专用图片空间" },
           { url: "", name: "亚马逊FBA升仓扩容" }
         ]
       },
       {
-        className: 'navlist', name: '1小时极速建站大师', navgator: [
+        className: 'navlist', name: '极速建站', navgator: [
           { url: "", name: "MB 工具" }
 
         ]
       },
       {
-        className: 'navlist', name: '做任务免费领T点', navgator: [
+        className: 'navlist', name: '做任务领T点', navgator: [
           { url: "", name: "任务中心" },
           { url: "", name: "进行中的任务" },
           { url: "", name: "退回的任务" },

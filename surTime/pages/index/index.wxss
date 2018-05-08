@@ -3,42 +3,45 @@
 .mainPage {
   display: flex;
  height: 100vh;
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 
 .navBar {
   height:100vh;
-  width: 200rpx;
+  width: 160rpx;
   /* padding: 10rpx; */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content:flex-start;
   align-items: flex-start;
-  background-color: #fff;
+  background-color: #F7F7F7;
     position: fixed;
   left: 0;
   top: 0;
 }
 
 .navBar .navlist {
-  flex: 1;
-  padding: 10rpx;
-  display: flex;
+  height: 80rpx;
+  line-height: 80rpx;
+   font-size: 18rpx;
+   text-align: center;
   width: 100%;
   align-items: center;
-  font-size: 35rpx;
+   
   box-sizing: border-box;
-  border-bottom: 1Px solid #ccc;
+  border-bottom: 1rpx solid #F1F1F1;
+  color: #646464;
 
 }
 
 .navBar .navlist.active {
-  background-color: #f2f2f2;
+  background-color: #fff;
   color: #2c7edc;
+  border-left: 2px solid #2c7edc;
 }
 .subnav{
   padding-left: 220rpx;
-  background-color: #f2f2f2;
+  background-color: #fff;
   width: 100%;
 }
 .subnav .navlist{
