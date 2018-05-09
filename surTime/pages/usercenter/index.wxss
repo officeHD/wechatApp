@@ -55,12 +55,15 @@ page {
   display: inline-block;
   width:86rpx;
   margin-right: 5px;
+  text-align: center;
 }
 
 .weui_cell_hd image {
-  width: 100%;
-  height: 15px;
-  vertical-align: -2px;
+  
+  height: 55rpx;
+  width: 55rpx;
+  vertical-align: middle;
+ 
 }
 
 .weui_cell_bd {

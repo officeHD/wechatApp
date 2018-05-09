@@ -1,6 +1,15 @@
 <view class='pay_info'>
-  <view class='banner bgcw'>
-    <image src='/images/pay/banner.jpg'></image>
+  <view class='banner'>
+    <image src='/images/pay/banner.png'></image>
+    <view class='banner_info'>
+      <view class='banner_title'>
+        入门级
+      </view>
+      <view class='banner_price'>￥
+        <text class='price_value'>300</text>
+      </view>
+
+    </view>
   </view>
   <view class='order_info bgcw'>
     <view class='title'>
@@ -34,7 +43,7 @@
       </view>
     </view>
   </view>
-  
+
   <view class='bottom bgcw'>
     <view class='bottom_flex'>
       <view class='price '>

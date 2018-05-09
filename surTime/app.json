@@ -1,7 +1,9 @@
 {
   "pages": [
-   
     "pages/index/index",
+    "pages/user/index",
+    "pages/pay/index",
+   
     "pages/reset/index",
     "pages/coupon/index",
     "pages/search/A9/index",
@@ -16,9 +18,9 @@
     "pages/search/GKSKST/index",
     "pages/search/GKSKST/detail/index",
     "pages/search/KR/index",
-    "pages/pay/index",
+   
     "pages/webview/index",
-    "pages/user/index",
+   
     "pages/usercenter/index",
     "pages/search/AutoCheck/index",
     "pages/search/AutoCheck/detail/index"

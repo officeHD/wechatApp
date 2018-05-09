@@ -6,25 +6,51 @@ Page({
     index: 0,
     position: 'relative',
     flag: true,
+    active:1,
     imgurl: [
       {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        src: '入门级',
+        price:"100元=100T",
+        single:"(1.00元/T)",
+        A9: "200元/ASIN",
+        auto: "200元/周期",
+        gk:"4.00元/ASIN",
         type: 1
       },
       {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        src: '基础级',
+        price: "300元=350T",
+        single: "(0.86元/T)",
+        A9: "172元/ASIN",
+        auto: "172元/周期",
+        gk: "3.44元/ASIN",
         type: 2
       },
       {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        src: '标准级',
+        price: "600元=800T",
+        single: "(0.75元/T)",
+        A9: "150元/ASIN",
+        auto: "150元/周期",
+        gk: "3.00元/ASIN",
         type: 3
       },
       {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        src: '专业级',
+        price: "1200元=2000T",
+        single: "(0.60元/T)",
+        A9: "120/ASIN",
+        auto: "120元/周期",
+        gk: "2.4元/ASIN",
         type: 4
       },
       {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        src: '企业级',
+        price: "2400元=5000T",
+        single: "(0.48元/T)",
+        A9: "96元/ASIN",
+        auto: "96元/周期",
+        gk: "1.72元/ASIN",
         type: 5
       }
 
@@ -54,15 +80,14 @@ Page({
     this.GetRechargeList()
   },
 
-  onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    //模拟加载
-    this.onLoad();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
-
+  bindchange:function(e){
+    // console.log(e.detail.current)
+    let current = e.detail.current;
+    this.setData({
+      active: current
+    })
   },
-
+ 
   searchType: function (e) {
     let that = this;
     let target = e.currentTarget.dataset.target;

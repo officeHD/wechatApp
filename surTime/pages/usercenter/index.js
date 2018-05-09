@@ -9,22 +9,22 @@ Page({
     GKfen:'',
     TuDian:'',
     userListInfo: [{
-      icon: '/images/shop.png',
+      icon: '/images/user/youhuiquan.png',
       linkurl: '/pages/coupon/index?type=user',
       text: '我的优惠券'
 
     }, {
-      icon: '/images/ziliao.png',
+        icon: '/images/user/tdianchongzhi.png',
       text: 'T点充值',
       linkurl: '/pages/recharge/index?type=1'
 
     }, {
-      icon: '/images/shoucang.png',
-      text: '账户充值',
-      linkurl: '/pages/recharge/index?type=2'
+        icon: '/images/user/taocan.png',
+      text: '套餐充值',
+      linkurl: '/pages/user/index'
 
     }, {
-      icon: 'images/apply.png',
+        icon: '/images/user/xougaimima.png',
       linkurl: '/pages/reset/index',
       text: '修改密码'
     }]

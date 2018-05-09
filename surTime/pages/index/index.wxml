@@ -1,24 +1,10 @@
-<!--index.wxml-->
-
-<view class='mainPage'>
-  <view class='navBar'>
-    <block wx:for="{{navbar}}" wx:key="{{index}}">
-      <view class='{{item.className}}' bindtap='clickCurrent' data-index="{{index}}">
-        {{item.name}}
-      </view>
-    </block>
-  </view>
-  <view class="subnav">
-    <view wx:for="{{navbar}}" wx:key="{{index}}" class='{{item.className}}'>
-
+<view class="mainNav">
+  <view wx:for="{{navbar}}" wx:key="{{index}}" class='item'>
+    <view class='title_name'>{{item.name}}</view>
+    <view class='subNav'>
       <block wx:for="{{item.navgator}}" wx:key="{{index}}">
         <view class='list_url' bindtap='toPage' data-url='{{item.url}}'>{{item.name}}</view>
       </block>
     </view>
-    <navigator class='list_url' url="/pages/album/detail/index">照片页面</navigator>
-   
-   <view wx-if="{{login}}" class='list_url' bindtap='takeOut'>退出</view>
-   <navigator  wx-if="{{!login}}" class='list_url' url="/pages/login/index">登录</navigator> 
-     <navigator class='list_url' url="/pages/register/index">注册</navigator>
   </view>
 </view>

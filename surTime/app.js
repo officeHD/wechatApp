@@ -10,6 +10,7 @@ App({
     var UserName = wx.getStorageSync('UserName') || '';
     var userData = wx.getStorageSync('userData') || '';
     this.globalData.userData = userData;
+    this.globalData.PKID = PKID;
     this.globalData.UserName = UserName;
     this.globalData.Tel = Tel;
     // 登录

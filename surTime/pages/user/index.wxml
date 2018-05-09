@@ -1,9 +1,27 @@
 <view>
   <view class='search'>
-    <swiper indicator-dots previous-margin="70rpx" next-margin="70rpx" current='1' circular='true'>
-      <block wx:for="{{imgurl}}" wx:key="{{code}}">
+    <swiper bindchange="bindchange" indicator-dots previous-margin="50rpx" next-margin="50rpx" current='1' circular='true'>
+      <block wx:for="{{imgurl}}" wx:key="{{type}}">
         <swiper-item>
-          <image src='{{item.src}}' data-type='{{item.type}}' bindtap='payOrder'></image>
+          <view class='item_list {{item.type==active+1?"active":""}}' data-type='{{item.type}}' bindtap='payOrder'>
+          <image wx-if="{{item.type==active+1}}" src='/images/user/gou.png'></image>
+            <view class='level'>{{item.src}}</view>
+            <view class='right_detail'>
+              <view class='price'>
+                <view>{{item.price}}</view>
+                <text>{{item.single}}</text>
+              </view>
+              <view class='detail'>
+                <view>常用功能扣费预估</view>
+                <view>A9工具 {{item.A9}}</view>
+                <view>自动选品 {{item.auto}}</view>
+                <view>GKSKST工具 {{item.gk}}</view>
+              </view>
+
+            </view>
+
+
+          </view>
         </swiper-item>
       </block>
 
@@ -41,7 +59,7 @@
     <view class='tbody'>
       <block wx-if="{{recordType==='recharge'}}" wx:for="{{listData}}" wx:key="{{RechargeTime}}">
         <view class="noData" wx-if="{{listData.length===0}}">
-         
+
         </view>
         <view class="tr">
           <view class="td">{{item.RechargeGK}}</view>

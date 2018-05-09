@@ -21,7 +21,7 @@
     </block>
     <view bindtap="takeOut"  class="weui_cell mt">
         <view class="weui_cell_hd">
-          <image src="{{item.icon}}"></image>
+          <image src="/images/user/tuichu.png"></image>
         </view>
         <view class="weui_cell_bd">
           <view class="weui_cell_bd_p">退出账号</view>
