@@ -61,8 +61,7 @@
             <view class="td">{{item.ASIN}}</view>
             <view class="td">{{item.Country}}</view>
             <view class="td operate">
-              <image src='../../../images/table/detail.png'></image>
-              <image src='../../../images/table/info.png'></image>
+              <image src='../../../images/table/info.png' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
             </view>
           </view>
         </block>

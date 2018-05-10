@@ -5,8 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    Amount: '',
+    CouponType: '',
+    DiscountType:'',
     type: 1,
-    config:[
+    current: '',
+    Discount: 0,//优惠
+
+    discountLabel: "请选择",
+    config: [
       {
         src: '入门级',
         price: "100",
@@ -29,9 +36,9 @@ Page({
       },
       {
         src: '标准级',
-        
+
         price: "600",
-        value:"800点",
+        value: "800点",
         single: "(0.75元/T)",
         A9: "150元/ASIN",
         auto: "150元/周期",
@@ -67,61 +74,28 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-
+    console.log(options.type)
+    let current = that.data.config.filter((item) => item.type == options.type);
     if (options.type) {
       that.setData({
-        type: options.type
+        current: current[0]
       })
     }
-
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onShow(){
+    let that=this;
+    let pages = getCurrentPages();
+    let currPage = pages[pages.length - 1];
+    console.log(currPage.data)
+    // that.setData({//将携带的参数赋值
+    //   address: currPage.data.item
+    // });
+    
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  selectDiscount:function(){
+    wx.navigateTo({
+      url: '/pages/coupon/index?type=pay',
+    })
   }
+
 })

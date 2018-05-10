@@ -1,0 +1,26 @@
+ <view class="table">
+    <view class='thead'>
+      <view class="tr">
+        <view class="th" > 任务名称 </view>
+        <view class="th"> 任务可重复次数 </view>
+        <view class="th " >开始任务 </view>
+        
+      </view>
+     
+
+    </view>
+    <view class='tbody'>
+      <block  wx:for="{{listData}}" wx:key="{{RechargeTime}}">
+        <view class="noData" wx-if="{{listData.length===0}}">
+
+        </view>
+        <view class="tr">
+          <view class="td">{{item.TaskType}}</view>
+          <view class="td">{{item.Surtime}}</view>
+          <view class="td">做任务</view>
+       
+        </view>
+      </block>
+      
+    </view>
+  </view>

@@ -13,27 +13,30 @@
       </view>
     </view>
   </view>
-  <view wx-if="{{active==='left'}}" wx:for="{{couponList}}" wx:key="{{index}}" class="item">
-    <view class="stamp stamp01">
+  <view wx-if="{{active==='left'}}" class="item">
+      <block  wx:for="{{couponList}}" wx:key="{{index}}" >
+       <view class="stamp stamp01">
       <view class="par">
         <view>
           <text class="sign">￥</text>
           <text class='span'>50</text> </view>
         <view class='p'>订单满100.00元</view>
       </view>
-      <view class="copy">
+      <view class="copy" data-data='{{item}}' bindtap='useCard'>
         <text>立</text>
         <text>即</text>
-        <text>使</text>用
-        <text></text> </view>
-
+        <text>使</text>
+        <text>用</text>
+      </view>
     </view>
+      </block>
+   
     <view wx-if="{{couponList.length===0}}" class='nodata'>
-       <image src='/images/user/nocoupe.png'></image>
+      <image src='/images/user/nocoupe.png'></image>
     </view>
   </view>
-  <block wx-if="{{active==='center'}}">
-    <view wx:for="{{centerList}}" wx:key="{{index}}" class="item">
+  <view wx-if="{{active==='center'}}" class="item">
+    <block wx:for="{{centerList}}" wx:key="{{index}}">
       <view class="stamp stamp01">
         <view class="par">
           <view>
@@ -48,12 +51,11 @@
           <text></text> </view>
 
       </view>
-    </view>
-
+    </block>
     <view wx-if="{{centerList.length===0}}" class='nodata'>
       <image src='/images/user/nocoupe.png'></image>
     </view>
-  </block>
+  </view>
   <block wx-if="{{active==='right'}}">
     <view wx:for="{{rightList}}" wx:key="{{index}}" class="item">
       <view class="stamp stamp01">

@@ -15,6 +15,7 @@ Page({
     flag: true,
     PageNum: 1,
     tips: '',
+    length: "1",
     listData: []
   },
   onLoad: function () {
@@ -59,7 +60,7 @@ Page({
         that.GetPNoIsView();
       }
     }
-   
+
     app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10 }, cb)
   },
 
@@ -75,9 +76,17 @@ Page({
 
   },
 
+
   onReachBottom: function () {
     let that = this;
-    that.AsinKeyAllByPage();
+    if (that.data.length === 0) {
+      wx.showToast({
+        title: '没有更多了',
+        icon: 'none'
+      })
+      return false;
+    }
+    this.AsinKeyAllByPage();
   },
   // 自动选品分页查询(下拉自动加载)
   AsinKeyAllByPage: function () {
@@ -162,18 +171,23 @@ Page({
   UserAddRole: function () {
     let that = this;
     let data = {
-      RowsNum: 10,
+      RowsNum: 100,
+
       UserID: app.globalData.PKID,
       PNO: that.data.PNo
     }
     let cb = res => {
       let result = JSON.parse(res.data.d);
       that.setData({
-        listData: JSON.parse(result.ReturnInfo)
+
+        listData: that.data.listData.concat(JSON.parse(result.ReturnInfo)),
+        page: that.data.page + 1,
+        length: JSON.parse(data.ReturnInfo).length
       })
     }
     app.ajax('/UserAddRole', data, cb)
   },
+
   // 获取消费所扣T点提示信息
   GetPNoIsView: function () {
     let that = this;
@@ -245,27 +259,9 @@ Page({
   },
   checkDetail: function (e) {
     let pkid = e.currentTarget.dataset.pkid;
-    let state = e.currentTarget.dataset.state;
-    if (state === "4") {
-      wx.navigateTo({
-        url: 'detail/index?pkid=' + pkid,
-      })
-    } else if (state === "5") {
-      wx.showModal({
-        title: '提示',
-        content: '数据已失效',
-      })
-    } else if (state === "3") {
-      wx.showModal({
-        title: '提示',
-        content: '数据优化中，最终完成可能需要2个工作日左右，请耐心等待!',
-      })
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '正在查询中 ，最终完成可能需要2个工作日左右，请耐心等待!',
-      })
-    }
+    wx.navigateTo({
+      url: 'detail/index?pkid=' + pkid,
+    })
 
   }
 

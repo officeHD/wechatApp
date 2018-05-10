@@ -1,0 +1,35 @@
+ <view class='search'>
+    <view class='pick_view'>
+      <view class='status {{active==="left"?"active":""}}' data-target="left" bindtap='searchType'>
+        进行中
+      </view>
+      <view class='status {{active==="center"?"active":""}}' data-target="center" bindtap='searchType'>
+        已退回
+      </view>
+      <view class='status {{active==="right"?"active":""}}' data-target="right" bindtap='searchType'>
+        已完成
+      </view>
+    </view>
+  </view>
+ 
+ <view class="table">
+    <view class='thead'>
+      <view class="tr">
+        <view class="th" > 任务名称 </view>
+        <view class="th"> 任务类型 </view>
+        <view class="th " >开始时间 </view>
+        <view class="th " >任务进度 </view>
+      </view>
+    </view>
+    <view class='tbody'>
+      <block  wx:for="{{active==='left'?listData:active==='center'?listData1:listData2}}" wx:key="{{item}}">
+        
+        <view class="tr">
+          <view class="td">{{item.TaskName}}</view>
+          <view class="td">{{item.TaskType}}</view>
+          <view class="td">{{item.CreateTime}}</view>
+          <view class="td">{{item.ProgressString}}</view>
+        </view>
+      </block>
+    </view>
+  </view>

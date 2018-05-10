@@ -10,7 +10,7 @@ Page({
     TuDian:'',
     userListInfo: [{
       icon: '/images/user/youhuiquan.png',
-      linkurl: '/pages/coupon/index?type=user',
+      linkurl: '/pages/coupon/index',
       text: '我的优惠券'
 
     }, {

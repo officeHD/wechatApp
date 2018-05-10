@@ -3,26 +3,26 @@
     <image src='/images/pay/banner.png'></image>
     <view class='banner_info'>
       <view class='banner_title'>
-        入门级
+        {{current.src}}
       </view>
       <view class='banner_price'>￥
-        <text class='price_value'>300</text>
+        <text class='price_value'>{{current.price}}</text>
       </view>
 
     </view>
   </view>
   <view class='order_info bgcw'>
     <view class='title'>
-      套餐系列：基础版本
+      套餐系列：{{current.src}}
     </view>
     <view class='order_conrtent'>
       <view>
-        <view>充值金额：300元 </view>
+        <view>充值金额：{{current.price}}元 </view>
         <view>下单时间：2018/3/19 14:30:30 </view>
 
       </view>
       <view>
-        <view>充值T点：350点 </view>
+        <view>充值T点：{{current.value}} </view>
         <view>充值方式：直接充值 </view>
       </view>
     </view>
@@ -34,8 +34,9 @@
     <view class='discount_list '>
       <view class='item_list'>
         <view>优惠券</view>
-        <view>
-          <text class='checked'>-￥50 满减券</text> ></view>
+        <view bindtap='selectDiscount'>
+          <text class='checked'>{{discountLabel}}</text> >
+        </view>
       </view>
       <view class='item_list'>
         <view>优惠券代码</view>
@@ -49,8 +50,8 @@
       <view class='price '>
         <view class='price_val '>￥300</view>
         <view class='discount_info '>
-          <text>已优惠￥50元</text>
-          <text>(1T仅需0.86元)</text>
+          <text>已优惠￥{{Discount}}元</text>
+          <text>{{current.single}}</text>
         </view>
       </view>
       <view class='topay '>

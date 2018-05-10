@@ -5,7 +5,7 @@
   position: relative;
   overflow: hidden;
   float: left;
-   margin: 27rpx;
+   margin: 15rpx;
 }
 
 .stamp:before {

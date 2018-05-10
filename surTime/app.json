@@ -3,6 +3,11 @@
     "pages/index/index",
     "pages/user/index",
     "pages/pay/index",
+    "pages/work/center/index",
+    "pages/work/list/index",
+   
+   
+   
    
     "pages/reset/index",
     "pages/coupon/index",

@@ -47,8 +47,8 @@ Page({
       },
       {
         className: 'navlist', name: '做任务领T点', navgator: [
-          { url: "", name: "任务中心" },
-          { url: "", name: "任务列表" }
+          { url: "/pages/work/center/index", name: "任务中心" },
+          { url: "/pages/work/list/index", name: "任务列表" }
 
         ]
       }

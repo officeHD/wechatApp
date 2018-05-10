@@ -41,7 +41,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    app.ajax('/PlannerKeyAllDetail', { UserID: UserID, PkId: pkid,KeyKeywordsRows: 10, RedAnalysisRows:10}, function (res) {
+    app.ajax('/PlannerKeyAllDetail', { UserID: UserID, PkId: pkid,KeyKeywordsRows: 1, RedAnalysisRows:1}, function (res) {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
