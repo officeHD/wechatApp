@@ -38,7 +38,7 @@
   </view>
 
   <view class='result'>
-    <view class="countDownTimeView" wx-if="{{!(range-0)||endSecond<0}}">
+     <view class="countDownTimeView" wx-if="{{!(range-0)}}">
       <view class='countDownTimeView_title'>
         <text wx-if="{{endSecond<0}}"> 活动已结束</text>
         <text wx-if="{{!(range-0)}}">暂未集齐</text>
@@ -48,9 +48,9 @@
       </text>
       <button class='cards' bindtap='creatCard'>点击生成母亲节专属贺卡</button>
 
-    </view>
+    </view> 
 
-    <view wx-if="{{endSecond>0&&range>0}}">
+    <view wx-if="{{range>0}}">
       <image class='r_bg' src='/images/bg_bk.png'></image>
       <image class='r_title' src='/images/title_huojiang.png'></image>
       <view class='center'>

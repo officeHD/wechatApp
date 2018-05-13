@@ -24,6 +24,7 @@ Page({
       })
     }
     let userData = JSON.parse(app.globalData.userData);
+   
     this.GetCouponByUser(userData.PKID);
   },
   /**
@@ -31,12 +32,15 @@ Page({
    */
   GetCouponByUser: function (UserID) {
     let that = this;
-
     let fn = msg => {
       let res = JSON.parse(msg.data.d);
       if (res.State.toString() === "1") {
+        let resultArr = JSON.parse(res.ReturnInfo)
+        console.log(resultArr)
         that.setData({
-          couponList: JSON.parse(res.ReturnInfo)
+          couponList: resultArr.filter((item) => item.CouponType==="1"),
+          rightList: resultArr.filter((item) => item.CouponType === "2"),
+          centerList:  resultArr.filter((item) => item.CouponType === "3")
         })
 
       }
@@ -50,7 +54,6 @@ Page({
     let target = e.currentTarget.dataset.target;
     this.setData({
       active: target
-
     })
   },
   useCard: function (e) {

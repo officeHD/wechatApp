@@ -17,35 +17,51 @@
         <button bindtap='search'>搜索</button>
       </view>
     </view>
-    
-      <view wx-if="{{type!=='KM'}}" class="checkbox" bindtap='checkboxChange'>
+
+    <view wx-if="{{type!=='KM'}}" class="checkbox" bindtap='checkboxChange'>
       <image src='{{check?"/images/check.png":"/images/nocheck.png"}}'></image>
-         是否查询所有子商品
-      </view>
-    
+      是否查询所有子商品
+    </view>
+
   </view>
   <view class='content'>
-
     <view class="table">
       <view class='thead'>
-        <view class="tr">
+        <view class="tr" wx-if="{{type!=='KM'}}">
           <view class="th">图片</view>
           <view class="th">ASIN </view>
           <view class="th">站点 </view>
           <view class="th">操作</view>
         </view>
+        <view class="tr" wx-if="{{type=='KM'}}">
+          <view class="th">序号</view>
+          <view class="th">关键词 </view>
+          <view class="th">记录条数 </view>
+          <view class="th">操作</view>
+        </view>
       </view>
       <view class='tbody'>
         <block wx:for="{{listData}}" wx:key="{{code}}">
-          <view class="tr">
+          <view class="tr" wx-if="{{type!=='KM'}}">
             <view class="td logo">
               <image src='{{item.ImgUrl}}'></image>
             </view>
             <view class="td">{{item.ASIN}}</view>
             <view class="td">{{item.CountryName}}</view>
             <view class="td operate">
-              <image src='../../../images/table/detail.png' data-url='{{item.ASINLink}}' bindtap='viewdetail'></image>
-
+               <image src='../../../images/table/detail.png' data-jindu='{{item.jindu}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
+                <image src='../../../images/table/del.png'  data-PKID='{{item.PKID}}' bindtap='delList'></image>
+            </view>
+          </view>
+          <view class="tr" wx-if="{{type==='KM'}}">
+            <view class="td logo">
+              {{index}}
+            </view>
+            <view class="td">{{item.KeyName}}</view>
+            <view class="td">{{item.DataCount}}</view>
+            <view class="td operate">
+              <image src='../../../images/table/detail.png' data-jindu='{{item.jindu}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
+                <image src='../../../images/table/del.png'  data-PKID='{{item.PKID}}' bindtap='delList'></image>
             </view>
           </view>
         </block>
@@ -53,5 +69,41 @@
     </view>
   </view>
 
+  <view class='bg_model' wx-if="{{showChild}}">
+    <view class='tableInfo'>
+      <view class='titles'> 在线预览
+        <view class='closeChild' bindtap='closeChild'>×</view>
+      </view>
+      <view class="table">
+      <view class='thead'>
+        <view class="tr">
+          <view class="th">序号</view>
+          <view class="th" wx-if="{{type!=='KM'}}">ASIN </view>
+          <view class="th" wx-if="{{type=='ST'}}">Search Terms </view>
+          <view class="th" wx-if="{{type==='SK'}}">入口ASIN </view>
+          <view class="th" wx-if="{{type==='SK'||type==='GK'}}">页面排名 </view>
+          <view class="th" wx-if="{{type==='SK'||type==='GK'}}">关键词</view>
+          <view class="th" wx-if="{{type==='SK'||type==='GK'}}">搜索结果数</view>
+        </view>
+      </view>
+      <view class='tbody'>
 
+        <block wx:for="{{listData}}" wx:key="{{code}}">
+          <view class="tr">
+            <view class="td">{{index}} </view>
+            <view class="td" wx-if="{{type!=='KM'}}">{{item.ASIN}} </view>
+            <view class="td" wx-if="{{type=='ST'}}">{{item.SearchTerms}} </view>
+            <view class="td" wx-if="{{type==='SK'}}">{{item.ASIN}} </view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.ASIN}}</view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.Country}}</view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.Country}}</view>
+
+          </view>
+        </block>
+      </view>
+    </view>
+    </view>
+    
+
+  </view>
 </view>

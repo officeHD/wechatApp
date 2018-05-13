@@ -1,15 +1,17 @@
 var app = getApp();
 Page({
   data: {
-    array: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
+    array: ['美国', '英国', '德国', '法国', '加拿大', '墨西哥', '日本', '西班牙', '意大利'],
+    arrayval: ['US', 'UK', 'DE', 'FR', 'CA', 'MX', 'JP', 'ES', 'IT'],
     index: 0,
     year: '2018',
     month: '09-01',
     Country: 'us',
     position: 'relative',
-    check:false,
+    check: false,
     page: '1',
     flag: true,
+    showChild: false,
     type: '',
     ASIN: '',
     listData: []
@@ -24,7 +26,8 @@ Page({
       let data = JSON.parse(res.data.d)
       console.log(JSON.parse(data.ReturnInfo))
       that.setData({
-        listData: JSON.parse(data.ReturnInfo)
+        listData: JSON.parse(data.ReturnInfo),
+        page: 2
       });
     }
     let data = {
@@ -43,13 +46,9 @@ Page({
     })
   },
   checkboxChange: function (e) {
-    
-     
-      this.setData({
-        check: !this.data.true
-      })
-   
-   
+    this.setData({
+      check: !this.data.true
+    })
   },
   search: function () {
     let that = this;
@@ -70,14 +69,14 @@ Page({
         listData: JSON.parse(data.ReturnInfo)
       });
     }
-    let datas={
-      UserID: UserID, 
-      Country: Country, 
-      IsExpand:that.data.check,
-      AsinList:'1-5',
-      PageCount:'20',
-      UserIpAddress:'',
-      Asin: ASIN 
+    let datas = {
+      UserID: UserID,
+      Country: Country,
+      IsExpand: that.data.check,
+      AsinList: '1-5',
+      PageCount: '20',
+      UserIpAddress: '',
+      Asin: ASIN
     }
     app.ajax('/GKSKSTKMSubmit', datas, cb, 'POST')
   },
@@ -96,43 +95,51 @@ Page({
   //底部加载更多
   onReachBottom: function () {
     let that = this;
-    that.setData({
-      page: that.data.page - 0 + 1
-    })
-    let cb = (res) => {
-      let data = JSON.parse(res.data.d)
-      let newList = JSON.parse(data.ReturnInfo);
-      that.setData({
-        listData: that.data.listData.concat(newList)
+    console.log(that.data.page)
+    if (that.data.page==0) {
+      wx.showToast({
+        title: '已无更多',
+        icon: 'none'
       });
+      return false;
     }
+
     let data = {
       UserID: app.globalData.PKID,
       PageType: that.data.type,
       Page: that.data.page,
       PageCount: '10'
     }
-    app.ajax('/GetGKSKSTKMHistoryTableInPage', data, cb)
-  },
-  onPageScroll: function (e) {
-    let that = this;
-    let scrollTop = e.scrollTop;
-
-    if (scrollTop >= 60) {
+    let cb = (res) => {
+      let data = JSON.parse(res.data.d)
+      let newList = JSON.parse(data.ReturnInfo);
+     
+      let page;
+      if (!newList.length) {
+        that.setData({
+          page: 0,
+        });
+        return false;
+      } else {
+        page = that.data.page-0 + 1
+      }
       that.setData({
-        position: 'fixed'
-      });
-    } else {
-      that.setData({
-        position: 'relative'
+        listData: that.data.listData.concat(newList),
+        page: page,
       });
     }
+    app.ajax('/GetGKSKSTKMHistoryTableInPage', data, cb)
   },
+
   bindPickerChange: function (e) {
-    this.setData({
-      index: e.detail.value
+    let that = this;
+    let index = e.detail.value;
+    that.setData({
+      index: index,
+      country: that.data.arrayval[index]
     })
   },
+
   bindDateChange: function (e) {
     this.setData({
       month: e.detail.value
@@ -144,35 +151,78 @@ Page({
     })
   },
   checkDetail: function (e) {
+    let that = this;
     let pkid = e.currentTarget.dataset.pkid;
-    let state = e.currentTarget.dataset.state;
-    if (state === "4") {
-     
-    } else if (state === "5") {
-      wx.showModal({
-        title: '提示',
-        content: '数据已失效',
-      })
-    } else if (state === "3") {
-      wx.showModal({
-        title: '提示',
-        content: '数据优化中，最终完成可能需要2个工作日左右，请耐心等待!',
-      })
+    let jindu = e.currentTarget.dataset.jindu;
+    if (that.data.type === "KM") {
+      if (jindu === "已完成") {
+        that.GetSKSKSTKMData(pkid);
+      } else if (jindu === "正在生成") {
+        wx.showModal({
+          title: '提示',
+          content: '正在生成',
+        })
+      }
     } else {
-      wx.showModal({
-        title: '提示',
-        content: '正在查询中 ，最终完成可能需要2个工作日左右，请耐心等待!',
+      that.GetSKSKSTKMData(pkid);
+    }
+  },
+  delList: function (e) {
+    let that = this;
+    let pkid = e.currentTarget.dataset.pkid;
+    wx.showModal({
+      title: '提示',
+      content: '删除后无法恢复',
+      success: function () {
+        let data = {
+          UserID: app.globalData.PKID,
+          PageType: that.data.type,
+          DataID: pkid,
+          FileName: ""
+        }
+        wx.showLoading({
+          title: '加载中',
+          icon: 'none'
+        })
+        app.ajax('/DeleteGKSKSTKMTableByUser', data, function (res) {
+          wx.hideLoading();
+          let returnMes = JSON.parse(res.data.d)
+          if (returnMes.State == 1) {
+            wx.showModal({
+              title: '提示',
+              content: '删除成功',
+            })
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: returnMes.ReturnInfo,
+            })
+          }
+        })
+      }
+    })
+  },
+  GetSKSKSTKMData: function (pkid) {
+    let that = this;
+    let data = { PageType: that.data.type, UserID: app.globalData.PKID, TDataID: pkid, Page: 1, PageCount: 10 };
+    let fn = msg => {
+
+      let resData = JSON.parse(msg.data.d);
+      console.log(JSON.parse(resData.RetDataTable))
+      console.log(JSON.parse(resData.RetKeyTable))
+
+      that.setData({
+        showChild: true,
       })
     }
+    app.ajax('/GetSKSKSTKMData', data, fn)
+  },
 
-  }
-,
 
-  viewdetail: function (e) {
-    wx.navigateTo({
-      url: '/pages/webview/index?url=' + e.currentTarget.dataset.url,
+  closeChild: function () {
+    this.setData({
+      showChild: false
     })
   }
-
 
 })

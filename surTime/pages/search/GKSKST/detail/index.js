@@ -2,18 +2,15 @@
 import * as echarts from '../../../../ec-canvas/echarts';
 var app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     PkId: '',
     pieData: [],//卖家流量渠道占比
-
     lineData: [],//折线图数据
     ec: {
       lazyLoad: true
     },
+    showChild: false,
+    childPIData: '',
     isLoaded: false,
     isDisposed: false,
     tableInfo: {},
@@ -33,21 +30,19 @@ Page({
       PkId: pkid
     });
     let UserID = app.globalData.PKID;
-
     // 获取组件
     that.ecComponent = that.selectComponent('#mychart-dom-bar');
-
     // 获取A9明细信息
     wx.showLoading({
       title: '加载中',
     });
-    app.ajax('/PlannerKeyAllDetail', { UserID: UserID, PkId: pkid,KeyKeywordsRows: 1, RedAnalysisRows:1}, function (res) {
+    app.ajax('/PlannerKeyAllDetail', { UserID: UserID, PkId: pkid, KeyKeywordsRows: 5, RedAnalysisRows: 5 }, function (res) {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       let Tables = JSON.parse(ReturnInfo.ds);
       console.log(Tables);
-      if (Tables.reads3.length > 0) {
+      if (Tables.reads1.length > 0) {
         //获取饼图数据
         that.GetSourcesStatisticsbyName(UserID, pkid, Tables.reads3[0].StoreName)
       }
@@ -55,47 +50,30 @@ Page({
         ASINUrl: ReturnInfo.ASINUrl,//Asin链接:
         KetUrl: ReturnInfo.KeywordUrl,//关键词链接
         ZiAsinCount: ReturnInfo.ChildAsinCount,//子表数量
-        tableInfo: Tables.reads[0],//产品主表
-        
-        KeywordRedAnalysisTop: Tables.reads1,//流量关键词词频分析Top20
-        
-        PIChild: Tables.reads2,//产品子表
-        
+        tableInfo: Tables.reads[0],//商品基础信息分析
+        SourcesStatistics: Tables.reads1,//流量关键词词频分析TOP20
+        PIChild: Tables.reads2,//变体所有ASIN信息
         ASINStatisticsByID: Tables.reads3,//关键词入口渠道占比
-      
-        ProKeywordRedAnalysis: Tables.reads4,//商品流量关键词分析
-        KeywordRedAnalysis: Tables.reads6,//流量关键词词频分析
-        RelatedASIN: Tables.reads7,//关联ASIN分析,
+        KeywordRedAnalysis: Tables.reads4,//当前商品流量关键词分析
+        KeywordAnalysis: Tables.reads6,//流量关键词词频分析 
+        // OlderPI: Tables.reads1,//历史表
+        // RelatedASIN: Tables.reads7,//关联ASIN分析,
       })
     })
 
 
-    //获取商品近三个月曝光量、点击量、销量明细
-    app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
-      let data = JSON.parse(res.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      that.setData({
-        lineData: ReturnInfo
-      })
-      //折线图
-      that.setLineChart(ReturnInfo);
-    })
-    //关键词入口渠道占比图形数据
-    app.ajax('/GetASINStatisticsByID', { UserID: UserID, PkId: pkid }, function (res) {
+    // //获取商品近三个月曝光量、点击量、销量明细
+    // app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
+    //   let data = JSON.parse(res.data.d);
+    //   let ReturnInfo = JSON.parse(data.ReturnInfo);
+    //   that.setData({
+    //     lineData: ReturnInfo
+    //   })
+    //   //折线图
+    //   that.setLineChart(ReturnInfo);
+    // })
 
-    })
-    //获取A9精准关键词分析信息(滚动条)
-    app.ajax('/GetKeywordAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
 
-    })
-    //获取A9流量关键词分析信息(滚动条)
-    app.ajax('/GetKeywordRedAnalysis', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
-
-    })
-    //获取A9关联ASIN分析(滚动条)
-    app.ajax('/GetPageRelatedASIN', { UserID: UserID, PkId: pkid, PageNum: '1', RowsNum: '20' }, function (res) {
-
-    })
 
   },
 
@@ -105,16 +83,23 @@ Page({
       active: target
     })
   },
+  getPieData: function (e) {
+    let UserID = app.globalData.PKID;
+    let PkId = this.data.PkId;
+    let name = e.currentTarget.dataset.name;
+    GetSourcesStatisticsbyName(UserID, PkId, name);
+  },
   // 根据店铺名称查询卖家流量渠道占比图形数据
   GetSourcesStatisticsbyName: function (UserID, PkId, StoreName) {
     let that = this;
-    app.ajax('/GetSourcesStatisticsbyName', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
+    app.ajax('/GetTopKeyGraph', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       console.log(ReturnInfo);
       that.setData({
         pieData: ReturnInfo
       })
+      that.setPieChart(that.data.pieData)
 
     })
   },
@@ -240,34 +225,42 @@ Page({
     });
   },
   viewdetail: function (e) {
-    wx.navigateTo({
-      url: '/pages/webview/index?url=' + e.currentTarget.dataset.url,
+    let that = this;
+    let ChildPkId = e.currentTarget.dataset.pkid;
+    this.GetPIChildbyID(ChildPkId, function (res) {
+      let resData = JSON.parse(res.data.d);
+      let childPIData = JSON.parse(resData.ReturnInfo)[0];
+      console.log(childPIData)
+      that.setData({
+        childPIData: childPIData,
+        showChild: true
+      })
     })
   },
+  GetPIChildbyID: function (ChildPkId, fn) {
+    let data = {
+      ChildPkId: ChildPkId,
+      UserID: app.globalData.PKID
+    }
+
+    app.ajax('/GetPIChildbyID', data, fn)
+  },
+
+
+
   prevChart: function (e) {
-    console.log(e)
     let that = this;
-    if (that.data.chartIndex === 3) {
-      that.setPieChart(that.data.pieData)
-    } else {
-      that.setLineChart(that.data.lineData)
-    }
-    if (that.data.chartIndex > 1) {
-      that.setData({
-        chartIndex: that.data.chartIndex - 1
-      })
-    }
+    that.setPieChart(that.data.pieData)
+    that.setData({
+      chartIndex: 1
+    })
 
   },
   nextChart: function (e) {
     let that = this;
-    if (that.data.chartIndex === 1) {
-      that.setPieChart(that.data.pieData)
-    } else {
-      that.setPie2Chart(that.data.ASINStatisticsByID)
-    }
+    that.setPie2Chart(that.data.ASINStatisticsByID)
     that.setData({
-      chartIndex: that.data.chartIndex + 1
+      chartIndex: 2
     })
   },
   prevTable: function (e) {
@@ -286,6 +279,11 @@ Page({
 
     that.setData({
       tableIndex: that.data.tableIndex + 1
+    })
+  },
+  closeChild: function () {
+    this.setData({
+      showChild: false
     })
   }
 

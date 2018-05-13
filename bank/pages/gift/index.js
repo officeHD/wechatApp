@@ -92,7 +92,7 @@ Page({
     let that = this;
     if (that.endSecond < 0) {
       wx.showToast({
-        title: '很抱歉，您与奖品擦肩而过，下次再来',
+        title: '活动已结束',
         icon: 'none'
       })
       return false;

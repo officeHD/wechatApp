@@ -36,42 +36,42 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    app.ajax('/A9ListDetail', { UserID: UserID, PkId: pkid, AnalysisRows: 10, RedAnalysisRows: 10, RelatedRows: 10 }, function (res) {
+    app.ajax('/AsinKeyAllDetail', { UserID: UserID, PkId: pkid, KeytopRows: 10, RedAnalysisRows: 10 }, function (res) {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       let Tables = JSON.parse(ReturnInfo.ds);
       console.log(Tables);
-      if (Tables.reads3.length > 0) {
+      if (Tables.reads1.length > 0) {
         //获取饼图数据
         that.GetSourcesStatisticsbyName(UserID, pkid, Tables.reads3[0].StoreName)
       }
       that.setData({
         ASINUrl: ReturnInfo.ASINUrl,//Asin链接:
-        KetUrl: ReturnInfo.KetUrl,//关键词链接
-        ZiAsinCount: ReturnInfo.ZiAsinCount,//子表数量
-        tableInfo: Tables.reads[0],//产品主表
-        OlderPI: Tables.reads1,//历史表
-        KeywordAnalysis: Tables.reads2,//精准关键词分析 
-        SourcesStatistics: Tables.reads3,//卖家流量渠道占比
-        PIChild: Tables.reads4,//产品子表
-        ASINStatisticsByID: Tables.reads5,//关键词入口渠道占比
-        KeywordRedAnalysis: Tables.reads6,//流量关键词分析
-        RelatedASIN: Tables.reads7,//关联ASIN分析,
+        KetUrl: ReturnInfo.KeywordUrl,//关键词链接
+        ZiAsinCount: ReturnInfo.ChildAsinCount,//子表数量
+        tableInfo: Tables.reads[0],//商品基础信息分析
+        SourcesStatistics: Tables.reads1,//当前商品TOP500关键词占比
+        PIChild: Tables.reads2,//变体所有ASIN信息
+        ASINStatisticsByID: Tables.reads3,//关键词入口渠道占比
+        KeywordRedAnalysis: Tables.reads4,//当前商品流量关键词分析
+        KeywordAnalysis: Tables.reads5,//精准关键词分析 
+        // OlderPI: Tables.reads1,//历史表
+        // RelatedASIN: Tables.reads7,//关联ASIN分析,
       })
     })
 
 
-    //获取商品近三个月曝光量、点击量、销量明细
-    app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
-      let data = JSON.parse(res.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      that.setData({
-        lineData: ReturnInfo
-      })
-      //折线图
-      that.setLineChart(ReturnInfo);
-    })
+    // //获取商品近三个月曝光量、点击量、销量明细
+    // app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
+    //   let data = JSON.parse(res.data.d);
+    //   let ReturnInfo = JSON.parse(data.ReturnInfo);
+    //   that.setData({
+    //     lineData: ReturnInfo
+    //   })
+    //   //折线图
+    //   that.setLineChart(ReturnInfo);
+    // })
 
 
 
@@ -92,13 +92,14 @@ Page({
   // 根据店铺名称查询卖家流量渠道占比图形数据
   GetSourcesStatisticsbyName: function (UserID, PkId, StoreName) {
     let that = this;
-    app.ajax('/GetSourcesStatisticsbyName', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
+    app.ajax('/GetTopKeyGraph', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       console.log(ReturnInfo);
       that.setData({
         pieData: ReturnInfo
       })
+      that.setPieChart(that.data.pieData)
 
     })
   },
@@ -248,29 +249,18 @@ Page({
 
 
   prevChart: function (e) {
-
     let that = this;
-    if (that.data.chartIndex === 3) {
-      that.setPieChart(that.data.pieData)
-    } else {
-      that.setLineChart(that.data.lineData)
-    }
-    if (that.data.chartIndex > 1) {
-      that.setData({
-        chartIndex: that.data.chartIndex - 1
-      })
-    }
+    that.setPieChart(that.data.pieData)
+    that.setData({
+      chartIndex: 1
+    })
 
   },
   nextChart: function (e) {
     let that = this;
-    if (that.data.chartIndex === 1) {
-      that.setPieChart(that.data.pieData)
-    } else {
-      that.setPie2Chart(that.data.ASINStatisticsByID)
-    }
+    that.setPie2Chart(that.data.ASINStatisticsByID)
     that.setData({
-      chartIndex: that.data.chartIndex + 1
+      chartIndex: 2
     })
   },
   prevTable: function (e) {

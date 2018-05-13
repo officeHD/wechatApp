@@ -100,7 +100,7 @@
             <view class="td">{{item.ASIN}}</view>
             <view class="td">{{item.Parentage}}</view>
             <view class="td">
-              <image src='/images/table/detail.png' data-url='{{item.ASINLink}}' bindtap='viewdetail'></image>
+              <image src='/images/table/info.png' data-pkid='{{item.PKID}}' bindtap='viewdetail'></image>
             </view>
           </view>
         </block>
@@ -110,28 +110,32 @@
   <view class='tableInfo'>
     <view class='title'>
       <image wx-if='{{chartIndex>1}}' bindtap='prevChart' class='controll pl' src='/images/arrow_left.png'></image>
-      <text wx-if="{{chartIndex===1}}">近三个月曝光量、点击量、销量明细</text>
-      <text wx-if="{{chartIndex===2}}">卖家流量渠道占比</text>
-      <text wx-if="{{chartIndex===3}}">关键词入口渠道占比</text>
-      <image wx-if='{{chartIndex<3}}' bindtap='nextChart' class='controll pr' src='/images/arrow_right.png'></image>
+      <text wx-if="{{chartIndex===1}}">流量关键词词频分析TOP20</text>
+      <text wx-if="{{chartIndex===2}}">关键词入口渠道占比</text>
+     
+
+      <view class='line'>
+        <view class='lines {{chartIndex===1?"active":""}}'></view>
+        <view class='lines {{chartIndex===2?"active":""}}'></view>
+       
+      </view>
+      <image wx-if='{{chartIndex<2}}' bindtap='nextChart' class='controll pr' src='/images/arrow_right.png'></image>
     </view>
     <view class='echart'>
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
-
     </view>
-    <view class="table" wx-if="{{chartIndex===2&&SourcesStatistics.length>0}}">
+    <view class="table" wx-if="{{chartIndex===1&&SourcesStatistics.length>0}}">
       <view class='thead'>
         <view class="tr">
-          <view class="th">店铺名称</view>
-          <view class="th">销售额度占比 </view>
-
+          <view class="th">关键词</view>
+          <view class="th">页面排名 </view>
         </view>
       </view>
       <view class='tbody'>
         <block wx:for="{{SourcesStatistics}}" wx:key="{{index}}">
           <view class="tr">
-            <view class="td">{{item.StoreName}} </view>
-            <view class="td">{{item.StoreNameRate}}</view>
+            <view class="td" data-name='{{item.StoreName}}' bindtap='getPieData'>{{item.keyWords}} </view>
+            <view class="td">{{item.Rank}}</view>
           </view>
         </block>
       </view>
@@ -140,9 +144,15 @@
   <view class='tableInfo'>
     <view class='title'>
       <image wx-if='{{tableIndex>1}}' bindtap='prevTable' class='controll pl' src='/images/arrow_left.png'></image>
-      <text wx-if="{{tableIndex===1}}">精准关键词</text>
-      <text wx-if="{{tableIndex===2}}">流量关键词</text>
-      <text wx-if="{{tableIndex===3}}">关联ASIN分析</text>
+      <view class='title_txt' wx-if="{{tableIndex===1}}">US 站点上升最快TOP500关键词</view>
+      <view class='title_txt' wx-if="{{tableIndex===2}}">当前商品流量关键词分析</view>
+      <view class='title_txt' wx-if="{{tableIndex===3}}">当前商品关联ASIN分析</view>
+      <view class='line'>
+        <view class='lines {{tableIndex===1?"active":""}}'></view>
+        <view class='lines {{tableIndex===2?"active":""}}'></view>
+        <view class='lines {{tableIndex===3?"active":""}}'></view>
+      </view>
+
       <image wx-if='{{tableIndex<3}}' bindtap='nextTable' class='controll pr' src='/images/arrow_right.png'></image>
 
     </view>
@@ -150,43 +160,38 @@
       <view class="table col">
         <view class='thead  '>
           <view class="tr ">
-            <view class="th">序号</view>
-            <view class="th">搜索关键词 </view>
-            <view class="th">百分比 </view>
-            <view class="th">点击关键词 </view>
-            <view class="th">百分比 </view>
-            <view class="th">购物车关键词 </view>
-            <view class="th">百分比 </view>
-            <view class="th">购买关键词 </view>
-            <view class="th">百分比 </view>
-            <view class="th">搜索类目入口 </view>
-            <view class="th">百分比 </view>
-
-
+            <view class="th">TOP排名</view>
+            <view class="th">关键词 </view>
+            <view class="th">搜索用户增量 </view>
+            <view class="th">当期搜索用户数 </view>
+            <view class="th">上期搜索用户数 </view>
+            <view class="th">当期搜索量 </view>
+            <view class="th">上期搜索量 </view>
+            <view class="th">当期点击量 </view>
+            <view class="th">当期加购量 </view>
+            
           </view>
         </view>
         <view class='tbody  '>
           <block wx:for="{{KeywordAnalysis}}" wx:key="{{index}}">
             <view class="tr  ">
-              <view class="td">{{index}} </view>
-              <view class="td">{{item.SearchRank}}</view>
-              <view class="td">{{item.SearchRate}}</view>
-              <view class="td">{{item.KeywordsClickRank}}</view>
-              <view class="td">{{item.ClickRate}}</view>
-              <view class="td">{{item.CartRank}}</view>
-              <view class="td">{{item.CartRate}}</view>
-              <view class="td">{{item.PurchaseRank}}</view>
-              <view class="td">{{item.PurchaseRate}}</view>
-              <view class="td">{{item.CategorySource}}</view>
-              <view class="td">{{item.CategorySourceRate}}</view>
-
+              <view class="td">{{item.TopRank}} </view>
+              <view class="td">{{item.keyWords}}</view>
+              <view class="td">{{item.SearchUserIncrement}}</view>
+              <view class="td">{{item.CurrentSearchUser}}</view>
+              <view class="td">{{item.PreviousSearchUser}}</view>
+              <view class="td">{{item.CurrentSearch}}</view>
+              <view class="td">{{item.PreviousSearch}}</view>
+              <view class="td">{{item.CurrentClicking}}</view>
+              <view class="td">{{item.CurrentCartAdding}}</view>
+              
             </view>
           </block>
         </view>
       </view>
     </scroll-view>
 
-    <view class="table" wx-if="{{tableIndex===2}}">
+    <view class="table centertable" wx-if="{{tableIndex===2}}">
       <view class='thead'>
         <view class="tr">
           <view class="th">序号</view>
@@ -198,14 +203,14 @@
       <view class='tbody'>
         <block wx:for="{{KeywordRedAnalysis}}" wx:key="{{index}}">
           <view class="tr">
-          <view class="td">{{index}}</view>
+            <view class="td">{{index}}</view>
             <view class="td">{{item.Keywords}} </view>
             <view class="td">{{item.SearchResults}}</view>
           </view>
         </block>
       </view>
     </view>
-     <scroll-view wx-if="{{tableIndex===3}}" scroll-x style="width: 100%">
+    <scroll-view wx-if="{{tableIndex===3}}" scroll-x style="width: 100%">
       <view class="table col3">
         <view class='thead  '>
           <view class="tr ">
@@ -214,9 +219,9 @@
             <view class="th">百分比 </view>
             <view class="th">关联关键词 </view>
             <view class="th">原始搜索结果数 </view>
-             
+
             <view class="th">百分比 </view>
-            
+
 
           </view>
         </view>
@@ -229,7 +234,7 @@
               <view class="td">{{item.KeywordsRelated}}</view>
               <view class="td">{{item.SearchResults}}</view>
               <view class="td">{{item.RelatedRate}}</view>
-               
+
             </view>
           </block>
         </view>
@@ -237,7 +242,95 @@
     </scroll-view>
   </view>
 
+  <view class='bg_model' wx-if="{{showChild}}">
+      
+    <view class='tableInfo'>
+      <view class='title'> 子ASIN明细 <view class='closeChild' bindtap='closeChild'>×</view></view>
+      <view class='infotop'>
+        <view class='image'>
+          <image src='{{childPIData.ImageUrl}}'></image>
+        </view>
+        <view class='Product_title'>
+          <view>Product Title:</view>
+          {{childPIData.ProductTitle}}
+        </view>
+      </view>
+      <view class='infoList'>
+        <view class='item'>
+          <view class='item_list'>
+            <view class='item_title'>ASIN:</view>
+            <view class='content'>{{childPIData.ASIN}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Parentage:</view>
+            <view class='content'>{{childPIData.Parentage}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Brand:</view>
+            <view class='content'>{{childPIData.Brand}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Manufacture:</view>
+            <view class='content'>{{childPIData.Manufacture}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>UPC:</view>
+            <view class='content'>{{childPIData.UPC}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>EAN:</view>
+            <view class='content'>{{childPIData.EAN}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Model:</view>
+            <view class='content'>{{childPIData.Model}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>PartNumber:</view>
+            <view class='content'>{{childPIData.PartNumber}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>MPN:</view>
+            <view class='content'>{{childPIData.MPN}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Department:</view>
+            <view class='content'>{{childPIData.Department}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Review:</view>
+            <view class='content'>{{childPIData.Review}}</view>
+          </view>
+
+          <view class='item_list'>
+            <view class='item_title'>ReviewLevel:</view>
+            <view class='content'>{{childPIData.ReviewLevel}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='search'>
+        <view class='pick_view'>
+          <view class='status {{active==="SearchTerms"?"active":""}}' data-target="SearchTerms" bindtap='searchType'>
+            SearchTerms
+          </view>
+          <view class='status {{active==="Features"?"active":""}}' data-target="Features" bindtap='searchType'>
+            Features
+          </view>
+          <view class='status {{active==="Description"?"active":""}}' data-target="Description" bindtap='searchType'>
+            Description
+          </view>
+        </view>
+      </view>
+      <view class='detail'>
+        <view wx-if="{{active==='Description'}}"> {{childPIData.Description}}</view>
+        <view wx-if="{{active==='SearchTerms'}}"> {{childPIData.SearchTerms}}</view>
+        <view wx-if="{{active==='Features'}}"> {{childPIData.Features}}</view>
+      </view>
+    </view>
+  </view>
 
 
-  
+
+
+
 </view>

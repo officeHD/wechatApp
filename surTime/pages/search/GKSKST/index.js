@@ -1,7 +1,8 @@
 var app = getApp();
 Page({
   data: {
-    array: ['美国', '中国', '巴西', '日本', '印度尼西亚'],
+    array: ['美国', '英国', '德国', '法国', '加拿大', '墨西哥', '日本', '西班牙', '意大利'],
+    arrayval: ['US', 'UK', 'DE', 'FR', 'CA', 'MX', 'JP', 'ES', 'IT'],
     page: 1,
     index: 0,
     Country: 'us',
@@ -17,14 +18,7 @@ Page({
   getA9List: function () {
     let that = this;
     let UserID = app.globalData.PKID;
-    let cb = (res) => {
-      let data = JSON.parse(res.data.d)
-      that.setData({
-        listData: that.data.listData.concat(JSON.parse(data.ReturnInfo)),
-        page: that.data.page + 1,
-        length: JSON.parse(data.ReturnInfo).length
-      });
-    }
+   
     let sendData = {
       UserID: UserID,
       Page: that.data.page,
@@ -33,7 +27,15 @@ Page({
       StrTime: '',
       EndTime: ''
     }
-    app.ajax('/PlannerKeyAllByPage', sendData, cb, 'POST')
+    let cb = (res) => {
+      let data = JSON.parse(res.data.d)
+      that.setData({
+        listData: that.data.listData.concat(JSON.parse(data.ReturnInfo)),
+        page: that.data.page + 1,
+        length: JSON.parse(data.ReturnInfo).length
+      });
+    }
+    app.ajax('/PlannerKeyAllByPage', sendData, cb)
   },
   //A9查询
   search: function () {
@@ -120,10 +122,15 @@ Page({
     })
   },
   bindPickerChange: function (e) {
-    this.setData({
-      index: e.detail.value
+    let that = this;
+    let index = e.detail.value;
+
+    that.setData({
+      index: index,
+      country: that.data.arrayval[index]
     })
   },
+ 
   checkDetail: function (e) {
     let pkid = e.currentTarget.dataset.pkid;
     let state = e.currentTarget.dataset.state;

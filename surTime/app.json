@@ -2,7 +2,10 @@
   "pages": [
     "pages/index/index",
     "pages/user/index",
-    "pages/pay/index",
+      "pages/pay/index",
+   
+   
+  
     "pages/work/center/index",
     "pages/work/list/index",
    
@@ -19,7 +22,7 @@
     "pages/register/index",
     "pages/album/detail/index",
     "pages/search/GKSKSTKM/index",
-    "pages/search/GKSKSTKM/detail/index",
+     
     "pages/search/GKSKST/index",
     "pages/search/GKSKST/detail/index",
     "pages/search/KR/index",
