@@ -1,11 +1,11 @@
 var app = getApp();
 Page({
   data: {
-    
+
     areas: ['美国', '英国', '德国', '法国', '加拿大', '墨西哥', '日本', '西班牙', '意大利'],
     arrayval: ['US', 'UK', 'DE', 'FR', 'CA', 'MX', 'JP', 'ES', 'IT'],
     areasIndex: 0,
-    timer: ['3 Days', '7 Days', '15 Days', '30 Days', '60 Days', '120 Days' ],
+    timer: ['3 Days', '7 Days', '15 Days', '30 Days', '60 Days', '120 Days'],
     timerval: ['3', '7', '15', '30', '60', '120'],
     timerIndex: 0,
     year: '2018',
@@ -21,7 +21,7 @@ Page({
     let UserID = app.globalData.PKID;
 
 
-   
+
   },
   changeASIN: function (e) {
     let value = e.detail.value;
@@ -103,5 +103,10 @@ Page({
       index: e.detail.value
     })
   }
-
+,
+  goDetail:function(){
+    wx.navigateTo({
+      url: './detail/index',
+    })
+  }
 })

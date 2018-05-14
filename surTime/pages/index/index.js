@@ -28,7 +28,7 @@ Page({
       },
       {
         className: 'navlist', name: '李思婷实验室', navgator: [
-          { url: "", name: "IM 工具" },
+          { url: "/pages/search/IM/index", name: "IM 工具" },
           { url: "", name: "DE 工具" },
           { url: "/pages/search/KR/index", name: "KR 工具" }
         ]

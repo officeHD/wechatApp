@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/user/index",
       "pages/pay/index",
+     
    
    
   
@@ -22,6 +23,8 @@
     "pages/register/index",
     "pages/album/detail/index",
     "pages/search/GKSKSTKM/index",
+    "pages/search/IM/index",
+    "pages/search/IM/detail/index",
      
     "pages/search/GKSKST/index",
     "pages/search/GKSKST/detail/index",

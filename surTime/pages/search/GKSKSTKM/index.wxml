@@ -71,8 +71,8 @@
 
   <view class='bg_model' wx-if="{{showChild}}">
     <view class='tableInfo'>
-      <view class='titles'> 在线预览
-        <view class='closeChild' bindtap='closeChild'>×</view>
+      <view class='titles' bindtap='closeChild'> 在线预览
+        <view class='closeChild' >×</view>
       </view>
       <view class="table">
       <view class='thead'>
@@ -82,7 +82,7 @@
           <view class="th" wx-if="{{type=='ST'}}">Search Terms </view>
           <view class="th" wx-if="{{type==='SK'}}">入口ASIN </view>
           <view class="th" wx-if="{{type==='SK'||type==='GK'}}">页面排名 </view>
-          <view class="th" wx-if="{{type==='SK'||type==='GK'}}">关键词</view>
+          <view class="th" wx-if="{{type==='SK'||type==='GK'||type==='KM'}}">关键词</view>
           <view class="th" wx-if="{{type==='SK'||type==='GK'}}">搜索结果数</view>
         </view>
       </view>
@@ -93,10 +93,10 @@
             <view class="td">{{index}} </view>
             <view class="td" wx-if="{{type!=='KM'}}">{{item.ASIN}} </view>
             <view class="td" wx-if="{{type=='ST'}}">{{item.SearchTerms}} </view>
-            <view class="td" wx-if="{{type==='SK'}}">{{item.ASIN}} </view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.ASIN}}</view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.Country}}</view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.Country}}</view>
+            <view class="td" wx-if="{{type==='SK'}}">{{item.InputAsin}} </view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.Rank}}</view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'||type==='KM'}}">{{item.KeyName}}</view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.SearchResults}}</view>
 
           </view>
         </block>

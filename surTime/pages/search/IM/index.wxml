@@ -1,7 +1,10 @@
 <view class='search'>
+
+<text class='history' bindtap='goDetail'>查看历史数据</text>
   <view class='title'>KR工具
-    <text>历史记录</text>
+   
   </view>
+   
   <view class='pick_view {{position}}'>
     <view class='picker_content'>
       <view class='item'>
@@ -15,27 +18,14 @@
         </picker>
       </view>
       <view class='item'>
-        <text>计划名：</text>
+        <text>ASIN：</text>
 
-        <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
-          <view class="picker_area">
-            {{areas[areasIndex]}}
-            <view class='flag'>▼</view>
-          </view>
-        </picker>
+        <input></input>
       </view>
+    
     </view>
     <view class='picker_content'>
-      <view class='item'>
-        <text>监控频率：</text>
-
-        <picker bindchange="bindPickerChange" value="{{timerIndex}}" range="{{timer}}">
-          <view class="picker_area">
-            {{timer[timerIndex]}}
-            <view class='flag'>▼</view>
-          </view>
-        </picker>
-      </view>
+     
       <view class='item'>
         <text>监控时长：</text>
 
@@ -46,20 +36,47 @@
           </view>
         </picker>
       </view>
+        <view class='item'>
+        <text>卖家名：</text>
+
+         <input></input>
+      </view>
     </view>
     <view class='picker_content'>
-      <view class='items'>
-        <text>ASIN关键词：</text>
+     <view class='item'>
+        <text>监控频率：</text>
 
-        <textarea auto-height/>
+        <picker bindchange="bindPickerChange" value="{{timerIndex}}" range="{{timer}}">
+          <view class="picker_area">
+            {{timer[timerIndex]}}
+            <view class='flag'>▼</view>
+          </view>
+        </picker>
       </view>
-      <view class='tips'>
-        (一行一个,ASIN与关键词使用"|"分隔，例如：B01MDKPDHM|iPhone7 case)
+      
+       <view class='item'>
+        <text>计划名：</text>
+
+        <input></input>
       </view>
+       
 
     </view>
+    <view class="checkbox" bindtap='checkboxChange'>
+      <image src='{{check?"/images/check.png":"/images/nocheck.png"}}'></image>
+      是否FBA(勾选则代表监控当前卖家FBA的库存；不勾选则监控FBM库存)
+    </view>
+    <view class="checkbox" bindtap='checkboxChange'>
+      <image src='{{check?"/images/check.png":"/images/nocheck.png"}}'></image>
+是否监控所有子商品(勾选此项创建计划时将耗费更多处理时间, 具体视子商品个数不同, 请耐心等待页面加载完成!)
+    </view>
+    <view  class="checkbox" bindtap='checkboxChange'>
+      <image src='{{check?"/images/check.png":"/images/nocheck.png"}}'></image>
+    是否立即查询库存(勾选此项在创建计划的时候就查询一次库存，不勾选则会延迟5-10分钟进行查询操作!)
+    </view>
+
     <view class='button' bindtap='search'>
-      确认搜索
+      创建计划
     </view>
   </view>
   <view class='attention'>
