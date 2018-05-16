@@ -1,13 +1,14 @@
 <view class='search'>
+  <text class='history' bindtap='goDetail'>查看历史数据</text>
   <view class='title'>KR工具
-    <text>历史记录</text>
+
   </view>
   <view class='pick_view {{position}}'>
     <view class='picker_content'>
       <view class='item'>
         <text>站点：</text>
 
-        <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+        <picker bindchange="bindPickerChangeAreas" value="{{areasIndex}}" range="{{areas}}">
           <view class="picker_area">
             {{areas[areasIndex]}}
             <view class='flag'>▼</view>
@@ -16,20 +17,13 @@
       </view>
       <view class='item'>
         <text>计划名：</text>
-
-        <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
-          <view class="picker_area">
-            {{areas[areasIndex]}}
-            <view class='flag'>▼</view>
-          </view>
-        </picker>
+        <input bindinput='changePlanName'></input>
       </view>
     </view>
     <view class='picker_content'>
       <view class='item'>
-        <text>监控频率：</text>
-
-        <picker bindchange="bindPickerChange" value="{{timerIndex}}" range="{{timer}}">
+        <text>监控时长：</text>
+        <picker bindchange="bindPickerChangeTimer" value="{{timerIndex}}" range="{{timer}}">
           <view class="picker_area">
             {{timer[timerIndex]}}
             <view class='flag'>▼</view>
@@ -37,11 +31,11 @@
         </picker>
       </view>
       <view class='item'>
-        <text>监控时长：</text>
+        <text>监控频率：</text>
 
-        <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+        <picker bindchange="bindPickerChangeFrequency" value="{{frequencyIndex}}" range="{{frequencyArr}}">
           <view class="picker_area">
-            {{areas[areasIndex]}}
+            {{frequencyArr[frequencyIndex]}}
             <view class='flag'>▼</view>
           </view>
         </picker>
@@ -51,7 +45,7 @@
       <view class='items'>
         <text>ASIN关键词：</text>
 
-        <textarea auto-height/>
+        <textarea auto-height bindinput='changeASIN'/>
       </view>
       <view class='tips'>
         (一行一个,ASIN与关键词使用"|"分隔，例如：B01MDKPDHM|iPhone7 case)

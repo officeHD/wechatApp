@@ -17,7 +17,7 @@
         <view class="tr">
           <view class="td">{{item.TaskType}}</view>
           <view class="td">{{item.Surtime}}</view>
-          <view class="td">做任务</view>
+          <view class="td" data-pkid='{{item.PKID}}' bindtap='goDetail'> 做任务 </view>
        
         </view>
       </block>

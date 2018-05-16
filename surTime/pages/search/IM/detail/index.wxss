@@ -127,6 +127,12 @@
   height: 70rpx;
   vertical-align: middle;
 }
+.td image {
+  width:57rpx;
+  height: 33rpx;
+  margin: 0 2rpx;
+  vertical-align: middle;
+}
 
 .bg-g {
   background: #e6f3f9;

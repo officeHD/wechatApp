@@ -35,8 +35,16 @@ Page({
       }
       app.ajax('/SelectPlanInIM', data, function (res) {
         console.log(JSON.parse(res.data.d));
-        let reMes = JSON.parse(JSON.parse(res.data.d).ReturnInfo);
-        console.log(reMes)
+        let CompleteIMTable = JSON.parse(JSON.parse(res.data.d).CompleteIMTable);
+        let RuningIMTable = JSON.parse(JSON.parse(res.data.d).RuningIMTable);
+        let StopIMTable = JSON.parse(JSON.parse(res.data.d).StopIMTable);
+        that.setData({
+          listData: RuningIMTable,
+          runing: RuningIMTable,
+          stop: StopIMTable,
+          finish: CompleteIMTable
+        })
+        console.log(CompleteIMTable)
       })
       that.setData({
         listData: app.globalData.runingData,
@@ -61,5 +69,20 @@ Page({
       active: target,
       listData: data
     })
+  },
+  //删除计划
+  DelFileInfoInIM:function(e){
+    app.ajax('/SelectPlanInIM', data, fn)
+  },
+  // 停止监控
+  SetStopInIM: function (e) {
+    app.ajax('/SetStopInIM', data, fn)
+  },
+  //重新查询IM计划
+  AgainImSearch:function(){
+    app.ajax('/AgainImSearch', data, fn)
+  },
+  ViewCharInIM:function(){
+    app.ajax('/ViewCharInIM', data, fn)
   }
 })

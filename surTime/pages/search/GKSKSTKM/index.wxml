@@ -88,15 +88,15 @@
       </view>
       <view class='tbody'>
 
-        <block wx:for="{{listData}}" wx:key="{{code}}">
+        <block wx:for="{{RetKeyTable}}" wx:key="{{code}}">
           <view class="tr">
             <view class="td">{{index}} </view>
             <view class="td" wx-if="{{type!=='KM'}}">{{item.ASIN}} </view>
             <view class="td" wx-if="{{type=='ST'}}">{{item.SearchTerms}} </view>
             <view class="td" wx-if="{{type==='SK'}}">{{item.InputAsin}} </view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.Rank}}</view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'||type==='KM'}}">{{item.KeyName}}</view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.SearchResults}}</view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.PageRank}}</view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'||type==='KM'}}">{{item.KeyWord}}</view>
+            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.SearchResult}}</view>
 
           </view>
         </block>

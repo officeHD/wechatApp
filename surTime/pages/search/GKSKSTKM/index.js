@@ -96,7 +96,7 @@ Page({
   onReachBottom: function () {
     let that = this;
     console.log(that.data.page)
-    if (that.data.page==0) {
+    if (that.data.page == 0) {
       wx.showToast({
         title: '已无更多',
         icon: 'none'
@@ -113,7 +113,7 @@ Page({
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
       let newList = JSON.parse(data.ReturnInfo);
-     
+
       let page;
       if (!newList.length) {
         that.setData({
@@ -121,7 +121,7 @@ Page({
         });
         return false;
       } else {
-        page = that.data.page-0 + 1
+        page = that.data.page - 0 + 1
       }
       that.setData({
         listData: that.data.listData.concat(newList),
@@ -208,11 +208,14 @@ Page({
     let fn = msg => {
 
       let resData = JSON.parse(msg.data.d);
+      console.log(resData)
       console.log(JSON.parse(resData.RetDataTable))
       console.log(JSON.parse(resData.RetKeyTable))
 
       that.setData({
         showChild: true,
+        RetDataTable:JSON.parse(resData.RetDataTable),
+        RetKeyTable: JSON.parse(resData.RetKeyTable)
       })
     }
     app.ajax('/GetSKSKSTKMData', data, fn)

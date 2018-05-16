@@ -1,16 +1,15 @@
 <view class='search'>
 
-<text class='history' bindtap='goDetail'>查看历史数据</text>
-  <view class='title'>KR工具
-   
+  <text class='history' bindtap='goDetail'>查看历史数据</text>
+  <view class='title'>IM工具
+
   </view>
-   
+
   <view class='pick_view {{position}}'>
     <view class='picker_content'>
       <view class='item'>
         <text>站点：</text>
-
-        <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+        <picker bindchange="bindPickerChangeAreas" value="{{areasIndex}}" range="{{areas}}">
           <view class="picker_area">
             {{areas[areasIndex]}}
             <view class='flag'>▼</view>
@@ -19,91 +18,73 @@
       </view>
       <view class='item'>
         <text>ASIN：</text>
-
-        <input></input>
+        <input bindinput='changeASIN'></input>
       </view>
-    
     </view>
     <view class='picker_content'>
-     
       <view class='item'>
         <text>监控时长：</text>
-
-        <picker bindchange="bindPickerChange" value="{{areasIndex}}" range="{{areas}}">
+        <picker bindchange="bindPickerChangeTimer" value="{{timerIndex}}" range="{{timerArr}}">
           <view class="picker_area">
-            {{areas[areasIndex]}}
+            {{timerArr[timerIndex]}}
             <view class='flag'>▼</view>
           </view>
         </picker>
       </view>
-        <view class='item'>
+      <view class='item'>
         <text>卖家名：</text>
 
-         <input></input>
+        <input bindinput='changeShopName'></input>
       </view>
     </view>
     <view class='picker_content'>
-     <view class='item'>
+      <view class='item'>
         <text>监控频率：</text>
 
-        <picker bindchange="bindPickerChange" value="{{timerIndex}}" range="{{timer}}">
+        <picker bindchange="bindPickerChangeFrequency" value="{{frequencyIndex}}" range="{{frequencyArr}}">
           <view class="picker_area">
-            {{timer[timerIndex]}}
+            {{frequencyArr[frequencyIndex]}}
             <view class='flag'>▼</view>
           </view>
         </picker>
       </view>
-      
-       <view class='item'>
+
+      <view class='item'>
         <text>计划名：</text>
 
-        <input></input>
+        <input bindinput="changePlanName"></input>
       </view>
-       
+
 
     </view>
-    <view class="checkbox" bindtap='checkboxChange'>
-      <image src='{{check?"/images/check.png":"/images/nocheck.png"}}'></image>
+    <view class="checkbox" bindtap='checkboxChange1'>
+      <image src='{{check1?"/images/check.png":"/images/nocheck.png"}}'></image>
       是否FBA(勾选则代表监控当前卖家FBA的库存；不勾选则监控FBM库存)
     </view>
-    <view class="checkbox" bindtap='checkboxChange'>
-      <image src='{{check?"/images/check.png":"/images/nocheck.png"}}'></image>
-是否监控所有子商品(勾选此项创建计划时将耗费更多处理时间, 具体视子商品个数不同, 请耐心等待页面加载完成!)
+    <view class="checkbox" bindtap='checkboxChange2'>
+      <image src='{{check2?"/images/check.png":"/images/nocheck.png"}}'></image>
+      是否监控所有子商品(勾选此项创建计划时将耗费更多处理时间, 具体视子商品个数不同, 请耐心等待页面加载完成!)
     </view>
-    <view  class="checkbox" bindtap='checkboxChange'>
-      <image src='{{check?"/images/check.png":"/images/nocheck.png"}}'></image>
-    是否立即查询库存(勾选此项在创建计划的时候就查询一次库存，不勾选则会延迟5-10分钟进行查询操作!)
+    <view class="checkbox" bindtap='checkboxChange3'>
+      <image src='{{check3?"/images/check.png":"/images/nocheck.png"}}'></image>
+      是否立即查询库存(勾选此项在创建计划的时候就查询一次库存，不勾选则会延迟5-10分钟进行查询操作!)
     </view>
 
-    <view class='button' bindtap='search'>
+    <view class='button' bindtap='newIMPlan'>
       创建计划
     </view>
   </view>
   <view class='attention'>
     <view class='titles'>注意事项</view>
-    <view>排名等于49或者0或者-1则当次监控不扣T点，监控结束后会自动返还（返还：排名等于49或者0或者-1的总次数*单价）
-
-
-    </view>
-    <view>
-      单次计划扣除T点数=有效关键词数*(1440/监控频率(分钟))*监控时长*单价
-    </view>
-    <view>[注1: 当前单价为1T点 注2: 监控频率统一换算成分钟为单位 ]</view>
-    <view class='titles'>关于排名等于-1、0或者49的解释:</view>
-    <view>
-      起仓点: 初次创建计划未执行立即查询会导致监测到的排名为0
-
-    </view>
-    <view>
-      溢仓点: 我们只监控常规3页以内的排名（即48名以内的排名），如果检测到的排名大于48名，则报表会统一显示为49名，因此49名没有参考意义
-
-    </view>
-    <view>空仓点: 卖家下架产品监测不到排名会导致监测到的排名为49名</view>
-
-    <view>
-      故障点: 监测点出现网络连接等问题会导致监测到的排名为-1
-
-    </view>
-
+    <view>由于亚马逊FBA存在分仓，监控FBA库存可能不准确，请知悉</view>
+    <view>库存等于999或者0则当次监控不扣T点，监控结束后会自动返还（返还：库存等于999和0的总次数*单价）</view>
+    <view>单次计划扣除T点数=有效ASIN数*(1440/监控频率(分钟))*监控时长*单价</view>
+    <view>[注1: 当前单价为2T点 注2: 监控频率统一换算成分钟为单位 ]</view>
+    <view class='titles'>关于销量销售额为0及误差:</view>
+    <view>起仓点: 初次创建计划数据不足时会导致销量销售额为0</view>
+    <view>补仓点: 卖家补货使库存比前点大会导致销量销售额为0，或者产生误差</view>
+    <view>溢仓点: 库存持续超过999会导致销量销售额为0，或者产生误差</view>
+    <view>空仓点: 卖家下架产品监测不到库存会导致销量销售额产生误差</view>
+    <view>频率点: 监控频率越快，卖家调整库存产生的误差影响越小</view>
   </view>
 </view>

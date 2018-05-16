@@ -61,7 +61,7 @@ Page({
       }
     }
 
-    app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10 }, cb)
+    app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10,Asin:'' }, cb)
   },
 
   /**
@@ -163,6 +163,7 @@ Page({
     let data = {
       RowsNum: 10,
       UserID: app.globalData.PKID,
+      Asin:'',
       PNO: that.data.PNo
     }
     app.ajax('/UserIsValidRole', data, cb)

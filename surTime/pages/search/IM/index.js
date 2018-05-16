@@ -2,23 +2,27 @@ var app = getApp();
 Page({
   data: {
 
-    areas: ['美国', '英国', '德国', '法国', '加拿大', '墨西哥', '日本', '西班牙', '意大利'],
-    arrayval: ['US', 'UK', 'DE', 'FR', 'CA', 'MX', 'JP', 'ES', 'IT'],
+    areas: ['美国', '英国', '德国', '法国'],
+    arrayval: ['US', 'UK', 'DE', 'FR'],
     areasIndex: 0,
-    timer: ['3 Days', '7 Days', '15 Days', '30 Days', '60 Days', '120 Days'],
+    Country: 'US',
+    timerArr: ['3 Days', '7 Days', '15 Days', '30 Days', '60 Days', '120 Days'],
     timerval: ['3', '7', '15', '30', '60', '120'],
     timerIndex: 0,
-    year: '2018',
-    month: '09-01',
-    Country: 'us',
-    position: 'relative',
+    timer: '3',
+    frequencyArr: ['6 mins', '15 mins', '30 mins', '1H', '3H', '6H', '12H', '24H'],
+    frequencyval: ['6', '15', '30', '60', '180', '360', '720', '1440'],
+    frequencyIndex: 0,
+    frequency: '6',
+    check1: false,
+    check2: false,
+    check3: false,
     flag: true,
     ASIN: '',
     listData: []
   },
   onLoad: function () {
     let that = this;
-    let UserID = app.globalData.PKID;
 
 
 
@@ -31,11 +35,44 @@ Page({
       ASIN: value
     })
   },
-  search: function () {
+  changePlanName: function (e) {
+    let value = e.detail.value;
+    let that = this;
+
+    that.setData({
+      planName: value
+    })
+  },
+  changeShopName: function (e) {
+    let value = e.detail.value;
+    let that = this;
+
+    that.setData({
+      shopName: value
+    })
+  },
+  checkboxChange1: function (e) {
+    this.setData({
+      check1: !this.data.true
+    })
+  },
+  checkboxChange2: function (e) {
+    this.setData({
+      check2: !this.data.true
+    })
+  },
+  checkboxChange3: function (e) {
+    this.setData({
+      check3: !this.data.true
+    })
+  },
+  //新增
+  newIMPlan: function () {
     let that = this;
     let UserID = app.globalData.PKID
-
     let Country = that.data.Country;
+    let SellerName = that.data.shopName;
+    let PlanName = that.data.planName;
     let ASIN = that.data.ASIN;
     if (!ASIN) {
       wx.showToast({
@@ -44,67 +81,64 @@ Page({
       })
       return;
     }
+    let data = {
+      UserID: UserID,
+      ASIN: ASIN,
+      Country: Country,
+      SellerName: SellerName,
+      PlanName: PlanName,
+      MonitoringCycleDay: that.data.timer,
+      MonitoringFrequency: that.data.frequency,
+      IsCreateRuning: that.data.check1,
+      IsExpandVariation: that.data.check2,
+      IsFBA: that.data.check3,
+      AsinList: '',
+      UserIpAddress: '',
+      StopPage: 1,
+      CompletePage: 1,
+      PageCount: 1,
+    };
     let cb = (res) => {
-      let data = JSON.parse(res.data.d)
-      that.setData({
-        listData: JSON.parse(data.ReturnInfo)
-      });
+      let data = JSON.parse(res.data.d);
+      if (data.State!==1){
+        wx.showModal({
+          title: '提示',
+          content: data.ReturnInfo,
+        })
+      }else{
+        that.goDetail();
+      }
+      
     }
-    app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
+    app.ajax('/NewIMPlan', data, cb)
   },
-  sortArr: function (e) {
-    let target = e.currentTarget.dataset.target;
+
+
+  bindPickerChangeAreas: function (e) {
     let that = this;
-    let arr = that.data.listData;
-    let flag = !that.data.flag;
+    let index = e.detail.value;
     that.setData({
-      flag: flag,
-      listData: app.sort_object(arr, target, flag)
-    });
-
-  },
-  /**
-  * 页面相关事件处理函数--监听用户下拉动作
-  */
-  onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    //模拟加载
-    this.onLoad();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
-
-  },
-
-  onReachBottom: function () {
-    let that = this;
-    let cb = (res) => {
-      that.setData({
-        listData: that.data.listData.concat(res.data.list)
-      });
-    }
-    app.ajax('A9List', '', cb, 'POST')
-  },
-  onPageScroll: function (e) {
-    let that = this;
-    let scrollTop = e.scrollTop;
-
-    if (scrollTop >= 60) {
-      that.setData({
-        position: 'fixed'
-      });
-    } else {
-      that.setData({
-        position: 'relative'
-      });
-    }
-  },
-  bindPickerChange: function (e) {
-    this.setData({
-      index: e.detail.value
+      areasIndex: index,
+      Country: that.data.arrayval[index]
     })
-  }
-,
-  goDetail:function(){
+  },
+  bindPickerChangeTimer: function (e) {
+    let that = this;
+    let index = e.detail.value;
+    that.setData({
+      timerIndex: index,
+      timer: that.data.timerval[index]
+    })
+  },
+  bindPickerChangeFrequency: function (e) {
+    let that = this;
+    let index = e.detail.value;
+    that.setData({
+      frequencyIndex: index,
+      frequency: that.data.frequencyval[index]
+    })
+  },
+  goDetail: function () {
     wx.navigateTo({
       url: './detail/index',
     })

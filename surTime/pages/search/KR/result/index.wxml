@@ -16,7 +16,7 @@
   <view class="table">
     <view class='thead'>
       <view class="tr">
-        <view class="th" data-target="integral" bindtap='sortArr'> 图片 </view>
+        <view class="th" data-target="integral" bindtap='sortArr'> 计划名 </view>
         <view class="th" data-target="money" bindtap='sortArr'> ASIN </view>
         <view class="th " data-target="time" bindtap='sortArr'>站点 </view>
         <view class="th ">操作</view>
@@ -25,10 +25,14 @@
     <view class='tbody' wx-if="{{listData.length>0}}">
       <block wx:for="{{listData}}" wx:key="{{index}}">
         <view class="tr">
-          <view class="td">{{item.RechargeGK}}</view>
-          <view class="td">{{item.RechargeMoney}}</view>
-          <view class="td">{{item.RechargeTime}}</view>
-          <view class="td"> {{item.RechargeType}} </view>
+          <view class="td">{{item.PlanName}}</view>
+          <view class="td">{{item.ASIN}}</view>
+          <view class="td">{{item.CountryName}}</view>
+          <view class="td">  
+           <image src='/images/table/info.png'></image>
+           <image src='/images/table/del.png'></image>
+           <image src='/images/table/look.png'></image>
+           </view>
         </view>
       </block>
 
