@@ -1,30 +1,72 @@
 <view class='search'>
 
-  <view class='title'>个人P卡办理
 
-  </view>
+  <view class='title' wx-if="{{type==='1'}}">办理WF账户</view>
+  <view class='title' wx-if="{{type==='2'}}">个人P卡办理</view>
   <view class='pick_view'>
     <view class='picker_content'>
       <view class='item'>
-        <text>站点：</text>
+        <text>任务名：</text>
         <input></input>
       </view>
       <view class='item'>
-        <text>计划名：</text>
+        <text>姓名：</text>
         <input bindinput='changePlanName'></input>
       </view>
     </view>
     <view class='picker_content'>
       <view class='item'>
-        <text>监控时长：</text>
+        <text>电话号码：</text>
         <input></input>
       </view>
       <view class='item'>
-        <text>监控频率：</text>
+        <text>邮箱：</text>
         <input></input>
       </view>
     </view>
-
+    <view class='picker_content'>
+      <view class='item'>
+        <text>出生日期：</text>
+        <input></input>
+      </view>
+      <view class='item'>
+        <text>邮编：</text>
+        <input></input>
+      </view>
+    </view>
+    <view class='picker_content'>
+      <view class='items'>
+        <text>币种：</text>
+        <view class="checkbox" data-index='1' bindtap='checkboxChange'>
+          <image src='{{check1?"/images/check.png":"/images/nocheck.png"}}'></image> 美元
+        </view>
+        <view class="checkbox" data-index='2' bindtap='checkboxChange'>
+          <image src='{{check2?"/images/check.png":"/images/nocheck.png"}}'></image> 英镑
+        </view>
+        <view class="checkbox" data-index='3' bindtap='checkboxChange'>
+          <image src='{{check3?"/images/check.png":"/images/nocheck.png"}}'></image> 欧元
+        </view>
+        <view class="checkbox" data-index='4' bindtap='checkboxChange'>
+          <image src='{{check4?"/images/check.png":"/images/nocheck.png"}}'></image> 加元
+        </view>
+        <view class="checkbox" data-index='5' bindtap='checkboxChange'>
+          <image src='{{check5?"/images/check.png":"/images/nocheck.png"}}'></image> 日元
+        </view>
+      </view>
+    </view>
+    <view class='picker_content'>
+      <view class='items'>
+        <text>地址：</text>
+        <input></input>
+      </view>
+    </view>
+    <view class='picker_content'>
+      <view class='items'>
+        <text>店铺链接：</text>
+        <input></input>
+      </view>
+    </view>
+     <view class='title'>个人信息上传</view>
     <view class='button' bindtap='search'>
       确认搜索
     </view>

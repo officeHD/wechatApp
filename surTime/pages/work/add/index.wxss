@@ -36,6 +36,7 @@ input{
 }
 .items{
   display: flex;
+  width: 100%;
 }
 picker{
   width: 195rpx;
@@ -55,10 +56,27 @@ picker{
   float: right;
   color:#818181;
 }
-.item text{
+.item text,.items text{
   width: 150rpx;
-   
+   text-align: right;
     font-size: 30rpx;
+}
+.checkbox {
+  width: 110rpx;
+  display: block;
+  font-size: 13px;
+   
+   height: 40rpx;
+   line-height: 40rpx;
+}
+.items input{
+  width:550rpx;
+}
+
+.checkbox image {
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: text-top;
 }
 textarea{
   width: 248rpx;

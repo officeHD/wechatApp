@@ -43,15 +43,20 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
-        var tempFilePaths = res.tempFilePaths
+        var tempFilePaths = res.tempFilePaths;
+        
+        console.log(res.tempFiles)
         wx.uploadFile({
-          url: '', // 上传接口
+          url: 'http://192.168.0.106/SurtimeWebService.asmx/UploadImages', // 上传接口
           filePath: tempFilePaths[0],
+          header: { "Content-Type": "application/json" },
           name: 'file',
           formData: {
-            'user': 'test'
+            "Key": "SurTimeWebserviceS3ur0ti1me8"
+            
           },
           success: function (res) {
+            console.log(res)
             var data = res.data
             //do something
           }

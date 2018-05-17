@@ -1,5 +1,6 @@
 {
   "pages": [
+      "pages/login/index",
     "pages/index/index",
     "pages/user/index",
       "pages/pay/index",
@@ -20,7 +21,7 @@
     "pages/search/A9/detail/index",
     "pages/album/index",
     "pages/search/KR/result/index",
-    "pages/login/index",
+  
     "pages/register/index",
     "pages/album/detail/index",
     "pages/search/GKSKSTKM/index",

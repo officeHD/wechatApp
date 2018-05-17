@@ -15,6 +15,12 @@ Page({
     newPassWord: ''
   },
   onLoad: function () {
+    let UserID = app.globalData.PKID;
+    if (UserID){
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+    }
 
   },
   //切换登录方式

@@ -47,7 +47,7 @@ Page({
   },
   checkboxChange: function (e) {
     this.setData({
-      check: !this.data.true
+      check: !this.data.check
     })
   },
   search: function () {
