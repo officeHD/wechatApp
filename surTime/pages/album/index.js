@@ -70,7 +70,7 @@ Page({
   },
   //点击删除按钮事件
   delItem: function (e) {
-    let that=this;
+    let that = this;
     let id = e.currentTarget.dataset.id;
     let Pictname = e.currentTarget.dataset.name;
     let datas = {
@@ -78,34 +78,40 @@ Page({
       Pictname: Pictname,
       PictId: id
     }
-    app.ajax('/DelPic', datas, function(res){
-        
-        if (JSON.parse(res.data.d).State.toString()==="1"){
-            wx.showModal({
-              title: '提示',
-              content: '删除成功',
-              complete:function(){
-                that.setList();
-              }
-            })
+    wx.showModal({
+      title: '提示',
+      content: '删除后无法恢复',
+      success: function (res) {
+        if (res.confirm) {
+          app.ajax('/DelPic', datas, function (res) {
+            if (JSON.parse(res.data.d).State.toString() === "1") {
+              wx.showModal({
+                title: '提示',
+                content: '删除成功',
+                complete: function () {
+                  that.setList();
+                }
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
+      },
+      fail: function (res) { },
+
     })
-    var index = e.currentTarget.dataset.index;
-    var list = this.data.list;
-    //移除列表中下标为index的项
-    list.splice(index, 1);
-    //更新列表的状态
-    this.setData({
-      list: list
-    });
+
+
   },
-  
+
   //查看相册
   albumDetail: function (e) {
 
     let id = e.currentTarget.dataset.id;
+    let pictname = e.currentTarget.dataset.pictname;
     wx.navigateTo({
-      url: `/pages/album/detail/index?id=${id}`,
+      url: `/pages/album/detail/index?id=${id}&pictname=${pictname}`,
     })
   },
   touchS: function (e) {
@@ -198,5 +204,4 @@ Page({
     }
     app.ajax('/ImageList', data, fn)
   }
-
 })

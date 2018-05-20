@@ -14,6 +14,8 @@ Page({
     showChild: false,
     type: '',
     ASIN: '',
+    active: "SearchTerms",
+    RetDataTable:'',
     listData: []
   },
   onLoad: function (options) {
@@ -173,32 +175,38 @@ Page({
     wx.showModal({
       title: '提示',
       content: '删除后无法恢复',
-      success: function () {
-        let data = {
-          UserID: app.globalData.PKID,
-          PageType: that.data.type,
-          DataID: pkid,
-          FileName: ""
-        }
-        wx.showLoading({
-          title: '加载中',
-          icon: 'none'
-        })
-        app.ajax('/DeleteGKSKSTKMTableByUser', data, function (res) {
-          wx.hideLoading();
-          let returnMes = JSON.parse(res.data.d)
-          if (returnMes.State == 1) {
-            wx.showModal({
-              title: '提示',
-              content: '删除成功',
-            })
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: returnMes.ReturnInfo,
-            })
+      success: function (res) {
+        if (res.confirm) {
+          let data = {
+            UserID: app.globalData.PKID,
+            PageType: that.data.type,
+            DataID: pkid,
+            FileName: ""
           }
-        })
+          wx.showLoading({
+            title: '加载中',
+            icon: 'none'
+          })
+          app.ajax('/DeleteGKSKSTKMTableByUser', data, function (res) {
+            wx.hideLoading();
+            let returnMes = JSON.parse(res.data.d)
+            if (returnMes.State == 1) {
+              wx.showModal({
+                title: '提示',
+                content: '删除成功',
+              })
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: returnMes.ReturnInfo,
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+
+       
       }
     })
   },
@@ -208,20 +216,26 @@ Page({
     let fn = msg => {
 
       let resData = JSON.parse(msg.data.d);
-      console.log(resData)
+       
       console.log(JSON.parse(resData.RetDataTable))
       console.log(JSON.parse(resData.RetKeyTable))
 
       that.setData({
-        showChild: true,
-        RetDataTable:JSON.parse(resData.RetDataTable),
-        RetKeyTable: JSON.parse(resData.RetKeyTable)
+        RetDataTable: JSON.parse(resData.RetDataTable)[0],
+        RetKeyTable: JSON.parse(resData.RetKeyTable),
+        showChild: true
+       
       })
     }
     app.ajax('/GetSKSKSTKMData', data, fn)
   },
 
-
+  searchType: function (e) {
+    let target = e.currentTarget.dataset.target;
+    this.setData({
+      active: target
+    })
+  },
   closeChild: function () {
     this.setData({
       showChild: false

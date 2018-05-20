@@ -5,7 +5,7 @@ view {
 .item-box {
   width: 750rpx;
   margin: 0auto;
-  padding-top: 40rpx;
+  padding-top:0;
   padding-bottom: 130rpx;
 }
 

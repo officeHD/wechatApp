@@ -49,8 +49,8 @@
             <view class="td">{{item.ASIN}}</view>
             <view class="td">{{item.CountryName}}</view>
             <view class="td operate">
-               <image src='../../../images/table/detail.png' data-jindu='{{item.jindu}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
-                <image src='../../../images/table/del.png'  data-PKID='{{item.PKID}}' bindtap='delList'></image>
+              <image src='../../../images/table/detail.png' data-jindu='{{item.jindu}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
+              <image src='../../../images/table/del.png' data-PKID='{{item.PKID}}' bindtap='delList'></image>
             </view>
           </view>
           <view class="tr" wx-if="{{type==='KM'}}">
@@ -61,7 +61,7 @@
             <view class="td">{{item.DataCount}}</view>
             <view class="td operate">
               <image src='../../../images/table/detail.png' data-jindu='{{item.jindu}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
-                <image src='../../../images/table/del.png'  data-PKID='{{item.PKID}}' bindtap='delList'></image>
+              <image src='../../../images/table/del.png' data-PKID='{{item.PKID}}' bindtap='delList'></image>
             </view>
           </view>
         </block>
@@ -72,38 +72,120 @@
   <view class='bg_model' wx-if="{{showChild}}">
     <view class='tableInfo'>
       <view class='titles' bindtap='closeChild'> 在线预览
-        <view class='closeChild' >×</view>
+        <view class='closeChild'>×</view>
       </view>
-      <view class="table">
-      <view class='thead'>
-        <view class="tr">
-          <view class="th">序号</view>
-          <view class="th" wx-if="{{type!=='KM'}}">ASIN </view>
-          <view class="th" wx-if="{{type=='ST'}}">Search Terms </view>
-          <view class="th" wx-if="{{type==='SK'}}">入口ASIN </view>
-          <view class="th" wx-if="{{type==='SK'||type==='GK'}}">页面排名 </view>
-          <view class="th" wx-if="{{type==='SK'||type==='GK'||type==='KM'}}">关键词</view>
-          <view class="th" wx-if="{{type==='SK'||type==='GK'}}">搜索结果数</view>
+      <block  wx-if="{{type=='GK'||type=='SK'}}">
+       <view class='infotop'>
+        <view class='image'>
+          <image src='{{RetDataTable.LargeImage}}'></image>
+        </view>
+        <view class='Product_title'>
+          <view>Product Title:</view>
+          {{RetDataTable.Title}}
         </view>
       </view>
-      <view class='tbody'>
-
-        <block wx:for="{{RetKeyTable}}" wx:key="{{code}}">
-          <view class="tr">
-            <view class="td">{{index}} </view>
-            <view class="td" wx-if="{{type!=='KM'}}">{{item.ASIN}} </view>
-            <view class="td" wx-if="{{type=='ST'}}">{{item.SearchTerms}} </view>
-            <view class="td" wx-if="{{type==='SK'}}">{{item.InputAsin}} </view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.PageRank}}</view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'||type==='KM'}}">{{item.KeyWord}}</view>
-            <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.SearchResult}}</view>
-
+      <view class='infoList'>
+        <view class='item'>
+          <view class='item_list'>
+            <view class='item_title'>ASIN:</view>
+            <view class='contents'>{{RetDataTable.ASIN}}</view>
           </view>
-        </block>
+          <view class='item_list'>
+            <view class='item_title'>Parentage:</view>
+            <view class='contents'>{{RetDataTable.Parentage}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Brand:</view>
+            <view class='contents'>{{RetDataTable.Brand}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Manufacture:</view>
+            <view class='contents'>{{RetDataTable.Manufacture}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>UPC:</view>
+            <view class='contents'>{{RetDataTable.UPC}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>EAN:</view>
+            <view class='contents'>{{RetDataTable.EAN}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Model:</view>
+            <view class='contents'>{{RetDataTable.Model}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>PartNumber:</view>
+            <view class='contents'>{{RetDataTable.PartNumber}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>MPN:</view>
+            <view class='contents'>{{RetDataTable.MPN}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Department:</view>
+            <view class='contents'>{{RetDataTable.Department}}</view>
+          </view>
+          <view class='item_list'>
+            <view class='item_title'>Review:</view>
+            <view class='contents'>{{RetDataTable.Review}}</view>
+          </view>
+
+          <view class='item_list'>
+            <view class='item_title'>ReviewLevel:</view>
+            <view class='contents'>{{RetDataTable.ReviewLevel}}</view>
+          </view>
+        </view>
+      </view>
+      <view class=''>
+        <view class='change_view'>
+          <view class='status {{active==="SearchTerms"?"active":""}}' data-target="SearchTerms" bindtap='searchType'>
+            SearchTerms
+          </view>
+          <view class='status {{active==="Features"?"active":""}}' data-target="Features" bindtap='searchType'>
+            Features
+          </view>
+          <view class='status {{active==="Description"?"active":""}}' data-target="Description" bindtap='searchType'>
+            Description
+          </view>
+        </view>
+      </view>
+      <view class='detail'>
+        <view wx-if="{{active==='Description'}}"> {{RetDataTable.Description}}</view>
+        <view wx-if="{{active==='SearchTerms'}}"> {{RetDataTable.SearchTerms}}</view>
+        <view wx-if="{{active==='Features'}}"> {{RetDataTable.Features}}</view>
+      </view>
+      </block>
+      <view class="table">
+        <view class='thead'>
+          <view class="tr">
+            <view class="th">序号</view>
+            <view class="th" wx-if="{{type!=='KM'}}">ASIN </view>
+            <view class="th" wx-if="{{type=='ST'}}">Search Terms </view>
+            <view class="th" wx-if="{{type==='SK'}}">入口ASIN </view>
+            <view class="th" wx-if="{{type==='SK'||type==='GK'}}">页面排名 </view>
+            <view class="th" wx-if="{{type==='SK'||type==='GK'||type==='KM'}}">关键词</view>
+            <view class="th" wx-if="{{type==='SK'||type==='GK'}}">搜索结果数</view>
+          </view>
+        </view>
+        <view class='tbody'>
+
+          <block wx:for="{{RetKeyTable}}" wx:key="{{code}}">
+            <view class="tr">
+              <view class="td">{{index}} </view>
+              <view class="td" wx-if="{{type!=='KM'}}">{{item.ASIN}} </view>
+              <view class="td" wx-if="{{type=='ST'}}">{{item.SearchTerms}} </view>
+              <view class="td" wx-if="{{type==='SK'}}">{{item.InputAsin}} </view>
+              <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.PageRank}}</view>
+              <view class="td" wx-if="{{type==='SK'||type==='GK'||type==='KM'}}">{{item.KeyWord}}</view>
+              <view class="td" wx-if="{{type==='SK'||type==='GK'}}">{{item.SearchResult}}</view>
+
+            </view>
+          </block>
+        </view>
       </view>
     </view>
-    </view>
-    
+
 
   </view>
 </view>

@@ -1,5 +1,5 @@
 .stamp {
-  width: 320rpx;
+  width: 317rpx;
   height: 140rpx;
   padding: 0 10rpx;
   position: relative;

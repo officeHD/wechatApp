@@ -16,7 +16,7 @@ Page({
   },
   onLoad: function () {
     let UserID = app.globalData.PKID;
-    if (UserID){
+    if (UserID) {
       wx.switchTab({
         url: '/pages/index/index',
       })
@@ -64,7 +64,7 @@ Page({
       app.ajax('/GetMobileCode', { Phone: phone }, cb)
     }
   },
-  
+
   // 填写手机号值
   changePhoneNum: function (e) {
     let value = e.detail.value;
@@ -89,7 +89,7 @@ Page({
       passWord: value
     })
   },
- 
+
   // 填写用户名值
   changeUserName: function (e) {
     let value = e.detail.value;
@@ -107,32 +107,32 @@ Page({
       verifyCode = app.trim(that.data.verifyCode),
       userName = app.trim(that.data.userName),
       passWord = app.trim(that.data.passWord);
-
+    let fn = (res) => {
+      wx.hideLoading()
+      let result = JSON.parse(res.data.d);
+      
+      if (result.State.toString() === "1") {
+        // 储存用户信息
+        app.initUserInfo(JSON.parse(result.ReturnInfo));
+        app.initUserData(result.ReturnInfo);
+        console.log(JSON.parse(result.ReturnInfo))
+        wx.switchTab({
+          url: '/pages/usercenter/index',
+        })
+      } else {
+        wx.showToast({
+          title: result.ReturnInfo,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    }
     if (type) {
       if (app.checkData('手机号', userPhone) && app.checkData('验证码', verifyCode)) {
         let data = {
           "Phone": userPhone,
           "Code": verifyCode
         };
-        let fn = (res) => {
-          wx.hideLoading()
-          let result = JSON.parse(res.data.d);
-
-          if (result.State.toString() === "1") {
-            // 储存用户信息
-            app.initUserInfo(JSON.parse(result.ReturnInfo));
-            app.initUserData(result.ReturnInfo);
-            wx.switchTab({
-              url: '/pages/usercenter/index',
-            })
-          } else {
-            wx.showToast({
-              title: result.ReturnInfo,
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        }
         wx.showLoading({
           title: '登录中',
         })
@@ -145,44 +145,14 @@ Page({
           "PassWord": passWord,
           "LoginType": 1
         };
-        let fn = (res) => {
-          wx.hideLoading()
-          let result = JSON.parse(res.data.d);
-          
-          if (result.State.toString() === "1") {
-            // 储存用户信息
-            app.initUserInfo(JSON.parse(result.ReturnInfo));
-            app.initUserData(result.ReturnInfo);
-           
-            wx.switchTab({
-              url: '/pages/usercenter/index',
-            })
-          } else {
-            wx.showToast({
-              title: result.ReturnInfo,
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        }
+
         wx.showLoading({
           title: '登录中',
         })
         app.ajax('/Login', data, fn)
       }
     }
-  },
-  login_wx: function (e) {
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res);
-        wx.switchTab({
-          url: '/pages/index/index'
-        })
-      }
-    })
-
   }
-
+ 
+ 
 })

@@ -61,7 +61,7 @@ Page({
           OldData: data.ReturnInfo
         })
       } else if (data.State.toString() === '2') {
-
+        wx.hideLoading();
         wx.showToast({
           title: data.ReturnInfo,
           icon: 'none'
@@ -76,6 +76,10 @@ Page({
       that.addAsin(UserID, Country, ASIN, that.data.OldData)
 
     }
+    wx.showLoading({
+      title: '查询中',
+      icon:'none'
+    })
     app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
 
   },
@@ -125,11 +129,12 @@ Page({
   bindPickerChange: function (e) {
     let that=this;
     let index = e.detail.value;
-  
+   
     that.setData({
       index: index,
-      country: that.data.arrayval[index]
+      Country: that.data.arrayval[index]
     })
+    
   },
   checkDetail: function (e) {
     let pkid = e.currentTarget.dataset.pkid;

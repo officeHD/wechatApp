@@ -31,6 +31,7 @@ page {
 .controll.pr{
   position: absolute;
   right:20rpx;
+  top: 10px;
 }
 .infotop {
   display: flex;
@@ -212,4 +213,30 @@ background-color: #f2f2f2
 .col3 .tbody .tr:nth-child(2n){
 background-color: #f2f2f2
 }
- 
+ .bg_model {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.bg_model .tableInfo {
+  height: 95%;
+  position: absolute;
+  left: 20rpx;
+  margin: 0;
+  top: 2.5%;
+  overflow-y: auto;
+}
+
+.closeChild {
+  width: 40rpx;
+  height: 40rpx;
+  font-size: 59rpx;
+  position: absolute;
+  right: 10rpx;
+  top: 0rpx;
+  color: #333;
+}

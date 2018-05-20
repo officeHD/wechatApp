@@ -17,6 +17,9 @@ Page({
     KeywordAnalysis: [],//精准关键词分析 
     active: "SearchTerms",
     chartIndex: 1,
+    pageNum1: 2,
+    pageNum2: 2,
+    pageNum3:2,
     tableIndex: 1
   },
 
@@ -62,16 +65,16 @@ Page({
     })
 
 
-    // //获取商品近三个月曝光量、点击量、销量明细
-    // app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
-    //   let data = JSON.parse(res.data.d);
-    //   let ReturnInfo = JSON.parse(data.ReturnInfo);
-    //   that.setData({
-    //     lineData: ReturnInfo
-    //   })
-    //   //折线图
-    //   that.setLineChart(ReturnInfo);
-    // })
+    //当前商品关联ASIN分析(初始化)
+    app.ajax('/GetPlannerRelatedASIN', { UserID: UserID, PkId: pkid, RowsNum: 10, PageNum:1}, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      console.log(ReturnInfo)
+      that.setData({
+        RelatedASIN: ReturnInfo
+      })
+      
+    })
 
 
 
@@ -243,7 +246,7 @@ Page({
       UserID: app.globalData.PKID
     }
 
-    app.ajax('/GetPIChildbyID', data, fn)
+    app.ajax('/GetPlannerPIChildbyID', data, fn)
   },
 
 
@@ -284,6 +287,70 @@ Page({
   closeChild: function () {
     this.setData({
       showChild: false
+    })
+  },
+  //加载更多
+  onReachBottom: function () {
+    let that = this;
+
+    if (that.data.tableIndex === 1) {
+    
+      that.GetPlanner500Key(); //关键词词频分析(向下滚动)
+    
+      
+    } else if (that.data.tableIndex === 2){
+      that.GetPlannerKeywordRedAnalysis()//当前商品流量关键词分析(向下滚动)
+    } else if (that.data.tableIndex === 3){
+      that.GetPlannerRelatedASIN();//当前商品关联ASIN分析(向下滚动)
+    }
+   
+  },
+  GetPlanner500Key:function(){
+    let that = this;
+    let PkId = that.data.PkId;
+    let UserID = app.globalData.PKID;
+    let pageNum = that.data.pageNum1;
+    app.ajax('/GetPlanner500Key', { UserID: UserID, PkId: PkId, RowsNum: 10, PNO:'', PageNum: pageNum }, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      console.log(ReturnInfo)
+      that.setData({
+        KeywordAnalysis: that.data.KeywordAnalysis.concat(ReturnInfo) ,
+        pageNum1: that.data.pageNum1 - 0 + 1
+      })
+
+    })
+  },
+  GetPlannerKeywordRedAnalysis:function(){
+    let that = this;
+    let PkId = that.data.PkId;
+    let UserID = app.globalData.PKID;
+    let pageNum = that.data.pageNum2;
+    app.ajax('/GetPlannerKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum: 10, PageNum: pageNum }, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      console.log(ReturnInfo)
+      that.setData({
+        KeywordRedAnalysis: that.data.KeywordRedAnalysis.concat(ReturnInfo) ,
+        pageNum2: that.data.pageNum2 - 0 + 1
+      })
+
+    })
+  },
+  GetPlannerRelatedASIN:function(){
+    let that=this;
+    let PkId = that.data.PkId;
+    let UserID = app.globalData.PKID;
+    let pageNum=that.data.pageNum3;
+      app.ajax('/GetPlannerRelatedASIN', { UserID: UserID, PkId: PkId, RowsNum: 10, PageNum: pageNum }, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      console.log(ReturnInfo)
+      that.setData({
+        RelatedASIN: that.data.RelatedASIN.concat(ReturnInfo) ,
+        pageNum3: that.data.pageNum3-0+1
+      })
+
     })
   }
 

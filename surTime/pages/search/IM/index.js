@@ -53,17 +53,17 @@ Page({
   },
   checkboxChange1: function (e) {
     this.setData({
-      check1: !this.data.true
+      check1: !this.data.check1
     })
   },
   checkboxChange2: function (e) {
     this.setData({
-      check2: !this.data.true
+      check2: !this.data.check2
     })
   },
   checkboxChange3: function (e) {
     this.setData({
-      check3: !this.data.true
+      check3: !this.data.check3
     })
   },
   //新增

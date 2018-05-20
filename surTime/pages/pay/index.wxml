@@ -8,7 +8,6 @@
       <view class='banner_price'>￥
         <text class='price_value'>{{current.price}}</text>
       </view>
-
     </view>
   </view>
   <view class='order_info bgcw'>
@@ -19,7 +18,6 @@
       <view>
         <view>充值金额：{{current.price}}元 </view>
         <view>下单时间：2018/3/19 14:30:30 </view>
-
       </view>
       <view>
         <view>充值T点：{{current.value}} </view>
@@ -35,29 +33,41 @@
       <view class='item_list'>
         <view>优惠券</view>
         <view bindtap='selectDiscount'>
-          <text class='checked'>{{discountLabel}}</text> >
+          <text class='checked'>{{Discount?"已使用":"请选择"}}</text> >
         </view>
       </view>
-      <view class='item_list'>
+      <view class='item_list' bindtap='changeShow'>
         <view>优惠券代码</view>
         <view>></view>
       </view>
     </view>
   </view>
-
   <view class='bottom bgcw'>
     <view class='bottom_flex'>
       <view class='price '>
         <view class='price_val '>￥300</view>
         <view class='discount_info '>
-          <text>已优惠￥{{Discount}}元</text>
+          <text wx-if="{{Discount}}"> 已使用优惠券{{Discount}}</text>
           <text>{{current.single}}</text>
         </view>
       </view>
-      <view class='topay '>
+      <view class='topay ' bindtap='GetPayImg'>
         确认支付
       </view>
     </view>
+  </view>
 
+  <view class='bg' wx-if="{{add_show}}">
+    <view class='add_model'>
+      <view class='add_title' bindtap='changeShow'>
+        使用优惠券
+        <text class='close'>×</text>
+      </view>
+      <view class='input_area'>
+        <text>请输入优惠券代码</text>
+        <input placeholder='' bindinput="changename"></input>
+      </view>
+      <view class='sure' bindtap='sure_add'>确认验证</view>
+    </view>
   </view>
 </view>

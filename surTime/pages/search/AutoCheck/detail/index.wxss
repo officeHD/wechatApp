@@ -155,6 +155,9 @@ page {
   padding: 10rpx;
   box-sizing: border-box;
   font-size: 32rpx;
+   hyphens: auto;
+	word-wrap: break-word;
+   text-indent: 32rpx;
 }
 
 .echart {

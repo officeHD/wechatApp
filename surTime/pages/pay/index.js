@@ -1,4 +1,4 @@
-// pages/pay/index.js
+var app = getApp();
 Page({
 
   /**
@@ -7,12 +7,13 @@ Page({
   data: {
     Amount: '',
     CouponType: '',
-    DiscountType:'',
+    DiscountType: '',
     type: 1,
     current: '',
     Discount: 0,//优惠
-
     discountLabel: "请选择",
+    add_show: false,
+    carCode: '',
     config: [
       {
         src: '入门级',
@@ -81,21 +82,69 @@ Page({
         current: current[0]
       })
     }
+     
   },
-  onShow(){
-    let that=this;
+  onShow() {
+    let that = this;
     let pages = getCurrentPages();
     let currPage = pages[pages.length - 1];
     console.log(currPage.data)
     // that.setData({//将携带的参数赋值
     //   address: currPage.data.item
     // });
-    
+
   },
-  selectDiscount:function(){
+  selectDiscount: function () {
     wx.navigateTo({
       url: '/pages/coupon/index?type=pay',
     })
+  },
+  changeShow: function () {
+    let that = this;
+    that.setData({
+      add_show: !that.data.add_show
+    })
+  },
+  changename: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      carCode: value
+    })
+  },
+  sure_add: function () {
+    let that = this;
+    let fn = msg => {
+      console.log(msg)
+      let res=JSON.parse(msg.data.d)
+      if(res.State==1){
+       // do something...
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: res.ReturnInfo,
+        })
+      }
+    }
+    app.ajax('/CouponValid', { textCoupon: that.data.carCode }, fn)
+  },
+  GetPayImg:function(){
+    let that=this;
+    let data={
+      paymoney: that.data.current.price,
+      paytype: "W01", //支付宝：A01 微：W01
+      Coupon: "",//优惠券代码没有传值：“”
+      UserID: app.globalData.PKID,//
+      CouponType: 0,//1.固定优惠券代码 2.用户绑定优惠券 （两者都没有传0） 
+      DiscountType: '',//1.折扣券 2.满减券 3.抵扣券 （优惠券类型1的情况下，传0）
+      Amount: 0,//要求金额
+      Discount: 0//满减金额or折扣率or抵扣金额
+
+    }
+    let fn=msg=>{
+      console.log(JSON.parse(msg.data.d))
+    }
+    app.ajax('/GetPayImg', data, fn)
   }
 
 })

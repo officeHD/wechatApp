@@ -18,7 +18,7 @@ Page({
   getA9List: function () {
     let that = this;
     let UserID = app.globalData.PKID;
-   
+
     let sendData = {
       UserID: UserID,
       Page: that.data.page,
@@ -28,7 +28,8 @@ Page({
       EndTime: ''
     }
     let cb = (res) => {
-      let data = JSON.parse(res.data.d)
+      let data = JSON.parse(res.data.d);
+      console.log(JSON.parse(data.ReturnInfo))
       that.setData({
         listData: that.data.listData.concat(JSON.parse(data.ReturnInfo)),
         page: that.data.page + 1,
@@ -52,15 +53,15 @@ Page({
       return;
     }
     let cb = (res) => {
+      wx.hideLoading()
       let data = JSON.parse(res.data.d)
       if (data.State.toString() === '1') {
-
+        that.addAsin(UserID, Country, ASIN, that.data.OldData)
       } else if (data.State.toString() === '4') {
         that.setData({
           OldData: data.ReturnInfo
         })
       } else if (data.State.toString() === '2') {
-
         wx.showToast({
           title: data.ReturnInfo,
           icon: 'none'
@@ -72,7 +73,11 @@ Page({
           content: '存在旧数据，是否重新查询',
         })
       }
-      that.addAsin(UserID, Country, ASIN, that.data.OldData)
+      wx.showLoading({
+        title: '加载中',
+        icon: 'none'
+      })
+     
 
     }
     app.ajax('/PlannerAsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
@@ -130,7 +135,7 @@ Page({
       country: that.data.arrayval[index]
     })
   },
- 
+
   checkDetail: function (e) {
     let pkid = e.currentTarget.dataset.pkid;
     let state = e.currentTarget.dataset.state;
@@ -143,12 +148,12 @@ Page({
         title: '提示',
         content: '数据已失效',
       })
-    } else  {
+    } else {
       wx.showModal({
         title: '提示',
         content: '正在查询中，最终完成可能需要5-30分钟（与子ASIN数量有关），请耐心等待!!',
       })
-    }  
+    }
 
   }
 

@@ -5,26 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    UserName:'',
-    GKfen:'',
-    TuDian:'',
+    UserName: '',
+    GKfen: '',
+    TuDian: '',
     userListInfo: [{
       icon: '/images/user/youhuiquan.png',
       linkurl: '/pages/coupon/index',
       text: '我的优惠券'
 
     }, {
-        icon: '/images/user/tdianchongzhi.png',
+      icon: '/images/user/tdianchongzhi.png',
       text: 'T点充值',
       linkurl: '/pages/recharge/index?type=1'
 
     }, {
-        icon: '/images/user/taocan.png',
+      icon: '/images/user/taocan.png',
       text: '套餐充值',
       linkurl: '/pages/user/index'
 
     }, {
-        icon: '/images/user/xougaimima.png',
+      icon: '/images/user/xougaimima.png',
       linkurl: '/pages/reset/index',
       text: '修改密码'
     }]
@@ -34,11 +34,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     let userData = app.globalData.userData;
-    console.log(userData)
     if (userData) {
-      let userDatas=JSON.parse(userData);
+      let userDatas = JSON.parse(userData);
       this.setData({
         UserName: userDatas.UserName,
         GKfen: userDatas.GKfen,
@@ -76,13 +74,18 @@ Page({
     wx.showModal({
       title: '退出提示',
       content: '确认退出？',
-      success: function () {
-        wx.clearStorageSync();
-        app.globalData.PKID = '';
-        app.globalData.UserName = '';
-        app.globalData.Tel = '';
-        app.globalData.userData = '';
-        that.onLoad();
+      success: function (res) {
+        if (res.confirm) {
+          wx.clearStorageSync();
+          app.globalData.PKID = '';
+          app.globalData.UserName = '';
+          app.globalData.Tel = '';
+          app.globalData.userData = '';
+          that.onLoad();
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+
       }
     })
 

@@ -134,8 +134,8 @@
       <view class='tbody'>
         <block wx:for="{{SourcesStatistics}}" wx:key="{{index}}">
           <view class="tr">
-            <view class="td" data-name='{{item.StoreName}}' bindtap='getPieData'>{{item.keyWords}} </view>
-            <view class="td">{{item.Rank}}</view>
+            <view class="td"   >{{item.keyWords}} </view>
+            <view class="td">{{item.Frequency}}</view>
           </view>
         </block>
       </view>
@@ -144,7 +144,7 @@
   <view class='tableInfo'>
     <view class='title'>
       <image wx-if='{{tableIndex>1}}' bindtap='prevTable' class='controll pl' src='/images/arrow_left.png'></image>
-      <view class='title_txt' wx-if="{{tableIndex===1}}">US 站点上升最快TOP500关键词</view>
+      <view class='title_txt' wx-if="{{tableIndex===1}}">关键词词频分析</view>
       <view class='title_txt' wx-if="{{tableIndex===2}}">当前商品流量关键词分析</view>
       <view class='title_txt' wx-if="{{tableIndex===3}}">当前商品关联ASIN分析</view>
       <view class='line'>
@@ -157,33 +157,23 @@
 
     </view>
     <scroll-view wx-if="{{tableIndex===1}}" scroll-x style="width: 100%">
-      <view class="table col">
+      <view class="table">
         <view class='thead  '>
           <view class="tr ">
-            <view class="th">TOP排名</view>
+            <view class="th">序号</view>
             <view class="th">关键词 </view>
-            <view class="th">搜索用户增量 </view>
-            <view class="th">当期搜索用户数 </view>
-            <view class="th">上期搜索用户数 </view>
-            <view class="th">当期搜索量 </view>
-            <view class="th">上期搜索量 </view>
-            <view class="th">当期点击量 </view>
-            <view class="th">当期加购量 </view>
+            
+            <view class="th">出现次数 </view>
             
           </view>
         </view>
         <view class='tbody  '>
           <block wx:for="{{KeywordAnalysis}}" wx:key="{{index}}">
             <view class="tr  ">
-              <view class="td">{{item.TopRank}} </view>
+              <view class="td">{{index}} </view>
               <view class="td">{{item.keyWords}}</view>
-              <view class="td">{{item.SearchUserIncrement}}</view>
-              <view class="td">{{item.CurrentSearchUser}}</view>
-              <view class="td">{{item.PreviousSearchUser}}</view>
-              <view class="td">{{item.CurrentSearch}}</view>
-              <view class="td">{{item.PreviousSearch}}</view>
-              <view class="td">{{item.CurrentClicking}}</view>
-              <view class="td">{{item.CurrentCartAdding}}</view>
+              
+              <view class="td">{{item.Frequency}}</view>
               
             </view>
           </block>
@@ -245,7 +235,7 @@
   <view class='bg_model' wx-if="{{showChild}}">
       
     <view class='tableInfo'>
-      <view class='title'> 子ASIN明细 <view class='closeChild' bindtap='closeChild'>×</view></view>
+      <view class='title'  bindtap='closeChild'> 子ASIN明细 <view class='closeChild'>×</view></view>
       <view class='infotop'>
         <view class='image'>
           <image src='{{childPIData.ImageUrl}}'></image>

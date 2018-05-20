@@ -52,7 +52,7 @@ Page({
 
         ]
       }
-     
+
     ],
     userInfo: {},
     hasUserInfo: false,

@@ -18,7 +18,9 @@
         </view>
         <view class='item_list'>
           <view class='item_title'>ASIN:</view>
-          <view class='content'>{{tableInfo.ASIN}}</view>
+          <view class='content'>
+          {{tableInfo.ASIN}}
+          </view>
         </view>
 
         <view class='item_list'>
@@ -77,7 +79,7 @@
       </view>
     </view>
     <view class='detail'>
-      <view wx-if="{{active==='Description'}}"> {{tableInfo.Description}}</view>
+      <view wx-if="{{active==='Description'}}"> {{Description}}</view>
       <view wx-if="{{active==='SearchTerms'}}"> {{tableInfo.SearchTerms}}</view>
       <view wx-if="{{active==='Features'}}"> {{tableInfo.Features}}</view>
     </view>

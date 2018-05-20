@@ -51,6 +51,7 @@ Page({
         KetUrl: ReturnInfo.KetUrl,//关键词链接
         ZiAsinCount: ReturnInfo.ZiAsinCount,//子表数量
         tableInfo: Tables.reads[0],//产品主表
+        Description: app.convertHtmlToText(Tables.reads[0].Description),
         OlderPI: Tables.reads1,//历史表
         KeywordAnalysis: Tables.reads2,//精准关键词分析 
         SourcesStatistics: Tables.reads3,//卖家流量渠道占比
