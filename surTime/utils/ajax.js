@@ -9,8 +9,8 @@ function ajax(url = '', data = {}, fn) {
   let app = getApp();
   
   if (app.globalData.userData){
-    let token = JSON.parse(app.globalData.userData).Password;
-    header = { "Content-Type": "application/json", 'Authorization': `Bearer ${token}`}
+    let token =  app.globalData.token ;
+    header = { "Content-Type": "application/json", 'Authorization':token}
   }
   wx.request({
     url: API_HOST + url,

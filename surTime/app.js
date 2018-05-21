@@ -9,10 +9,12 @@ App({
     var Tel = wx.getStorageSync('Tel') || '';
     var UserName = wx.getStorageSync('UserName') || '';
     var userData = wx.getStorageSync('userData') || '';
+    var token = wx.getStorageSync('token') || '';
     this.globalData.userData = userData;
     this.globalData.PKID = PKID;
     this.globalData.UserName = UserName;
     this.globalData.Tel = Tel;
+    this.globalData.token = token;
    
 
     // 获取用户信息
@@ -41,6 +43,13 @@ App({
       data: userData
     })
     this.globalData.userData = userData;
+  },
+  initToken:function(val){
+    this.globalData.token = val;
+    wx.setStorage({
+      key: "token",
+      data: val
+    })
   },
   initUserInfo: function (obj) {
     this.globalData.PKID = obj.PKID;
@@ -74,6 +83,7 @@ App({
   globalData: {
     userInfo: null,
     userData: '',
+    token:'',
     runingData: [],
     stopData: [],
     finishData: []

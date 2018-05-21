@@ -25,13 +25,14 @@
     <view class='tbody' wx-if="{{listData.length>0}}">
       <block wx:for="{{listData}}" wx:key="{{index}}">
         <view class="tr">
-          <view class="td">{{item.PlanName}}</view>
-          <view class="td">{{item.ASIN}}</view>
-          <view class="td">{{item.CountryName}}</view>
+          <view class="td name">{{item.PlanName}}</view>
+          <view class="td asinKey">{{item.ASIN}}</view>
+          <view class="td country">{{item.CountryName}}</view>
           <view class="td">  
-           <image src='/images/table/info.png'></image>
-           <image src='/images/table/del.png'></image>
-           <image src='/images/table/look.png'></image>
+           <image data-id='{{item.PKID}}' data-asin='{{item.ASIN}}' bindtap='SetStopInIM' wx-if="{{active==='runing'}}" src='/images/table/look.png'></image>
+            <image data-id='{{item.PKID}}' bindtap='AgainImSearch' wx-if="{{active!=='runing'}}" src='/images/table/detail.png'></image>
+            <image data-id='{{item.PKID}}' data-asin='{{item.ASIN}}' data-sname='{{item.SellerName}}' bindtap='ViewCharInIM' src='/images/table/info.png'></image>
+            <image data-id='{{item.PKID}}' bindtap='DelFileInfoInIM' src='/images/table/del.png'></image>
            </view>
         </view>
       </block>
@@ -40,5 +41,11 @@
   </view>
   <view class="noData" wx-if="{{listData.length<=0}}">
     暂无数据
+  </view>
+   <view class='bg_model {{canvasShow?"show":""}}' bindtap='changeCanvas' >
+    <view class='echart'>
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+
+    </view>
   </view>
 </view>

@@ -113,9 +113,11 @@ Page({
       
       if (result.State.toString() === "1") {
         // 储存用户信息
+        // console.log(res.header.Authorization);
         app.initUserInfo(JSON.parse(result.ReturnInfo));
         app.initUserData(result.ReturnInfo);
-        console.log(JSON.parse(result.ReturnInfo))
+        app.initToken(res.header.Authorization)
+        // console.log(JSON.parse(result.ReturnInfo))
         wx.switchTab({
           url: '/pages/usercenter/index',
         })
@@ -145,7 +147,6 @@ Page({
           "PassWord": passWord,
           "LoginType": 1
         };
-
         wx.showLoading({
           title: '登录中',
         })

@@ -89,9 +89,9 @@ Page({
       PlanName: PlanName,
       MonitoringCycleDay: that.data.timer,
       MonitoringFrequency: that.data.frequency,
-      IsCreateRuning: that.data.check1,
+      IsCreateRuning: that.data.check3,
       IsExpandVariation: that.data.check2,
-      IsFBA: that.data.check3,
+      IsFBA: that.data.check1,
       AsinList: '',
       UserIpAddress: '',
       StopPage: 1,
@@ -99,6 +99,7 @@ Page({
       PageCount: 1,
     };
     let cb = (res) => {
+      wx.hideLoading();
       let data = JSON.parse(res.data.d);
       if (data.State!==1){
         wx.showModal({
@@ -110,6 +111,10 @@ Page({
       }
       
     }
+    wx.showLoading({
+      title: '创建中'
+      
+    })
     app.ajax('/NewIMPlan', data, cb)
   },
 
