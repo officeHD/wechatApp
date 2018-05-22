@@ -63,8 +63,6 @@ Page({
             "Pictid": that.data.id,
             "UserID": app.globalData.PKID,
             'Pictname': that.data.Pictname,
-            "Files": tempFilePaths[0]
-
           },
           success: function (res) {
             var doc = XMLParser.parseFromString(res.data);

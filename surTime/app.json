@@ -1,40 +1,29 @@
 {
   "pages": [
+    "pages/login/index",
+    "pages/work/add/index",
+    
    
-      "pages/login/index",
     "pages/index/index",
     "pages/user/index",
-      "pages/pay/index",
-      "pages/album/detail/index",
-   
-   
-  
+    "pages/pay/index",
+    "pages/album/detail/index",
     "pages/work/center/index",
     "pages/work/list/index",
-    "pages/work/add/index",
-   
-   
-   
-   
     "pages/reset/index",
     "pages/coupon/index",
     "pages/search/A9/index",
     "pages/search/A9/detail/index",
     "pages/album/index",
     "pages/search/KR/result/index",
-  
     "pages/register/index",
-    
     "pages/search/GKSKSTKM/index",
     "pages/search/IM/index",
     "pages/search/IM/detail/index",
-     
     "pages/search/GKSKST/index",
     "pages/search/GKSKST/detail/index",
     "pages/search/KR/index",
-   
     "pages/webview/index",
-   
     "pages/usercenter/index",
     "pages/search/AutoCheck/index",
     "pages/search/AutoCheck/detail/index"

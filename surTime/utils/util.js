@@ -13,10 +13,11 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+ 
 //校验数据有效性
 export const checkData = (str, text) => {
-  if (text === '') {
+  
+  if (!text||text === '') {
     //非空验证
     wx.showToast({
       title: `${str} 不得为空！`,
@@ -48,7 +49,7 @@ export const checkData = (str, text) => {
         reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
         break;
       default:
-        reg = /^\w+$/;
+        reg = /[\s\S]*/;
         break
     }
     if (!reg.test(text)) {

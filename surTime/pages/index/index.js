@@ -35,8 +35,8 @@ Page({
       },
       {
         className: 'navlist', name: '卖家配套服务', navgator: [
-          { url: "/pages/album/index", name: "图片专用空间" },
-          { url: "", name: "亚马逊FBA升仓扩容" }
+          { url: "/pages/album/index", name: "图片专用空间" }
+        
         ]
       },
       {

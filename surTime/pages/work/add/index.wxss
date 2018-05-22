@@ -5,44 +5,49 @@
   color: #333;
   letter-spacing: 2rpx;
 }
-.picker_content{
+
+.picker_content {
   display: flex;
   justify-content: space-between;
   padding: 0 20rpx;
   margin: 10px 0;
- 
   font-size: 14px;
 }
-.history{
+
+.history {
   position: absolute;
   right: 30rpx;
-  top:30rpx;
+  top: 30rpx;
   font-size: 24rpx;
   line-height: 50rpx;
   letter-spacing: 2rpx;
-  color: #1487D9;
+  color: #1487d9;
 }
-input{
+
+input {
   width: 195rpx;
-  border:1px solid #ccc;
+  border: 1px solid #ccc;
   height: 50rpx;
   line-height: 50rpx;
   box-sizing: border-box;
 }
 
-.picker_content .item{
+.picker_content .item {
   width: 50%;
-  display: flex
+  display: flex;
 }
-.items{
+
+.items {
   display: flex;
   width: 100%;
 }
-picker{
+
+picker {
   width: 195rpx;
   height: 50rpx;
 }
-.picker_area{
+
+.picker_area {
   width: 195rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -52,25 +57,28 @@ picker{
   border: 1px solid #ccc;
   font-size: 13px;
 }
-.flag{
+
+.flag {
   float: right;
-  color:#818181;
+  color: #818181;
 }
-.item text,.items text{
+
+.item text, .items text {
   width: 150rpx;
-   text-align: right;
-    font-size: 30rpx;
+  text-align: right;
+  font-size: 30rpx;
 }
+
 .checkbox {
   width: 110rpx;
   display: block;
   font-size: 13px;
-   
-   height: 40rpx;
-   line-height: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
 }
-.items input{
-  width:550rpx;
+
+.items input {
+  width: 550rpx;
 }
 
 .checkbox image {
@@ -78,38 +86,98 @@ picker{
   height: 30rpx;
   vertical-align: text-top;
 }
-textarea{
+
+textarea {
   width: 248rpx;
   min-height: 50rpx;
   line-height: 50rpx;
   height: auto;
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
 }
-.tips{
+
+.tips {
   width: 260rpx;
   font-size: 12px;
   padding: 10rpx;
 }
-.button{
+
+.button {
   width: 400rpx;
   height: 70rpx;
   line-height: 70rpx;
   margin: 20px auto;
   text-align: center;
-  background-color: #1487D9;
+  background-color: #1487d9;
   color: #fff;
   border-radius: 5px;
   font-size: 33rpx;
 }
-.attention{
+
+.attention {
   border-top: 1px dotted #ccc;
   padding: 20px 10px;
   font-size: 26rpx;
 }
-.attention .titles{
+
+.attention .titles {
   text-align: left;
   font-size: 30rpx;
   font-weight: 600;
   margin: 15rpx 0;
-  color:#1487D9; 
+  color: #1487d9;
+}
+
+.subtitle {
+  text-align: left;
+  background-color: #f2f2f2;
+  margin: 15rpx 0;
+  padding: 15rpx;
+  font-size: 30rpx;
+}
+
+.radio {
+  font-size: 26rpx;
+  margin: 10px;
+}
+
+.img {
+  height: 130rpx;
+  display: block;
+  width: 130rpx;
+}
+
+.user_item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.view {
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 2;
+}
+.partner{
+   padding-top: 40rpx;
+ 
+  position: relative;
+}
+.addPartner{
+  width: 260rpx;
+  position: absolute;
+  right: 0;
+  height: 40rpx;
+  font-size: 32rpx;
+  top: 0;
+  text-align: center;
+  color: #1487D9;
+}
+.partnerList{
+  background-color: #F9FDFF;
+  width: 700rpx;
+  margin: 20rpx auto;
+  border-radius: 5px;
+  padding: 20rpx 10rpx;
+}
+.picker_bir{
+  width: 100%;
 }

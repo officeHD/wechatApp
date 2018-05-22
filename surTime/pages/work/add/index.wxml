@@ -1,40 +1,62 @@
 <view class='search'>
 
 
-  <view class='title' wx-if="{{type==='1'}}">办理WF账户</view>
-  <view class='title' wx-if="{{type==='2'}}">个人P卡办理</view>
+  <view class='subtitle' wx-if="{{type==='1'}}">办理WF账户</view>
+  <view class='subtitle' wx-if="{{type==='2'}}">P卡办理</view>
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio" wx:for="{{items}}" wx:key="{{index}}">
+      <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+    </label>
+  </radio-group>
   <view class='pick_view'>
     <view class='picker_content'>
       <view class='item'>
         <text>任务名：</text>
-        <input></input>
+        <input bindinput="changeTaskName"></input>
       </view>
       <view class='item'>
         <text>姓名：</text>
-        <input bindinput='changePlanName'></input>
+        <input bindinput='changeName'></input>
+      </view>
+    </view>
+    <view class='picker_content' wx-if="{{type=='2'&&genre=='personal'}}">
+      <view class='item'>
+        <text>身份证号：</text>
+        <input bindinput="changeUserCode"></input>
+      </view>
+      <view class='item'>
+        <text>拼音：</text>
+        <input bindinput='changeUserpinyin'></input>
       </view>
     </view>
     <view class='picker_content'>
-      <view class='item'>
-        <text>电话号码：</text>
-        <input></input>
+      <view class='item' wx-if="{{type=='1'||genre=='personal'}}">
+        <text>手机号码：</text>
+        <input bindinput='changePhone'></input>
+      </view>
+      <view class='item' wx-if="{{type==='2'&&genre=='company'}}">
+        <text>企业名称</text>
+        <input bindinput='changeCompanyName'></input>
       </view>
       <view class='item'>
         <text>邮箱：</text>
-        <input></input>
+        <input bindinput='changeEmail'></input>
       </view>
     </view>
     <view class='picker_content'>
       <view class='item'>
-        <text>出生日期：</text>
-        <input></input>
+        <picker class="picker_bir" mode="date" value="{{Birthday}}" start="1900-09-01" end="{{today}}" bindchange="changeBirthday">
+          <view>
+            出生日期：{{Birthday}}
+          </view>
+        </picker>
       </view>
       <view class='item'>
         <text>邮编：</text>
-        <input></input>
+        <input bindinput='changeZipCode'></input>
       </view>
     </view>
-    <view class='picker_content'>
+    <view class='picker_content' wx-if="{{type==='1'}}">
       <view class='items'>
         <text>币种：</text>
         <view class="checkbox" data-index='1' bindtap='checkboxChange'>
@@ -57,18 +79,128 @@
     <view class='picker_content'>
       <view class='items'>
         <text>地址：</text>
-        <input></input>
+        <input bindinput='changeAddress'></input>
       </view>
     </view>
-    <view class='picker_content'>
+    <view class='picker_content' wx-if="{{type=='1'||genre=='company'}}">
       <view class='items'>
         <text>店铺链接：</text>
-        <input></input>
+        <input bindinput='changeAFrontShopLink'></input>
       </view>
     </view>
-     <view class='title'>个人信息上传</view>
+
+    <view class='userInf' wx-if="{{type==='1'}}">
+      <view class='user_item'>
+        <view class='item_list'>
+          <image class='img' wx:if="{{!tempFilePaths[0]}}" bindtap='img_item' id='0' name='idcard_positive' src='/images/add.png'></image>
+          <image class='img' wx:else bindtap='img_item' id='0' name='idcard_positive' src='{{tempFilePaths[0]}}'></image>
+          <view class='view'>身份证正面 </view>
+
+
+        </view>
+        <view class='item_list'>
+
+          <image class='img' wx:if="{{!tempFilePaths[1]}}" bindtap='img_item' id='1' name='idcars_reverse' src='/images/add.png'></image>
+          <image class='img' wx:else bindtap='img_item' id='1' name='idcars_reverse' src='{{tempFilePaths[1]}}'></image>
+          <view class='view'>身份证正面</view>
+        </view>
+        <view class='item_list'>
+
+          <image class='img' wx:if="{{!tempFilePaths[2]}}" bindtap='img_item' id='2' name='bill' src='/images/add.png'></image>
+          <image class='img' wx:else bindtap='img_item' id='2' name='bill' src='{{tempFilePaths[2]}}'></image>
+          <view class='view'>账单</view>
+        </view>
+        <view class='item_list' wx-if="{{genre==='company'}}">
+
+          <image class='img' wx:if="{{!tempFilePaths[3]}}" bindtap='img_item' id='3' name='business_license' src='/images/add.png'></image>
+          <image class='img' wx:else bindtap='img_item' id='3' name='business_license' src='{{tempFilePaths[3]}}'></image>
+          <view class='view'>营业执照</view>
+        </view>
+      </view>
+      <view class='picker_content'>
+        <view class='items'>
+          <text>亚马逊上销售产品：</text>
+          <input bindinput='changeASellsProducts'></input>
+        </view>
+      </view>
+    </view>
+
+    <view class='subtitle' wx-if="{{type==='2'}}">国内银行账户信息</view>
+    <view class='countmes'>
+      <view class='picker_content' wx-if="{{type=='2'&&genre=='personal'}}">
+        <view class='item'>
+          <text>银行名称：</text>
+          <input bindinput="changebankname"></input>
+        </view>
+        <view class='item'>
+          <text>支行城市：</text>
+          <input bindinput='changesbankcity'></input>
+        </view>
+      </view>
+      <view class='picker_content'>
+        <view class='item'>
+          <text>支行名称：</text>
+          <input bindinput="changesbankname"></input>
+        </view>
+        <view class='item'>
+          <text>账户名称：</text>
+          <input bindinput='changebankuser'></input>
+        </view>
+      </view>
+      <view class='picker_content'>
+        <view class='item'>
+          <text>银行账号：</text>
+          <input bindinput="changebankhao"></input>
+        </view>
+        <view class='item'>
+          <text>关联手机：</text>
+          <input bindinput='changebankusertel'></input>
+        </view>
+      </view>
+            <view class='picker_content'>
+        <view class='items'>
+          <text>证件号码：</text>
+          <input bindinput='changebankusercode'></input>
+        </view>
+      </view>
+    </view>
+    <view wx-if="{{type==='1'&&genre==='company'}}" class='partner'>
+
+      <view class='addPartner' bindtap='addPartner'> 添加股东</view>
+      <block wx:for="{{partnerArr}}" wx:key="{{index}}">
+        <view class='partnerList'>
+          <view class='picker_content'>
+            <view class='item'>
+              <text>股东姓名:</text>
+              <input></input>
+            </view>
+            <view class='item'>
+              <text>占股比例:</text>
+              <input bindinput='changePlanName'></input>
+            </view>
+          </view>
+          <view class='user_item'>
+            <view class='item_list'>
+              <image class='img' wx:if="{{!tempFilePaths1[index]}}" bindtap='img_item1' id='{{index}}' name='idcard_positive' src='/images/add.png'></image>
+              <image class='img' wx:else bindtap='img_item1' id='{{index}}' name='idcard_positive' src='{{tempFilePaths1[index]}}'></image>
+              <view class='view'>身份证正面 </view>
+
+
+            </view>
+            <view class='item_list'>
+
+              <image class='img' wx:if="{{!tempFilePaths2[index]}}" bindtap='img_item2' id='{{index}}' name='idcars_reverse' src='/images/add.png'></image>
+              <image class='img' wx:else bindtap='img_item2' id='{{index}}' name='idcars_reverse' src='{{tempFilePaths2[index]}}'></image>
+              <view class='view'>身份证正面</view>
+            </view>
+
+          </view>
+        </view>
+      </block>
+
+    </view>
     <view class='button' bindtap='search'>
-      确认搜索
+      新增
     </view>
   </view>
 
