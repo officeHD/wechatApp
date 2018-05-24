@@ -3,13 +3,13 @@
   <view class='search'>
     <view class='pick_view'>
       <view class='status {{active==="left"?"active":""}}' data-target="left" bindtap='searchType'>
-        折扣券 
+        折扣券
       </view>
       <view class='status {{active==="center"?"active":""}}' data-target="center" bindtap='searchType'>
-       满减券
+        抵用券
       </view>
       <view class='status {{active==="right"?"active":""}}' data-target="right" bindtap='searchType'>
-        抵扣券
+        满减券
       </view>
     </view>
   </view>
@@ -17,10 +17,12 @@
     <block wx:for="{{couponList}}" wx:key="{{index}}">
       <view class="stamp stamp01">
         <view class="par">
-          <view>
-          
-            <text class='span'>{{item.Discount}}</text> </view>
-          <view class='p'>开始日期{{item.StartTime}}</view>
+          <view class='par_t'>
+            <text class='discount'>{{item.Discount}}</text>折
+          </view>
+          <view class='par_b'>
+            有效期至 {{item.endDay}}
+          </view>
         </view>
         <view class="copy" data-data='{{item}}' bindtap='useCard'>
           <text>立</text>
@@ -38,17 +40,20 @@
     <block wx:for="{{centerList}}" wx:key="{{index}}">
       <view class="stamp stamp01">
         <view class="par">
-          <view>
-            <text class="sign">￥</text>
-            <text class='span'>50</text> </view>
-          <view class='p'>订单满100.00元</view>
+          <view class='par_t'>
+            <view>￥
+              <text class='discount'>{{item.Discount}}</text>抵用券
+            </view>
+          </view>
+          <view class='par_b'>
+            有效期至 {{item.endDay}}
+          </view>
         </view>
-        <view class="copy">
+        <view class="copy" data-data='{{item}}' bindtap='useCard'>
           <text>立</text>
           <text>即</text>
-          <text>使</text>用
-          <text></text> </view>
-
+          <text>使</text>
+          <text>用</text> </view>
       </view>
     </block>
     <view wx-if="{{centerList.length===0}}" class='nodata'>
@@ -59,16 +64,22 @@
     <block wx:for="{{rightList}}" wx:key="{{index}}">
       <view class="stamp stamp01">
         <view class="par">
-          <view>
-            <text class="sign">￥</text>
-            <text class='span'>50</text> </view>
-          <view class='p'>订单满100.00元</view>
+          <view class='par_t'>
+            <view>￥
+              <text class='discount'>{{item.Discount}}</text>
+            </view>
+            <view class='amount'> 满{{item.Amount}}元使用</view>
+          </view>
+          <view class='par_b'>
+            有效期至 {{item.endDay}}
+          </view>
+
         </view>
-        <view class="copy">
+        <view class="copy" data-data='{{item}}' bindtap='useCard'>
           <text>立</text>
           <text>即</text>
-          <text>使</text>用
-          <text></text> </view>
+          <text>使</text>
+          <text>用</text> </view>
 
       </view>
     </block>

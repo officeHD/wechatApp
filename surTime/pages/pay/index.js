@@ -9,6 +9,7 @@ Page({
     CouponType: '',
     DiscountType: '',
     type: 1,
+    carType:"",
     current: '',
     Discount: 0,//优惠
     discountLabel: "请选择",
@@ -92,6 +93,17 @@ Page({
     // that.setData({//将携带的参数赋值
     //   address: currPage.data.item
     // });
+    let carType='';
+    if (currPage.data.CouponType==1){
+      carType ="折扣券";
+    } else if (currPage.data.CouponType == 2){
+      carType = "满减券"
+    } else if (currPage.data.CouponType == 3){
+      carType =="抵扣券"
+    }
+    that.setData({
+      carType: carType
+    })
 
   },
   selectDiscount: function () {

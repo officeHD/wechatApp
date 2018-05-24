@@ -1,8 +1,9 @@
 {
   "pages": [
+    
     "pages/login/index",
     "pages/work/add/index",
-    
+    "pages/coupon/index",
    
     "pages/index/index",
     "pages/user/index",
@@ -11,7 +12,7 @@
     "pages/work/center/index",
     "pages/work/list/index",
     "pages/reset/index",
-    "pages/coupon/index",
+    
     "pages/search/A9/index",
     "pages/search/A9/detail/index",
     "pages/album/index",

@@ -33,7 +33,7 @@
       <view class='item_list'>
         <view>优惠券</view>
         <view bindtap='selectDiscount'>
-          <text class='checked'>{{Discount?"已使用":"请选择"}}</text> >
+          <text class='checked'>{{Discount?"已使用"+carType:"请选择"}}</text> >
         </view>
       </view>
       <view class='item_list' bindtap='changeShow'>

@@ -1,11 +1,11 @@
 .stamp {
-  width: 317rpx;
-  height: 140rpx;
+  width: 650rpx;
+  height: 200rpx;
   padding: 0 10rpx;
   position: relative;
   overflow: hidden;
-  float: left;
-   margin: 15rpx;
+  margin: 15rpx auto;
+  display: flex;
 }
 
 .stamp:before {
@@ -16,7 +16,6 @@
   left: 10rpx;
   right: 10rpx;
   z-index: -1;
- 
 }
 
 .stamp:after {
@@ -32,16 +31,38 @@
 
 .stamp .par {
   float: left;
-  padding: 16rpx 15rpx;
-  width: 220rpx;
-  border-right: 2rpx dashed rgba(255, 255, 255, 0.3);
+  padding: 16rpx 10rpx;
+  flex: 4;
+  border-right: 4rpx dashed #fff;
   text-align: left;
   display: flex;
+  color: #fff;
+  height: 100%;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-.stamp .par .p {
-  color: #fff;
-  font-size: 20rpx;
+.par_t {
+  flex: 3;
+  font-size: 32rpx;
+  display: flex;
+  align-items: baseline
+}
+
+.par_t .discount {
+  font-size: 100rpx;
+}
+.amount{
+  font-size: 28rpx;
+  height: 100%;
+  flex: 1;
+  text-align: right;
+  padding-right: 10rpx;
+   
+}
+.par_b {
+  flex: 1;
+  font-size: 26rpx;
 }
 
 .stamp .par .span {
@@ -63,9 +84,10 @@
 .stamp .copy {
   height: 100%;
   vertical-align: text-bottom;
-  font-size: 24rpx;
+  font-size: 32rpx;
   color: rgb(255, 255, 255);
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -83,11 +105,10 @@
 }
 
 .item {
-  
   padding: 20rpx 10rpx;
 }
+
 .search {
-  
   border: 1px solid transparent;
 }
 
@@ -134,15 +155,17 @@
   color: #fff;
 }
 
-.nodata{
+.nodata {
   display: flex;
   padding: 90rpx 0;
   justify-content: center;
 }
-.nodata image{
+
+.nodata image {
   width: 355rpx;
   height: 302rpx;
 }
-page{
-  background: #FAF7FA;
+
+page {
+  background: #faf7fa;
 }
