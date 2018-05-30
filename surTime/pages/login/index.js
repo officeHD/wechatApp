@@ -110,7 +110,7 @@ Page({
     let fn = (res) => {
       wx.hideLoading()
       let result = JSON.parse(res.data.d);
-      
+
       if (result.State.toString() === "1") {
         // 储存用户信息
         // console.log(res.header.Authorization);
@@ -133,7 +133,8 @@ Page({
       if (app.checkData('手机号', userPhone) && app.checkData('验证码', verifyCode)) {
         let data = {
           "Phone": userPhone,
-          "Code": verifyCode
+          "Code": verifyCode,
+          "Openid": app.globalData.openId
         };
         wx.showLoading({
           title: '登录中',
@@ -145,6 +146,7 @@ Page({
         let data = {
           "UserName": userName,
           "PassWord": passWord,
+          "Openid": app.globalData.openId,
           "LoginType": 1
         };
         wx.showLoading({
@@ -154,6 +156,6 @@ Page({
       }
     }
   }
- 
- 
+
+
 })

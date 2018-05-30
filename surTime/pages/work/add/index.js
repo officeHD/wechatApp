@@ -183,6 +183,13 @@ Page({
       bankusertel: value
     })
   },
+  changeCompanyName: function (e) {
+    let value = e.detail.value;
+    let that = this;
+    that.setData({
+      CompanyName: value
+    })
+  },
   changeUserpinyin: function (e) {
     let value = e.detail.value;
     let that = this;
@@ -200,7 +207,7 @@ Page({
   // 保存个人P卡业务
   SavePByUser: function () {
 
-    let Pictname = {
+    let Pictname = [{
       taskid: this.data.type,
       taskname: this.data.TaskName,
       username: this.data.Name,
@@ -218,16 +225,23 @@ Page({
       sbankname: this.data.sbankname,
       sbankcity: this.data.sbankcity,
       bankusertel: this.data.bankusertel,
-    }
+    }];
     let data = {
       UserID: app.globalData.PKID,
       JsonFormInfo: JSON.stringify(Pictname)
     }
     let fn = msg => {
       console.log(msg);
+      let res = JSON.parse(msg.data.d);
+
+      wx.showModal({
+        title: '提示',
+        content: res.ReturnInfo,
+      })
     }
-    if (app.checkData('任务名', data.taskname) && app.checkData('姓名', data.username)
-      && app.checkData('身份证号', data.userpinyin) && app.checkData('姓名拼音', data.userpinyin)
+
+    if (app.checkData('任务名', this.data.TaskName) && app.checkData('姓名', this.data.Name)
+      && app.checkData('身份证号', this.data.UserCode)
     ) {
 
       app.ajax("/SavePByUser", data, fn)
@@ -236,6 +250,42 @@ Page({
   },
   //保存企业P卡业务
   SavePByCompany: function () {
+    let Pictname = [{
+      taskid: this.data.type,
+      taskname: this.data.TaskName,
+      companyname: this.data.CompanyName,
+      username: this.data.Name,
+      birthday: this.data.Birthday,
+      email: this.data.Email,
+      address: this.data.Address,
+      addcode: this.data.ZipCode,
+      splink: this.data.AFrontShopLink,
+      usercode: this.data.UserCode,
+      sirenorqiye: this.data.sirenorqiye,//
+      bankname: this.data.bankname,
+     
+      bankusercode: this.data.bankusercode,
+      bankuser: this.data.bankuser,
+      bankhao: this.data.bankhao,
+      sbankname: this.data.sbankname,
+      sbankcity: this.data.sbankcity,
+      bankusertel: this.data.bankusertel,
+      // usertel: this.data.Phone,
+    }];
+    let data = {
+      UserID: app.globalData.PKID,
+      JsonFormInfo: JSON.stringify(Pictname)
+    }
+    let fn = msg => {
+      console.log(msg);
+      let res = JSON.parse(msg.data.d);
+
+      wx.showModal({
+        title: '提示',
+        content: res.ReturnInfo,
+      })
+    }
+
     app.ajax("/SavePByCompany", data, fn)
   },
   //保存个人/企业WF业务

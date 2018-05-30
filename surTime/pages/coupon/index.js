@@ -17,10 +17,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.type)
+    console.log(options)
     if (options.type) {
       this.setData({
-        type: true
+        type: true,
+        value: options.value
       })
     }
     let userData = JSON.parse(app.globalData.userData);
@@ -71,7 +72,18 @@ Page({
       })
       return false;
     }
+ 
     let carData = e.currentTarget.dataset.data;
+    console.log(carData);
+    if (carData.CouponType.toString()!=='1'){
+      if ((carData.Amount - 0)>(that.data.value)){
+        wx.showModal({
+          title: '提示',
+          content: `订单满${carData.Amount} 元使用`,
+        })
+        return false;
+      }
+    }
     let pages = getCurrentPages();//当前页面
     let prevPage = pages[pages.length - 2];//上一页面
     prevPage.setData({//直接给上移页面赋值
@@ -79,10 +91,9 @@ Page({
       DiscountType: carData.CouponType,
       Amount: carData.Amount,
       Discount: carData.Discount,
+      cardId:carData.PKID
     });
-    wx.navigateBack({
-
-    })
+    wx.navigateBack({ })
   },
   getDateAfter_n: function (initDate, days) {
 

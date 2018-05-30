@@ -199,7 +199,10 @@
       </block>
 
     </view>
-    <view class='button' bindtap='search'>
+    <view wx-if="{{genre==='personal'}}" class='button' bindtap='SavePByUser'>
+      新增
+    </view>
+    <view wx-if="{{genre==='company'}}" class='button' bindtap='SavePByCompany'>
       新增
     </view>
   </view>

@@ -46,6 +46,7 @@ Page({
       RecCode: RecCode,
       IPAddress: IPAddress,
       MobileCode: MobileCode,
+      Openid: app.globalData.openId,
     }
     if (app.checkData('手机号', Mobile) && app.checkData('邮箱', Email)){
       app.ajax('/Register', data, cb)

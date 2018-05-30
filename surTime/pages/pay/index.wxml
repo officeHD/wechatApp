@@ -17,7 +17,7 @@
     <view class='order_conrtent'>
       <view>
         <view>充值金额：{{current.price}}元 </view>
-        <view>下单时间：2018/3/19 14:30:30 </view>
+        <view>下单时间：{{now}} </view>
       </view>
       <view>
         <view>充值T点：{{current.value}} </view>
@@ -45,7 +45,7 @@
   <view class='bottom bgcw'>
     <view class='bottom_flex'>
       <view class='price '>
-        <view class='price_val '>￥300</view>
+        <view class='price_val '>￥{{Totalfee}}</view>
         <view class='discount_info '>
           <text wx-if="{{Discount}}"> 已使用优惠券{{Discount}}</text>
           <text>{{current.single}}</text>

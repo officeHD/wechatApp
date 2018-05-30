@@ -27,6 +27,14 @@ Page({
   },
 
   goDetail: function (e) {
+    if (e.currentTarget.dataset.pkid.toString()==='1'){
+      wx.showModal({
+        title: '提示',
+        content: '暂不可用',
+       
+      })
+      return false
+    }
     wx.navigateTo({
       url: '/pages/work/add/index?type=' + e.currentTarget.dataset.pkid,
     })

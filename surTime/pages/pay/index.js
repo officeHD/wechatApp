@@ -11,10 +11,12 @@ Page({
     type: 1,
     carType:"",
     current: '',
+    cardId:'',
     Discount: 0,//优惠
     discountLabel: "请选择",
     add_show: false,
-    carCode: '',
+    Totalfee:'',
+ 
     config: [
       {
         src: '入门级',
@@ -76,11 +78,22 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    console.log(options.type)
+    console.log(options.type);
+    var now = new Date();
+
+    var year = now.getFullYear();       //年  
+    var month = now.getMonth() + 1;     //月  
+    var day = now.getDate();            //日  
+
+    var hh = now.getHours();            //时  
+    var mm = now.getMinutes();          //分  
+    var ss = now.getSeconds();  
     let current = that.data.config.filter((item) => item.type == options.type);
     if (options.type) {
       that.setData({
-        current: current[0]
+        current: current[0],
+        Totalfee: current[0].price,
+        now: `${year}/${month}/${day} ${hh}:${mm}:${ss}`
       })
     }
      
@@ -94,12 +107,21 @@ Page({
     //   address: currPage.data.item
     // });
     let carType='';
-    if (currPage.data.CouponType==1){
+    if (currPage.data.DiscountType.toString()==='1'){
       carType ="折扣券";
-    } else if (currPage.data.CouponType == 2){
-      carType = "满减券"
-    } else if (currPage.data.CouponType == 3){
-      carType =="抵扣券"
+      that.setData({
+        Totalfee: that.data.current.price * that.data.Discount
+      })
+    } else if (currPage.data.DiscountType.toString() === '2'){
+      carType = "满减券";
+      that.setData({
+        Totalfee: that.data.current.price- that.data.Discount
+      })
+    } else if (currPage.data.DiscountType.toString() === '3'){
+      carType ="抵扣券";
+      that.setData({
+        Totalfee: that.data.current.price - that.data.Discount
+      })
     }
     that.setData({
       carType: carType
@@ -108,7 +130,7 @@ Page({
   },
   selectDiscount: function () {
     wx.navigateTo({
-      url: '/pages/coupon/index?type=pay',
+      url: `/pages/coupon/index?type=pay&value=${this.data.current.price}`
     })
   },
   changeShow: function () {
@@ -121,7 +143,7 @@ Page({
     let value = e.detail.value;
     let that = this;
     that.setData({
-      carCode: value
+      cardId: value
     })
   },
   sure_add: function () {
@@ -130,7 +152,11 @@ Page({
       console.log(msg)
       let res=JSON.parse(msg.data.d)
       if(res.State==1){
-       // do something...
+       that.setData({
+         Totalfee: that.data.current.price - res.ReturnInfo,
+         add_show: false,
+         DiscountType:2
+       })
       }else{
         wx.showModal({
           title: '提示',
@@ -138,25 +164,40 @@ Page({
         })
       }
     }
-    app.ajax('/CouponValid', { textCoupon: that.data.carCode }, fn)
+    app.ajax('/CouponValid', { textCoupon: that.data.cardId }, fn)
   },
   GetPayImg:function(){
     let that=this;
     let data={
-      paymoney: that.data.current.price,
-      paytype: "W01", //支付宝：A01 微：W01
-      Coupon: "",//优惠券代码没有传值：“”
       UserID: app.globalData.PKID,//
-      CouponType: 0,//1.固定优惠券代码 2.用户绑定优惠券 （两者都没有传0） 
-      DiscountType: '',//1.折扣券 2.满减券 3.抵扣券 （优惠券类型1的情况下，传0）
-      Amount: 0,//要求金额
-      Discount: 0//满减金额or折扣率or抵扣金额
-
+      Openid: app.globalData.openId,
+      AllTotallfee: that.data.current.price,
+      Openid: app.globalData.openId,
+      DiscountID: that.data.cardId,
+      DiscountType: that.data.DiscountType,
+      Totalfee: that.data.Totalfee, //优惠后金额
+      
     }
     let fn=msg=>{
-      console.log(JSON.parse(msg.data.d))
+      console.log();
+      let res = JSON.parse(msg.data.d);
+      if (res.State===1){
+        let returnInf = JSON.parse(res.ReturnInfo);
+        wx.requestPayment({
+          'timeStamp': returnInf.timeStamp,
+          'nonceStr': returnInf.nonceStr,
+          'package': returnInf.package,
+          'signType': 'MD5',
+          'paySign': returnInf.paySign,
+          'success': function (res) {
+          },
+          'fail': function (res) {
+          }
+        })
+
+      }
     }
-    app.ajax('/GetPayImg', data, fn)
+    app.ajax('/WXPay', data, fn)
   }
 
 })
