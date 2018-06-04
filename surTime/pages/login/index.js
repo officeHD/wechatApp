@@ -16,11 +16,11 @@ Page({
   },
   onLoad: function () {
     let UserID = app.globalData.PKID;
-    if (UserID) {
-      wx.switchTab({
-        url: '/pages/index/index',
-      })
-    }
+    // if (UserID) {
+    //   wx.switchTab({
+    //     url: '/pages/index/index',
+    //   })
+    // }
 
   },
   //切换登录方式
@@ -117,7 +117,7 @@ Page({
         app.initUserInfo(JSON.parse(result.ReturnInfo));
         app.initUserData(result.ReturnInfo);
         app.initToken(res.header.Authorization)
-        // console.log(JSON.parse(result.ReturnInfo))
+        console.log(JSON.parse(result.ReturnInfo))
         wx.switchTab({
           url: '/pages/usercenter/index',
         })
@@ -137,7 +137,7 @@ Page({
           "Openid": app.globalData.openId
         };
         wx.showLoading({
-          title: '登录中',
+          title: '绑定中',
         })
         app.ajax('/MobileLogin', data, fn)
       }
@@ -146,13 +146,13 @@ Page({
         let data = {
           "UserName": userName,
           "PassWord": passWord,
-          "Openid": app.globalData.openId,
-          "LoginType": 1
+          "Openid": app.globalData.openId
+           
         };
         wx.showLoading({
-          title: '登录中',
+          title: '绑定中',
         })
-        app.ajax('/Login', data, fn)
+        app.ajax('/WXUserBinding', data, fn)
       }
     }
   }

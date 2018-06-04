@@ -16,6 +16,12 @@ Page({
   onLoad: function () {
     this.getA9List();
   },
+  demoLink:function(){
+    wx.showModal({
+      title: '提示',
+      content: '演示数据',
+    })
+  },
   getA9List: function () {
     let that = this;
     let UserID = app.globalData.PKID;
@@ -41,10 +47,9 @@ Page({
   //A9查询
   search: function () {
     let that = this;
-    let UserID = app.globalData.PKID
+    let UserID = app.globalData.PKID;
     let Country = that.data.Country;
     let ASIN = that.data.ASIN;
-
     if (!ASIN) {
       wx.showToast({
         title: '请输入ASIN',
@@ -92,7 +97,24 @@ Page({
         title: data.ReturnInfo,
         icon: 'none'
       })
-      that.onLoad()
+      let sendData = {
+        UserID: app.globalData.PKID,
+        Page: 1,
+        PageCount: 10,
+        Asin: that.data.ASIN,
+        StrTime: '',
+        EndTime: ''
+      }
+      let cb = (res) => {
+        let data = JSON.parse(res.data.d)
+        that.setData({
+          listData:JSON.parse(data.ReturnInfo),
+
+          
+        });
+      }
+
+      app.ajax('/A9ListByPage', sendData, cb, 'POST')
     }
     app.ajax('/AddAsin', { UserID: UserID, Country: Country, Asin: ASIN, OldData: OldData }, cb, 'POST')
   },

@@ -18,7 +18,7 @@
       <view class="stamp stamp01">
         <view class="par">
           <view class='par_t'>
-            <text class='discount'>{{item.Discount}}</text>折
+            <text class='discount'>{{item.Discount*10}}</text>折
           </view>
           <view class='par_b'>
             有效期至 {{item.endDay}}

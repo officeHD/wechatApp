@@ -35,6 +35,7 @@ App({
                 console.log(ret.ReturnInfo.length)
                 if (ret.ReturnInfo.length < 30) {
                   that.globalData.openId = ret.ReturnInfo;
+                  
                 } else {
                   that.initUserInfo(JSON.parse(ret.ReturnInfo));
                   that.initUserData(ret.ReturnInfo);

@@ -23,9 +23,9 @@
     <view class='picker_content'>
       <view class='item'>
         <text>监控时长：</text>
-        <picker bindchange="bindPickerChangeTimer" value="{{timerIndex}}" range="{{timer}}">
+        <picker bindchange="bindPickerChangeTimer" value="{{timerIndex}}" range="{{timerArr}}">
           <view class="picker_area">
-            {{timer[timerIndex]}}
+            {{timerArr[timerIndex]}}
             <view class='flag'>▼</view>
           </view>
         </picker>

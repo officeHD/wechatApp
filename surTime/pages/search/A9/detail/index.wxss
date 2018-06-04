@@ -11,6 +11,10 @@ page {
   background-color: #fff;
 }
 
+.overFlow {
+  overflow: hidden;
+}
+
 .title {
   text-align: center;
   font-size: 30rpx;
@@ -157,7 +161,7 @@ page {
   font-size: 32rpx;
   text-indent: 32rpx;
   hyphens: auto;
-	word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .echart {
@@ -279,9 +283,11 @@ ec-canvas {
   left: 0;
   top: 0;
   background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
 }
 
 .bg_model .tableInfo {
+  z-index: 99999;
   height: 95%;
   position: absolute;
   left: 20rpx;

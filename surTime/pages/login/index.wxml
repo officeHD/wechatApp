@@ -24,13 +24,13 @@
       </view>
     </block>
     <view class='login_type'>
-      <view class='login_mes' bindtap='onChangeLoginType'>
+      <!-- <view class='login_mes' bindtap='onChangeLoginType'>
         {{login_type}}
-      </view>
+      </view> -->
       
     </view>
     <view class='{{reset_pass?"hide":""}}'>
-      <view class='login_btn' data-type="{{by_message}}" bindtap='login'>登录</view>
+      <view class='login_btn' data-type="{{by_message}}" bindtap='login'>绑定</view>
       <navigator url='../register/index' open-type="navigate" class='create_count'>创建账号</navigator>
     </view>
    

@@ -9,9 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    album: [
-
-    ]
+    album: [],
+    uploadimg: []
   },
   /**
    * 生命周期函数--监听页面加载
@@ -41,47 +40,66 @@ Page({
       })
     })
   },
+  uploadDIY: function (filePaths, successUp, failUp, i, length) {
+    let that = this;
+    wx.showLoading({
+      title: '上传中',
+    })
+    wx.uploadFile({
+      url: "https://mp.surtime.com/SurtimeWebService.asmx/UploadImages",
+      filePath: filePaths[i],
+      header: { "Content-Type": "multipart/form-data", 'Authorization': app.globalData.token },
+      name: 'File',
+      formData: {
+        "Key": "SurTimeWebserviceS3ur0ti1me8",
+        "IsUpdateName": 'false',
+        "Pictid": that.data.id,
+        "UserID": app.globalData.PKID,
+        'Pictname': that.data.Pictname,
+      },
+      success: (resp) => {
+        successUp++;
+      },
+      fail: (res) => {
+        failUp++;
+      },
+      complete: () => {
+        i++;
+        that.setAlbum();
+        if (i == length) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '总共' + successUp + '张上传成功,' + failUp + '张上传失败！',
+            icon:'none'
+          })
+         
+        } else {  //递归调用uploadDIY函数
+          that.uploadDIY(filePaths, successUp, failUp, i, length);
+         
+        }
+      },
+    });
+  },
+
   add_pic: function (e) {
     let that = this;
-    
-    
+
+    var upload_picture_list = that.data.upload_picture_list;
     wx.chooseImage({
-      count: 1, // 默认9
+      count: 9, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
+
         var tempFilePaths = res.tempFilePaths;
-        
-        wx.uploadFile({
-          url: 'http://192.168.0.106/SurtimeWebService.asmx/UploadImages', // 上传接口
-          filePath: tempFilePaths[0],
-          header: { "Content-Type": "multipart/form-data", 'Authorization': app.globalData.token },
-          name: 'file',
-          formData: {
-            "Key": "SurTimeWebserviceS3ur0ti1me8",
-            "IsUpdateName": 'false',
-            "Pictid": that.data.id,
-            "UserID": app.globalData.PKID,
-            'Pictname': that.data.Pictname,
-          },
-          success: function (res) {
-            var doc = XMLParser.parseFromString(res.data);
-            let msg = JSON.parse(doc.getElementsByTagName('string')[0].childNodes['0'].nodeValue);
-            if(msg.State===1){
-              wx.showModal({
-                title: '提示',
-                content: '上传成功',
-              })
-            }else{
-              wx.showModal({
-                title: '提示',
-                content: msg.ReturnInfo,
-              })
-            }
-            // var data = res.data
-            //do something
-          }
-        })
+        var successUp = 0; //成功个数
+        var failUp = 0; //失败个数
+        var length = res.tempFilePaths.length; //总共个数
+        var i = 0; //第几个
+        that.uploadDIY(res.tempFilePaths, successUp, failUp, i, length);
+
+
+
       }
     })
   },
@@ -89,7 +107,7 @@ Page({
   deleteImage: function (e) {
     var that = this;
     let pkid = e.currentTarget.dataset.pkid;
-    let fileName = e.currentTarget.dataset.fileName;
+    let fileName = e.currentTarget.dataset.filename;
     wx.showModal({
       title: '提示',
       content: '确定要删除此图片吗？',

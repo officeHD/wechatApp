@@ -1,7 +1,7 @@
 // let API_HOST = "https://www.easy-mock.com/mock/5a9a2c2efdc65f3e22abbdaf/example";
  
 // let API_HOST = "http://192.168.0.106/SurtimeWebService.asmx";
-let API_HOST = "http://mp.surtime.com/SurtimeWebService.asmx";
+let API_HOST = "https://mp.surtime.com/SurtimeWebService.asmx";
  
 
  

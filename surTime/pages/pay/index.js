@@ -7,11 +7,11 @@ Page({
   data: {
     Amount: '',
     CouponType: '',
-    DiscountType: '',
+    DiscountType: 0,
     type: 1,
     carType:"",
     current: '',
-    cardId:'',
+    cardId:0,
     Discount: 0,//优惠
     discountLabel: "请选择",
     add_show: false,
@@ -124,7 +124,8 @@ Page({
       })
     }
     that.setData({
-      carType: carType
+      carType: carType,
+      DiscountType:1
     })
 
   },
@@ -171,11 +172,11 @@ Page({
     let data={
       UserID: app.globalData.PKID,//
       Openid: app.globalData.openId,
-      AllTotallfee: that.data.current.price,
+      AllTotalfee: that.data.current.price-0,
       Openid: app.globalData.openId,
       DiscountID: that.data.cardId,
       DiscountType: that.data.DiscountType,
-      Totalfee: that.data.Totalfee, //优惠后金额
+      Totalfee: that.data.Totalfee-0, //优惠后金额
       
     }
     let fn=msg=>{
@@ -190,8 +191,25 @@ Page({
           'signType': 'MD5',
           'paySign': returnInf.paySign,
           'success': function (res) {
+            wx.showToast({
+              title: '支付成功',
+              icon: 'success',
+              mask: false
+            })
+            setTimeout(function () {
+              wx.hideToast()
+              wx.switchTab({
+                url: '/pages/index/index'
+              })
+            }, 1500)
           },
           'fail': function (res) {
+            wx.showModal({
+              title: '提示',
+              content: '支付失败',
+              showCancel: false
+               
+            })
           }
         })
 
