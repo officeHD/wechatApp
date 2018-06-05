@@ -1,12 +1,12 @@
 var app = getApp();
 Page({
   data: {
-    array: ['美国', '英国', '德国', '法国', '加拿大', '墨西哥', '日本', '西班牙','意大利'],
-    arrayval: ['US', 'UK', 'DE','FR','CA','MX', 'JP','ES', 'IT'],
+    array: ['美国', '英国', '德国', '法国', '加拿大', '墨西哥', '日本', '西班牙', '意大利'],
+    arrayval: ['US', 'UK', 'DE', 'FR', 'CA', 'MX', 'JP', 'ES', 'IT'],
     page: 1,
     index: 0,
     Country: 'US',
-    
+
     flag: true,
     ASIN: '',
     OldData: '',
@@ -16,7 +16,7 @@ Page({
   onLoad: function () {
     this.getA9List();
   },
-  demoLink:function(){
+  demoLink: function () {
     wx.showModal({
       title: '提示',
       content: '演示数据',
@@ -29,7 +29,7 @@ Page({
       UserID: UserID,
       Page: that.data.page,
       PageCount: 10,
-      Asin: that.data.ASIN,
+      Asin: '',
       StrTime: '',
       EndTime: ''
     }
@@ -60,11 +60,14 @@ Page({
     let cb = (res) => {
       let data = JSON.parse(res.data.d)
       if (data.State.toString() === '1') {
+        that.addAsin(UserID, Country, ASIN, that.data.OldData)
 
       } else if (data.State.toString() === '4') {
         that.setData({
           OldData: data.ReturnInfo
-        })
+        });
+        that.addAsin(UserID, Country, ASIN, that.data.OldData)
+
       } else if (data.State.toString() === '2') {
         wx.hideLoading();
         wx.showToast({
@@ -73,18 +76,23 @@ Page({
         })
         return false;
       } else {
+        wx.hideLoading();
         wx.showModal({
           title: '查询提示',
           content: '存在旧数据，是否重新查询',
+          success: function (res) {
+            if (res.confirm) {
+              that.addAsin(UserID, Country, ASIN, that.data.OldData)
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
         })
       }
-      that.addAsin(UserID, Country, ASIN, that.data.OldData)
 
     }
-    wx.showLoading({
-      title: '查询中',
-      icon:'none'
-    })
+
     app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
 
   },
@@ -101,21 +109,26 @@ Page({
         UserID: app.globalData.PKID,
         Page: 1,
         PageCount: 10,
-        Asin: that.data.ASIN,
+        Asin: '',
         StrTime: '',
         EndTime: ''
       }
       let cb = (res) => {
         let data = JSON.parse(res.data.d)
         that.setData({
-          listData:JSON.parse(data.ReturnInfo),
+          listData: JSON.parse(data.ReturnInfo),
 
-          
+
         });
       }
 
       app.ajax('/A9ListByPage', sendData, cb, 'POST')
     }
+    wx.showLoading({
+      title: '查询中',
+      icon: 'none',
+      mask: true
+    })
     app.ajax('/AddAsin', { UserID: UserID, Country: Country, Asin: ASIN, OldData: OldData }, cb, 'POST')
   },
   /**
@@ -149,14 +162,14 @@ Page({
     })
   },
   bindPickerChange: function (e) {
-    let that=this;
+    let that = this;
     let index = e.detail.value;
-   
+
     that.setData({
       index: index,
       Country: that.data.arrayval[index]
     })
-    
+
   },
   checkDetail: function (e) {
     let pkid = e.currentTarget.dataset.pkid;

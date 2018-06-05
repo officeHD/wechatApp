@@ -38,6 +38,7 @@ Page({
     // 获取A9明细信息
     wx.showLoading({
       title: '加载中',
+      mask:true
     });
     app.ajax('/AsinKeyAllDetail', { UserID: UserID, PkId: pkid, KeytopRows: 10, RedAnalysisRows: 10 }, function (res) {
       wx.hideLoading();

@@ -6,7 +6,7 @@ Page({
     index: 0,
     year: '2018',
     month: '09-01',
-    Country: 'us',
+    Country: 'US',
     position: 'relative',
     check: false,
     page: '1',
@@ -23,8 +23,22 @@ Page({
     that.setData({
       type: options.type
     })
+    that.GetGKSKSTKMHistoryTableInPage();
+    
+   
+  
+  },
+  GetGKSKSTKMHistoryTableInPage:function(){
+    let that=this;
     let UserID = app.globalData.PKID;
+    let data = {
+      UserID: UserID,
+      PageType: that.data.type,
+      Page: '1',
+      PageCount: '10'
+    }
     let cb = (res) => {
+      wx.hideLoading();
       let data = JSON.parse(res.data.d)
       console.log(JSON.parse(data.ReturnInfo))
       that.setData({
@@ -32,12 +46,9 @@ Page({
         page: 2
       });
     }
-    let data = {
-      UserID: UserID,
-      PageType: that.data.type,
-      Page: '1',
-      PageCount: '10'
-    }
+    wx.showLoading({
+      title: '加载中',
+    })
     app.ajax('/GetGKSKSTKMHistoryTableInPage', data, cb)
   },
   changeASIN: function (e) {
@@ -66,20 +77,34 @@ Page({
       return;
     }
     let cb = (res) => {
-      let data = JSON.parse(res.data.d)
-      that.setData({
-        listData: JSON.parse(data.ReturnInfo)
-      });
+    wx.hideLoading();
+      let data = JSON.parse(res.data.d);
+      if (data.State==1){
+        that.setData({
+          listData: JSON.parse(data.TableJson)
+        });
+      }else{
+        wx.showModal({
+          title: '提示',
+          content:data.ReturnInfo,
+        })
+      }
+     
     }
     let datas = {
       UserID: UserID,
       Country: Country,
       IsExpand: that.data.check,
-      AsinList: '1-5',
-      PageCount: '20',
+      AsinList: '',
+      PageCount: 200,
+      PageType: that.data.type,
       UserIpAddress: '',
-      Asin: ASIN
+      ASINorKey: ASIN
     }
+    wx.showLoading({
+      title: '查询中',
+      mask:true
+    })
     app.ajax('/GKSKSTKMSubmit', datas, cb, 'POST')
   },
 
@@ -138,7 +163,7 @@ Page({
     let index = e.detail.value;
     that.setData({
       index: index,
-      country: that.data.arrayval[index]
+      Country: that.data.arrayval[index]
     })
   },
 
@@ -171,7 +196,9 @@ Page({
   },
   delList: function (e) {
     let that = this;
-    let pkid = e.currentTarget.dataset.pkid;
+    let pkid = e.currentTarget.dataset.pkid - 0;
+    let filename = e.currentTarget.dataset.filename;
+    console.log(e.currentTarget.dataset);
     wx.showModal({
       title: '提示',
       content: '删除后无法恢复',
@@ -181,7 +208,7 @@ Page({
             UserID: app.globalData.PKID,
             PageType: that.data.type,
             DataID: pkid,
-            FileName: ""
+            FileName: filename
           }
           wx.showLoading({
             title: '加载中',
@@ -195,6 +222,7 @@ Page({
                 title: '提示',
                 content: '删除成功',
               })
+              that.GetGKSKSTKMHistoryTableInPage();
             } else {
               wx.showModal({
                 title: '提示',
@@ -211,15 +239,28 @@ Page({
     })
   },
   GetSKSKSTKMData: function (pkid) {
+
     let that = this;
     let data = { PageType: that.data.type, UserID: app.globalData.PKID, TDataID: pkid, Page: 1, PageCount: 10 };
+    that.setData({
+      RetDataTable: '',
+      RetKeyTable: '',
+      
+
+    })
     let fn = msg => {
 
       let resData = JSON.parse(msg.data.d);
        
       console.log(JSON.parse(resData.RetDataTable))
       console.log(JSON.parse(resData.RetKeyTable))
-
+      if (!JSON.parse(resData.RetDataTable) && !JSON.parse(resData.RetKeyTable)){
+        wx.showModal({
+          title: '提示',
+          content: '暂无数据',
+        })
+        return false;
+      }
       that.setData({
         RetDataTable: JSON.parse(resData.RetDataTable)[0],
         RetKeyTable: JSON.parse(resData.RetKeyTable),

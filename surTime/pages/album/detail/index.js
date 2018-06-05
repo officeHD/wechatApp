@@ -80,7 +80,15 @@ Page({
       },
     });
   },
-
+  previewImage: function (e) {
+    var current = e.target.dataset.src;
+    let list = this.data.album.map((item, index) => { return item.FileURL});
+    console.log(list);
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接  
+      urls: list// 需要预览的图片http链接列表  
+    })
+  },
   add_pic: function (e) {
     let that = this;
 

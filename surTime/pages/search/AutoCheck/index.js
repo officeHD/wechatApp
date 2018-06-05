@@ -76,7 +76,12 @@ Page({
 
   },
 
-
+  demoLink: function () {
+    wx.showModal({
+      title: '提示',
+      content: '演示数据',
+    })
+  },
   onReachBottom: function () {
     let that = this;
     if (that.data.length === 0) {
@@ -96,9 +101,11 @@ Page({
       PNO: that.data.PNo,
       PageNum: that.data.PageNum,
       RowsNum: 10,
+      Asin:''
+
     }
     let cb = res => {
-      console.log(res);
+      console.log(JSON.parse(res.data.d));
 
     }
     app.ajax('/AsinKeyAllByPage', data, cb)
@@ -136,7 +143,13 @@ Page({
   //点击搜索
   searchBtn: function () {
     let that = this;
+    wx.showLoading({
+      title: '查询中',
+     
+      mask:true
+    })
     that.UserIsValidRole(function (res) {
+      wx.hideLoading();
       let result = JSON.parse(res.data.d);
       console.log(result)
       if (result.State.toString() === "1") {
@@ -161,7 +174,7 @@ Page({
   UserIsValidRole: function (cb) {
     let that = this;
     let data = {
-      RowsNum: 10,
+      RowsNum:200,
       UserID: app.globalData.PKID,
       Asin:'',
       PNO: that.data.PNo

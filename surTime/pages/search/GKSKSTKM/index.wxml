@@ -61,7 +61,7 @@
             <view class="td">{{item.DataCount}}</view>
             <view class="td operate">
               <image src='../../../images/table/detail.png' data-jindu='{{item.jindu}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
-              <image src='../../../images/table/del.png' data-PKID='{{item.PKID}}' bindtap='delList'></image>
+              <image src='../../../images/table/del.png' data-PKID='{{item.PKID}}'  data-filename='{{item.FileName}}'  bindtap='delList'></image>
             </view>
           </view>
         </block>

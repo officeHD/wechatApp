@@ -40,9 +40,12 @@ App({
                   that.initUserInfo(JSON.parse(ret.ReturnInfo));
                   that.initUserData(ret.ReturnInfo);
                   that.initToken(res.header.Authorization);
-                  wx.switchTab({
-                    url: '/pages/usercenter/index',
-                  })
+                  // wx.switchTab({
+                  //   url: '/pages/usercenter/index',
+                  // })
+                  if (this.employIdCallback) {
+                    this.employIdCallback(res.header.Authorization);
+                  }
                 }
               }
             }

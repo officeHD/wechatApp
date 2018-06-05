@@ -48,7 +48,7 @@
             </view>
             <view class="td"> ASINDEMO</view>
             <view class="td">us</view>
-            <view class="td operate">
+            <view class="td operate" bindtap='demoLink'>
               <image src='../../../images/table/detail.png'></image>
             </view>
           </view>

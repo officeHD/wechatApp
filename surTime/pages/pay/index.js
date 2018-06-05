@@ -196,6 +196,7 @@ Page({
               icon: 'success',
               mask: false
             })
+          
             setTimeout(function () {
               wx.hideToast()
               wx.switchTab({

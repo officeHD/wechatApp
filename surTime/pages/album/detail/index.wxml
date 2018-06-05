@@ -3,7 +3,7 @@
   
     
     <block wx:for="{{album}}" wx:key="{{index}}">
-      <image data-filename='{{item.FileName}}' data-pkid='{{item.UniqueID1}}' bindlongtap='deleteImage' src='{{item.FileURL}}'>
+      <image data-filename='{{item.FileName}}' data-src="{{item.FileURL}}" bindtap='previewImage' data-pkid='{{item.UniqueID1}}' bindlongtap='deleteImage' src='{{item.FileURL}}'>
      
       </image>
     </block>

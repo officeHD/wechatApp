@@ -42,7 +42,7 @@
   text-align: center;
   font-size: 30rpx;
   color: #1893de;
-  padding: 10px 30px;
+  padding: 10px 0;
   position: relative;
   height: 40rpx;
 }
