@@ -1,4 +1,3 @@
-
 .content {
   position: relative;
   top: 388rpx;
@@ -12,8 +11,7 @@
   height: 388rpx;
 }
 
- 
- .bg_model {
+.bg_model {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -22,6 +20,62 @@
   background: rgba(0, 0, 0, 0.8);
   z-index: 20;
 }
+
+.asinList {
+  background: #fff;
+  width: 90%;
+  margin: 5% auto;
+  height: 90%;
+  border-radius: 5px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.list_item {
+  display: flex;
+  font-size: 14px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.asinList_banner {
+  height: 60rpx;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.overFlow {
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 0;
+}
+
+.list_item:nth-child(2n) {
+  background-color: #f2f2f2;
+}
+
+.asinList_title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.list_text {
+  margin: 0 10rpx 15rpx 0;
+}
+
+.asinList_content {
+  flex: 4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .tableInfo {
   width: 710rpx;
   margin: 20rpx;
@@ -38,6 +92,7 @@
   overflow-y: auto;
   z-index: 30;
 }
+
 .titles {
   text-align: center;
   font-size: 30rpx;
@@ -57,14 +112,13 @@
   color: #333;
 }
 
-
 .checkbox {
   width: 500rpx;
   display: block;
   font-size: 13px;
   color: #fff;
-   height: 40rpx;
-   line-height: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
 }
 
 .checkbox image {
@@ -72,6 +126,7 @@
   height: 30rpx;
   vertical-align: text-top;
 }
+
 .infoList {
   display: flex;
   justify-content: space-around;
@@ -85,32 +140,39 @@
   box-sizing: border-box;
   word-wrap: break-word;
 }
-.item_list{
+
+.item_list {
   display: flex;
 }
- .infotop {
+
+.infotop {
   display: flex;
   width: 100%;
   justify-content: space-around;
 }
+
 .Product_title {
   width: 400rpx;
   font-size: 30rpx;
 }
+
 .infotop image {
   width: 250rpx;
   height: 250rpx;
 }
+
 .item .item_title {
   display: block;
   text-align: right;
   width: 200rpx;
   margin-right: 10rpx;
 }
+
 .item .contents {
   text-align: left;
   word-wrap: break-all;
 }
+
 .change_view {
   display: flex;
   width: 600rpx;
@@ -120,9 +182,11 @@
   align-items: center;
   border: 1px solid #00a0e9;
   border-radius: 55px;
-  background-color: #E9E9E9;
+  background-color: #e9e9e9;
   overflow: hidden;
-}.status {
+}
+
+.status {
   width: 200rpx;
   border-right: 1px solid #00a0e9;
   text-align: center;
@@ -138,11 +202,14 @@
 .active {
   background-color: #00a0e9;
   color: #fff;
-}.detail{
+}
+
+.detail {
   padding: 10rpx;
   box-sizing: border-box;
   font-size: 32rpx;
 }
+
 .search {
   height: 388rpx;
   background: transparent;

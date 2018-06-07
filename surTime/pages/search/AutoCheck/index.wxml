@@ -1,73 +1,49 @@
 <view>
-  <image class='search_bg' src='/images/search_bg.png'></image>
-  <view class='search'>
-    <view class='title'>自动选品工具</view>
-    <view class='pick_view'>
-      <view class='picker_content'>
+  <image class="search_bg" src="/images/search_bg.png"></image>
+  <view class="search">
+    <view class="title">自动选品工具</view>
+    <view class="pick_view">
+      <view class="picker_content">
         <picker value="{{index}}" range-key="name" range="{{countryArr}}" bindchange="bindPickerChange">
-          <view class="picker_area">
-            {{countryArr[index].name}}▼
-          </view>
+          <view class="picker_area">{{countryArr[index].name}}▼</view>
         </picker>
         <picker value="{{yearIndex}}" range-key="name" range="{{yearArr}}" bindchange="bindYearChange">
-          <view class="picker_year">
-            {{yearArr[yearIndex].name}}▼
-          </view>
+          <view class="picker_year">{{yearArr[yearIndex].name}}▼</view>
         </picker>
         <picker value="{{timeIndex}}" range-key="MonthDay" range="{{timeArr}}" bindchange="bindPickerChangeTime">
-          <view class="picker_time">
-            {{timeArr[timeIndex].MonthDay}}▼
-          </view>
+          <view class="picker_time">{{timeArr[timeIndex].MonthDay}}▼</view>
         </picker>
       </view>
-      <view class='button'>
-        <button bindtap='searchBtn'>搜索</button>
+      <view class="button">
+        <button bindtap="searchBtn">搜索</button>
       </view>
     </view>
-    <view class='tips'>{{tips}}</view>
+    <view class="tips">{{tips}}</view>
   </view>
-  <view class='content '>
- <block wx:if="{{listData.length==0}}">
-      <view class='demo_head'>案例</view>
-    </block>
-
+  <view class="content ">
     <view class="table">
-      <view class='thead'>
+      <view class="thead">
         <view class="tr ">
-          <view class="th"> 图片</view>
-          <view class="th"> ASIN </view>
-          <view class="th ">站点 </view>
+          <view class="th">图片</view>
+          <view class="th">ASIN</view>
+          <view class="th ">站点</view>
           <view class="th ">操作</view>
         </view>
       </view>
-      <view class='tbody'>
-        <block wx:if="{{listData.length==0}}">
-          <view class="tr">
-            <view class="td logo">
-              <image src='/images/album/demo.png'></image>
-            </view>
-            <view class="td"> ASINDEMO</view>
-            <view class="td">us</view>
-            <view class="td operate" bindtap='demoLink'>
-              <image src='../../../images/table/detail.png'></image>
-            </view>
-          </view>
-        </block>
+      <view class="tbody">
         <block wx:for="{{listData}}" wx:key="{{code}}">
           <view class="tr">
             <view class="td logo">
-              <image src='{{item.ImageUrl}}'></image>
+              <image src="{{item.ImageUrl}}"></image>
             </view>
             <view class="td">{{item.ASIN}}</view>
             <view class="td">{{item.Country}}</view>
             <view class="td operate">
-              <image src='../../../images/table/info.png' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
+              <image src="../../../images/table/info.png" data-PKID="{{item.PKID}}" bindtap="checkDetail"></image>
             </view>
           </view>
         </block>
       </view>
     </view>
   </view>
-
-
 </view>

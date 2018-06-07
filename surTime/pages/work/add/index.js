@@ -23,6 +23,26 @@ Page({
     type: '2',
     today: '',
     Birthday: '请选择',
+    TaskName: '',
+    CompanyName: '',
+    Name: '',
+    Birthday: '',
+    Email: '',
+    Address: '',
+    ZipCode: '',
+    AFrontShopLink: '',
+    UserCode: '',
+    sirenorqiye: '',
+    bankname: '',
+    bankusercode: '',
+    bankuser: '',
+    bankhao: '',
+    sbankname: '',
+    sbankcity: '',
+    bankusertel: '',
+    bankhao: '',
+    Phone: '',
+    Userpinyin: ''
   },
 
   /**
@@ -263,7 +283,7 @@ Page({
       usercode: this.data.UserCode,
       sirenorqiye: this.data.sirenorqiye,//
       bankname: this.data.bankname,
-     
+
       bankusercode: this.data.bankusercode,
       bankuser: this.data.bankuser,
       bankhao: this.data.bankhao,

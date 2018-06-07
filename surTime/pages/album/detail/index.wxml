@@ -1,12 +1,9 @@
 <view>
-  <view class='album'>
-  
-    
+ 
+  <view class="album">
     <block wx:for="{{album}}" wx:key="{{index}}">
-      <image data-filename='{{item.FileName}}' data-src="{{item.FileURL}}" bindtap='previewImage' data-pkid='{{item.UniqueID1}}' bindlongtap='deleteImage' src='{{item.FileURL}}'>
-     
-      </image>
+      <image bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap="previewImage" data-filename="{{item.FileName}}" data-src="{{item.FileURL}}" data-pkid="{{item.UniqueID1}}" bindlongtap="deleteImage" src="{{item.FileURL}}"></image>
     </block>
   </view>
-  <view class='add_album' bindtap='add_pic'>添加图片</view>
+  <view class="add_album" bindtap="add_pic">添加图片</view>
 </view>

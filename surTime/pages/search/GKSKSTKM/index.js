@@ -15,7 +15,7 @@ Page({
     type: '',
     ASIN: '',
     active: "SearchTerms",
-    RetDataTable:'',
+    RetDataTable: '',
     listData: []
   },
   onLoad: function (options) {
@@ -24,18 +24,18 @@ Page({
       type: options.type
     })
     that.GetGKSKSTKMHistoryTableInPage();
-    
-   
-  
+
+
+
   },
-  GetGKSKSTKMHistoryTableInPage:function(){
-    let that=this;
+  GetGKSKSTKMHistoryTableInPage: function () {
+    let that = this;
     let UserID = app.globalData.PKID;
     let data = {
       UserID: UserID,
       PageType: that.data.type,
       Page: '1',
-      PageCount: '10'
+      PageCount: 10
     }
     let cb = (res) => {
       wx.hideLoading();
@@ -64,6 +64,9 @@ Page({
     })
   },
   search: function () {
+    this.searchAsinList();
+  },
+  searchAsinList: function (AsinList) {
     let that = this;
     let UserID = app.globalData.PKID
 
@@ -77,25 +80,35 @@ Page({
       return;
     }
     let cb = (res) => {
-    wx.hideLoading();
+      wx.hideLoading();
       let data = JSON.parse(res.data.d);
-      if (data.State==1){
+      if (data.State == 1) {
         that.setData({
           listData: JSON.parse(data.TableJson)
         });
-      }else{
-        wx.showModal({
-          title: '提示',
-          content:data.ReturnInfo,
-        })
+      } else {
+        if (data.State == 2) {
+          console.log(JSON.parse(data.AsinListAndSection));
+          that.setData({
+            showAsinList: true,
+            AsinListAndSection: JSON.parse(data.AsinListAndSection)
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: data.ReturnInfo,
+          });
+        }
+
+        console.log(data);
       }
-     
+
     }
     let datas = {
       UserID: UserID,
       Country: Country,
       IsExpand: that.data.check,
-      AsinList: '',
+      AsinList: AsinList || '',
       PageCount: 200,
       PageType: that.data.type,
       UserIpAddress: '',
@@ -103,11 +116,10 @@ Page({
     }
     wx.showLoading({
       title: '查询中',
-      mask:true
+      mask: true
     })
     app.ajax('/GKSKSTKMSubmit', datas, cb, 'POST')
   },
-
   /**
   * 页面相关事件处理函数--监听用户下拉动作
   */
@@ -177,6 +189,16 @@ Page({
       year: e.detail.value
     })
   },
+  setAsinList: function (e) {
+    let that = this;
+    let asinlist = e.currentTarget.dataset.asinlist;
+    that.setData({
+      showAsinList: false
+
+    })
+    that.searchAsinList(asinlist);
+
+  },
   checkDetail: function (e) {
     let that = this;
     let pkid = e.currentTarget.dataset.pkid;
@@ -233,39 +255,30 @@ Page({
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
-
-       
       }
     })
   },
   GetSKSKSTKMData: function (pkid) {
-
     let that = this;
-    let data = { PageType: that.data.type, UserID: app.globalData.PKID, TDataID: pkid, Page: 1, PageCount: 10 };
+    let data = {
+      PageType: that.data.type,
+      UserID: app.globalData.PKID,
+      TDataID: pkid,
+      Page: 1,
+      PageCount:200
+    };
     that.setData({
       RetDataTable: '',
       RetKeyTable: '',
-      
-
     })
     let fn = msg => {
-
       let resData = JSON.parse(msg.data.d);
-       
       console.log(JSON.parse(resData.RetDataTable))
       console.log(JSON.parse(resData.RetKeyTable))
-      if (!JSON.parse(resData.RetDataTable) && !JSON.parse(resData.RetKeyTable)){
-        wx.showModal({
-          title: '提示',
-          content: '暂无数据',
-        })
-        return false;
-      }
       that.setData({
         RetDataTable: JSON.parse(resData.RetDataTable)[0],
         RetKeyTable: JSON.parse(resData.RetKeyTable),
         showChild: true
-       
       })
     }
     app.ajax('/GetSKSKSTKMData', data, fn)
@@ -282,5 +295,4 @@ Page({
       showChild: false
     })
   }
-
 })

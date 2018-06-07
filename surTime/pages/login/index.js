@@ -21,19 +21,21 @@ Page({
     //     url: '/pages/index/index',
     //   })
     // }
-    if (app.globalData.token && app.globalData.token != '') {
-      wx.switchTab({
-        url: '/pages/index/index',
-      })
-    }else{
-      app.employIdCallback = employId => {
-        if (employId != '') {
-          wx.switchTab({
-            url: '/pages/index/index',
-          })
-        }
-      }
-    }
+    app.login();
+    // if (app.globalData.token && app.globalData.token != '') {
+    //   wx.switchTab({
+    //     url: '/pages/index/index',
+    //   })
+    // }else{
+     
+    //   app.employIdCallback = employId => {
+    //     if (employId != '') {
+    //       wx.switchTab({
+    //         url: '/pages/index/index',
+    //       })
+    //     }
+    //   }
+    // }
 
   },
   //切换登录方式

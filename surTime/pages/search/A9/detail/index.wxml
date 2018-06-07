@@ -112,7 +112,7 @@
   <view class='tableInfo'>
     <view class='title'>
       <image wx-if='{{chartIndex>1}}' bindtap='prevChart' class='controll pl' src='/images/arrow_left.png'></image>
-      <text wx-if="{{chartIndex===1}}">近三个月曝光量、点击量、销量明细</text>
+      <text wx-if="{{chartIndex===1}}">商品曝光量、点击量、销量明细</text>
       <text wx-if="{{chartIndex===2}}">卖家流量渠道占比</text>
       <text wx-if="{{chartIndex===3}}">关键词入口渠道占比</text>
 

@@ -13,6 +13,23 @@
  
   font-size: 14px;
 }
+.checkbox {
+  width: 750rpx;
+  padding:10rpx 30rpx;
+  display: block;
+  font-size: 13px;
+  color: #333;
+   height: auto;
+   line-height: 40rpx;
+   box-sizing: border-box;
+}
+
+.checkbox image {
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align:middle;
+}
+
 .history{
   position: absolute;
   right: 30rpx;

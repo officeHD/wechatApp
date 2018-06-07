@@ -3,12 +3,28 @@ Page({
   data: {
     list: [],
     add_show: '',//显示添加模态框
+    showipsd: true,
     delBtnWidth: 180//删除按钮宽度单位（rpx）
   },
   onLoad: function () {
     let that = this;
     that.setList();
     that.initEleWidth();
+    wx.getStorage({
+      key: 'showipsd',
+      success: function (res) {
+        that.setData({
+          showipsd: false
+        });
+      }
+    })
+    setTimeout(function(){
+      that.setData({
+        showipsd:false
+      });
+      wx.setStorageSync('showipsd', 'false')
+
+    }, 1500)
   },
   changename: function (e) {
     let value = e.detail.value;

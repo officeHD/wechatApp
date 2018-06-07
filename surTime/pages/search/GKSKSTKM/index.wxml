@@ -1,4 +1,4 @@
-<view>
+<view class='{{showChild?"overFlow":""}}'>
 
   <image class='search_bg' src='/images/search_bg.png'></image>
   <view class='search'>
@@ -50,7 +50,7 @@
             <view class="td">{{item.CountryName}}</view>
             <view class="td operate">
               <image src='../../../images/table/detail.png' data-jindu='{{item.jindu}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
-              <image src='../../../images/table/del.png' data-PKID='{{item.PKID}}' bindtap='delList'></image>
+              <image src='../../../images/table/del.png' data-PKID='{{item.PKID}}' data-filename='{{item.FileName}}'  bindtap='delList'></image>
             </view>
           </view>
           <view class="tr" wx-if="{{type==='KM'}}">
@@ -61,7 +61,7 @@
             <view class="td">{{item.DataCount}}</view>
             <view class="td operate">
               <image src='../../../images/table/detail.png' data-jindu='{{item.jindu}}' data-PKID='{{item.PKID}}' bindtap='checkDetail'></image>
-              <image src='../../../images/table/del.png' data-PKID='{{item.PKID}}'  data-filename='{{item.FileName}}'  bindtap='delList'></image>
+              <image src='../../../images/table/del.png' data-PKID='{{item.PKID}}' data-filename='{{item.FileName}}' bindtap='delList'></image>
             </view>
           </view>
         </block>
@@ -74,87 +74,88 @@
       <view class='titles' bindtap='closeChild'> 在线预览
         <view class='closeChild'>×</view>
       </view>
-      <block  wx-if="{{type=='GK'||type=='SK'}}">
-       <view class='infotop'>
-        <view class='image'>
-          <image src='{{RetDataTable.LargeImage}}'></image>
+      <block wx-if="{{type=='GK'||type=='SK'}}">
+        <view class='infotop'>
+          <view class='image'>
+            <image src='{{RetDataTable.LargeImage}}'></image>
+          </view>
+          <view class='Product_title'>
+            <view>Product Title:</view>
+            {{RetDataTable.Title}}
+          </view>
         </view>
-        <view class='Product_title'>
-          <view>Product Title:</view>
-          {{RetDataTable.Title}}
-        </view>
-      </view>
-      <view class='infoList'>
-        <view class='item'>
-          <view class='item_list'>
-            <view class='item_title'>ASIN:</view>
-            <view class='contents'>{{RetDataTable.ASIN}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>Parentage:</view>
-            <view class='contents'>{{RetDataTable.Parentage}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>Brand:</view>
-            <view class='contents'>{{RetDataTable.Brand}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>Manufacture:</view>
-            <view class='contents'>{{RetDataTable.Manufacture}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>UPC:</view>
-            <view class='contents'>{{RetDataTable.UPC}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>EAN:</view>
-            <view class='contents'>{{RetDataTable.EAN}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>Model:</view>
-            <view class='contents'>{{RetDataTable.Model}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>PartNumber:</view>
-            <view class='contents'>{{RetDataTable.PartNumber}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>MPN:</view>
-            <view class='contents'>{{RetDataTable.MPN}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>Department:</view>
-            <view class='contents'>{{RetDataTable.Department}}</view>
-          </view>
-          <view class='item_list'>
-            <view class='item_title'>Review:</view>
-            <view class='contents'>{{RetDataTable.Review}}</view>
-          </view>
+        <view class='infoList'>
+          <view class='item'>
+            <view class='item_list'>
+              <view class='item_title'>ASIN:</view>
+              <view class='contents'>{{RetDataTable.ASIN}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>Parentage:</view>
+              <view class='contents'>{{RetDataTable.Parentage}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>Brand:</view>
+              <view class='contents'>{{RetDataTable.Brand}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>Manufacture:</view>
+              <view class='contents'>{{RetDataTable.Manufacture}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>UPC:</view>
+              <view class='contents'>{{RetDataTable.UPC}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>EAN:</view>
+              <view class='contents'>{{RetDataTable.EAN}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>Model:</view>
+              <view class='contents'>{{RetDataTable.Model}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>PartNumber:</view>
+              <view class='contents'>{{RetDataTable.PartNumber}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>MPN:</view>
+              <view class='contents'>{{RetDataTable.MPN}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>Department:</view>
+              <view class='contents'>{{RetDataTable.Department}}</view>
+            </view>
+            <view class='item_list'>
+              <view class='item_title'>Review:</view>
+              <view class='contents'>{{RetDataTable.Review}}</view>
+            </view>
 
-          <view class='item_list'>
-            <view class='item_title'>ReviewLevel:</view>
-            <view class='contents'>{{RetDataTable.ReviewLevel}}</view>
+            <view class='item_list'>
+              <view class='item_title'>ReviewLevel:</view>
+              <view class='contents'>{{RetDataTable.ReviewLevel}}</view>
+            </view>
           </view>
         </view>
-      </view>
-      <view class=''>
-        <view class='change_view'>
-          <view class='status {{active==="SearchTerms"?"active":""}}' data-target="SearchTerms" bindtap='searchType'>
-            SearchTerms
-          </view>
-          <view class='status {{active==="Features"?"active":""}}' data-target="Features" bindtap='searchType'>
-            Features
-          </view>
-          <view class='status {{active==="Description"?"active":""}}' data-target="Description" bindtap='searchType'>
-            Description
+        <view class=''>
+          <view class='change_view'>
+            <view class='status {{active==="SearchTerms"?"active":""}}' data-target="SearchTerms" bindtap='searchType'>
+              SearchTerms
+            </view>
+            <view class='status {{active==="Features"?"active":""}}' data-target="Features" bindtap='searchType'>
+              Features
+            </view>
+            <view class='status {{active==="Description"?"active":""}}' data-target="Description" bindtap='searchType'>
+              Description
+            </view>
           </view>
         </view>
-      </view>
-      <view class='detail'>
-        <view wx-if="{{active==='Description'}}"> {{RetDataTable.Description}}</view>
-        <view wx-if="{{active==='SearchTerms'}}"> {{RetDataTable.SearchTerms}}</view>
-        <view wx-if="{{active==='Features'}}"> {{RetDataTable.Features}}</view>
-      </view>
+        <view class='detail'>
+        
+          <view wx-if="{{active==='SearchTerms'}}"> {{RetDataTable.SearchTerms}}</view>
+          <view wx-if="{{active==='Features'}}"> {{RetDataTable.Features}}</view>
+            <view wx-if="{{active==='Description'}}"> {{RetDataTable.ProductDescription}}</view>
+        </view>
       </block>
       <view class="table">
         <view class='thead'>
@@ -172,7 +173,7 @@
 
           <block wx:for="{{RetKeyTable}}" wx:key="{{code}}">
             <view class="tr">
-              <view class="td">{{index}} </view>
+              <view class="td">{{index+1}} </view>
               <view class="td" wx-if="{{type!=='KM'}}">{{item.ASIN}} </view>
               <view class="td" wx-if="{{type=='ST'}}">{{item.SearchTerms}} </view>
               <view class="td" wx-if="{{type==='SK'}}">{{item.InputAsin}} </view>
@@ -185,7 +186,25 @@
         </view>
       </view>
     </view>
+  </view>
+  <view class='bg_model' wx-if="{{showAsinList}}">
+    <view class='asinList'>
+      <view class='asinList_banner'>请选择ASIN区间</view>
+      <block wx:for="{{AsinListAndSection}}" wx:key="{{index}}">
+        <view class='list_item' data-asinlist="{{item.AsinSection}}" bindtap='setAsinList' >
+          <view class='asinList_title'>{{item.AsinSection}}</view>
+
+          <view class='asinList_content'>
+            <block wx:for="{{item.AsinList}}" wx:key="{{index}}">
+              <view class='list_text'>
+              {{item}}  
+             </view>
 
 
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
   </view>
 </view>

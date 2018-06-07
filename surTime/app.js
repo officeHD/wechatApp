@@ -5,56 +5,19 @@ App({
   onLaunch: function () {
     let that = this;
     // 展示本地存储能力
-    var PKID = wx.getStorageSync('PKID') || '';
-    var Tel = wx.getStorageSync('Tel') || '';
-    var UserName = wx.getStorageSync('UserName') || '';
-    var userData = wx.getStorageSync('userData') || '';
-    var token = wx.getStorageSync('token') || '';
-    var openId = wx.getStorageSync('openId') || '';
-    this.globalData.userData = userData;
-    this.globalData.PKID = PKID;
-    this.globalData.UserName = UserName;
-    this.globalData.Tel = Tel;
-    this.globalData.token = token;
-    this.globalData.openId = openId;
-    wx.login({
-      success: function (res) {
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'http://mp.surtime.com/SurtimeWebService.asmx/WXLogin',
-            method: 'POST',
-            data: {
-              Code: res.code,
-              Key: "SurTimeWebserviceS3ur0ti1me8"
-            },
-            success: function (res) {
-              console.log(JSON.parse(res.data.d))
-              let ret = JSON.parse(res.data.d);
-              if (ret.State === 1) {
-                console.log(ret.ReturnInfo.length)
-                if (ret.ReturnInfo.length < 30) {
-                  that.globalData.openId = ret.ReturnInfo;
-                  
-                } else {
-                  that.initUserInfo(JSON.parse(ret.ReturnInfo));
-                  that.initUserData(ret.ReturnInfo);
-                  that.initToken(res.header.Authorization);
-                  // wx.switchTab({
-                  //   url: '/pages/usercenter/index',
-                  // })
-                  if (this.employIdCallback) {
-                    this.employIdCallback(res.header.Authorization);
-                  }
-                }
-              }
-            }
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    });
+    // var PKID = wx.getStorageSync('PKID') || '';
+    // var Tel = wx.getStorageSync('Tel') || '';
+    // var UserName = wx.getStorageSync('UserName') || '';
+    // var userData = wx.getStorageSync('userData') || '';
+    // var token = wx.getStorageSync('token') || '';
+    // var openId = wx.getStorageSync('openId') || '';
+    // this.globalData.userData = userData;
+    // this.globalData.PKID = PKID;
+    // this.globalData.UserName = UserName;
+    // this.globalData.Tel = Tel;
+    // this.globalData.token = token;
+    // this.globalData.openId = openId;
+    // that.login();
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -74,6 +37,60 @@ App({
         }
       }
     })
+  },
+  login:function(){
+    let that=this;
+    wx.showLoading({
+      title: '登录中',
+      mask:true
+    })
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'https://mp.surtime.com/SurtimeWebService.asmx/WXLogin',
+            method: 'POST',
+            data: {
+              Code: res.code,
+              Key: "SurTimeWebserviceS3ur0ti1me8"
+            },
+            success: function (res) {
+              console.log(JSON.parse(res.data.d));
+              wx.hideLoading();
+
+              let ret = JSON.parse(res.data.d);
+              if (ret.State === 1) {
+                console.log(ret.ReturnInfo.length)
+                if (ret.ReturnInfo.length < 30) {
+                  that.globalData.openId = ret.ReturnInfo;
+                  wx.showModal({
+                    title: '登录提示',
+                    content: '请绑定账号或注册',
+                    success: function () {
+                       
+                    }
+                  })
+                  
+                } else {
+                  that.initUserInfo(JSON.parse(ret.ReturnInfo));
+                  that.initUserData(ret.ReturnInfo);
+                  that.initToken(res.header.Authorization);
+                  wx.switchTab({
+                    url: '/pages/usercenter/index',
+                  })
+                  if (this.employIdCallback) {
+                    this.employIdCallback(res.header.Authorization);
+                  }
+                }
+              }
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
   },
   initUserData: function (userData) {
     wx.setStorage({

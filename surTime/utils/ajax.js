@@ -36,7 +36,12 @@ function ajax(url = '', data = {}, fn) {
       fn(res);
     },
     fail: function (error) {
-      console.log(error)
+      console.log(error);
+      wx.hideLoading();
+      wx.showToast({
+        title: error.errMsg,
+        icon: "none"
+      })
     }
   });
 }

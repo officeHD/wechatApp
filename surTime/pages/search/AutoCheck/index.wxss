@@ -127,7 +127,7 @@
 .tips{
    width: 580rpx;
    text-align: left;
-   font-size: 30rpx;
+   font-size: 26rpx;
    color: #FB3838;
 }
 

@@ -36,22 +36,22 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#fff",
-    "selectedColor": "#333",
+    "color": "#333",
+    "selectedColor": "#fff",
     "borderStyle": "white",
     "backgroundColor": "#2C7EDC",
     "box-shadow": "0 0 6px 0",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/tab/part.png",
-        "selectedIconPath": "images/tab/part_on.png",
+        "iconPath": "images/tab/part_on.png",
+        "selectedIconPath": "images/tab/part.png",
         "text": "分类导航"
       },
       {
         "pagePath": "pages/usercenter/index",
-        "iconPath": "images/tab/user.png",
-        "selectedIconPath": "images/tab/user_on.png",
+        "iconPath": "images/tab/user_on.png",
+        "selectedIconPath": "images/tab/user.png",
         "text": "我的"
       }
     ]

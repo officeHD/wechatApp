@@ -1,4 +1,5 @@
 <view class="item-box">
+ <view wx-if="{{showipsd}}" class='tips'>相册左滑删除</view>
   <view class="items">
 
     <view wx:for="{{list}}" wx:key="{{index}}" class="item">

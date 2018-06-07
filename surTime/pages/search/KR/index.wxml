@@ -45,15 +45,19 @@
       <view class='items'>
         <text>ASIN关键词：</text>
 
-        <textarea auto-height bindinput='changeASIN'/>
+        <textarea auto-height bindinput='changeASIN' />
       </view>
       <view class='tips'>
         (一行一个,ASIN与关键词使用"|"分隔，例如：B01MDKPDHM|iPhone7 case)
       </view>
 
     </view>
+    <view class="checkbox" bindtap='checkboxChange1'>
+      <image src='{{check1?"/images/check.png":"/images/nocheck.png"}}'></image>
+      是否立即查询排名
+    </view>
     <view class='button' bindtap='search'>
-      确认搜索
+      确认创建
     </view>
   </view>
   <view class='attention'>

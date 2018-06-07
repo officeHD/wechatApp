@@ -34,6 +34,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+
+  },
+  onShow: function () {
     let userData = app.globalData.userData;
     if (userData) {
       let userDatas = JSON.parse(userData);
@@ -43,17 +47,7 @@ Page({
         TuDian: userDatas.TuDian
       })
     }
-
   },
-  onShow:function(){
-    let fn=msg=>{
-      let ret = JSON.parse(msg.data.d);
-      app.initUserInfo(JSON.parse(ret.ReturnInfo));
-      app.initUserData(ret.ReturnInfo);
-    }
-    app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
-  },
-
   toDetailsTap: function (e) {
     let url = e.currentTarget.dataset.detailurl;
     if (url) {

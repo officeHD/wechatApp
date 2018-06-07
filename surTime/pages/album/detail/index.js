@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    startTime:'',
+    endTime:'',
     album: [],
     uploadimg: []
   },
@@ -22,6 +24,7 @@ Page({
       Pictname: options.pictname
     })
     this.setAlbum();
+    
   },
   setAlbum: function () {
     let that = this;
@@ -39,6 +42,13 @@ Page({
         album: albumList
       })
     })
+  },
+
+  bindTouchStart: function (e) {
+    this.startTime = e.timeStamp;
+  },
+  bindTouchEnd: function (e) {
+    this.endTime = e.timeStamp;
   },
   uploadDIY: function (filePaths, successUp, failUp, i, length) {
     let that = this;
@@ -70,24 +80,26 @@ Page({
           wx.hideLoading();
           wx.showToast({
             title: '总共' + successUp + '张上传成功,' + failUp + '张上传失败！',
-            icon:'none'
+            icon: 'none'
           })
-         
         } else {  //递归调用uploadDIY函数
           that.uploadDIY(filePaths, successUp, failUp, i, length);
-         
+
         }
       },
     });
   },
   previewImage: function (e) {
-    var current = e.target.dataset.src;
-    let list = this.data.album.map((item, index) => { return item.FileURL});
-    console.log(list);
-    wx.previewImage({
-      current: current, // 当前显示图片的http链接  
-      urls: list// 需要预览的图片http链接列表  
-    })
+    if (this.endTime - this.startTime < 350) {
+      var current = e.target.dataset.src;
+      let list = this.data.album.map((item, index) => { return item.FileURL });
+      console.log(list);
+      wx.previewImage({
+        current: current, // 当前显示图片的http链接  
+        urls: list// 需要预览的图片http链接列表  
+      })
+    }
+
   },
   add_pic: function (e) {
     let that = this;

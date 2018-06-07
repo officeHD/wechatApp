@@ -78,6 +78,8 @@ Page({
     })
   },
   onLoad: function () {
+
+     
   },
   onShow: function () {
     let that = this;

@@ -61,7 +61,7 @@ Page({
       }
     }
 
-    app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10,Asin:'' }, cb)
+    app.ajax('/AsinKeyAll', { UserID: UserID, PNo: PNo, RowsNum: 10, Asin: '' }, cb)
   },
 
   /**
@@ -101,7 +101,7 @@ Page({
       PNO: that.data.PNo,
       PageNum: that.data.PageNum,
       RowsNum: 10,
-      Asin:''
+      Asin: ''
 
     }
     let cb = res => {
@@ -145,8 +145,8 @@ Page({
     let that = this;
     wx.showLoading({
       title: '查询中',
-     
-      mask:true
+
+      mask: true
     })
     that.UserIsValidRole(function (res) {
       wx.hideLoading();
@@ -164,7 +164,6 @@ Page({
             if (result.State.toString() === "4") {
               that.UserAddRole()
             }
-
           }
         })
       }
@@ -174,9 +173,9 @@ Page({
   UserIsValidRole: function (cb) {
     let that = this;
     let data = {
-      RowsNum:200,
+      RowsNum: 200,
       UserID: app.globalData.PKID,
-      Asin:'',
+      Asin: '',
       PNO: that.data.PNo
     }
     app.ajax('/UserIsValidRole', data, cb)
@@ -186,7 +185,7 @@ Page({
     let that = this;
     let data = {
       RowsNum: 100,
-
+      Asin: '',
       UserID: app.globalData.PKID,
       PNO: that.data.PNo
     }
@@ -211,8 +210,18 @@ Page({
     }
     let cb = res => {
       let ReturnInfo = JSON.parse(JSON.parse(res.data.d).ReturnInfo)
+
+      let tips = ReturnInfo.Ttext
+      let infoText = that.data.timeArr[that.data.timeIndex].MonthDay;
+      if (infoText.indexOf('演示数据') > 0) {
+
+        tips = "演示数据，本次查询不会消耗T点！"
+
+      } else if (infoText.indexOf('已购买') > 0) {
+        tips = "您已购买当期数据，本次查询不会消耗T点！"
+      }
       that.setData({
-        tips: ReturnInfo.Ttext
+        tips: tips
       })
     }
     app.ajax('/GetPNoIsView', data, cb)

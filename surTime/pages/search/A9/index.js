@@ -92,7 +92,10 @@ Page({
       }
 
     }
-
+    wx.showLoading({
+      title: '查询中',
+      mask: true
+    })
     app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
 
   },

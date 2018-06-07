@@ -14,7 +14,7 @@ Page({
     frequencyval: ['6', '15', '30', '60', '180', '360', '720', '1440'],
     frequencyIndex: 0,
     frequency: '6',
-
+    check1:false,
     flag: true,
     ASIN: '',
     listData: []
@@ -25,6 +25,14 @@ Page({
 
 
 
+  },
+  changePlanName: function (e) {
+    let value = e.detail.value;
+    let that = this;
+
+    that.setData({
+      planName: value
+    })
   },
   changeASIN: function (e) {
     let value = e.detail.value;
@@ -58,6 +66,11 @@ Page({
       frequency: that.data.frequencyval[index]
     })
   },
+  checkboxChange1: function (e) {
+    this.setData({
+      check1: !this.data.check1
+    })
+  },
   search: function () {
     let that = this;
     let UserID = app.globalData.PKID
@@ -71,9 +84,25 @@ Page({
       })
       return;
     }
+    let sendData = {
+      UserID: UserID,
+      Country: Country,
+
+      PlanName: that.data.planName,
+      KeyWord: ASIN,
+      MonitoringCycleDay: that.data.timer,
+      MonitoringFrequency: that.data.frequency,
+      IsCreateRuning: that.data.check1,
+      UserIPAddress: '',
+      RuningPage: 1,
+      StopPage: 1,
+      CompletePage: 1,
+      PageCount: 20
+    }
     let cb = (res) => {
+      wx.hideLoading();
       let data = JSON.parse(res.data.d)
-    
+
       if (data.State !== 1) {
         wx.showModal({
           title: '提示',
@@ -83,7 +112,11 @@ Page({
         that.goDetail();
       }
     }
-    app.ajax('/AsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
+    wx.showLoading({
+      title: '创建中',
+      mask:true
+    })
+    app.ajax('/NewKeyPlan', sendData, cb)
   },
   goDetail: function () {
     wx.navigateTo({

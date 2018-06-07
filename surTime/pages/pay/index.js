@@ -197,12 +197,7 @@ Page({
               mask: false
             })
           
-            setTimeout(function () {
-              wx.hideToast()
-              wx.switchTab({
-                url: '/pages/index/index'
-              })
-            }, 1500)
+           that.updateT();
           },
           'fail': function (res) {
             wx.showModal({
@@ -217,6 +212,21 @@ Page({
       }
     }
     app.ajax('/WXPay', data, fn)
+  },
+  updateT:function(){
+    let fn=msg=>{
+    
+      let ret = JSON.parse(msg.data.d);
+      app.initUserInfo(JSON.parse(ret.ReturnInfo));
+      app.initUserData(ret.ReturnInfo);
+      console.log(ret);
+      wx.hideToast()
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }
+    app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
   }
+
 
 })
