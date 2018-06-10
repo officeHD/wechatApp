@@ -130,7 +130,7 @@ Page({
   // 停止监控
   SetStopInIM: function (e) {
 
-    let id = e.currentTarget.dataset.id;
+    let id = e.currentTarget.dataset.id-0;
 
     let data = {
       Asin_ID: id,
@@ -166,6 +166,7 @@ Page({
   //重新查询IM计划
   AgainImSearch: function (e) {
     let id = e.currentTarget.dataset.id;
+    console.log(id);
     let data = {
       ImPaPKID: id,
       UserID: app.globalData.PKID,

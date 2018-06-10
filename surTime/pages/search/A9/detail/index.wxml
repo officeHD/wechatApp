@@ -98,7 +98,7 @@
       <view class='tbody'>
         <block wx:for="{{PIChild}}" wx:key="{{index}}">
           <view class="tr">
-            <view class="td">{{index}} </view>
+            <view class="td">{{index+1}} </view>
             <view class="td">{{item.ASIN}}</view>
             <view class="td">{{item.Parentage}}</view>
             <view class="td">
@@ -182,7 +182,7 @@
         <view class='tbody  '>
           <block wx:for="{{KeywordAnalysis}}" wx:key="{{index}}">
             <view class="tr  ">
-              <view class="td">{{index}} </view>
+              <view class="td">{{index+1}} </view>
               <view class="td">{{item.SearchRank}}</view>
               <view class="td">{{item.SearchRate}}</view>
               <view class="td">{{item.KeywordsClickRank}}</view>
@@ -237,7 +237,7 @@
         <view class='tbody'>
           <block wx:for="{{RelatedASIN}}" wx:key="{{index}}">
             <view class="tr  ">
-              <view class="td">{{index}} </view>
+              <view class="td">{{index+1}} </view>
               <view class="td">{{item.InputAsin}}</view>
               <view class="td">{{item.ASINSourceRate}}</view>
               <view class="td">{{item.KeywordsRelated}}</view>

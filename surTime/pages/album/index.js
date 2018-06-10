@@ -125,7 +125,7 @@ Page({
   albumDetail: function (e) {
 
     let id = e.currentTarget.dataset.id;
-    let pictname = e.currentTarget.dataset.pictname;
+    let pictname = encodeURIComponent(e.currentTarget.dataset.pictname);
     wx.navigateTo({
       url: `/pages/album/detail/index?id=${id}&pictname=${pictname}`,
     })

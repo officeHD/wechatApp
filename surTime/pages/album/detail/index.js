@@ -21,7 +21,7 @@ Page({
     console.log(options)
     this.setData({
       id: options.id,
-      Pictname: options.pictname
+      Pictname: decodeURIComponent(options.pictname)
     })
     this.setAlbum();
     

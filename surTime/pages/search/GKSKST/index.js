@@ -75,7 +75,8 @@ Page({
       }
       wx.showLoading({
         title: '加载中',
-        icon: 'none'
+        icon: 'none',
+        mask:true
       })
      
 

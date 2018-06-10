@@ -36,7 +36,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    app.ajax('/A9ListDetail', { UserID: UserID, PkId: pkid, AnalysisRows: 10, RedAnalysisRows: 10, RelatedRows: 10 }, function (res) {
+    app.ajax('/A9ListDetail', { UserID: UserID, PkId: pkid, AnalysisRows: 200, RedAnalysisRows: 200, RelatedRows: 200 }, function (res) {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
@@ -106,14 +106,18 @@ Page({
   //设置折线图
   setLineChart: function (options) {
     let option = {
-      color: ['rgb(124, 181, 236)', 'rgb(67, 67, 72)', 'rgb(144, 237, 125)', 'rgb(247, 163, 92)', 'rgb(128, 133, 233)', 'rgb(241, 92, 128)'],
+       
       tooltip: {
         trigger: 'axis'
       },
       legend: {
         data: ['曝光量', '点击量', '加入购物车量', '订单量', '平均价格', '总销售金额']
       },
+     
       grid: {
+        left: '1%',
+        right: '1%',
+        bottom: '1%',
         containLabel: true
       },
       xAxis: {
@@ -146,11 +150,15 @@ Page({
     } else {
       data = [{ value: 1, name: "暂无数据" }]
     }
-
-
+    let legendData = data.map((item,index)=>{
+      return item.name
+    })
     let option = {
       backgroundColor: "#ffffff",
-      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      legend: {
+       
+        data: legendData
+      },
       series: [{
         label: { normal: { ontSize: 14 } },
         type: 'pie',
@@ -179,12 +187,23 @@ Page({
     } else {
       data = [{ value: 1, name: "暂无数据" }]
     }
-
+    let legendData = data.map((item,indedx)=>{
+      return item.name
+    })
     let option = {
       backgroundColor: "#ffffff",
-      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      legend: {
+        
+        data: legendData
+      },
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '1%',
+        containLabel: true
+      },
       series: [{
-        label: { normal: { ontSize: 14 } },
+        label: { normal: { ontSize: 12 } },
         type: 'pie',
         center: ['50%', '50%'],
         radius: [0, '60%'],

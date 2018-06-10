@@ -18,11 +18,9 @@
     </view>
   </view>
   <view class='content'>
-    <block wx:if="{{listData.length==0}}" >
-    <view class='demo_head'>案例</view>
-    </block>
+
     <view class="table">
-    
+
       <view class='thead'>
         <view class="tr">
           <view class="th">图片</view>
@@ -32,18 +30,7 @@
         </view>
       </view>
       <view class='tbody'>
-       <block wx:if="{{listData.length==0}}" >
-          <view class="tr">
-            <view class="td logo">
-              <image src='/images/album/demo.png'></image>
-            </view>
-            <view class="td"> ASINDEMO</view>
-            <view class="td">us</view>
-            <view class="td operate">
-               <image src='../../../images/table/detail.png'></image>
-            </view>
-          </view>
-        </block>
+       
         <block wx:for="{{listData}}" wx:key="{{code}}">
           <view class="tr">
             <view class="td logo">

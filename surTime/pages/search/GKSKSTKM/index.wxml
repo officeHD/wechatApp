@@ -11,7 +11,7 @@
           </view>
         </picker>
 
-        <input placeholder='请务必输入ASIN' bindinput="changeASIN"></input>
+        <input  placeholder='{{type==="KM"?"请输入关键词":"请务必输入ASIN"}}' bindinput="changeASIN"></input>
       </view>
       <view class='button'>
         <button bindtap='search'>搜索</button>
@@ -55,7 +55,7 @@
           </view>
           <view class="tr" wx-if="{{type==='KM'}}">
             <view class="td logo">
-              {{index}}
+              {{index+1}}
             </view>
             <view class="td">{{item.KeyName}}</view>
             <view class="td">{{item.DataCount}}</view>
@@ -139,9 +139,7 @@
         </view>
         <view class=''>
           <view class='change_view'>
-            <view class='status {{active==="SearchTerms"?"active":""}}' data-target="SearchTerms" bindtap='searchType'>
-              SearchTerms
-            </view>
+            
             <view class='status {{active==="Features"?"active":""}}' data-target="Features" bindtap='searchType'>
               Features
             </view>
@@ -152,7 +150,7 @@
         </view>
         <view class='detail'>
         
-          <view wx-if="{{active==='SearchTerms'}}"> {{RetDataTable.SearchTerms}}</view>
+         
           <view wx-if="{{active==='Features'}}"> {{RetDataTable.Features}}</view>
             <view wx-if="{{active==='Description'}}"> {{RetDataTable.ProductDescription}}</view>
         </view>

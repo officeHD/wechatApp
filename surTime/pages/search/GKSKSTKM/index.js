@@ -14,7 +14,7 @@ Page({
     showChild: false,
     type: '',
     ASIN: '',
-    active: "SearchTerms",
+    active: "Features",
     RetDataTable: '',
     listData: []
   },
@@ -73,8 +73,12 @@ Page({
     let Country = that.data.Country;
     let ASIN = that.data.ASIN;
     if (!ASIN) {
+      let tips = "请输入ASIN";
+      if(that.data.type=="KM"){
+        tips="请输入关键词"
+      }
       wx.showToast({
-        title: '请输入ASIN',
+        title: tips,
         icon: "none"
       })
       return;
@@ -83,8 +87,14 @@ Page({
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       if (data.State == 1) {
+        let listData ;
+        if(that.data.type==="KM"){
+          listData = JSON.parse(data.ReturnInfo)
+        }else{
+          listData = JSON.parse(data.TableJson)
+        }
         that.setData({
-          listData: JSON.parse(data.TableJson)
+          listData: listData
         });
       } else {
         if (data.State == 2) {
@@ -204,6 +214,7 @@ Page({
     let pkid = e.currentTarget.dataset.pkid;
     let jindu = e.currentTarget.dataset.jindu;
     if (that.data.type === "KM") {
+    
       if (jindu === "已完成") {
         that.GetSKSKSTKMData(pkid);
       } else if (jindu === "正在生成") {
@@ -263,7 +274,7 @@ Page({
     let data = {
       PageType: that.data.type,
       UserID: app.globalData.PKID,
-      TDataID: pkid,
+      TDataID: pkid-0,
       Page: 1,
       PageCount:200
     };

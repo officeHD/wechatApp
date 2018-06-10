@@ -31,6 +31,8 @@ function ajax(url = '', data = {}, fn) {
           title: JSON.parse(res.data.d).ReturnInfo,
           icon: "none"
         })
+        //访问失效重新登录
+        app.login();
         return false;
       }
       fn(res);

@@ -226,6 +226,116 @@ Page({
   },
   // 保存个人P卡业务
   SavePByUser: function () {
+    if (!this.data.TaskName){
+      wx.showToast({
+        title: '请输入任务名',
+        icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.Name) {
+      wx.showToast({
+        title: '请输入姓名',
+        icon: 'none'
+      })
+      return false;
+    }
+ 
+    if (!this.data.UserCode) {
+      wx.showToast({
+        title: '请输入身份证号',
+        icon: 'none'
+      })
+      return false;
+    }
+ 
+    if (!this.data.Userpinyin) {
+      wx.showToast({
+        title: '请输入姓名拼音',
+        icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.Phone) {
+      wx.showToast({
+        title: '请输入手机号', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.Email) {
+      wx.showToast({
+        title: '请输入邮箱', icon: 'none'
+      })
+      return false;
+    }
+   
+    if (!this.data.Birthday) {
+      wx.showToast({
+        title: '请输入生日', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.ZipCode) {
+      wx.showToast({
+        title: '请输入邮编', icon: 'none'
+      })
+      return false;
+    }
+
+   
+    if (!this.data.Address) {
+      wx.showToast({
+        title: '请输地址', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.bankname) {
+      wx.showToast({
+        title: '请输入银行名称', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.sbankcity) {
+      wx.showToast({
+        title: '请输入支行城市', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.sbankname) {
+      wx.showToast({
+        title: '请输入支行名称', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.bankuser) {
+      wx.showToast({
+        title: '请输入账户名称', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.bankhao) {
+      wx.showToast({
+        title: '请输入银行账号', icon: 'none'
+      })
+      return false;
+    }
+
+    if (!this.data.bankusertel) {
+      wx.showToast({
+        title: '请输入关联手机号', icon: 'none'
+      })
+      return false;
+    }
+
+
+    if (!this.data.bankusercode) {
+      wx.showToast({
+        title: '请输入证件号', icon: 'none'
+      })
+      return false;
+    }
+ 
+
 
     let Pictname = [{
       taskid: this.data.type,
@@ -270,6 +380,102 @@ Page({
   },
   //保存企业P卡业务
   SavePByCompany: function () {
+    if (!this.data.TaskName) {
+      wx.showToast({
+        title: '请输入任务名',
+        icon:'none'
+      })
+      return false;
+    }
+    if (!this.data.CompanyName) {
+      wx.showToast({
+        title: '请输入公司名称', icon: 'none'
+      })
+      return false;
+    }
+
+    
+    if (!this.data.Name) {
+      wx.showToast({
+        title: '请输入姓名', icon: 'none'
+      })
+      return false;
+    }
+
+
+
+    // if (!this.data.sirenorqiye) {
+    //   wx.showToast({
+    //     title: '请输入姓名拼音',
+    //   })
+    //   return false;
+    // }
+ 
+   
+
+
+    if (!this.data.Email) {
+      wx.showToast({
+        title: '请输入邮箱', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.Birthday) {
+      wx.showToast({
+        title: '请输入生日', icon: 'none'
+      })
+      return false;
+    }
+    
+    if (!this.data.ZipCode) {
+      wx.showToast({
+        title: '请输入邮编', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.Address) {
+      wx.showToast({
+        title: '请输地址', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.AFrontShopLink) {
+      wx.showToast({
+        title: '请输入店铺链接', icon: 'none'
+      })
+      return false;
+    }
+ 
+    if (!this.data.sbankname) {
+      wx.showToast({
+        title: '请输入支行名称', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.bankuser) {
+      wx.showToast({
+        title: '请输入账户名称', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.bankhao) {
+      wx.showToast({
+        title: '请输入银行账号', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.bankusertel) {
+      wx.showToast({
+        title: '请输入关联手机号', icon: 'none'
+      })
+      return false;
+    }
+    if (!this.data.bankusercode) {
+      wx.showToast({
+        title: '请输入证件号', icon: 'none'
+      })
+      return false;
+    }
     let Pictname = [{
       taskid: this.data.type,
       taskname: this.data.TaskName,
@@ -279,18 +485,19 @@ Page({
       email: this.data.Email,
       address: this.data.Address,
       addcode: this.data.ZipCode,
-      splink: this.data.AFrontShopLink,
-      usercode: this.data.UserCode,
+      StoreLink: this.data.AFrontShopLink,
       sirenorqiye: this.data.sirenorqiye,//
+      bankuser: this.data.bankuser,
+      bankusercode: this.data.bankusercode,
       bankname: this.data.bankname,
 
-      bankusercode: this.data.bankusercode,
-      bankuser: this.data.bankuser,
+     
+    
       bankhao: this.data.bankhao,
       sbankname: this.data.sbankname,
       sbankcity: this.data.sbankcity,
       bankusertel: this.data.bankusertel,
-      // usertel: this.data.Phone,
+      
     }];
     let data = {
       UserID: app.globalData.PKID,

@@ -38,6 +38,8 @@ Page({
 
   },
   onShow: function () {
+    this.updateT();
+
     let userData = app.globalData.userData;
     if (userData) {
       let userDatas = JSON.parse(userData);
@@ -47,6 +49,16 @@ Page({
         TuDian: userDatas.TuDian
       })
     }
+    console.log(1);
+  },
+  updateT: function () {
+    let fn = msg => {
+
+      let ret = JSON.parse(msg.data.d);
+      app.initUserInfo(JSON.parse(ret.ReturnInfo));
+      app.initUserData(ret.ReturnInfo);
+    }
+    app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
   },
   toDetailsTap: function (e) {
     let url = e.currentTarget.dataset.detailurl;

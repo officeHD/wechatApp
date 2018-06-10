@@ -96,7 +96,7 @@
       <view class='tbody'>
         <block wx:for="{{PIChild}}" wx:key="{{index}}">
           <view class="tr">
-            <view class="td">{{index}} </view>
+            <view class="td">{{index+1}} </view>
             <view class="td">{{item.ASIN}}</view>
             <view class="td">{{item.Parentage}}</view>
             <view class="td">
@@ -170,7 +170,7 @@
         <view class='tbody  '>
           <block wx:for="{{KeywordAnalysis}}" wx:key="{{index}}">
             <view class="tr  ">
-              <view class="td">{{index}} </view>
+              <view class="td">{{index+1}} </view>
               <view class="td">{{item.keyWords}}</view>
               
               <view class="td">{{item.Frequency}}</view>

@@ -175,7 +175,7 @@
 
 .change_view {
   display: flex;
-  width: 600rpx;
+  width: 400rpx;
   height: 55rpx;
   margin: 10px auto;
   justify-content: center;

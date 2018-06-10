@@ -39,7 +39,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    app.ajax('/PlannerKeyAllDetail', { UserID: UserID, PkId: pkid, KeyKeywordsRows: 5, RedAnalysisRows: 5 }, function (res) {
+    app.ajax('/PlannerKeyAllDetail', { UserID: UserID, PkId: pkid, KeyKeywordsRows:200, RedAnalysisRows: 200}, function (res) {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
@@ -66,7 +66,7 @@ Page({
 
 
     //当前商品关联ASIN分析(初始化)
-    app.ajax('/GetPlannerRelatedASIN', { UserID: UserID, PkId: pkid, RowsNum: 10, PageNum:1}, function (res) {
+    app.ajax('/GetPlannerRelatedASIN', { UserID: UserID, PkId: pkid, RowsNum: 200, PageNum:1}, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       console.log(ReturnInfo)
@@ -150,10 +150,22 @@ Page({
       data = [{ value: 1, name: "暂无数据" }]
     }
 
+    let legendData = data.map((item, index) => {
+      return item.name
+    })
 
     let option = {
       backgroundColor: "#ffffff",
-      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '1%',
+        containLabel: true
+      },
+      legend: {
+
+        data: legendData
+      },
       series: [{
         label: { normal: { ontSize: 14 } },
         type: 'pie',
@@ -182,10 +194,22 @@ Page({
     } else {
       data = [{ value: 1, name: "暂无数据" }]
     }
+    let legendData = data.map((item, index) => {
+      return item.name
+    })
 
     let option = {
       backgroundColor: "#ffffff",
-      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '1%',
+        containLabel: true
+      },
+      legend: {
+
+        data: legendData
+      },
       series: [{
         label: { normal: { ontSize: 14 } },
         type: 'pie',
@@ -310,10 +334,14 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum = that.data.pageNum1;
-    app.ajax('/GetPlanner500Key', { UserID: UserID, PkId: PkId, RowsNum: 10, PNO:'', PageNum: pageNum }, function (res) {
+    app.ajax('/GetPlanner500Key', { UserID: UserID, PkId: PkId, RowsNum: 200, PNO:'', PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      console.log(ReturnInfo);
+      if (!ReturnInfo || !ReturnInfo.length) {
+        return false;
+      }
+
       that.setData({
         KeywordAnalysis: that.data.KeywordAnalysis.concat(ReturnInfo) ,
         pageNum1: that.data.pageNum1 - 0 + 1
@@ -326,10 +354,14 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum = that.data.pageNum2;
-    app.ajax('/GetPlannerKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum: 10, PageNum: pageNum }, function (res) {
+    app.ajax('/GetPlannerKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum: 200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      console.log(ReturnInfo);
+      if (!ReturnInfo || !ReturnInfo.length) {
+        return false;
+      };
+
       that.setData({
         KeywordRedAnalysis: that.data.KeywordRedAnalysis.concat(ReturnInfo) ,
         pageNum2: that.data.pageNum2 - 0 + 1

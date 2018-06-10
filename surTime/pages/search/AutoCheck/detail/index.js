@@ -19,7 +19,7 @@ Page({
     chartIndex: 1,
     pageNum1: 2,
     pageNum2: 2,
-    pageNum3: 1,
+    pageNum3: 2,
     tableIndex: 1
   },
 
@@ -40,7 +40,7 @@ Page({
       title: '加载中',
       mask:true
     });
-    app.ajax('/AsinKeyAllDetail', { UserID: UserID, PkId: pkid, KeytopRows: 10, RedAnalysisRows: 10 }, function (res) {
+    app.ajax('/AsinKeyAllDetail', { UserID: UserID, PkId: pkid, KeytopRows:200, RedAnalysisRows: 200 }, function (res) {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
@@ -119,8 +119,12 @@ Page({
         data: ['曝光量', '点击量', '加入购物车量', '订单量', '平均价格', '总销售金额']
       },
       grid: {
+        left: '1%',
+        right: '1%',
+        bottom: '1%',
         containLabel: true
       },
+      
       xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -151,11 +155,22 @@ Page({
     } else {
       data = [{ value: 1, name: "暂无数据" }]
     }
-
+    let legendData = data.map((item, index) => {
+      return item.name
+    })
 
     let option = {
       backgroundColor: "#ffffff",
-      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '1%',
+        containLabel: true
+      },
+      legend: {
+
+        data: legendData
+      },
       series: [{
         label: { normal: { ontSize: 14 } },
         type: 'pie',
@@ -185,9 +200,22 @@ Page({
       data = [{ value: 1, name: "暂无数据" }]
     }
 
+    let legendData = data.map((item, index) => {
+      return item.name
+    })
+
     let option = {
       backgroundColor: "#ffffff",
-      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '1%',
+        containLabel: true
+      },
+      legend: {
+
+        data: legendData
+      },
       series: [{
         label: { normal: { ontSize: 14 } },
         type: 'pie',
@@ -313,10 +341,14 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum = that.data.pageNum1;
-    app.ajax('/GetTop500Key', { UserID: UserID, PkId: PkId, RowsNum: 10, PNO: '', PageNum: pageNum }, function (res) {
+    app.ajax('/GetTop500Key', { UserID: UserID, PkId: PkId, RowsNum:200, PNO: '', PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       console.log(ReturnInfo)
+      if (!ReturnInfo || !ReturnInfo.length) {
+        return false;
+      }
+      
       that.setData({
         KeywordAnalysis: that.data.KeywordAnalysis.concat(ReturnInfo),
         pageNum1: that.data.pageNum1 - 0 + 1
@@ -329,10 +361,13 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum = that.data.pageNum2;
-    app.ajax('/GetTopKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum: 10, PageNum: pageNum }, function (res) {
+    app.ajax('/GetTopKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum:200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      console.log(ReturnInfo);
+      if (!ReturnInfo || !ReturnInfo.length){
+        return false;
+      }
       that.setData({
         KeywordRedAnalysis: that.data.KeywordRedAnalysis.concat(ReturnInfo),
         pageNum2: that.data.pageNum2 - 0 + 1
@@ -345,7 +380,7 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum = that.data.pageNum3;
-    app.ajax('/GetTopRelatedASIN', { UserID: UserID, PkId: PkId, RowsNum: 10, PageNum: pageNum }, function (res) {
+    app.ajax('/GetTopRelatedASIN', { UserID: UserID, PkId: PkId, RowsNum: 200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       console.log(ReturnInfo)

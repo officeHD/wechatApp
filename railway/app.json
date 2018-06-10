@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/index/index",
+ 
+     
     "pages/logs/logs"
   ],
   "window":{
@@ -8,5 +10,26 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#fff",
+    "borderStyle": "white",
+    "backgroundColor": "#2C7EDC",
+    "box-shadow": "0 0 6px 0",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tab/part_on.png",
+        "selectedIconPath": "images/tab/part.png",
+        "text": "单数据"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "iconPath": "images/tab/user_on.png",
+        "selectedIconPath": "images/tab/user.png",
+        "text": "综合对比"
+      }
+    ]
   }
 }

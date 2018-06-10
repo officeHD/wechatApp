@@ -176,7 +176,7 @@ page {
 }
 
 .echart {
-  width: 600rpx;
+  width: 100%;
   height: 600rpx;
   margin: 0 auto;
 }

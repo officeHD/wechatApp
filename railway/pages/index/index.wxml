@@ -1,4 +1,13 @@
-<!--index.wxml-->
-<view>
-  <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+<view class="container">
+  <view class="section">
+    <picker bindchange="bindPickerChange" range-key='站名' value="{{index}}" range="{{array}}">
+      <view class="picker">
+        {{array[index]['站名'] }}
+      </view>
+    </picker>
+  </view>
+  <view class='echarts'>
+   <ec-canvas wx:if="{{!isDisposed}}" id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+  </view>
+  
 </view>
