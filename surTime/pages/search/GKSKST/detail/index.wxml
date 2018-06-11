@@ -193,7 +193,7 @@
       <view class='tbody'>
         <block wx:for="{{KeywordRedAnalysis}}" wx:key="{{index}}">
           <view class="tr">
-            <view class="td">{{index}}</view>
+            <view class="td">{{index+1}}</view>
             <view class="td">{{item.Keywords}} </view>
             <view class="td">{{item.SearchResults}}</view>
           </view>
@@ -218,7 +218,7 @@
         <view class='tbody'>
           <block wx:for="{{RelatedASIN}}" wx:key="{{index}}">
             <view class="tr  ">
-              <view class="td">{{index}} </view>
+              <view class="td">{{index+1}} </view>
               <view class="td">{{item.InputAsin}}</view>
               <view class="td">{{item.ASINSourceRate}}</view>
               <view class="td">{{item.KeywordsRelated}}</view>
@@ -235,7 +235,7 @@
   <view class='bg_model' wx-if="{{showChild}}">
       
     <view class='tableInfo'>
-      <view class='title'  bindtap='closeChild'> 子ASIN明细 <view class='closeChild'>×</view></view>
+      <view class='title'  bindtap='closeChild'> 子ASIN明细 <view  bindtap='closeChild' class='closeChild'>×</view></view>
       <view class='infotop'>
         <view class='image'>
           <image src='{{childPIData.ImageUrl}}'></image>

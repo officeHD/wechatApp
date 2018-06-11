@@ -13,7 +13,26 @@ Page({
     listData: []
   },
   onLoad: function () {
-    this.getA9List();
+    let that = this;
+    let UserID = app.globalData.PKID;
+
+    let sendData = {
+      UserID: UserID,
+      Page: 1,
+      PageCount:200,
+      Asin: '',
+      StrTime: '',
+      EndTime: ''
+    }
+    let cb = (res) => {
+      let data = JSON.parse(res.data.d);
+      console.log(JSON.parse(data.ReturnInfo))
+      that.setData({
+        listData: JSON.parse(data.ReturnInfo),
+        
+      });
+    }
+    app.ajax('/PlannerKeyAllByPage', sendData, cb)
   },
   getA9List: function () {
     let that = this;
@@ -22,7 +41,7 @@ Page({
     let sendData = {
       UserID: UserID,
       Page: that.data.page,
-      PageCount: 10,
+      PageCount:200,
       Asin: '',
       StrTime: '',
       EndTime: ''
@@ -30,6 +49,11 @@ Page({
     let cb = (res) => {
       let data = JSON.parse(res.data.d);
       console.log(JSON.parse(data.ReturnInfo))
+      let ReturnInfo=JSON.parse(data.ReturnInfo);
+      if (!ReturnInfo || !ReturnInfo.length) {
+        return false;
+      };
+
       that.setData({
         listData: that.data.listData.concat(JSON.parse(data.ReturnInfo)),
         page: that.data.page + 1,
@@ -73,14 +97,15 @@ Page({
           content: '存在旧数据，是否重新查询',
         })
       }
-      wx.showLoading({
-        title: '加载中',
-        icon: 'none',
-        mask:true
-      })
+      
      
 
     }
+    wx.showLoading({
+      title: '加载中',
+      icon: 'none',
+      mask:true
+    });
     app.ajax('/PlannerAsinIsExists', { UserID: UserID, Country: Country, Asin: ASIN }, cb, 'POST')
 
   },
@@ -88,13 +113,19 @@ Page({
   addAsin: function (UserID, Country, ASIN, OldData) {
     let that = this;
     let cb = (res) => {
+      wx.hideLoading();
       let data = JSON.parse(res.data.d)
       wx.showToast({
         title: data.ReturnInfo,
         icon: 'none'
       })
-      that.onLoad()
+      that.onLoad();
     }
+    wx.showLoading({
+      title: '加载中',
+      icon: 'none',
+      mask:true
+    });
     app.ajax('/PlannerAddAsin', { UserID: UserID, Country: Country, Asin: ASIN, OldData: OldData }, cb, 'POST')
   },
   /**

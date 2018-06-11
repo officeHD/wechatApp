@@ -9,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    startTime:'',
-    endTime:'',
+    startTime: '',
+    endTime: '',
+    delStu: false,
     album: [],
     uploadimg: []
   },
@@ -24,7 +25,7 @@ Page({
       Pictname: decodeURIComponent(options.pictname)
     })
     this.setAlbum();
-    
+
   },
   setAlbum: function () {
     let that = this;
@@ -123,47 +124,80 @@ Page({
       }
     })
   },
+  choseImg: function (e) {
+    var that = this;
+    let pkid = e.currentTarget.dataset.pkid;
+    let fileName = e.currentTarget.dataset.filename;
+    let key = e.currentTarget.dataset.key;
+    console.log(key);
+    let data = that.data.album;
+    data[key].select = !that.data.album[key].select
+    that.setData({
+      album: data
+    })
 
+  },
   deleteImage: function (e) {
     var that = this;
     let pkid = e.currentTarget.dataset.pkid;
     let fileName = e.currentTarget.dataset.filename;
-    wx.showModal({
-      title: '提示',
-      content: '确定要删除此图片吗？',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('点击确定了');
-          that.DelImage(pkid, fileName)
-        } else if (res.cancel) {
-          console.log('点击取消了');
-          return false;
-        }
-        that.setData({
-          images
-        });
-      }
+    that.setData({
+      delStu: true
+    })
+
+  },
+  cancel: function () {
+    let data = this.data.album.map((item,index)=>{return {...item,select:false}})
+    this.setData({
+      delStu: false,
+      album:data
     })
   },
-  //删除图片
-  DelImage: function (pkid, fileName) {
+  del_pic: function () {
     let that = this;
-    let data = {
+    let data = that.data.album.filter(function (item, index) {
+      return item.select
+    });
+
+    var successUp = 0; //成功个数
+    var failUp = 0; //失败个数
+    var length = data.length; //总共个数
+    var i = 0; //第几个
+    that.DelImage(data, successUp, failUp, i, length);
+
+
+  },
+  //删除图片
+  DelImage: function (data, successUp, failUp, i, length) {
+    let that = this;
+    let datas = {
       UserID: app.globalData.PKID,
       PicName: that.data.Pictname,
-      Pkid: pkid,  //文件编号
-      FileName: fileName //文件名称	 
+      Pkid: data[i].UniqueID1,  //文件编号
+      FileName: data[i].FileName //文件名称	 
     }
     let fn = msg => {
       let res = JSON.parse(msg.data.d);
-      wx.showModal({
-        title: '提示',
-        content: res.ReturnInfo,
-        success: function () {
-          that.setAlbum();
-        }
-      })
+      if (res.State === 1) {
+        successUp++;
+      } else {
+        failUp++;
+      }
+      i++;
+      that.setAlbum();
+      if (i == length) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '总共' + successUp + '张删除成功,' + failUp + '张删除失败！',
+          icon: 'none'
+        })
+      } else {  //递归调用uploadDIY函数
+        that.DelImage(data, successUp, failUp, i, length);
+
+      }
+
     }
-    app.ajax('/DelImage', data, fn)
+    app.ajax('/DelImage', datas, fn)
   }
 })
+

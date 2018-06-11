@@ -100,12 +100,19 @@ Page({
       UserID: app.globalData.PKID,
       PNO: that.data.PNo,
       PageNum: that.data.PageNum,
-      RowsNum: 10,
+      RowsNum: 200,
       Asin: ''
 
     }
     let cb = res => {
-      console.log(JSON.parse(res.data.d));
+      // console.log(JSON.parse(res.data.d));
+      let data = JSON.parse(res.data.d)
+      let listData=JSON.parse(data.ReturnInfo);
+      that.setData({
+        listData: that.data.listData.concat(listData.map((item,index)=>{return {ImageUrl:item.ImageUrl,ASIN:item.ASIN,Country:item.Country,PKID:item.PKID}})),
+        PageNum: that.data.PageNum + 1,
+        length: JSON.parse(data.ReturnInfo).length
+      });
 
     }
     app.ajax('/AsinKeyAllByPage', data, cb)
@@ -151,7 +158,7 @@ Page({
     that.UserIsValidRole(function (res) {
       wx.hideLoading();
       let result = JSON.parse(res.data.d);
-      console.log(result)
+      console.log(result.State);
       if (result.State.toString() === "1") {
         that.setData({
           listData: JSON.parse(result.ReturnInfo)
@@ -193,7 +200,7 @@ Page({
       let result = JSON.parse(res.data.d);
       that.setData({
 
-        listData: that.data.listData.concat(JSON.parse(result.ReturnInfo)),
+        listData: JSON.parse(result.ReturnInfo),
         page: that.data.page + 1,
         length: JSON.parse(data.ReturnInfo).length
       })
@@ -283,7 +290,7 @@ Page({
   checkDetail: function (e) {
     let pkid = e.currentTarget.dataset.pkid;
     wx.navigateTo({
-      url: 'detail/index?pkid=' + pkid,
+      url: 'detail/index?pkid=' + pkid+'&pNo='+this.data.PNo,
     })
 
   }

@@ -47,7 +47,7 @@
       <view class='price '>
         <view class='price_val '>￥{{Totalfee}}</view>
         <view class='discount_info '>
-          <text wx-if="{{Discount}}"> 已使用优惠券{{Discount}}</text>
+          <text wx-if="{{Discount}}"> 已使用{{carType}}{{carType==='折扣券'?Discount*10+'折':Discount}}</text>
           <text>{{current.single}}</text>
         </view>
       </view>

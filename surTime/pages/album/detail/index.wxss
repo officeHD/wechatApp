@@ -6,7 +6,25 @@
   padding: 0 7.9rpx;
   padding-bottom: 120rpx;
 }
-
+.image_list{
+  width: 177rpx;
+  height: 177rpx;
+  margin: 5rpx;
+  position: relative;
+}
+.imgmask{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5)
+}
+.album .imgmask image{
+width: 40rpx;
+height: 40rpx;
+float: right;
+}
 .album image {
   width: 177rpx;
   height: 177rpx;
@@ -24,4 +42,15 @@
   line-height: 100rpx;
   transform: translate(-50%, 0);
   color: #fff;
+  display: flex;
+  justify-content: center;
+}
+.cancel{
+  background: #e2e2e2;
+  flex: 1;
+  color: #333;
+}
+.del_album{
+background-color: #e64340;
+flex: 1;
 }

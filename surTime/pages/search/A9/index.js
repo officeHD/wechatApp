@@ -28,7 +28,7 @@ Page({
     let sendData = {
       UserID: UserID,
       Page: that.data.page,
-      PageCount: 10,
+      PageCount: 200,
       Asin: '',
       StrTime: '',
       EndTime: ''
@@ -111,7 +111,7 @@ Page({
       let sendData = {
         UserID: app.globalData.PKID,
         Page: 1,
-        PageCount: 10,
+        PageCount: 200,
         Asin: '',
         StrTime: '',
         EndTime: ''
@@ -120,9 +120,14 @@ Page({
         let data = JSON.parse(res.data.d)
         that.setData({
           listData: JSON.parse(data.ReturnInfo),
-
-
         });
+        let fn = msg => {
+
+          let ret = JSON.parse(msg.data.d);
+          app.initUserInfo(JSON.parse(ret.ReturnInfo));
+          app.initUserData(ret.ReturnInfo);
+        }
+        app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
       }
 
       app.ajax('/A9ListByPage', sendData, cb, 'POST')

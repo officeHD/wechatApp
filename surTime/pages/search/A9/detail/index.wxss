@@ -303,11 +303,16 @@ ec-canvas {
 }
 
 .closeChild {
-  width: 40rpx;
-  height: 40rpx;
-  font-size: 59rpx;
-  position: absolute;
-  right: 10rpx;
-  top: 0rpx;
-  color: #333;
+  width:40rpx;
+  height:40rpx;
+  font-size:59rpx;
+  position:fixed;
+  right:4%;
+  top:1%;
+  color:#333;
+  background:#fff;
+  z-index:999999;
+  border-radius:15px;
+  line-height:40rpx;
+  
 }

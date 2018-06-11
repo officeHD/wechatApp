@@ -1,32 +1,30 @@
 <view class="item-box">
- <view wx-if="{{showipsd}}" class='tips'>相册左滑删除</view>
   <view class="items">
-
     <view wx:for="{{list}}" wx:key="{{index}}" class="item">
-      <view data-id='{{item.id}}' bindtap='albumDetail' bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" data-pictname='{{item.text}}' style='{{item.txtStyle}}' class="inner txt">
-        <image class="item-icon" mode="widthFix" src="/images/album/demo.png">
-        </image>
-        <view class='content'>
+      <view data-id="{{item.id}}" bindtap="albumDetail" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" data-pictname="{{item.text}}" style="{{item.txtStyle}}" class="inner txt">
+        <image class="item-icon" mode="widthFix" src="/images/album/demo.png"></image>
+        <view class="content">
           <text>{{item.text}}</text>
-
         </view>
+        <view class="deltip">左滑删除</view>
       </view>
-      <view data-id='{{item.id}}' data-name="{{item.text}}" bindtap="delItem" class="inner del">删除</view>
+      <view data-id="{{item.id}}" data-name="{{item.text}}" bindtap="delItem" class="inner del">
+        删除
+      </view>
     </view>
   </view>
-  <view class='add_album' bindtap='changeShow'>添加相册</view>
-  <view class='bg' wx-if="{{add_show}}">
-    <view class='add_model'>
-      <view class='add_title' bindtap='changeShow'>
+  <view class="add_album" bindtap="changeShow">添加相册</view>
+  <view class="bg" wx-if="{{add_show}}">
+    <view class="add_model">
+      <view class="add_title" bindtap="changeShow">
         创建相册
-        <text class='close'>×</text>
+        <text class="close">×</text>
       </view>
-      <view class='input_area'>
+      <view class="input_area">
         <text>请输入相册名称</text>
-        <input placeholder='' bindinput="changename"></input>
+        <input placeholder="" bindinput="changename"></input>
       </view>
-      <view class='sure' bindtap='sure_add'>确定</view>
+      <view class="sure" bindtap="sure_add">确定</view>
     </view>
   </view>
-
 </view>

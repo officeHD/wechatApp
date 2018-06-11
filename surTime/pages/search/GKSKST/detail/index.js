@@ -55,7 +55,7 @@ Page({
         ZiAsinCount: ReturnInfo.ChildAsinCount,//子表数量
         tableInfo: Tables.reads[0],//商品基础信息分析
         SourcesStatistics: Tables.reads1,//流量关键词词频分析TOP20
-        PIChild: Tables.reads2,//变体所有ASIN信息
+        // PIChild: Tables.reads2,//变体所有ASIN信息
         ASINStatisticsByID: Tables.reads3,//关键词入口渠道占比
         KeywordRedAnalysis: Tables.reads4,//当前商品流量关键词分析
         KeywordAnalysis: Tables.reads6,//流量关键词词频分析 
@@ -76,6 +76,17 @@ Page({
       
     })
 
+     // 
+     app.ajax('/GetPlannerPIChildAll', { UserID: UserID, PkId: pkid}, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      console.log(ReturnInfo)
+      that.setData({
+        PIChild: ReturnInfo
+      })
+      
+    })
+    
 
 
   },
@@ -93,6 +104,7 @@ Page({
     GetSourcesStatisticsbyName(UserID, PkId, name);
   },
   // 根据店铺名称查询卖家流量渠道占比图形数据
+  // GetPlannerStatisticsGraph
   GetSourcesStatisticsbyName: function (UserID, PkId, StoreName) {
     let that = this;
     app.ajax('/GetTopKeyGraph', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
@@ -167,10 +179,39 @@ Page({
         data: legendData
       },
       series: [{
-        label: { normal: { ontSize: 14 } },
+        label: {
+          normal: {
+            ontSize: 12,
+            formatter: '   {b|{b}}\n{hr|}\n {per|{d}%}  ',
+            backgroundColor: '#eee',
+            borderColor: '#aaa',
+            borderWidth: 1,
+            borderRadius: 4,
+          
+            rich: {
+             
+              hr: {
+                borderColor: '#aaa',
+                width: '100%',
+                borderWidth: 0.5,
+                height: 0
+              },
+              b: {
+                color: '#999',
+                lineHeight: 22,
+                align: 'center'
+              },
+              per: {
+                 
+                align: 'center',
+                 
+              }
+            }
+          }
+        },
         type: 'pie',
-        center: ['50%', '50%'],
-        radius: [0, '60%'],
+        radius: '45%',
+        center: ['50%', '65%'],
         data: data,
         itemStyle: {
           emphasis: {
@@ -211,10 +252,39 @@ Page({
         data: legendData
       },
       series: [{
-        label: { normal: { ontSize: 14 } },
+        label: {
+          normal: {
+            ontSize: 12,
+            formatter: '   {b|{b}}\n{hr|}\n {per|{d}%}  ',
+            backgroundColor: '#eee',
+            borderColor: '#aaa',
+            borderWidth: 1,
+            borderRadius: 4,
+          
+            rich: {
+             
+              hr: {
+                borderColor: '#aaa',
+                width: '100%',
+                borderWidth: 0.5,
+                height: 0
+              },
+              b: {
+                color: '#999',
+                lineHeight: 22,
+                align: 'center'
+              },
+              per: {
+                 
+                align: 'center',
+                 
+              }
+            }
+          }
+        },
         type: 'pie',
-        center: ['50%', '50%'],
-        radius: [0, '60%'],
+        radius: '40%',
+        center: ['50%', '70%'],
         data: data,
         itemStyle: {
           emphasis: {
@@ -369,6 +439,7 @@ Page({
 
     })
   },
+ 
   GetPlannerRelatedASIN:function(){
     let that=this;
     let PkId = that.data.PkId;
@@ -377,7 +448,10 @@ Page({
       app.ajax('/GetPlannerRelatedASIN', { UserID: UserID, PkId: PkId, RowsNum: 10, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      console.log(ReturnInfo);
+      if (!ReturnInfo || !ReturnInfo.length) {
+        return false;
+      };
       that.setData({
         RelatedASIN: that.data.RelatedASIN.concat(ReturnInfo) ,
         pageNum3: that.data.pageNum3-0+1

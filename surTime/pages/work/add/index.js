@@ -370,13 +370,8 @@ Page({
       })
     }
 
-    if (app.checkData('任务名', this.data.TaskName) && app.checkData('姓名', this.data.Name)
-      && app.checkData('身份证号', this.data.UserCode)
-    ) {
-
-      app.ajax("/SavePByUser", data, fn)
-    }
-
+     app.ajax("/SavePByUser", data, fn)
+    
   },
   //保存企业P卡业务
   SavePByCompany: function () {

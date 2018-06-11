@@ -20,7 +20,8 @@ Page({
     pageNum1: 2,
     pageNum2: 2,
     pageNum3: 2,
-    tableIndex: 1
+    tableIndex: 1,
+    PNo:'',
   },
 
   /**
@@ -29,8 +30,11 @@ Page({
   onLoad: function (options) {
     let that = this;
     let pkid = options.pkid;
+    let pNo = options.pNo;
+    console.log(pNo);
     that.setData({
-      PkId: pkid
+      PkId: pkid,
+      PNo: pNo
     });
     let UserID = app.globalData.PKID;
     // 获取组件
@@ -67,16 +71,15 @@ Page({
     that.GetPlannerRelatedASIN()
 
 
-    // //获取商品近三个月曝光量、点击量、销量明细
-    // app.ajax('/GetHistoryDatabyID', { UserID: UserID, PkId: pkid }, function (res) {
-    //   let data = JSON.parse(res.data.d);
-    //   let ReturnInfo = JSON.parse(data.ReturnInfo);
-    //   that.setData({
-    //     lineData: ReturnInfo
-    //   })
-    //   //折线图
-    //   that.setLineChart(ReturnInfo);
-    // })
+    //获取商品近三个月曝光量、点击量、销量明细
+    app.ajax('/GetTopYe3RelatedData', { UserID: UserID, PkId: pkid,RowsNum:200}, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      that.setData({
+        RelatedASIN: ReturnInfo
+      })
+       
+    })
 
 
 
@@ -172,10 +175,39 @@ Page({
         data: legendData
       },
       series: [{
-        label: { normal: { ontSize: 14 } },
+        label: {
+          normal: {
+            ontSize: 12,
+            formatter: '   {b|{b}}\n{hr|}\n {per|{d}%}  ',
+            backgroundColor: '#eee',
+            borderColor: '#aaa',
+            borderWidth: 1,
+            borderRadius: 4,
+          
+            rich: {
+             
+              hr: {
+                borderColor: '#aaa',
+                width: '100%',
+                borderWidth: 0.5,
+                height: 0
+              },
+              b: {
+                color: '#999',
+                lineHeight: 22,
+                align: 'center'
+              },
+              per: {
+                 
+                align: 'center',
+                 
+              }
+            }
+          }
+        },
         type: 'pie',
-        center: ['50%', '50%'],
-        radius: [0, '60%'],
+        radius: '45%',
+        center: ['50%', '65%'],
         data: data,
         itemStyle: {
           emphasis: {
@@ -217,10 +249,39 @@ Page({
         data: legendData
       },
       series: [{
-        label: { normal: { ontSize: 14 } },
+        label: {
+          normal: {
+            ontSize: 12,
+            formatter: '   {b|{b}}\n{hr|}\n {per|{d}%}  ',
+            backgroundColor: '#eee',
+            borderColor: '#aaa',
+            borderWidth: 1,
+            borderRadius: 4,
+          
+            rich: {
+             
+              hr: {
+                borderColor: '#aaa',
+                width: '100%',
+                borderWidth: 0.5,
+                height: 0
+              },
+              b: {
+                color: '#999',
+                lineHeight: 22,
+                align: 'center'
+              },
+              per: {
+                 
+                align: 'center',
+                 
+              }
+            }
+          }
+        },
         type: 'pie',
-        center: ['50%', '50%'],
-        radius: [0, '60%'],
+        radius: '45%',
+        center: ['50%', '65%'],
         data: data,
         itemStyle: {
           emphasis: {
@@ -341,7 +402,7 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum = that.data.pageNum1;
-    app.ajax('/GetTop500Key', { UserID: UserID, PkId: PkId, RowsNum:200, PNO: '', PageNum: pageNum }, function (res) {
+    app.ajax('/GetTop500Key', { UserID: UserID, PkId: PkId, RowsNum:200, PNO: that.data.PNo, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       console.log(ReturnInfo)
@@ -383,7 +444,11 @@ Page({
     app.ajax('/GetTopRelatedASIN', { UserID: UserID, PkId: PkId, RowsNum: 200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+      console.log(ReturnInfo);
+      if (!ReturnInfo || !ReturnInfo.length) {
+        return false;
+      };
+
       that.setData({
         RelatedASIN: that.data.RelatedASIN.concat(ReturnInfo),
         pageNum3: that.data.pageNum3 - 0 + 1

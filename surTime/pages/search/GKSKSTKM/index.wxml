@@ -72,7 +72,7 @@
   <view class='bg_model' wx-if="{{showChild}}">
     <view class='tableInfo'>
       <view class='titles' bindtap='closeChild'> 在线预览
-        <view class='closeChild'>×</view>
+        <view  bindtap='closeChild' class='closeChild'>×</view>
       </view>
       <block wx-if="{{type=='GK'||type=='SK'}}">
         <view class='infotop'>

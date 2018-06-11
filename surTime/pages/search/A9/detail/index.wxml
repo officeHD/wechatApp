@@ -212,7 +212,7 @@
       <view class='tbody'>
         <block wx:for="{{KeywordRedAnalysis}}" wx:key="{{index}}">
           <view class="tr">
-            <view class="td">{{index}}</view>
+            <view class="td">{{index+1}}</view>
             <view class="td">{{item.Keywords}} </view>
             <view class="td">{{item.SearchResults}}</view>
           </view>

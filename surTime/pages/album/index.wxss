@@ -17,7 +17,13 @@ view {
 .items {
   width: 100%;
 }
-
+.deltip{
+  float:right;
+  position: absolute;
+  right: 10px;
+  font-size: 28rpx;
+  color: #797979;
+}
 .item {
   position: relative;
   border-top: 2rpx solid#eee;

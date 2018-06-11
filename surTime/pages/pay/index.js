@@ -196,7 +196,13 @@ Page({
               icon: 'success',
               mask: false
             })
-          
+            let fn = msg => {
+
+              let ret = JSON.parse(msg.data.d);
+              app.initUserInfo(JSON.parse(ret.ReturnInfo));
+              app.initUserData(ret.ReturnInfo);
+            }
+            app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
           
           },
           'fail': function (res) {

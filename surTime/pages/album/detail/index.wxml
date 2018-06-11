@@ -1,9 +1,17 @@
 <view>
  
   <view class="album">
-    <block wx:for="{{album}}" wx:key="{{index}}">
+    <view  class="image_list" wx:for="{{album}}" wx:key="{{index}}">
+        <view class="imgmask" data-filename="{{item.FileName}}" data-src="{{item.FileURL}}" data-key="{{index}}" wx-if="{{delStu}}" bindtap="choseImg">
+           <image src='{{item.select?"/images/check.png":"/images/nocheck.png"}}'></image>
+        </view>
       <image bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap="previewImage" data-filename="{{item.FileName}}" data-src="{{item.FileURL}}" data-pkid="{{item.UniqueID1}}" bindlongtap="deleteImage" src="{{item.FileURL}}"></image>
-    </block>
+    </view>
   </view>
-  <view class="add_album" bindtap="add_pic">添加图片</view>
+  <view wx-if="{{!delStu}}" class="add_album" bindtap="add_pic">添加图片</view>
+  
+  <view wx-if="{{delStu}}" class="add_album">
+    <view class="cancel" bindtap="cancel">取消</view>
+    <view class="del_album" bindtap="del_pic">删除图片</view>
+  </view>
 </view>
