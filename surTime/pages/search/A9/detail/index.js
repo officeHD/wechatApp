@@ -58,7 +58,7 @@ Page({
         OlderPI: Tables.reads1,//历史表
         KeywordAnalysis: Tables.reads2,//精准关键词分析 
         SourcesStatistics: Tables.reads3,//卖家流量渠道占比
-        PIChild: Tables.reads4,//产品子表
+        // PIChild: Tables.reads4,//产品子表
         ASINStatisticsByID: Tables.reads5,//关键词入口渠道占比
         KeywordRedAnalysis: Tables.reads6,//流量关键词分析
         RelatedASIN: Tables.reads7,//关联ASIN分析,
@@ -76,6 +76,18 @@ Page({
       //折线图
       that.setLineChart(ReturnInfo);
     })
+
+    
+    //产品子表
+    app.ajax('/GetPIChildAll', { UserID: UserID, PkId: pkid }, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      that.setData({
+        PIChild: ReturnInfo
+      })
+       
+    })
+
 
 
 

@@ -21,7 +21,7 @@ Page({
     pageNum2: 2,
     pageNum3: 2,
     tableIndex: 1,
-    PNo:'',
+    PNo: '',
   },
 
   /**
@@ -42,9 +42,9 @@ Page({
     // 获取A9明细信息
     wx.showLoading({
       title: '加载中',
-      mask:true
+      mask: true
     });
-    app.ajax('/AsinKeyAllDetail', { UserID: UserID, PkId: pkid, KeytopRows:200, RedAnalysisRows: 200 }, function (res) {
+    app.ajax('/AsinKeyAllDetail', { UserID: UserID, PkId: pkid, KeytopRows: 200, RedAnalysisRows: 200 }, function (res) {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
@@ -60,7 +60,7 @@ Page({
         ZiAsinCount: ReturnInfo.ChildAsinCount,//子表数量
         tableInfo: Tables.reads[0],//商品基础信息分析
         SourcesStatistics: Tables.reads1,//当前商品TOP500关键词占比
-        PIChild: Tables.reads2,//变体所有ASIN信息
+        // PIChild: Tables.reads2,//变体所有ASIN信息
         ASINStatisticsByID: Tables.reads3,//关键词入口渠道占比
         KeywordRedAnalysis: Tables.reads4,//当前商品流量关键词分析
         KeywordAnalysis: Tables.reads5,//精准关键词分析 
@@ -72,16 +72,25 @@ Page({
 
 
     //获取商品近三个月曝光量、点击量、销量明细
-    app.ajax('/GetTopYe3RelatedData', { UserID: UserID, PkId: pkid,RowsNum:200}, function (res) {
+    app.ajax('/GetTopYe3RelatedData', { UserID: UserID, PkId: pkid, RowsNum: 200 }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       that.setData({
         RelatedASIN: ReturnInfo
       })
-       
+
     })
 
+    //获取变体所有ASIN信息
+    app.ajax('/GetTopPIChildAll', { UserID: UserID, PkId: pkid }, function (res) {
+      let data = JSON.parse(res.data.d);
+      let ReturnInfo = JSON.parse(data.ReturnInfo);
+      console.log(ReturnInfo);
+      that.setData({
+        PIChild: ReturnInfo
+      })
 
+    })
 
   },
 
@@ -127,7 +136,7 @@ Page({
         bottom: '1%',
         containLabel: true
       },
-      
+
       xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -183,9 +192,9 @@ Page({
             borderColor: '#aaa',
             borderWidth: 1,
             borderRadius: 4,
-          
+
             rich: {
-             
+
               hr: {
                 borderColor: '#aaa',
                 width: '100%',
@@ -198,9 +207,9 @@ Page({
                 align: 'center'
               },
               per: {
-                 
+
                 align: 'center',
-                 
+
               }
             }
           }
@@ -257,9 +266,9 @@ Page({
             borderColor: '#aaa',
             borderWidth: 1,
             borderRadius: 4,
-          
+
             rich: {
-             
+
               hr: {
                 borderColor: '#aaa',
                 width: '100%',
@@ -272,9 +281,9 @@ Page({
                 align: 'center'
               },
               per: {
-                 
+
                 align: 'center',
-                 
+
               }
             }
           }
@@ -402,14 +411,14 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum = that.data.pageNum1;
-    app.ajax('/GetTop500Key', { UserID: UserID, PkId: PkId, RowsNum:200, PNO: that.data.PNo, PageNum: pageNum }, function (res) {
+    app.ajax('/GetTop500Key', { UserID: UserID, PkId: PkId, RowsNum: 200, PNO: that.data.PNo, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       console.log(ReturnInfo)
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       }
-      
+
       that.setData({
         KeywordAnalysis: that.data.KeywordAnalysis.concat(ReturnInfo),
         pageNum1: that.data.pageNum1 - 0 + 1
@@ -422,11 +431,11 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum = that.data.pageNum2;
-    app.ajax('/GetTopKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum:200, PageNum: pageNum }, function (res) {
+    app.ajax('/GetTopKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum: 200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       console.log(ReturnInfo);
-      if (!ReturnInfo || !ReturnInfo.length){
+      if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       }
       that.setData({
