@@ -4,23 +4,10 @@ const api = require('./utils/ajax.js')
 App({
   onLaunch: function () {
     let that = this;
-    // 展示本地存储能力
-    // var PKID = wx.getStorageSync('PKID') || '';
-    // var Tel = wx.getStorageSync('Tel') || '';
-    // var UserName = wx.getStorageSync('UserName') || '';
-    // var userData = wx.getStorageSync('userData') || '';
-    // var token = wx.getStorageSync('token') || '';
-    // var openId = wx.getStorageSync('openId') || '';
-    // this.globalData.userData = userData;
-    // this.globalData.PKID = PKID;
-    // this.globalData.UserName = UserName;
-    // this.globalData.Tel = Tel;
-    // this.globalData.token = token;
-    // this.globalData.openId = openId;
-    // that.login();
-    // 获取用户信息
+   
     wx.getSetting({
       success: res => {
+        console.log(res)
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
@@ -34,7 +21,7 @@ App({
               }
             }
           })
-        }
+        } 
       }
     })
   },
@@ -46,6 +33,15 @@ App({
     })
     wx.login({
       success: function (res) {
+        wx.getUserInfo({
+          success: function (res) {
+            console.log(res);
+            
+          },
+          fail: function (res) {
+            console.log(res);
+          }
+        })
         if (res.code) {
           //发起网络请求
           wx.request({
@@ -56,12 +52,12 @@ App({
               Key: "SurTimeWebserviceS3ur0ti1me8"
             },
             success: function (res) {
-              console.log(JSON.parse(res.data.d));
+              // console.log(JSON.parse(res.data.d));
               wx.hideLoading();
 
               let ret = JSON.parse(res.data.d);
               if (ret.State === 1) {
-                console.log(ret.ReturnInfo.length)
+               // console.log(ret.ReturnInfo.length)
                 if (ret.ReturnInfo.length < 30) {
                   that.globalData.openId = ret.ReturnInfo;
                   wx.showModal({
@@ -87,7 +83,7 @@ App({
             }
           })
         } else {
-          console.log('登录失败！' + res.errMsg)
+         // console.log('登录失败！' + res.errMsg)
         }
       }
     });

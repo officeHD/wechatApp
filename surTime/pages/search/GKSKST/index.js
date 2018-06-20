@@ -26,10 +26,10 @@ Page({
     }
     let cb = (res) => {
       let data = JSON.parse(res.data.d);
-      console.log(JSON.parse(data.ReturnInfo))
+     // console.log(JSON.parse(data.ReturnInfo))
       that.setData({
         listData: JSON.parse(data.ReturnInfo),
-        
+        page: 2,
       });
     }
     app.ajax('/PlannerKeyAllByPage', sendData, cb)
@@ -48,7 +48,7 @@ Page({
     }
     let cb = (res) => {
       let data = JSON.parse(res.data.d);
-      console.log(JSON.parse(data.ReturnInfo))
+     // console.log(JSON.parse(data.ReturnInfo))
       let ReturnInfo=JSON.parse(data.ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
@@ -77,7 +77,8 @@ Page({
       return;
     }
     let cb = (res) => {
-      wx.hideLoading()
+      wx.hideLoading();
+      that.getUserInfo();
       let data = JSON.parse(res.data.d)
       if (data.State.toString() === '1') {
         that.addAsin(UserID, Country, ASIN, that.data.OldData)
@@ -119,6 +120,7 @@ Page({
         title: data.ReturnInfo,
         icon: 'none'
       })
+      that.getUserInfo();
       that.onLoad();
     }
     wx.showLoading({
@@ -126,7 +128,15 @@ Page({
       icon: 'none',
       mask:true
     });
-    app.ajax('/PlannerAddAsin', { UserID: UserID, Country: Country, Asin: ASIN, OldData: OldData }, cb, 'POST')
+    app.ajax('/PlannerAddAsin', { UserID: UserID, Country: Country, Asin: ASIN, OldData: OldData }, cb)
+  },
+  getUserInfo: function () {
+    let fn = msg => {
+      let ret = JSON.parse(msg.data.d);
+      app.initUserInfo(JSON.parse(ret.ReturnInfo));
+      app.initUserData(ret.ReturnInfo);
+    }
+    app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
   },
   /**
   * 下拉刷新

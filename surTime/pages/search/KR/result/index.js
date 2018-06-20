@@ -49,7 +49,7 @@ Page({
       let CompleteIMTable = JSON.parse(JSON.parse(res.data.d).CompleteKRTable);
       let RuningIMTable = JSON.parse(JSON.parse(res.data.d).RuningKRTable);
       let StopIMTable = JSON.parse(JSON.parse(res.data.d).StopKRTable);
-      console.log(JSON.parse(res.data.d));
+      // console.log(JSON.parse(res.data.d));
       if (that.data.active === "runing") {
         that.setData({
           listData: RuningIMTable
@@ -123,7 +123,7 @@ Page({
           })
           app.ajax('/DelFileInfoInKeyPlan', data, fn)
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -158,7 +158,7 @@ Page({
           })
           app.ajax('/SetStopInKeyPlan', data, fn)
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -199,7 +199,7 @@ Page({
           })
           app.ajax('/AgainKrSearch', data, fn)
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -268,7 +268,7 @@ Page({
           }
         }
       }
-      console.log(option)
+      // console.log(option)
       that.init(option)
     }
     app.ajax('/ViewCharInKeyPlan', data, fn)

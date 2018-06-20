@@ -6,7 +6,7 @@ Page({
    */
   data: {
     Amount: '',
-    CouponType: '',
+    CouponType: 0,
     DiscountType: 0,
     type: 1,
     carType:"",
@@ -16,7 +16,7 @@ Page({
     discountLabel: "请选择",
     add_show: false,
     Totalfee:'',
- 
+    Coupon:'',
     config: [
       {
         src: '入门级',
@@ -78,7 +78,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    console.log(options.type);
+   // console.log(options.type);
     var now = new Date();
 
     var year = now.getFullYear();       //年  
@@ -102,7 +102,7 @@ Page({
     let that = this;
     let pages = getCurrentPages();
     let currPage = pages[pages.length - 1];
-    console.log(currPage.data)
+   // console.log(currPage.data)
     // that.setData({//将携带的参数赋值
     //   address: currPage.data.item
     // });
@@ -125,7 +125,8 @@ Page({
     }
     that.setData({
       carType: carType,
-      DiscountType:1
+      Coupon:'',
+      CouponType:2
     })
 
   },
@@ -140,23 +141,29 @@ Page({
       add_show: !that.data.add_show
     })
   },
+  // 输入优惠券代码
   changename: function (e) {
     let value = e.detail.value;
     let that = this;
     that.setData({
-      cardId: value
+      Coupon: value
     })
   },
+  // 确认验证码
   sure_add: function () {
     let that = this;
     let fn = msg => {
-      console.log(msg)
+     // console.log(msg)
       let res=JSON.parse(msg.data.d)
       if(res.State==1){
        that.setData({
-         Totalfee: that.data.current.price - res.ReturnInfo,
+         Totalfee: that.data.current.price *(res.ReturnInfo/10),
          add_show: false,
-         DiscountType:2
+         carType:"折扣券",
+         CouponType:1,
+         DiscountID:'',
+         Discount:res.ReturnInfo/10,
+         DiscountType:1
        })
       }else{
         wx.showModal({
@@ -165,7 +172,7 @@ Page({
         })
       }
     }
-    app.ajax('/CouponValid', { textCoupon: that.data.cardId }, fn)
+    app.ajax('/CouponValid', { textCoupon: that.data.Coupon }, fn)
   },
   GetPayImg:function(){
     let that=this;
@@ -173,14 +180,16 @@ Page({
       UserID: app.globalData.PKID,//
       Openid: app.globalData.openId,
       AllTotalfee: that.data.current.price-0,
-      Openid: app.globalData.openId,
+      CouponType: that.data.CouponType,//1优惠券 2用户绑定 0 无
+      Coupon: that.data.Coupon,//优惠券代码
       DiscountID: that.data.cardId,
+      Discount: that.data.Discount,
       DiscountType: that.data.DiscountType,
       Totalfee: that.data.Totalfee-0, //优惠后金额
-      
+      Amount:that.data.Amount,
     }
     let fn=msg=>{
-      console.log();
+     // console.log();
       let res = JSON.parse(msg.data.d);
       if (res.State===1){
         let returnInf = JSON.parse(res.ReturnInfo);

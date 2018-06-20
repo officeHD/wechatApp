@@ -66,14 +66,21 @@ Page({
       check3: !this.data.check3
     })
   },
+  search: function () {
+    this.newIMPlan();
+  },
   //新增
-  newIMPlan: function () {
+  newIMPlan: function (asinlist) {
     let that = this;
     let UserID = app.globalData.PKID
     let Country = that.data.Country;
     let SellerName = that.data.shopName;
     let PlanName = that.data.planName;
     let ASIN = that.data.ASIN;
+    let AsinList='';
+    if(asinlist){
+      AsinList=asinlist;
+    }
     if (!ASIN) {
       wx.showToast({
         title: '请输入ASIN',
@@ -92,7 +99,7 @@ Page({
       IsCreateRuning: that.data.check3,
       IsExpandVariation: that.data.check2,
       IsFBA: that.data.check1,
-      AsinList: '',
+      AsinList: AsinList,
       UserIpAddress: '',
       StopPage: 1,
       CompletePage: 1,
@@ -107,7 +114,23 @@ Page({
           content: data.ReturnInfo,
         })
       }else{
-        that.goDetail();
+        let fn = msg => {
+          let ret = JSON.parse(msg.data.d);
+          app.initUserInfo(JSON.parse(ret.ReturnInfo));
+          app.initUserData(ret.ReturnInfo);
+        }
+        app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn);
+       
+        if(that.data.check2&&AsinList==''){
+          that.setData({
+            showAsinList: true,
+            AsinListAndSection: JSON.parse(data.RuningIMTable)
+          })
+        }else{
+          that.goDetail();
+
+        }
+
       }
       
     }
@@ -117,8 +140,17 @@ Page({
     })
     app.ajax('/NewIMPlan', data, cb)
   },
+  setAsinList: function (e) {
+    let that = this;
+    let asinlist = e.currentTarget.dataset.asinlist;
+    that.setData({
+      showAsinList: false
 
+    })
+    that.newIMPlan(asinlist);
 
+  },
+   
   bindPickerChangeAreas: function (e) {
     let that = this;
     let index = e.detail.value;

@@ -87,10 +87,13 @@
   width: 350rpx;
   text-indent: 10rpx;
   border: 1rpx solid #ccc;
+  display: flex;
  
   /* display: block */
 }
-
+.input_message .input_logo{
+margin: 10rpx;
+}
 .input_message input {
   height: 80rpx;
   width: 270rpx;

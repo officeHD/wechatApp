@@ -23,7 +23,9 @@
 .table.hide {
   display: none;
 }
-
+.td .again{
+  width: 37rpx;
+}
 .template.table {
   position: absolute;
   top: 0;

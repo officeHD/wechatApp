@@ -40,7 +40,7 @@ Page({
     let cb = (res) => {
       wx.hideLoading();
       let data = JSON.parse(res.data.d)
-      console.log(JSON.parse(data.ReturnInfo))
+//console.log(JSON.parse(data.ReturnInfo))
       that.setData({
         listData: JSON.parse(data.ReturnInfo),
         page: 2
@@ -86,6 +86,7 @@ Page({
     let cb = (res) => {
       wx.hideLoading();
       let data = JSON.parse(res.data.d);
+      that.getUserInfo();
       if (data.State == 1) {
         let listData ;
         if(that.data.type==="KM"){
@@ -98,7 +99,7 @@ Page({
         });
       } else {
         if (data.State == 2) {
-          console.log(JSON.parse(data.AsinListAndSection));
+        //  console.log(JSON.parse(data.AsinListAndSection));
           that.setData({
             showAsinList: true,
             AsinListAndSection: JSON.parse(data.AsinListAndSection)
@@ -110,7 +111,7 @@ Page({
           });
         }
 
-        console.log(data);
+       // console.log(data);
       }
 
     }
@@ -130,6 +131,14 @@ Page({
     })
     app.ajax('/GKSKSTKMSubmit', datas, cb, 'POST')
   },
+  getUserInfo: function () {
+    let fn = msg => {
+      let ret = JSON.parse(msg.data.d);
+      app.initUserInfo(JSON.parse(ret.ReturnInfo));
+      app.initUserData(ret.ReturnInfo);
+    }
+    app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
+  },
   /**
   * 页面相关事件处理函数--监听用户下拉动作
   */
@@ -144,7 +153,7 @@ Page({
   //底部加载更多
   onReachBottom: function () {
     let that = this;
-    console.log(that.data.page)
+    // console.log(that.data.page)
     if (that.data.page == 0) {
       wx.showToast({
         title: '已无更多',
@@ -231,7 +240,7 @@ Page({
     let that = this;
     let pkid = e.currentTarget.dataset.pkid - 0;
     let filename = e.currentTarget.dataset.filename;
-    console.log(e.currentTarget.dataset);
+    // console.log(e.currentTarget.dataset);
     wx.showModal({
       title: '提示',
       content: '删除后无法恢复',
@@ -264,7 +273,7 @@ Page({
             }
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -284,13 +293,20 @@ Page({
     })
     let fn = msg => {
       let resData = JSON.parse(msg.data.d);
-      console.log(JSON.parse(resData.RetDataTable))
-      console.log(JSON.parse(resData.RetKeyTable))
+      // console.log(JSON.parse(resData.RetDataTable))
+      // console.log(JSON.parse(resData.RetKeyTable))
       that.setData({
         RetDataTable: JSON.parse(resData.RetDataTable)[0],
         RetKeyTable: JSON.parse(resData.RetKeyTable),
         showChild: true
       })
+      let fns = msg => {
+
+        let ret = JSON.parse(msg.data.d);
+        app.initUserInfo(JSON.parse(ret.ReturnInfo));
+        app.initUserData(ret.ReturnInfo);
+      }
+      app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fns)
     }
     app.ajax('/GetSKSKSTKMData', data, fn)
   },

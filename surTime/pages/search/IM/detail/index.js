@@ -45,30 +45,33 @@ Page({
       PageCount: 10
     }
     app.ajax('/SelectPlanInIM', data, function (res) {
-      console.log(JSON.parse(res.data.d));
+      // console.log(JSON.parse(res.data.d));
       let CompleteIMTable = JSON.parse(JSON.parse(res.data.d).CompleteIMTable);
       let RuningIMTable = JSON.parse(JSON.parse(res.data.d).RuningIMTable);
       let StopIMTable = JSON.parse(JSON.parse(res.data.d).StopIMTable);
       if (that.data.active === "runing") {
         that.setData({
-          listData: RuningIMTable
+          listData: RuningIMTable,
+          active:'runing'
         })
       } else if (that.data.active === "stop") {
         that.setData({
-          listData: StopIMTable
+          listData: StopIMTable,
+          active:'stop'
         })
       } else {
         that.setData({
-          listData: CompleteIMTable
+          listData: CompleteIMTable,
+          active:'finish'
         })
       }
       that.setData({
-        listData: RuningIMTable,
+       
         runing: RuningIMTable,
         stop: StopIMTable,
         finish: CompleteIMTable
       })
-      console.log(RuningIMTable)
+      console.log(CompleteIMTable)
 
     })
     // that.setData({
@@ -122,7 +125,7 @@ Page({
           })
           app.ajax('/DelFileInfoInIM', data, fn)
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -158,7 +161,7 @@ Page({
           })
           app.ajax('/SetStopInIM', data, fn)
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -166,7 +169,7 @@ Page({
   //重新查询IM计划
   AgainImSearch: function (e) {
     let id = e.currentTarget.dataset.id;
-    console.log(id);
+    // console.log(id);
     let data = {
       ImPaPKID: id,
       UserID: app.globalData.PKID,
@@ -198,7 +201,7 @@ Page({
           })
           app.ajax('/AgainImSearch', data, fn)
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })

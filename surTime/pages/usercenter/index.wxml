@@ -1,11 +1,11 @@
 <view>
-  <view class='top'>
-    <image src='/images/user/avator.png'></image>
+  <view class="top">
+    <image src="/images/user/avator.png"></image>
     <text>{{UserName||"未登录"}}</text>
   </view>
-  <view class='money'>
-    <view class='left'>可用T点：{{GKfen}}</view>
-    <view class='right'>冻结T点：{{TuDian}}</view>
+  <view class="money">
+    <view class="left">可用T点：{{GKfen}}</view>
+    <view class="right">冻结T点：{{TuDian}}</view>
   </view>
   <view class="info_list">
     <block wx:for="{{userListInfo}}" wx:key="{{index}}">
@@ -14,7 +14,7 @@
           <image src="{{item.icon}}"></image>
         </view>
         <view class="weui_cell_bd">
-          <view class="weui_cell_bd_p"> {{item.text}} </view>
+          <view class="weui_cell_bd_p">{{item.text}}</view>
         </view>
         <view class="with_arrow"></view>
       </view>
@@ -29,4 +29,7 @@
       <view class="with_arrow"></view>
     </view> -->
   </view>
+  <button class="cs_button" open-type="contact" session-from="weapp">
+    <image class="cs_image" src="../../images/service.png"></image>
+  </button>
 </view>

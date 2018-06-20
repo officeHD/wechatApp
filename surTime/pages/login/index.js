@@ -16,26 +16,9 @@ Page({
   },
   onLoad: function () {
     let UserID = app.globalData.PKID;
-    // if (UserID) {
-    //   wx.switchTab({
-    //     url: '/pages/index/index',
-    //   })
-    // }
-    app.login();
-    // if (app.globalData.token && app.globalData.token != '') {
-    //   wx.switchTab({
-    //     url: '/pages/index/index',
-    //   })
-    // }else{
-     
-    //   app.employIdCallback = employId => {
-    //     if (employId != '') {
-    //       wx.switchTab({
-    //         url: '/pages/index/index',
-    //       })
-    //     }
-    //   }
-    // }
+  
+    // app.login();
+    
 
   },
   //切换登录方式
@@ -132,7 +115,7 @@ Page({
         app.initUserInfo(JSON.parse(result.ReturnInfo));
         app.initUserData(result.ReturnInfo);
         app.initToken(res.header.Authorization)
-        console.log(JSON.parse(result.ReturnInfo))
+        //console.log(JSON.parse(result.ReturnInfo))
         wx.switchTab({
           url: '/pages/usercenter/index',
         })

@@ -20,3 +20,21 @@ view{
 .fr{
 float: right;
 }
+.cs_button {
+  
+  bottom: 20px;
+  height: 100rpx;
+  position: fixed;
+  margin-left: 240rpx;
+  right: 20px;
+  background-color: transparent;
+}
+
+.cs_button:after {
+  border: 0px;
+}
+
+.cs_image {
+  width: 100rpx;
+  height: 100rpx;
+}

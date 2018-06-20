@@ -14,11 +14,6 @@ Page({
       text: '我的优惠券'
 
     }, {
-      icon: '/images/user/tdianchongzhi.png',
-      text: 'T点充值',
-      linkurl: '/pages/recharge/index?type=1'
-
-    }, {
       icon: '/images/user/taocan.png',
       text: '套餐充值',
       linkurl: '/pages/user/index'
@@ -49,7 +44,7 @@ Page({
         TuDian: userDatas.TuDian
       })
     }
-    console.log(1);
+    // console.log(1);
   },
   updateT: function () {
     let fn = msg => {
@@ -93,7 +88,7 @@ Page({
           app.globalData.userData = '';
           that.onLoad();
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
 
       }

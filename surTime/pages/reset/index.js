@@ -70,7 +70,7 @@ Page({
       verifyCode: that.data.verifyCode
     }
     let fn = msg => {
-      console.log(1);
+     // console.log(1);
     }
     if (app.checkData('手机号', that.data.userPhone) && app.checkData('验证码', that.data.verifyCode)) {
 
@@ -108,7 +108,7 @@ Page({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res);
+       // console.log(res);
         wx.switchTab({
           url: '/pages/index/index'
         })

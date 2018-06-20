@@ -29,10 +29,10 @@
           <view class="td asinKey">{{item.ASIN}}</view>
           <view class="td country">{{item.CountryName}}</view>
           <view class="td">  
-           <image data-id='{{item.PKID}}' data-asin='{{item.ASIN}}' bindtap='SetStopInIM' wx-if="{{active==='runing'}}" src='/images/table/look.png'></image>
-            <image data-id='{{item.PKID}}' bindtap='AgainImSearch' wx-if="{{active!=='runing'}}" src='/images/table/detail.png'></image>
+           <image data-id='{{item.PAPKID}}' data-asin='{{item.ASIN}}' bindtap='SetStopInIM' wx-if="{{active==='runing'}}" src='/images/table/look.png'></image>
+            <image   data-id='{{item.PAPKID}}' bindtap='AgainImSearch' wx-if="{{active!=='runing'}}" src='/images/table/relode.png'></image>
             <image data-id='{{item.PKID}}' data-asin='{{item.ASIN}}' data-sname='{{item.SellerName}}' bindtap='ViewCharInIM' src='/images/table/info.png'></image>
-            <image data-id='{{item.PKID}}' bindtap='DelFileInfoInIM' src='/images/table/del.png'></image>
+            <image data-id='{{item.PAPKID}}' bindtap='DelFileInfoInIM' src='/images/table/del.png'></image>
            </view>
         </view>
       </block>

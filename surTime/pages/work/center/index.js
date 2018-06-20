@@ -17,7 +17,7 @@ Page({
     let userData = JSON.parse(app.globalData.userData);
     app.ajax("/TaskInfoList", { UserID: userData.PKID }, function (res) {
       let msg = JSON.parse(res.data.d)
-      console.log(JSON.parse(msg.ReturnInfo));
+      // console.log(JSON.parse(msg.ReturnInfo));
       if (msg.State.toString() === "1") {
         that.setData({
           listData: JSON.parse(msg.ReturnInfo)

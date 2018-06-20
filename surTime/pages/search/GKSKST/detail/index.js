@@ -44,7 +44,7 @@ Page({
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       let Tables = JSON.parse(ReturnInfo.ds);
-      console.log(Tables);
+     // console.log(Tables);
       if (Tables.reads1.length > 0) {
         //获取饼图数据
         that.GetSourcesStatisticsbyName(UserID, pkid, Tables.reads3[0].StoreName)
@@ -69,7 +69,7 @@ Page({
     app.ajax('/GetPlannerRelatedASIN', { UserID: UserID, PkId: pkid, RowsNum: 200, PageNum:1}, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+     // console.log(ReturnInfo)
       that.setData({
         RelatedASIN: ReturnInfo
       })
@@ -80,7 +80,7 @@ Page({
      app.ajax('/GetPlannerPIChildAll', { UserID: UserID, PkId: pkid}, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+     // console.log(ReturnInfo)
       that.setData({
         PIChild: ReturnInfo
       })
@@ -110,7 +110,7 @@ Page({
     app.ajax('/GetTopKeyGraph', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       that.setData({
         pieData: ReturnInfo
       })
@@ -210,7 +210,7 @@ Page({
           }
         },
         type: 'pie',
-        radius: '45%',
+        radius: '35%',
         center: ['50%', '65%'],
         data: data,
         itemStyle: {
@@ -283,7 +283,7 @@ Page({
           }
         },
         type: 'pie',
-        radius: '40%',
+        radius: '35%',
         center: ['50%', '70%'],
         data: data,
         itemStyle: {
@@ -327,7 +327,7 @@ Page({
     this.GetPIChildbyID(ChildPkId, function (res) {
       let resData = JSON.parse(res.data.d);
       let childPIData = JSON.parse(resData.ReturnInfo)[0];
-      console.log(childPIData)
+      //(childPIData)
       that.setData({
         childPIData: childPIData,
         showChild: true
@@ -407,7 +407,7 @@ Page({
     app.ajax('/GetPlanner500Key', { UserID: UserID, PkId: PkId, RowsNum: 200, PNO:'', PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       }
@@ -427,7 +427,7 @@ Page({
     app.ajax('/GetPlannerKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum: 200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+    //  console.log(ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       };
@@ -445,10 +445,10 @@ Page({
     let PkId = that.data.PkId;
     let UserID = app.globalData.PKID;
     let pageNum=that.data.pageNum3;
-      app.ajax('/GetPlannerRelatedASIN', { UserID: UserID, PkId: PkId, RowsNum: 10, PageNum: pageNum }, function (res) {
+      app.ajax('/GetPlannerRelatedASIN', { UserID: UserID, PkId: PkId, RowsNum:200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       };

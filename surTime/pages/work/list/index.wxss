@@ -42,10 +42,22 @@
 .td {
   display: table-cell;
   height: 70rpx;
-  line-height:70rpx;
+  
   text-align: center;
   font-size: 12px;
    box-sizing: border-box;
+   display:table-cell;
+height:70rpx;
+line-height:1;
+text-align:center;
+font-size:12px;
+box-sizing:border-box;
+vertical-align:middle;
+text-align:left;
+max-width:200rpx;
+padding:0 15rpx;
+word-break: break-all;
+
 }
 
 .search {

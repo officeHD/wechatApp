@@ -44,7 +44,7 @@ Page({
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       let Tables = JSON.parse(ReturnInfo.ds);
-      console.log(Tables);
+     // console.log(Tables);
       if (Tables.reads3.length > 0) {
         //获取饼图数据
         that.GetSourcesStatisticsbyName(UserID, pkid, Tables.reads3[0].StoreName)
@@ -111,7 +111,7 @@ Page({
     app.ajax('/GetSourcesStatisticsbyName', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       that.setData({
         pieData: ReturnInfo
       })
@@ -183,7 +183,7 @@ Page({
       series: [{
         label: {
           normal: {
-            ontSize: 12,
+            ontSize: 10,
             formatter: '   {b|{b}}\n{hr|}\n {per|{d}%}  ',
             backgroundColor: '#eee',
             borderColor: '#aaa',
@@ -211,8 +211,12 @@ Page({
             }
           }
         },
+        labelLine: {
+          show: true,
+          length:0.001
+        },
         type: 'pie',
-        radius: '45%',
+        radius: '35%',
         center: ['50%', '65%'],
         data: data,
         itemStyle: {
@@ -246,6 +250,7 @@ Page({
       legend: {
 
         data: legendData
+        
       },
 
       tooltip: {
@@ -255,7 +260,7 @@ Page({
       series: [{
 
         type: 'pie',
-        radius: '45%',
+        radius: '35%',
         center: ['50%', '65%'],
         data: data,
         itemStyle: {
@@ -267,7 +272,7 @@ Page({
         },
         label: {
           normal: {
-            ontSize: 12,
+            ontSize: 10,
             formatter: '   {b|{b}}\n{hr|}\n {per|{d}%}  ',
             backgroundColor: '#eee',
             borderColor: '#aaa',
@@ -330,7 +335,7 @@ Page({
     this.GetPIChildbyID(ChildPkId, function (res) {
       let resData = JSON.parse(res.data.d);
       let childPIData = JSON.parse(resData.ReturnInfo)[0];
-      console.log(childPIData)
+     // console.log(childPIData)
       that.setData({
         childPIData: childPIData,
         showChild: true
@@ -410,7 +415,7 @@ Page({
     let fn = msg => {
       let data = JSON.parse(msg.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       };
@@ -434,14 +439,15 @@ Page({
     }
     let fn = msg => {
       let data = JSON.parse(msg.data.d);
-      let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+      console.log(JSON.parse(data.ReturnInfo))
+      let ReturnInfo = JSON.parse(data.ReturnInfo).map((item,index)=>{return {Keywords:item.Keywords,SearchResults:item.SearchResults}});
+     // console.log(ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       };
 
       that.setData({
-        KeywordRedAnalysis: that.data.KeywordAnalysis.concat(ReturnInfo),
+        KeywordRedAnalysis: that.data.KeywordRedAnalysis.concat(ReturnInfo),
         pageNum1: that.data.pageNum1 - 0 + 1
       })
     }
@@ -458,18 +464,23 @@ Page({
       RowsNum: 200,
     }
     let fn = msg => {
+      wx.hideLoading();
       let data = JSON.parse(msg.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     console.log(ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       };
 
       that.setData({
-        RelatedASIN: that.data.KeywordAnalysis.concat(ReturnInfo),
+        RelatedASIN: that.data.RelatedASIN.concat(ReturnInfo),
         pageNum3: that.data.pageNum3 - 0 + 1
       })
     }
+    wx.showLoading({
+      title:"加载中",
+      mask:true
+    })
     app.ajax('/GetPageRelatedASIN', data, fn)
   },
   //加载更多

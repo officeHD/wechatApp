@@ -19,7 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+   // console.log(options)
     this.setData({
       id: options.id,
       Pictname: decodeURIComponent(options.pictname)
@@ -33,12 +33,12 @@ Page({
       Picid: that.data.id,
       UserID: app.globalData.PKID,
       Page: '1',
-      PageCount: '20'
+      PageCount: '200'
     }
     app.ajax('/Getpictable', data, function (res) {
 
       let albumList = JSON.parse(JSON.parse(res.data.d).ReturnInfo);
-      console.log(albumList)
+      //console.log(albumList)
       that.setData({
         album: albumList
       })
@@ -90,11 +90,12 @@ Page({
       },
     });
   },
+  //预览图片
   previewImage: function (e) {
     if (this.endTime - this.startTime < 350) {
       var current = e.target.dataset.src;
       let list = this.data.album.map((item, index) => { return item.FileURL });
-      console.log(list);
+      //console.log(list);
       wx.previewImage({
         current: current, // 当前显示图片的http链接  
         urls: list// 需要预览的图片http链接列表  
@@ -129,7 +130,7 @@ Page({
     let pkid = e.currentTarget.dataset.pkid;
     let fileName = e.currentTarget.dataset.filename;
     let key = e.currentTarget.dataset.key;
-    console.log(key);
+    //console.log(key);
     let data = that.data.album;
     data[key].select = !that.data.album[key].select
     that.setData({

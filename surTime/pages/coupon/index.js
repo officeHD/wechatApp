@@ -17,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    //console.log(options)
     if (options.type) {
       this.setData({
         type: true,
@@ -43,7 +43,7 @@ Page({
           let endDay = that.getDateAfter_n(data, resultArr[i].ValidDay)
           resultArr[i].endDay = endDay;
         }
-        console.log(resultArr)
+       // console.log(resultArr)
         that.setData({
           couponList: resultArr.filter((item) => item.CouponType === "1"),
           rightList: resultArr.filter((item) => item.CouponType === "2"),
@@ -74,7 +74,7 @@ Page({
     }
  
     let carData = e.currentTarget.dataset.data;
-    console.log(carData);
+   // console.log(carData);
     if (carData.CouponType.toString()!=='1'){
       if ((carData.Amount - 0)>(that.data.value)){
         wx.showModal({
@@ -87,8 +87,8 @@ Page({
     let pages = getCurrentPages();//当前页面
     let prevPage = pages[pages.length - 2];//上一页面
     prevPage.setData({//直接给上移页面赋值
-      CouponType: 2,
-      DiscountType: carData.CouponType,
+      CouponType: 2 ,
+      DiscountType:carData.CouponType,
       Amount: carData.Amount,
       Discount: carData.Discount,
       cardId:carData.PKID

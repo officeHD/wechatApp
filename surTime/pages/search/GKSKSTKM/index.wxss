@@ -28,8 +28,7 @@
   height: 90%;
   border-radius: 5px;
   overflow: auto;
-  display: flex;
-  flex-direction: column;
+ 
 }
 
 .list_item {

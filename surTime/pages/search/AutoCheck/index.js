@@ -107,9 +107,9 @@ Page({
     let cb = res => {
       // console.log(JSON.parse(res.data.d));
       let data = JSON.parse(res.data.d)
-      let listData=JSON.parse(data.ReturnInfo);
+      let listData = JSON.parse(data.ReturnInfo);
       that.setData({
-        listData: that.data.listData.concat(listData.map((item,index)=>{return {ImageUrl:item.ImageUrl,ASIN:item.ASIN,Country:item.Country,PKID:item.PKID}})),
+        listData: that.data.listData.concat(listData.map((item, index) => { return { ImageUrl: item.ImageUrl, ASIN: item.ASIN, Country: item.Country, PKID: item.PKID } })),
         PageNum: that.data.PageNum + 1,
         length: JSON.parse(data.ReturnInfo).length
       });
@@ -156,9 +156,11 @@ Page({
       mask: true
     })
     that.UserIsValidRole(function (res) {
+
       wx.hideLoading();
+      that.getUserInfo();
       let result = JSON.parse(res.data.d);
-      console.log(result.State);
+      // console.log(result.State);
       if (result.State.toString() === "1") {
         that.setData({
           listData: JSON.parse(result.ReturnInfo)
@@ -169,6 +171,7 @@ Page({
           content: result.ReturnInfo,
           success: function () {
             if (result.State.toString() === "4") {
+
               that.UserAddRole()
             }
           }
@@ -197,6 +200,7 @@ Page({
       PNO: that.data.PNo
     }
     let cb = res => {
+
       let result = JSON.parse(res.data.d);
       that.setData({
 
@@ -204,10 +208,18 @@ Page({
         page: that.data.page + 1,
         length: JSON.parse(data.ReturnInfo).length
       })
+      that.getUserInfo();
     }
     app.ajax('/UserAddRole', data, cb)
   },
-
+  getUserInfo: function () {
+    let fn = msg => {
+      let ret = JSON.parse(msg.data.d);
+      app.initUserInfo(JSON.parse(ret.ReturnInfo));
+      app.initUserData(ret.ReturnInfo);
+    }
+    app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
+  },
   // 获取消费所扣T点提示信息
   GetPNoIsView: function () {
     let that = this;
@@ -283,14 +295,14 @@ Page({
         timeArr: ReturnInfo,
         PNo: ReturnInfo[0].PNo
       })
-      console.log(that.data.timeArr)
+      // console.log(that.data.timeArr)
     }
     app.ajax('/GetMouthByYear', data, cb)
   },
   checkDetail: function (e) {
     let pkid = e.currentTarget.dataset.pkid;
     wx.navigateTo({
-      url: 'detail/index?pkid=' + pkid+'&pNo='+this.data.PNo,
+      url: 'detail/index?pkid=' + pkid + '&pNo=' + this.data.PNo,
     })
 
   }

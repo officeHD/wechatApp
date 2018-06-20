@@ -102,7 +102,13 @@ Page({
     let cb = (res) => {
       wx.hideLoading();
       let data = JSON.parse(res.data.d)
+      let fn = msg => {
 
+        let ret = JSON.parse(msg.data.d);
+        app.initUserInfo(JSON.parse(ret.ReturnInfo));
+        app.initUserData(ret.ReturnInfo);
+      }
+      app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
       if (data.State !== 1) {
         wx.showModal({
           title: '提示',
@@ -111,6 +117,7 @@ Page({
       } else {
         that.goDetail();
       }
+
     }
     wx.showLoading({
       title: '创建中',

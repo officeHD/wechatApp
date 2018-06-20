@@ -70,7 +70,7 @@
       是否立即查询库存(勾选此项在创建计划的时候就查询一次库存，不勾选则会延迟5-10分钟进行查询操作!)
     </view>
 
-    <view class='button' bindtap='newIMPlan'>
+    <view class='button' bindtap='search'>
       创建计划
     </view>
   </view>
@@ -86,5 +86,25 @@
     <view>溢仓点: 库存持续超过999会导致销量销售额为0，或者产生误差</view>
     <view>空仓点: 卖家下架产品监测不到库存会导致销量销售额产生误差</view>
     <view>频率点: 监控频率越快，卖家调整库存产生的误差影响越小</view>
+  </view>
+   <view class='bg_model' wx-if="{{showAsinList}}">
+    <view class='asinList'>
+      <view class='asinList_banner'>请选择ASIN区间</view>
+      <block wx:for="{{AsinListAndSection}}" wx:key="{{index}}">
+        <view class='list_item' data-asinlist="{{item.AsinSection}}" bindtap='setAsinList' >
+          <view class='asinList_title'>{{item.AsinSection}}</view>
+
+          <view class='asinList_content'>
+            <block wx:for="{{item.AsinList}}" wx:key="{{index}}">
+              <view class='list_text'>
+              {{item}}  
+             </view>
+
+
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
   </view>
 </view>

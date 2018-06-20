@@ -31,7 +31,7 @@ Page({
     let that = this;
     let pkid = options.pkid;
     let pNo = options.pNo;
-    console.log(pNo);
+   // console.log(pNo);
     that.setData({
       PkId: pkid,
       PNo: pNo
@@ -49,7 +49,7 @@ Page({
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
       let Tables = JSON.parse(ReturnInfo.ds);
-      console.log(Tables);
+     // console.log(Tables);
       if (Tables.reads1.length > 0) {
         //获取饼图数据
         that.GetSourcesStatisticsbyName(UserID, pkid, Tables.reads3[0].StoreName)
@@ -85,7 +85,7 @@ Page({
     app.ajax('/GetTopPIChildAll', { UserID: UserID, PkId: pkid }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       that.setData({
         PIChild: ReturnInfo
       })
@@ -112,7 +112,7 @@ Page({
     app.ajax('/GetTopKeyGraph', { UserID: UserID, PkId: PkId, StoreName: StoreName }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       that.setData({
         pieData: ReturnInfo
       })
@@ -215,7 +215,7 @@ Page({
           }
         },
         type: 'pie',
-        radius: '45%',
+        radius: '35%',
         center: ['50%', '65%'],
         data: data,
         itemStyle: {
@@ -289,7 +289,7 @@ Page({
           }
         },
         type: 'pie',
-        radius: '45%',
+        radius: '35%',
         center: ['50%', '65%'],
         data: data,
         itemStyle: {
@@ -333,7 +333,7 @@ Page({
     this.GetPIChildbyID(ChildPkId, function (res) {
       let resData = JSON.parse(res.data.d);
       let childPIData = JSON.parse(resData.ReturnInfo)[0];
-      console.log(childPIData)
+     // console.log(childPIData)
       that.setData({
         childPIData: childPIData,
         showChild: true
@@ -414,7 +414,7 @@ Page({
     app.ajax('/GetTop500Key', { UserID: UserID, PkId: PkId, RowsNum: 200, PNO: that.data.PNo, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo)
+     // console.log(ReturnInfo)
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       }
@@ -434,7 +434,7 @@ Page({
     app.ajax('/GetTopKeywordRedAnalysis', { UserID: UserID, PkId: PkId, RowsNum: 200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       }
@@ -453,7 +453,7 @@ Page({
     app.ajax('/GetTopRelatedASIN', { UserID: UserID, PkId: PkId, RowsNum: 200, PageNum: pageNum }, function (res) {
       let data = JSON.parse(res.data.d);
       let ReturnInfo = JSON.parse(data.ReturnInfo);
-      console.log(ReturnInfo);
+     // console.log(ReturnInfo);
       if (!ReturnInfo || !ReturnInfo.length) {
         return false;
       };

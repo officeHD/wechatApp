@@ -111,7 +111,7 @@ Page({
             }
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          //console.log('用户点击取消')
         }
       },
       fail: function (res) { },
@@ -213,7 +213,7 @@ Page({
     }
     let fn = msg => {
       let res = JSON.parse(msg.data.d);
-      console.log(JSON.parse(res.ReturnInfo))
+     // console.log(JSON.parse(res.ReturnInfo))
       that.setData({
         list: JSON.parse(res.ReturnInfo).Table1
       })

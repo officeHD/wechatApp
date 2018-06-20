@@ -18,7 +18,7 @@ Page({
     let userData = JSON.parse(app.globalData.userData);
     app.ajax("/TaskIng", { UserID: userData.PKID }, function (res) {
       let msg = JSON.parse(res.data.d)
-      console.log(msg);
+      // console.log(msg);
       if (msg.State.toString() === "1") {
         that.setData({
           listData: JSON.parse(msg.ReturnInfo)
@@ -27,7 +27,7 @@ Page({
     })
     app.ajax("/TaskBack", { UserID: userData.PKID }, function (res) {
       let msg = JSON.parse(res.data.d)
-      console.log(msg);
+      // console.log(msg);
       if (msg.State.toString() === "1") {
         that.setData({
           listData1: JSON.parse(msg.ReturnInfo)
@@ -36,7 +36,7 @@ Page({
     })
     app.ajax("/TaskCompleted", { UserID: userData.PKID }, function (res) {
       let msg = JSON.parse(res.data.d)
-      console.log(msg);
+      // console.log(msg);
       if (msg.State.toString() === "1") {
         that.setData({
           listData2: JSON.parse(msg.ReturnInfo)

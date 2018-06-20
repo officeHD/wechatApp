@@ -7,4 +7,7 @@
       </block>
     </view>
   </view>
+   <button class="cs_button" open-type="contact" session-from="weapp">
+    <image class="cs_image" src="../../images/service.png"></image>
+  </button>
 </view>

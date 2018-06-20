@@ -49,7 +49,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    // console.log(options);
     var myDate = new Date();
     this.setData({
       type: options.type,
@@ -361,7 +361,7 @@ Page({
       JsonFormInfo: JSON.stringify(Pictname)
     }
     let fn = msg => {
-      console.log(msg);
+      // console.log(msg);
       let res = JSON.parse(msg.data.d);
 
       wx.showModal({
@@ -499,7 +499,7 @@ Page({
       JsonFormInfo: JSON.stringify(Pictname)
     }
     let fn = msg => {
-      console.log(msg);
+      // console.log(msg);
       let res = JSON.parse(msg.data.d);
 
       wx.showModal({
@@ -562,7 +562,7 @@ Page({
   addPartner: function () {
     var cb = this.data.partnerArr;
     cb.push(this.data.partnerArr.length);
-    console.log(cb)
+    // console.log(cb)
     this.setData({
       partnerArr: cb
     });

@@ -1,10 +1,11 @@
 {
   "pages": [
-    
+   
+    "pages/authorization/index",
     "pages/login/index",
     "pages/work/add/index",
     "pages/coupon/index",
-   
+    "pages/register/index",
     "pages/index/index",
     "pages/user/index",
     "pages/pay/index",
@@ -17,7 +18,7 @@
     "pages/search/A9/detail/index",
     "pages/album/index",
     "pages/search/KR/result/index",
-    "pages/register/index",
+    
     "pages/search/GKSKSTKM/index",
     "pages/search/IM/index",
     "pages/search/IM/detail/index",
@@ -36,7 +37,7 @@
     "navigationBarTextStyle": "black"
   },
   "networkTimeout":{
-    "request": 180000,
+    "request": 600000,
     "connectSocket": 10000,
     "uploadFile": 10000,
     "downloadFile": 10000
