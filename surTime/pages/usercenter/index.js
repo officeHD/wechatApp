@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    avatarUrl:'',
     UserName: '',
     GKfen: '',
     TuDian: '',
@@ -39,6 +40,7 @@ Page({
     if (userData) {
       let userDatas = JSON.parse(userData);
       this.setData({
+        avatarUrl:app.globalData.userInfo.avatarUrl,
         UserName: userDatas.UserName,
         GKfen: userDatas.GKfen,
         TuDian: userDatas.TuDian
@@ -76,23 +78,7 @@ Page({
   //退出登录
   takeOut: function () {
     let that = this;
-    wx.showModal({
-      title: '退出提示',
-      content: '确认退出？',
-      success: function (res) {
-        if (res.confirm) {
-          wx.clearStorageSync();
-          app.globalData.PKID = '';
-          app.globalData.UserName = '';
-          app.globalData.Tel = '';
-          app.globalData.userData = '';
-          that.onLoad();
-        } else if (res.cancel) {
-          // console.log('用户点击取消')
-        }
-
-      }
-    })
+    
 
   },
 

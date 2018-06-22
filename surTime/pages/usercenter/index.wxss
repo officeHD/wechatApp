@@ -18,6 +18,7 @@ page {
   width: 128rpx;
   height: 128rpx;
   margin-bottom: 20rpx;
+  border-radius: 64rpx;
 }
 
 .money {

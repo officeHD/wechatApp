@@ -1,1 +1,6 @@
-<button open-type="getUserInfo" bindgetuserinfo="getUserInfoAction">授权用户信息</button>
+
+<view>
+<image class="logo"  src="/images/avator.jpg" />
+<button class="login"  open-type="getUserInfo" bindgetuserinfo="getUserInfoAction"></button>
+</view>
+

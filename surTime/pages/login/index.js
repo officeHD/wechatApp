@@ -17,7 +17,7 @@ Page({
   onLoad: function () {
     let UserID = app.globalData.PKID;
   
-    // app.login();
+    app.login();
     
 
   },

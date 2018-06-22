@@ -3,8 +3,6 @@ const util = require('./utils/util.js');
 const api = require('./utils/ajax.js')
 App({
   onLaunch: function () {
-    let that = this;
-   
     wx.getSetting({
       success: res => {
         console.log(res)

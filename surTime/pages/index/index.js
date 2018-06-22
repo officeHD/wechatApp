@@ -14,7 +14,7 @@ Page({
       {
         className: 'navlist active', name: '数据揭秘', navgator: [
           { url: "/pages/search/A9/index", name: "A9工具" },
-          { url: "/pages/search/AutoCheck/index", name: "自动选品" },
+          // { url: "/pages/search/AutoCheck/index", name: "自动选品" },
           { url: "/pages/search/GKSKST/index", name: "GK SK ST 综合查询" },
         ]
       },
