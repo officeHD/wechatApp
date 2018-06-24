@@ -1,6 +1,6 @@
 <view class='login'>
   <view class='logo_box'>
-    <image src="../../images/login/logo.png" class="logo" />
+    <image src="../../images/login/logo.jpg" class="logo" />
   </view>
   <view class='login_box'>
     <view class='input_list'>
@@ -9,7 +9,7 @@
     </view>
      <view class='input_list '>
       <image src="../../images/login/password.png"  class="input_logo" />
-      <input class='input_area' placeholder="密码" password bindinput="changepassword"></input>
+      <input class='input_area' placeholder="密码（6-12位字母和数字组合）" password bindinput="changepassword"></input>
     </view>
     <view class='input_list'>
      <image src="../../images/login/phone.png" class="input_logo" />

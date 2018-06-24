@@ -147,12 +147,12 @@ swiper-item{
 }
 .item_list{
   display: flex;
-  background: #2C7EDC;
+  background: #1BB395;
   padding: 40rpx 20rpx;
   color: #fff;
   position: relative;
   border-radius: 5px;
- box-shadow: 0 0 10px #2C7EDC;
+ box-shadow: 0 0 10px #1BB395;
 }
 .item_list image{
   position: absolute;
@@ -162,8 +162,8 @@ swiper-item{
   height: 42rpx;
 }
 .active{
-  background-color: #1BB395;
-   box-shadow: 0 0 10px #1BB395;
+  background-color: #2C7EDC;
+   box-shadow: 0 0 10px #2C7EDC;
 }
 .level{
   writing-mode:tb-rl;

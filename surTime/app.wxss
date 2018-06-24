@@ -29,7 +29,9 @@ float: right;
   right: 20px;
   background-color: transparent;
 }
-
+.flex{
+  display: flex;
+}
 .cs_button:after {
   border: 0px;
 }

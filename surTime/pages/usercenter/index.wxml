@@ -19,7 +19,7 @@
         <view class="with_arrow"></view>
       </view>
     </block>
-    <view bindtap="takeOut" class="weui_cell mt">
+    <!-- <view bindtap="takeOut" class="weui_cell mt">
       <view class="weui_cell_hd">
         <image src="/images/user/tuichu.png"></image>
       </view>
@@ -27,7 +27,7 @@
         <view class="weui_cell_bd_p">账号解绑</view>
       </view>
       <view class="with_arrow"></view>
-    </view>
+    </view> -->
   </view>
   <button class="cs_button" open-type="contact" session-from="weapp">
     <image class="cs_image" src="../../images/service.png"></image>

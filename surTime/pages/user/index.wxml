@@ -74,7 +74,7 @@
             {{item.page}}
           </view>
           <view class="td">{{item.Description}}</view>
-          <view class="td">{{item.UsableTD}}</view>
+          <view class="td">{{item.Deduct}}</view>
           <view class="td"> {{item.HandleTime}} </view>
         </view>
       </block>

@@ -9,8 +9,9 @@
 
 .logo {
   margin-top: 20rpx;
-  width: 200rpx;
+  width: 170rpx;
   height: 170rpx;
+  border-radius: 170px;
 }
 
 .login_box {
@@ -45,7 +46,7 @@
   width: 215rpx;
   text-align: right;
   line-height: 100rpx;
-  font-size: 32rpx;
+  font-size: 24rpx;
   float: right;
   color: #00a0e9;
 }

@@ -13,11 +13,11 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
- 
+
 //校验数据有效性
 export const checkData = (str, text) => {
-  
-  if (!text||text === '') {
+
+  if (!text || text === '') {
     //非空验证
     wx.showToast({
       title: `${str} 不得为空！`,
@@ -47,6 +47,9 @@ export const checkData = (str, text) => {
         break;
       case str.indexOf('邮箱') >= 0:
         reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        break;
+      case str.indexOf('密码') >= 0:
+        reg =  /^.{6,12}$/;
         break;
       default:
         reg = /[\s\S]*/;

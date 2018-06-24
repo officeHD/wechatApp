@@ -19,28 +19,24 @@ App({
               }
             }
           })
-        } 
+        }
       }
     })
   },
-  login:function(){
-    let that=this;
+  login: function () {
+    let that = this;
     wx.showLoading({
       title: '登录中',
-      mask:true
+      mask: true
     })
     wx.login({
       success: function (res) {
-        wx.getUserInfo({
-          success: function (res) {
-            console.log(res);
-            
-          },
-          fail: function (res) {
-            console.log(res);
-          }
-        })
+        wx.hideLoading();
+
         if (res.code) {
+          wx.showLoading({
+            title: '正在登录'
+          })
           //发起网络请求
           wx.request({
             url: 'https://mp.surtime.com/SurtimeWebService.asmx/WXLogin',
@@ -50,22 +46,27 @@ App({
               Key: "SurTimeWebserviceS3ur0ti1me8"
             },
             success: function (res) {
+              wx.showLoading({
+                title: '请求成功'
+              })
               // console.log(JSON.parse(res.data.d));
               wx.hideLoading();
 
               let ret = JSON.parse(res.data.d);
               if (ret.State === 1) {
-               // console.log(ret.ReturnInfo.length)
+                // console.log(ret.ReturnInfo.length)
                 if (ret.ReturnInfo.length < 30) {
                   that.globalData.openId = ret.ReturnInfo;
                   wx.showModal({
                     title: '登录提示',
                     content: '请绑定账号或注册',
                     success: function () {
-                       
+                      wx.navigateTo({
+                        url: '/pages/login/index',
+                      })
                     }
                   })
-                  
+
                 } else {
                   that.initUserInfo(JSON.parse(ret.ReturnInfo));
                   that.initUserData(ret.ReturnInfo);
@@ -78,10 +79,21 @@ App({
                   }
                 }
               }
+            },
+            fail: function (error) {
+              
+              wx.hideLoading();
+              wx.showToast({
+                title: error.errMsg,
+                icon: "none"
+              })
             }
           })
         } else {
-         // console.log('登录失败！' + res.errMsg)
+          // console.log('登录失败！' + res.errMsg)
+          wx.showToast({
+            title: "登录失败！"
+          });
         }
       }
     });

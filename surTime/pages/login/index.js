@@ -17,9 +17,8 @@ Page({
   onLoad: function () {
     let UserID = app.globalData.PKID;
   
-    app.login();
     
-
+  
   },
   //切换登录方式
   onChangeLoginType: function (e) {
@@ -67,6 +66,7 @@ Page({
   changePhoneNum: function (e) {
     let value = e.detail.value;
     let that = this;
+     
     that.setData({
       userPhone: value
     })
@@ -127,31 +127,19 @@ Page({
         })
       }
     }
-    if (type) {
-      if (app.checkData('手机号', userPhone) && app.checkData('验证码', verifyCode)) {
-        let data = {
-          "Phone": userPhone,
-          "Code": verifyCode,
-          "Openid": app.globalData.openId
-        };
-        wx.showLoading({
-          title: '绑定中',
-        })
-        app.ajax('/MobileLogin', data, fn)
-      }
-    } else {
-      if (app.checkData('账号', userName) && app.checkData('密码', passWord)) {
-        let data = {
-          "UserName": userName,
-          "PassWord": passWord,
-          "Openid": app.globalData.openId
-           
-        };
-        wx.showLoading({
-          title: '绑定中',
-        })
-        app.ajax('/WXUserBinding', data, fn)
-      }
+    if (app.checkData('手机号', userPhone) && app.checkData('验证码', verifyCode)&&app.checkData('账号', userName) && app.checkData('密码', passWord)) {
+      let data = {
+        "Phone": userPhone,
+        "Code": verifyCode,
+        "UserName": userName,
+        "PassWord": passWord,
+        'WXNickName':app.globalData.userInfo.nickName,
+        "Openid": app.globalData.openId
+      };
+      wx.showLoading({
+        title: '绑定中',
+      })
+      app.ajax('/WXUserBinding', data, fn)
     }
   }
 

@@ -33,12 +33,12 @@
       <view class='item_list'>
         <view>优惠券</view>
         <view bindtap='selectDiscount'>
-          <text class='checked'>{{Discount?"已使用"+carType:"请选择"}}</text> >
+         <text wx-if="{{Coupon}}">请选择</text> <text wx-if="{{!Coupon}}" class='checked'>{{Discount?"已使用"+carType:"请选择"}}</text> >
         </view>
       </view>
       <view class='item_list' bindtap='changeShow'>
         <view>优惠券代码</view>
-        <view>></view>
+        <view><text wx-if="{{!Coupon}}">请选择</text><text wx-if="{{Coupon}}" class='checked'>{{Discount?"已使用"+carType:"请选择"}}</text> ></view>
       </view>
     </view>
   </view>
@@ -65,7 +65,11 @@
       </view>
       <view class='input_area'>
         <text>请输入优惠券代码</text>
-        <input placeholder='' bindinput="changename"></input>
+        <view class="flex">
+        <input value="{{Coupon}}" placeholder='' bindinput="changename"></input>
+        <button class="scan_btn" bindtap="scan">扫一扫</button>
+        </view>
+        
       </view>
       <view class='sure' bindtap='sure_add'>确认验证</view>
     </view>

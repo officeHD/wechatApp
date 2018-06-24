@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    Amount: '',
+    Amount:0,
     CouponType: 0,
     DiscountType: 0,
     type: 1,
@@ -107,26 +107,30 @@ Page({
     //   address: currPage.data.item
     // });
     let carType='';
+   
     if (currPage.data.DiscountType.toString()==='1'){
       carType ="折扣券";
       that.setData({
+        CouponType:2,
         Totalfee: that.data.current.price * that.data.Discount
       })
     } else if (currPage.data.DiscountType.toString() === '2'){
       carType = "满减券";
       that.setData({
+        CouponType:2,
         Totalfee: that.data.current.price- that.data.Discount
       })
     } else if (currPage.data.DiscountType.toString() === '3'){
       carType ="抵扣券";
       that.setData({
+        CouponType:2,
         Totalfee: that.data.current.price - that.data.Discount
       })
     }
     that.setData({
       carType: carType,
       Coupon:'',
-      CouponType:2
+       
     })
 
   },
@@ -149,6 +153,17 @@ Page({
       Coupon: value
     })
   },
+  scan:function(){
+    let that = this;
+    wx.scanCode({
+      success: (res) => {
+        console.log(res.result);
+        that.setData({
+          Coupon: res.result
+        })
+      }
+    })
+  },
   // 确认验证码
   sure_add: function () {
     let that = this;
@@ -161,7 +176,7 @@ Page({
          add_show: false,
          carType:"折扣券",
          CouponType:1,
-         DiscountID:'',
+         DiscountID:0,
          Discount:res.ReturnInfo/10,
          DiscountType:1
        })
@@ -206,10 +221,12 @@ Page({
               mask: false
             })
             let fn = msg => {
-
               let ret = JSON.parse(msg.data.d);
               app.initUserInfo(JSON.parse(ret.ReturnInfo));
               app.initUserData(ret.ReturnInfo);
+              wx.switchTab({
+                url: '/pages/usercenter/index',
+              })
             }
             app.ajax('/GetUserInfo', { Openid: app.globalData.openId }, fn)
           
@@ -224,6 +241,11 @@ Page({
           }
         })
 
+      }else{
+        wx.showToast({
+          title:res.ReturnInfo,
+          icon:"none"
+        })
       }
     }
     app.ajax('/WXPay', data, fn)

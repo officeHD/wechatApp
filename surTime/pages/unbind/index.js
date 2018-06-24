@@ -91,9 +91,8 @@ Page({
     let that = this;
     let data = {
       UserID:app.globalData.PKID,//
-      NewPassWord: that.data.newPassWord,
-      Mobile: that.data.userPhone,
-      MobileCode: that.data.verifyCode
+      Phone: that.data.userPhone,
+      Code: that.data.verifyCode
     }
     let fn = msg => {
       // console.log(1);
@@ -102,9 +101,7 @@ Page({
         wx.showToast({
           title: '修改成功',
         })
-        wx.switchTab({
-          url: '/pages/usercenter/index',
-        })
+       app.login();
       }else{
         wx.showToast({
           title: returnInf.ReturnInfo,
@@ -113,9 +110,9 @@ Page({
       
       console.log(returnInf);
     }
-    if (app.checkData('密码',that.data.newPassWord)&&app.checkData('手机号', that.data.userPhone) && app.checkData('验证码', that.data.verifyCode)) {
+    if (app.checkData('手机号', that.data.userPhone) && app.checkData('验证码', that.data.verifyCode)) {
 
-      app.ajax('/UpdatePassWord', data, fn)
+      app.ajax('/WXUserUNBinding', data, fn)
     }
 
   },

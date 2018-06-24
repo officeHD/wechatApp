@@ -21,9 +21,7 @@ Page({
         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回  
         // 所以此处加入 callback 以防止这种情况  
         app.userInfoReadyCallback = res => {  
-          wx.navigateTo({
-            url: '/pages/login/index' 
-          })
+           app.login();
         }  
       } 
       
@@ -34,9 +32,7 @@ Page({
       const iv = res.detail.iv;
       if(res.detail.userInfo){
         app.globalData.userInfo=res.detail.userInfo;
-        wx.navigateTo({
-          url: '/pages/login/index' 
-        })
+        app.login();
       }else{
         
       }

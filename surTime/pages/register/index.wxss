@@ -10,8 +10,9 @@
 
 .logo {
   
-  width: 200rpx;
+  width:170rpx;
   height: 170rpx;
+  border-radius: 170rpx;
 }
 
 .login_box {

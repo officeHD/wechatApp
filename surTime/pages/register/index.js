@@ -28,8 +28,9 @@ Page({
           title: '注册提示',
           content: "注册成功",
         })
-        wx.navigateTo({
-          url: '/pages/login/index',
+        app.login();
+        wx.switchTab({
+          url: '/pages/usercenter/index',
         })
       }
       if(result.State.toString()!=='1'){
@@ -47,9 +48,10 @@ Page({
       IPAddress: IPAddress,
       MobileCode: MobileCode,
       Openid: app.globalData.openId,
+      WXNickName:app.globalData.userInfo.nickName,
     }
-    if (app.checkData('手机号', Mobile) && app.checkData('邮箱', Email)){
-      app.ajax('/Register', data, cb)
+    if (app.checkData('手机号', Mobile) && app.checkData('邮箱', Email)&&app.checkData('密码',PassWord)&&app.checkData('验证码',RecCode)){
+      app.ajax('/WXRegister', data, cb)
     }
     
   },

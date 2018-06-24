@@ -188,3 +188,9 @@
   margin-top: 5px;
   padding-left: 20rpx;
 }
+.scan_btn{
+  height:1.4rem;
+  line-height:1.4rem;
+  margin:10rpx;
+  font-size:24rpx;
+}
