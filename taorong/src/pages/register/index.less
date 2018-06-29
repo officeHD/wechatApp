@@ -1,0 +1,41 @@
+ 
+.login {
+    height: 100vh;
+    background-color: #F3F3F3;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    .login_input{
+        padding: 0 20px;
+        background-color: #fff;
+        margin: 20px 0;
+        input{
+            background-color: #fff;
+            height: 80px;
+            line-height: 80px;
+            &.line{
+                border-bottom: 1px solid #E6E6E6;
+            }
+        }
+        
+    }
+    button {
+        width: 80%;
+        background-color: #DA251E;
+        color: #fff;
+        margin: 50px auto 30px;
+    }
+}
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    background-color: rgb(0, 0, 0) !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+    -webkit-tap-highlight-color:rgba(0,0,0,0) !important;
+}

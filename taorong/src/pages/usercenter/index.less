@@ -1,0 +1,165 @@
+.user {
+    background-color: #f2f2f2;
+    padding-bottom: 50px;
+}
+
+.userCard {
+    height: 300px;
+    width: 100%;
+    background-color: #F2F2F2;
+    border: 1px solid transparent;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    .card_center {
+        width: 94%;
+        height: 240px;
+        background-color: #F3533A;
+        margin: 30px auto;
+        color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        position: relative;
+        .user_name {
+            height: 50px;
+            font-size: 32px;
+            line-height: 50px;
+            margin-top: 15px;
+        }
+        .avator {
+            position: absolute;
+            right: 20%;
+            top: -20px;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+        }
+        .bg_clicle {
+            display: inline-block;
+            background-color: #DA4B34;
+            border-radius: 20px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 20px;
+            color: #F2F2F2;
+            margin-right: 10px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            font-size: 26px;
+        }
+        .agent {
+            color: #F1DF31;
+            .apply {
+                color: #fff;
+                font-size: 22px;
+            }
+        }
+    }
+}
+
+.userAccount {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 20px 0;
+    background-color: #fff;
+    margin-bottom: 20px;
+    &.line {
+        .item {
+            &:nth-child(n+2) {
+                &::before {
+                    content: '';
+                    width: 0;
+                    border-right: 1Px solid #E6E6E6;
+                    position: absolute;
+                    left: 0;
+                    height: 100%;
+                }
+            }
+            .iconfont {
+                color: #fff;
+                font-size: 50px;
+                &.icon-safe {
+                    background-color: #72C616;
+                }
+                &.icon-pay_wait {
+                    background-color: #FF8805;
+                }
+                &.icon-xufei {
+                    background-color: #FF6B54;
+                }
+            }
+        }
+    }
+    .item {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 26px;
+        .red {
+            font-size: 36px;
+            margin-bottom: 5px;
+        }
+        position: relative;
+        .iconfont {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 70px;
+            margin-bottom: 10px;
+            color: #9B9B9B;
+        }
+    }
+}
+
+.title_item {
+    background-color: #fff;
+    border-bottom: 1px solid #E6E6E6;
+    height: 80px;
+    line-height: 80px;
+    padding: 0 20px;
+    font-size: 32px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    .allOrder {
+        color: #666;
+        font-size: 28px;
+    }
+    .icon_title{
+        font-size: 28px;
+        .iconfont{
+            color: #DA4B34;
+            font-weight: 600;
+            font-size: 30px;
+        }
+       
+    }
+}

@@ -3,12 +3,12 @@
 .album {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 7.9rpx;
+  padding: 0 ;
   padding-bottom: 120rpx;
 }
 .image_list{
-  width: 177rpx;
-  height: 177rpx;
+  width: 176rpx;
+  height: 176rpx;
   margin: 5rpx;
   position: relative;
 }
@@ -26,8 +26,8 @@ height: 40rpx;
 float: right;
 }
 .album image {
-  width: 177rpx;
-  height: 177rpx;
+  width: 176rpx;
+  height: 176rpx;
   margin: 5rpx;
 }
 
@@ -44,6 +44,7 @@ float: right;
   color: #fff;
   display: flex;
   justify-content: center;
+  font-size: 32rpx;
 }
 .cancel{
   background: #e2e2e2;

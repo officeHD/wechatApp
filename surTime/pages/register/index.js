@@ -10,7 +10,7 @@ Page({
     MobileCode:''//手机验证码
   },
   onLoad: function (options) {
-
+    console.log(app.globalData.openId);
   },
   //确认注册
   register: function () {
@@ -29,9 +29,7 @@ Page({
           content: "注册成功",
         })
         app.login();
-        wx.switchTab({
-          url: '/pages/usercenter/index',
-        })
+       
       }
       if(result.State.toString()!=='1'){
         wx.showModal({
@@ -50,7 +48,7 @@ Page({
       Openid: app.globalData.openId,
       WXNickName:app.globalData.userInfo.nickName,
     }
-    if (app.checkData('手机号', Mobile) && app.checkData('邮箱', Email)&&app.checkData('密码',PassWord)&&app.checkData('验证码',RecCode)){
+    if (app.checkData('手机号', Mobile) && app.checkData('邮箱', Email)&&app.checkData('密码',PassWord)&&app.checkData('验证码',MobileCode)){
       app.ajax('/WXRegister', data, cb)
     }
     
@@ -102,12 +100,20 @@ Page({
       app.ajax('/GetMobileCode', { Phone: phone }, cb)
     }
   }, //输入手机号
+  verifyPhone:function(e){
+    let value = e.detail.value;
+    app.checkData('手机号', value)
+  },
   changephone: function (e) {
     let value = e.detail.value;
     let that = this;
     that.setData({
       Mobile: value
     })
+  },
+  verifyEmail:function(e){
+    let value = e.detail.value;
+    app.checkData('邮箱', value)
   },
   //邮箱
   changeemail: function (e) {
@@ -118,6 +124,10 @@ Page({
     })
   },
   //密码
+  verifyPass:function(e){
+    let value = e.detail.value;
+    app.checkData('密码', value)
+  },
   changepassword: function (e) {
     let value = e.detail.value;
     let that = this;
@@ -126,6 +136,10 @@ Page({
     })
   },
   //手机验证码
+  verifyCode:function(e){
+    let value = e.detail.value;
+    app.checkData('验证码', value)
+  },
   changemsCode: function (e) {
     let value = e.detail.value;
     let that = this;

@@ -9,7 +9,7 @@
   width: 750rpx;
   z-index: 10;
   overflow-y: auto;
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 .table.hide {
@@ -54,19 +54,23 @@
   display: table-cell;
   color: #000;
   height: 70rpx;
-  line-height:70rpx;
+  line-height: 70rpx;
   text-align: center;
   font-size: 14px;
   padding-left: 5px;
+  max-width: 200rpx;
 }
 
 .td {
   display: table-cell;
   height: 100rpx;
   line-height: 1;
-  text-align: center;
+  text-align: left;
   font-size: 12px;
-   box-sizing: border-box;
+  box-sizing: border-box;
+  word-break: break-all;
+  word-wrap: break-word;
+  padding-left: 10rpx;
 }
 
 .thead .tr {
@@ -87,8 +91,7 @@
   line-height: 1;
   padding: 5px 0 5px 5px;
   min-width: 150rpx;
-  vertical-align: middle
-  
+  vertical-align: middle;
 }
 
 .tbody.hide {
@@ -126,18 +129,19 @@
 }
 
 .search {
-  
 }
-.search swiper{
+
+.search swiper {
   height: 400rpx;
   padding: 0;
   box-sizing: border-box;
-  
 }
-swiper-item{
+
+swiper-item {
   padding: 20rpx;
   box-sizing: border-box;
 }
+
 .search .title {
   width: 750rpx;
   text-align: center;
@@ -145,51 +149,56 @@ swiper-item{
   color: #fff;
   letter-spacing: 2rpx;
 }
-.item_list{
+
+.item_list {
   display: flex;
-  background: #1BB395;
+  background: #1bb395;
   padding: 40rpx 20rpx;
   color: #fff;
   position: relative;
   border-radius: 5px;
- box-shadow: 0 0 10px #1BB395;
+  box-shadow: 0 0 10px #1bb395;
 }
-.item_list image{
+
+.item_list image {
   position: absolute;
   right: 30rpx;
   top: 30rpx;
   width: 42rpx;
   height: 42rpx;
 }
-.active{
-  background-color: #2C7EDC;
-   box-shadow: 0 0 10px #2C7EDC;
+
+.active {
+  background-color: #2c7edc;
+  box-shadow: 0 0 10px #2c7edc;
 }
-.level{
-  writing-mode:tb-rl;
+
+.level {
+  writing-mode: tb-rl;
   display: flex;
   justify-content: center;
-  width:140rpx;
+  width: 140rpx;
   align-items: center;
   border-right: 1px dashed #fff;
   font-size: 50rpx;
   letter-spacing: 10rpx;
-
 }
-.right_detail{
+
+.right_detail {
   text-align: center;
   height: 100%;
   padding: 5rpx 50rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
 
+.price {
+  border-bottom: 1px dashed #fff;
+  font-size: 32rpx;
 }
-.price{
-border-bottom:  1px dashed #fff;
-font-size: 32rpx;
-}
-.detail{
+
+.detail {
   font-size: 28rpx;
   display: flex;
   padding: 10rpx 0;

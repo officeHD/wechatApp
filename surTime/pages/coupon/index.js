@@ -39,8 +39,10 @@ Page({
         let resultArr = JSON.parse(res.ReturnInfo);
         for (var i = 0; i < resultArr.length; i++) {
           // console.log(resultArr[i].StartTime)
-          let data = resultArr[i].StartTime;
-          let endDay = that.getDateAfter_n(data, resultArr[i].ValidDay)
+          let olddata = resultArr[i].StartTime;
+          
+          let endDay = that.getDateAfter_n(olddata, resultArr[i].ValidDay);
+          // console.log(olddata, resultArr[i].ValidDay);
           resultArr[i].endDay = endDay;
         }
        // console.log(resultArr)
@@ -107,8 +109,9 @@ Page({
     var month = initDate.substring(4, 6);
     var day = initDate.substring(6, 8);
     date = new Date(initDate); // 月份是从0开始的  
-    date.setDate(date.getDate() + days);
-
+    // console.log(date, date.getTime(), days * 24 * 60 * 60 * 1000);
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    console.log(date);
     var yearStr = date.getFullYear();
     var monthStr = ("0" + (date.getMonth() + 1)).slice(-2, 8); // 拼接2位数月份  
     var dayStr = ("0" + date.getDate()).slice(-2, 8); // 拼接2位数日期  

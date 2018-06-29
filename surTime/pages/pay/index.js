@@ -187,7 +187,7 @@ Page({
         })
       }
     }
-    app.ajax('/CouponValid', { textCoupon: that.data.Coupon }, fn)
+    app.ajax('/CouponValid', { textCoupon: that.data.Coupon, UserID:app.globalData.PKID }, fn)
   },
   GetPayImg:function(){
     let that=this;

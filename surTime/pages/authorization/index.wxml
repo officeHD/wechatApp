@@ -1,6 +1,8 @@
 
 <view>
-<image class="logo"  src="/images/avator.jpg" />
+<view class='top'></view>
+<view class='bottom'></view>
+<image class="logo"  src="/images/bg1.jpg" />
 <button class="login"  open-type="getUserInfo" bindgetuserinfo="getUserInfoAction"></button>
 </view>
 

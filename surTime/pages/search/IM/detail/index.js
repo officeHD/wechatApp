@@ -101,7 +101,8 @@ Page({
   DelFileInfoInIM: function (e) {
     let id = e.currentTarget.dataset.id;
     let data = {
-      PlanAsinID: id
+      PlanAsinID: id,
+      UserID:app.globalData.PKID
 
     }
     let fn = msg => {

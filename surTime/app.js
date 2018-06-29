@@ -54,7 +54,7 @@ App({
 
               let ret = JSON.parse(res.data.d);
               if (ret.State === 1) {
-                // console.log(ret.ReturnInfo.length)
+                console.log(ret.ReturnInfo)
                 if (ret.ReturnInfo.length < 30) {
                   that.globalData.openId = ret.ReturnInfo;
                   wx.showModal({

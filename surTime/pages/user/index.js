@@ -117,7 +117,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    app.ajax('/GetRechargeListByUser', { UserName: app.globalData.UserName }, cb)
+    app.ajax('/GetRechargeListByUser', { UserName: app.globalData.UserName,UserID:app.globalData.PKID }, cb)
   },
   GetOperationLis: function () {
     let that = this;
@@ -135,7 +135,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    app.ajax('/GetOperationListByuser', { UserName: app.globalData.UserName }, cb)
+    app.ajax('/GetOperationListByuser', { UserName: app.globalData.UserName,UserID:app.globalData.PKID }, cb)
   },
   payOrder: function (e) {
 

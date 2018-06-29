@@ -209,7 +209,8 @@ Page({
     let that = this;
     let id = e.currentTarget.dataset.id;
     let data = {
-      AsinKeyID: id
+      AsinKeyID: id,
+      UserID:app.globalData.PKID
     }
     let fn = msg => {
       that.changeCanvas();

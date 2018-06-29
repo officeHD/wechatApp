@@ -61,7 +61,10 @@ Page({
 
     })
   },
-
+  verifyPhone:function(e){
+    let value = e.detail.value;
+    app.checkData('手机号', value)
+  },
   // 填写手机号值
   changePhoneNum: function (e) {
     let value = e.detail.value;
@@ -69,6 +72,11 @@ Page({
     that.setData({
       userPhone: value
     })
+  },
+  //手机验证码
+  verifyCode:function(e){
+    let value = e.detail.value;
+    app.checkData('验证码', value)
   },
   // 填写验证码值
   changeVerifyCode: function (e) {
@@ -79,6 +87,10 @@ Page({
     })
   },
   //输入新密码
+  verifyPass:function(e){
+    let value = e.detail.value;
+    app.checkData('密码', value)
+  },
   changeNewPassWord: function (e) {
     let value = e.detail.value;
     let that = this;

@@ -101,6 +101,7 @@ Page({
         wx.showToast({
           title: '修改成功',
         })
+        // wx.clearStorage();
        app.login();
       }else{
         wx.showToast({

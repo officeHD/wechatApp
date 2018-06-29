@@ -66,7 +66,9 @@ Page({
         wx.showToast({
           title:returnInf.ReturnInfo,
           icon:'none'
-        })
+        });
+        // wx.clearStorage();
+        app.login();
       }
      
       

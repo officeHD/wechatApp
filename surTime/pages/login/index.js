@@ -61,7 +61,10 @@ Page({
       app.ajax('/GetMobileCode', { Phone: phone }, cb)
     }
   },
-
+  verifyPhone:function(e){
+    let value = e.detail.value;
+    app.checkData('手机号', value)
+  },
   // 填写手机号值
   changePhoneNum: function (e) {
     let value = e.detail.value;
@@ -71,6 +74,11 @@ Page({
       userPhone: value
     })
   },
+    //手机验证码
+    verifyCode:function(e){
+      let value = e.detail.value;
+      app.checkData('验证码', value)
+    },
   // 填写验证码值
   changeVerifyCode: function (e) {
     let value = e.detail.value;
@@ -78,6 +86,11 @@ Page({
     that.setData({
       verifyCode: value
     })
+  },
+   //输入新密码
+   verifyPass:function(e){
+    let value = e.detail.value;
+    app.checkData('密码', value)
   },
   // 填写密码值
   changePassWord: function (e) {

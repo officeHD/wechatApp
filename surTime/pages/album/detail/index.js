@@ -1,7 +1,7 @@
 // pages/album/detail/index.js
 var ParserXml = require('../../../lib/xmldom/dom-parser')
 var app = getApp();
-var XMLParser = new ParserXml.DOMParser();
+
 
 Page({
 
@@ -13,16 +13,18 @@ Page({
     endTime: '',
     delStu: false,
     album: [],
+    page: 1,
     uploadimg: []
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   // console.log(options)
+    // console.log(options)
     this.setData({
       id: options.id,
-      Pictname: decodeURIComponent(options.pictname)
+      Pictname: decodeURIComponent(options.pictname),
+      page: 1
     })
     this.setAlbum();
 
@@ -32,19 +34,33 @@ Page({
     let data = {
       Picid: that.data.id,
       UserID: app.globalData.PKID,
-      Page: '1',
-      PageCount: '200'
+      Page: that.data.page,
+      PageCount: '50'
     }
     app.ajax('/Getpictable', data, function (res) {
 
       let albumList = JSON.parse(JSON.parse(res.data.d).ReturnInfo);
       //console.log(albumList)
+
       that.setData({
-        album: albumList
+        album: albumList,
+        albumlength: albumList.length,
+        page: that.data.page + 1
       })
     })
   },
-
+  //加载更多
+  onReachBottom: function () {
+    let that = this;
+    if (that.data.albumlength === 0) {
+      wx.showToast({
+        title: '没有更多了',
+        icon: 'none'
+      })
+      return false;
+    }
+    this.setAlbum();
+  },
   bindTouchStart: function (e) {
     this.startTime = e.timeStamp;
   },
@@ -69,7 +85,21 @@ Page({
         'Pictname': that.data.Pictname,
       },
       success: (resp) => {
-        successUp++;
+        var XMLParser = new ParserXml.DOMParser();
+        var doc = XMLParser.parseFromString(resp.data);
+        var prepay_id = doc.getElementsByTagName("string")[0].firstChild.nodeValue;//获取节点名字为prepay_id的值
+        console.log(prepay_id);
+        let resultMes = JSON.parse(prepay_id);
+        if (resultMes.State == 1) {
+          successUp++;
+        } else {
+          wx.showToast({
+            title: resultMes.ReturnInfo,
+            icon: 'none'
+          })
+          failUp++;
+        }
+
       },
       fail: (res) => {
         failUp++;
@@ -148,10 +178,10 @@ Page({
 
   },
   cancel: function () {
-    let data = this.data.album.map((item,index)=>{return {...item,select:false}})
+    let data = this.data.album.map((item, index) => { return { ...item, select: false } })
     this.setData({
       delStu: false,
-      album:data
+      album: data
     })
   },
   del_pic: function () {
@@ -168,6 +198,7 @@ Page({
 
 
   },
+
   //删除图片
   DelImage: function (data, successUp, failUp, i, length) {
     let that = this;
